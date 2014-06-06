@@ -1,0 +1,12 @@
+# Set my editor
+export EDITOR=nano
+
+# Pip configuration - cache files, and don't change the prompt
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+# Virtualenvwrapper (python)
+if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+    export WORKON_HOME=$HOME/.virtualenv
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
