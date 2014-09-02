@@ -1,0 +1,13 @@
+---
+- name: add spotify repository
+  template: dest=/etc/apt/sources.list.d/spotify.list src=spotify.list owner=root group=root mode=0644
+
+#- name: add spotify repository key
+#  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
+
+- name: install software from external sources
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - dropbox
+    - spotify-client
+    - sublime-text

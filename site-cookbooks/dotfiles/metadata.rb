@@ -1,6 +1,0 @@
-name             'dotfiles'
-maintainer       'Sam Clements (borntyping)'
-maintainer_email 'sam@borntyping.co.uk'
-license          'MIT'
-description      'Installs tools and dotfiles'
-version          '1.0.0'

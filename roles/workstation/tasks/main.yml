@@ -1,0 +1,14 @@
+---
+- name: install common software
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - firefox
+    - terminator
+
+- name: install development software
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - git
+    - ansible
+
+

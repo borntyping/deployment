@@ -1,15 +1,13 @@
 deployment
 ==========
 
-A Chef respository I use for deploying new servers and workstations. As well as
-creating dotfiles, it also installs the software that uses those dotfiles (and
-more!)
+Deploys dotfiles, configuration and packages to my workstations using Ansible.
 
 Usage
 -----
 
 ```bash
-sudo chef-solo -c solo.rb -o dotfiles::shell
+sudo ansible-playbook --inventory-file local site.yml
 ```
 
 Licence
