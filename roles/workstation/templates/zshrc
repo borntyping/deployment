@@ -1,0 +1,39 @@
+#!/bin/zsh
+
+bindkey -e
+
+autoload -U colors && colors                    # Adds variables for printing colors
+autoload -Uz compinit && compinit               # Loads completion modules
+
+
+setopt histignorealldups                        # Ignore duplicate history entries
+setopt sharehistory                             # Share history between ZSH instances
+setopt auto_name_dirs
+setopt auto_push_d
+setopt no_auto_cd
+setopt extended_glob
+setopt prompt_subst                             # Allow substitution in PROMPT
+setopt interactive_comments                     # Allow comments in interactive mode
+
+unsetopt correct
+unsetopt correct_all
+
+HISTFILE=~/.zsh_history
+
+# Set aliases
+
+alias gs="git status"
+
+# Load virtualenvwrapper, and display the current virtualenv in the prompt
+
+if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
+    export VIRTUAL_ENV_DISABLE_PROMPT=1
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+function prompt_venv() {
+    [ -n "$VIRTUAL_ENV" ] && echo "virtualenv:$(basename "$VIRTUAL_ENV") "
+}
+
+PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%} %{$fg_bold[blue]%}%~%{$reset_color%} $(prompt_venv)%{$fg_bold[blue]%}$%{$reset_color%} '
