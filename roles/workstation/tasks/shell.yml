@@ -1,0 +1,6 @@
+---
+- name: install zsh
+  apt: pkg=zsh state=latest
+  
+- name: configure zsh
+  template: src=zshrc dest=~/.zshrc

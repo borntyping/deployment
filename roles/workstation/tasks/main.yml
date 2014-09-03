@@ -1,6 +1,7 @@
 ---
-- include: ansible.yml
-- include: python.yml
+- include: ansible.yml tags=ansible
+- include: python.yml tags=python
+- include: shell.yml tags=shell
 
 - name: install common software
   apt: pkg={{ item }} state=latest

@@ -1,39 +1,87 @@
 #!/bin/zsh
+#
+# A minimal .zshrc
+#
+# Author: Sam Clements <sam@borntyping.co.uk>
+# Licence: MIT
+#
 
-bindkey -e
+ZSH_CACHE=$HOME/.cache/zsh                      # A cache directory for use in other options
+setopt INTERACTIVE_COMMENTS                     # Allow comments in interactive mode
+setopt RM_STAR_WAIT                             # Force the user to wait when doing `rm *`
 
-autoload -U colors && colors                    # Adds variables for printing colors
+#
+# History settings
+#
+
+SAVEHIST=10000                                  # Lines of history to save to a file
+HISTSIZE=10000                                  # Lines of history to keep in memory
+HISTFILE=$ZSH_CACHE/history                     # Save history in .cache
+
+setopt APPEND_HISTORY                           # Append to the HISTFILE, not replace
+setopt HIST_IGNORE_DUPS                         # Ignore duplicate history entries
+setopt INC_APPEND_HISTORY                       # Append history immediately 
+setopt SHARE_HISTORY                            # Share history between ZSH instances
+setopt EXTENDED_HISTORY                         # Store more information on history items
+
+#
+# Completion
+#
+
 autoload -Uz compinit && compinit               # Loads completion modules
+setopt AUTO_MENU                                # Show completion menu on succesive tab press
+setopt ALWAYS_TO_END                            # Move cursor after completion
+setopt COMPLETE_IN_WORD                         # Allow completion from middle of word
+setopt LIST_PACKED                              # Smallet completion menu
 
+# Intelligent handling of characters after a completion
+setopt AUTO_PARAM_KEYS AUTO_PARAM_SLASH AUTO_REMOVE_SLASH
 
-setopt histignorealldups                        # Ignore duplicate history entries
-setopt sharehistory                             # Share history between ZSH instances
-setopt auto_name_dirs
-setopt auto_push_d
-setopt no_auto_cd
-setopt extended_glob
-setopt prompt_subst                             # Allow substitution in PROMPT
-setopt interactive_comments                     # Allow comments in interactive mode
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path $ZSH_CACHE/completion/
 
-unsetopt correct
-unsetopt correct_all
+#
+# Named directories 
+#
 
-HISTFILE=~/.zsh_history
+setopt AUTO_NAME_DIRS                           # Automatically create named directories
+borntyping="$HOME/Development/borntyping"       # http://github.com/borntyping
+phoenix_ci="$HOME/Development/phoenix-ci"       # http://github.com/phoenix-ci
+personal="$HOME/Development/personal"           # Unpublished projects
 
-# Set aliases
+#
+# Aliases
+#
 
 alias gs="git status"
+alias gd="git diff"
+alias -g ...='../..'                            # Allow ... to mean ../.. anywhere
+
+#
+# Prompt
+#
+
+autoload -U vcs_info                            # Version control information
+autoload -U colors && colors                    # Adds variables for printing colors
+setopt PROMPT_SUBST                             # Allow substitution in PROMPT
+setopt PRINT_EXIT_VALUE                         # Print non-zero exit codes
 
 # Load virtualenvwrapper, and display the current virtualenv in the prompt
-
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
     export VIRTUAL_ENV_DISABLE_PROMPT=1
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+# Display the current virtualenv when active
 function prompt_venv() {
     [ -n "$VIRTUAL_ENV" ] && echo "virtualenv:$(basename "$VIRTUAL_ENV") "
 }
 
-PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%} %{$fg_bold[blue]%}%~%{$reset_color%} $(prompt_venv)%{$fg_bold[blue]%}$%{$reset_color%} '
+PROMPT='\
+%{$fg_bold[green]%}%n@%m%{$reset_color%} \
+%{$fg_bold[blue]%}%~%{$reset_color%} \
+${vcs_info_msg_0_}$(prompt_venv)\
+%{$fg_bold[blue]%}$%{$reset_color%} '
