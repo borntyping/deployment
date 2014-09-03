@@ -1,4 +1,7 @@
 ---
+- include: ansible.yml
+- include: python.yml
+
 - name: install common software
   apt: pkg={{ item }} state=latest
   with_items:
@@ -32,58 +35,3 @@
 
 - name: install development gems
   gem: name=git-hub state=latest
-
-# Ansible
-
-- name: configure ansible ppa
-  command: apt-add-repository ppa:ansible/ansible
-  args: {'creates': '/etc/apt/sources.list.d/ansible-ansible-trusty.list'}
-  tags:
-    - ansible
-
-- name: update ansible
-  apt: pkg=ansible state=latest
-  tags:
-    - ansible
-
-# Python
-
-- name: configure deadsnakes ppa
-  command: apt-add-repository ppa:fkrull/deadsnakes
-  args: {'creates': '/etc/apt/sources.list.d/fkrull-deadsnakes-trusty.list'}
-  tags:
-    - python
-
-- name: install python packages
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - python2.6
-    - python2.6-dev
-    - python
-    - python-pip
-    - python-dev
-    - python3
-    - python3-pip
-    - python3-dev
-  tags:
-    - python
-
-- name: install python modules (py2/py3)
-  pip: state=latest executable={{ item[0] }} name={{ item[1] }}
-  with_nested:
-    - - pip2
-      - pip3
-    - - setuptools
-      - flake8
-  tags:
-    - python
-
-- name: install python development modules (py3)
-  pip: state=latest executable=pip3 name={{ item }}
-  with_items:
-    - virtualenvwrapper
-    - tox
-    - flake8
-    - pyyaml
-  tags:
-    - python
