@@ -6,8 +6,16 @@ Deploys dotfiles, configuration and packages to my workstations using Ansible.
 Usage
 -----
 
+The `./ansible-run` script runs `ansible-playbook` on the local machine:
+
 ```bash
 sudo ansible-playbook --inventory-file local site.yml
+```
+
+To pull the repository and run it in one:
+
+```bash
+ansible-pull --url=git@github.com:borntyping/deployment.git --inventory=local site.yml --verbose
 ```
 
 Licence

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo ansible-playbook --inventory-file="local.conf" "site.yml"

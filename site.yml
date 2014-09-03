@@ -3,6 +3,5 @@
 - hosts: local
   user: sam
   roles:
-    - common
     - workstation
     - workstation-extras
