@@ -121,4 +121,4 @@ export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
 #
 
 export PATH="$HOME/.gem/ruby/1.9.1/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
