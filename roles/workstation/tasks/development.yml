@@ -1,0 +1,53 @@
+#
+# Installs and configures development tools
+#
+
+- name: install development packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - ack-grep
+    - ansible
+    - git
+    - htop
+    - nano
+    - nodejs
+    - ruby
+    - ruby-dev
+    - tmux
+    - tree
+
+- name: install development packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - git-cola
+    - gitg
+    - meld
+  tags:
+    - gui
+
+- name: install git scripts
+  copy: 'src={{ item }} dest=/usr/local/bin/{{ item }} mode=0755'
+  with_items:
+    - git-tag-version
+    - git-overwritten
+
+- name: link git-subtree
+  file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link'
+
+- name: install development gems
+  gem: 'state=latest name={{ item }}'
+  with_items:
+    - git-hub
+    - jekyll
+    - travis
+    - travis-lint
+
+- name: configure dotfiles
+  template: 'src={{ item }} dest=~/.{{ item }}'
+  with_items:
+    - gitconfig
+    - nanorc
+    - htoprc
+    - tmux.conf
+  tags:
+    - dotfiles

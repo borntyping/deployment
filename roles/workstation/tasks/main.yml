@@ -1,42 +1,19 @@
 ---
-- include: ansible.yml tags=ansible
-- include: python.yml tags=python
-- include: shell.yml tags=shell
+- include: "development.yml tags=development,dev"
+- include: "ansible.yml tags=ansible"
+- include: "python.yml tags=python"
+- include: "shell.yml tags=shell"
 
 - name: install common software
   apt: pkg={{ item }} state=latest
   with_items:
     - firefox
     - terminator
+  tags:
+    - gui
 
 - name: configure terminator
   template: dest=~/.config/terminator/config src=terminator.conf
-
-- name: install development software
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - ruby
-    - ruby-dev
-    - nodejs
-    - git
-    - ansible
-    - nano
-    - htop
-    - tmux
-
-- name: configure dotfiles
-  template: src={{ item }} dest=~/.{{ item }}
-  with_items:
-    - gitconfig
-    - nanorc
-    - htoprc
-    - tmux.conf
-
-- name: install git-tag-version
-  copy: src=git-tag-version dest=/usr/local/bin/git-tag-version mode=0755
-
-- name: install development gems
-  gem: state=latest name={{ item }}
-  with_items:
-    - git-hub
-    - jekyll
+  tags:
+    - dotfiles
+    - gui

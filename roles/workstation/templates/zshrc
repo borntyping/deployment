@@ -44,6 +44,9 @@ zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE/completion/
 zstyle ':completion:*:*:*:users' ignored-patterns '*'
 
+# Fuzzy completion - case insensitive, partial-word and substring
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 #
 # Title
 #
