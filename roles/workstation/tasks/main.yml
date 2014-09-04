@@ -17,6 +17,7 @@
   with_items:
     - ruby
     - ruby-dev
+    - nodejs
     - git
     - ansible
     - nano
@@ -35,4 +36,7 @@
   copy: src=git-tag-version dest=/usr/local/bin/git-tag-version mode=0755
 
 - name: install development gems
-  gem: name=git-hub state=latest
+  gem: state=latest name={{ item }}
+  with_items:
+    - git-hub
+    - jekyll

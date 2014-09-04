@@ -31,6 +31,7 @@ setopt EXTENDED_HISTORY                         # Store more information on hist
 autoload -Uz compinit && compinit               # Loads completion modules
 setopt AUTO_MENU                                # Show completion menu on succesive tab press
 setopt ALWAYS_TO_END                            # Move cursor after completion
+setopt COMPLETE_ALIASES                         # Allow autocompletion for aliases
 setopt COMPLETE_IN_WORD                         # Allow completion from middle of word
 setopt LIST_PACKED                              # Smallet completion menu
 
@@ -41,23 +42,14 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE/completion/
+zstyle ':completion:*:*:*:users' ignored-patterns '*'
 
 #
-# Named directories 
+# Title
 #
 
-setopt AUTO_NAME_DIRS                           # Automatically create named directories
-borntyping="$HOME/Development/borntyping"       # http://github.com/borntyping
-phoenix_ci="$HOME/Development/phoenix-ci"       # http://github.com/phoenix-ci
-personal="$HOME/Development/personal"           # Unpublished projects
-
-#
-# Aliases
-#
-
-alias gs="git status"
-alias gd="git diff"
-alias -g ...='../..'                            # Allow ... to mean ../.. anywhere
+function precmd() { print -Pn "\e]2;%n@%m\a" }  # Set title to user@host
+function preexec() { print -Pn "\e]2;$2\a"; }   # Set title to the current command
 
 #
 # Prompt
@@ -66,7 +58,6 @@ alias -g ...='../..'                            # Allow ... to mean ../.. anywhe
 autoload -U vcs_info                            # Version control information
 autoload -U colors && colors                    # Adds variables for printing colors
 setopt PROMPT_SUBST                             # Allow substitution in PROMPT
-setopt PRINT_EXIT_VALUE                         # Print non-zero exit codes
 
 # Load virtualenvwrapper, and display the current virtualenv in the prompt
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
@@ -85,3 +76,32 @@ PROMPT='\
 %{$fg_bold[blue]%}%~%{$reset_color%} \
 ${vcs_info_msg_0_}$(prompt_venv)\
 %{$fg_bold[blue]%}$%{$reset_color%} '
+
+#
+# Named directories 
+#
+
+setopt AUTO_NAME_DIRS                           # Automatically create named directories
+borntyping="$HOME/Development/borntyping"       # http://github.com/borntyping
+phoenix_ci="$HOME/Development/phoenix-ci"       # http://github.com/phoenix-ci
+personal="$HOME/Development/personal"           # Unpublished projects
+
+#
+# Aliases
+#
+
+alias ls='ls --color=auto'                      # Use colors with ls
+alias grep='grep --color=auto'                  # Use colors for grep output
+alias -g ...='../..'                            # Allow ... to mean ../.. anywhere
+alias gs='git status'
+alias gd='git diff'
+
+# Set colors to use with `ls --color`
+export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
+
+#
+# Bin
+#
+
+export PATH="$HOME/.gem/ruby/1.9.1/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
