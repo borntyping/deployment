@@ -51,8 +51,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:
 # Title
 #
 
-function precmd() { print -Pn "\e]2;%n@%m\a" }  # Set title to user@host
-function preexec() { print -Pn "\e]2;$2\a"; }   # Set title to the current command
+
 
 #
 # Prompt
@@ -62,6 +61,15 @@ autoload -U vcs_info                            # Version control information
 autoload -U colors && colors                    # Adds variables for printing colors
 setopt PROMPT_SUBST                             # Allow substitution in PROMPT
 
+# Set styles for vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true 
+zstyle ':vcs_info:*' check-for-staged-changes true
+zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}!%{$reset_color%}"
+zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}?%{$reset_color%}"
+zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}%c%u " 
+zstyle ':vcs_info:*' actionformats "%s:%b(%a)%c%u "
+
 # Load virtualenvwrapper, and display the current virtualenv in the prompt
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
@@ -70,14 +78,20 @@ if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
 fi
 
 # Display the current virtualenv when active
-function prompt_venv() {
-    [ -n "$VIRTUAL_ENV" ] && echo "virtualenv:$(basename "$VIRTUAL_ENV") "
+function env_info() {
+    env_info_msg=""
+    if [ -n "$VIRTUAL_ENV" ]; then
+        env_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+    fi
 }
+
+function precmd() { print -Pn "\e]2;%n@%m\a"; vcs_info; env_info; }
+function preexec() { print -Pn "\e]2;$2\a"; }
 
 PROMPT='\
 %{$fg_bold[green]%}%n@%m%{$reset_color%} \
 %{$fg_bold[blue]%}%~%{$reset_color%} \
-${vcs_info_msg_0_}$(prompt_venv)\
+${vcs_info_msg_0_}${env_info_msg}\
 %{$fg_bold[blue]%}$%{$reset_color%} '
 
 #

@@ -41,6 +41,15 @@
     - jekyll
     - travis
     - travis-lint
+  tags:
+    - ruby
+
+- name: install development python modules
+  pip: 'name={{ item }} state=latest executable=pip3'
+  with_items:
+    - pipsi
+  tags:
+    - python
 
 - name: configure dotfiles
   template: 'src={{ item }} dest=~/.{{ item }}'

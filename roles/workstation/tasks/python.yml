@@ -9,35 +9,28 @@
     - python
 
 - name: install python packages
-  apt: pkg={{ item }} state=latest
+  apt: 'pkg={{ item }} state=latest'
   with_items:
     - python2.6
     - python2.6-dev
     - python
     - python-pip
     - python-dev
+    - python-flake8
+    - python-setuptools
     - python3
     - python3-pip
     - python3-dev
-  tags:
-    - python
-
-- name: install python modules (py2+py3)
-  pip: state=latest executable={{ item[0] }} name={{ item[1] }}
-  with_nested:
-    - - pip2
-      - pip3
-    - - setuptools
-      - flake8
+    - python3-flake8
+    - python3-setuptools
   tags:
     - python
 
 - name: install python development modules (py3)
-  pip: state=latest executable=pip3 name={{ item }}
+  pip: 'state=latest executable=pip3 name={{ item }}'
   with_items:
     - virtualenvwrapper
     - tox
-    - flake8
     - pyyaml
   tags:
     - python
