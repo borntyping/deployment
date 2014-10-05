@@ -99,9 +99,10 @@ ${vcs_info_msg_0_}${env_info_msg}\
 #
 
 setopt AUTO_NAME_DIRS                           # Automatically create named directories
-borntyping="$HOME/Development/borntyping"       # http://github.com/borntyping
-phoenix_ci="$HOME/Development/phoenix-ci"       # http://github.com/phoenix-ci
-personal="$HOME/Development/personal"           # Unpublished projects
+borntyping="$HOME/Development/borntyping"
+personal="$HOME/Development/personal"
+university="$HOME/Development/personal/university"
+phoenix="$HOME/Development/phoenix-ci"
 
 #
 # Aliases
@@ -122,3 +123,5 @@ export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
 
 export PATH="$HOME/.gem/ruby/1.9.1/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
