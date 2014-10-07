@@ -6,7 +6,6 @@
   apt: pkg={{ item }} state=latest
   with_items:
     - ack-grep
-    - ansible
     - git
     - htop
     - nano
@@ -15,24 +14,18 @@
     - ruby-dev
     - tmux
     - tree
-
-- name: install development packages
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - git-cola
-    - gitg
-    - meld
-  tags:
-    - gui
+  sudo: yes
 
 - name: install git scripts
   copy: 'src={{ item }} dest=/usr/local/bin/{{ item }} mode=0755'
   with_items:
     - git-tag-version
     - git-overwritten
+  sudo: yes
 
 - name: link git-subtree
   file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link'
+  sudo: yes
 
 - name: install development gems
   gem: 'state=latest name={{ item }}'
@@ -41,6 +34,7 @@
     - jekyll
     - travis
     - travis-lint
+  sudo: yes
   tags:
     - ruby
 
@@ -48,6 +42,7 @@
   pip: 'name={{ item }} state=latest executable=pip3'
   with_items:
     - pipsi
+  sudo: yes
   tags:
     - python
 

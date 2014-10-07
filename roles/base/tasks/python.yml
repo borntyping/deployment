@@ -3,16 +3,13 @@
 #
 
 - name: configure deadsnakes ppa
+  when: ansible_distribution == 'Ubuntu'
   command: apt-add-repository ppa:fkrull/deadsnakes
   args: {'creates': '/etc/apt/sources.list.d/fkrull-deadsnakes-trusty.list'}
-  tags:
-    - python
 
 - name: install python packages
   apt: 'pkg={{ item }} state=latest'
   with_items:
-    - python2.6
-    - python2.6-dev
     - python
     - python-pip
     - python-dev
@@ -24,18 +21,19 @@
     - python3-flake8
     - python3-setuptools
     - virtualenvwrapper
-  tags:
-    - python
 
-- name: install python development modules (py3)
-  pip: 'state=latest executable=pip3 name={{ item }}'
+- name: install deprecated python packages
+  when: ansible_distribution == 'Ubuntu'
+  apt: 'pkg={{ item }} state=latest'
   with_items:
-    - tox
-    - pyyaml
-  tags:
-    - python
+    - python2.6
+    - python2.6-dev
+
+# - name: install python development modules (py3)
+#   pip: 'state=latest executable=pip3 name={{ item }}'
+#   with_items:
+#     - tox
+#     - pyyaml
 
 - name: install postmkvirtualenv script
   copy: src=postmkvirtualenv dest=~/.virtualenvs/postmkvirtualenv mode=0755
-  tags:
-    - python

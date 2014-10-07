@@ -1,7 +1,11 @@
 ---
 
-- hosts: local
-  user: sam
+- hosts: workstation
   roles:
+    - base
     - workstation
-    - workstation-extras
+
+- hosts: servers
+  roles:
+    - base
+    - server

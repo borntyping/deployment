@@ -1,0 +1,2 @@
+---
+- user: name=sam comment="Sam Clements" groups=sudo append=true

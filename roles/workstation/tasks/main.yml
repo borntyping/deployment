@@ -1,14 +1,13 @@
 ---
-- include: "development.yml tags=development,dev"
-- include: "ansible.yml tags=ansible"
-- include: "python.yml tags=python"
-- include: "shell.yml tags=shell"
-
 - name: install common software
   apt: pkg={{ item }} state=latest
   with_items:
     - firefox
     - terminator
+    - git-cola
+    - gitg
+    - meld
+  sudo: yes
   tags:
     - gui
 
@@ -16,4 +15,20 @@
   template: dest=~/.config/terminator/config src=terminator.conf
   tags:
     - dotfiles
-    - gui
+
+- name: add spotify repository
+  template: dest=/etc/apt/sources.list.d/spotify.list src=spotify.list owner=root group=root mode=0644
+  sudo: true
+
+#- name: add spotify repository key
+#  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
+
+- name: install software from external sources
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - dropbox
+    - spotify-client
+    - sublime-text
+    - steam
+    - crawl-tiles
+  sudo: true

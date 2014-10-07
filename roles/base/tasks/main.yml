@@ -1,0 +1,5 @@
+---
+- include: "development.yml tags=development,dev"
+- include: "ansible.yml tags=ansible"
+- include: "python.yml tags=python"
+- include: "shell.yml tags=shell"
