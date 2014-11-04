@@ -1,5 +1,4 @@
 ---
-- include: "ansible.yml tags=ansible"
 - include: "development.yml tags=dev"
 - include: "dotfiles.yml tags=dotfiles"
 - include: "python.yml tags=python"
