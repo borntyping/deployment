@@ -6,17 +6,32 @@ Deploys dotfiles, configuration and packages to my workstations using Ansible.
 Usage
 -----
 
-The `./ansible-run` script runs `ansible-playbook` on the local machine:
+To pull the repository and run the playbook against the local machine in one command:
 
 ```bash
-sudo ansible-playbook --inventory-file local site.yml
+ansible-pull --url=git@github.com:borntyping/deployment.git -i localhost, -K site.yml
 ```
 
-To pull the repository and run it in one:
+If you intend to modify the repository:
 
 ```bash
-ansible-pull --url=git@github.com:borntyping/deployment.git --inventory=local site.yml --verbose
+git clone git@github.com:borntyping/deployment.git
+cd deployment
+$EDITOR inventory.conf
+./ansible-run
 ```
+
+The `./ansible-run` script is a wrapper around `ansible-playbook`, and requires an inventory file to exist at `./inventory.conf` (it'll remind you if you forget to create it). An example inventory might look like this:
+
+```
+[workstation]
+localhost ansible_connection=local ansible_sudo_pass=EXAMPLE
+
+[servers]
+example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
+```
+
+If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run` or `ansible-playbook` (which is what the `ansible-pull` command above does).
 
 Licence
 -------
