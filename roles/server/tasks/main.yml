@@ -1,2 +1,3 @@
 ---
-- user: name=sam comment="Sam Clements" groups=sudo append=true
+- name: add user to sudoers
+  user: 'name={{ user_id }} comment={{ user_name }} groups=sudo append=true'
