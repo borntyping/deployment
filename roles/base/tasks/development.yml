@@ -37,3 +37,4 @@
     - travis-lint
   tags:
     - ruby
+    - slow

@@ -22,12 +22,12 @@
 - name: deadsnakes | configure ppa
   command: apt-add-repository ppa:fkrull/deadsnakes
   args: {'creates': '/etc/apt/sources.list.d/fkrull-deadsnakes-trusty.list'}
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Mint'
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
   sudo: yes
 
 - name: deadsnakes | install python2.6
-  when: ansible_distribution == 'Ubuntu'
   apt: 'pkg={{ item }} state=latest'
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
   sudo: yes
   with_items:
     - python2.6

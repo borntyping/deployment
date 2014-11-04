@@ -12,7 +12,7 @@
     - gui
 
 - name: configure terminator
-  template: dest=~/.config/terminator/config src=terminator.conf
+  template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
   tags:
     - dotfiles
 
@@ -24,7 +24,7 @@
 #  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
 
 - name: install software from external sources
-  apt: pkg={{ item }} state=installed
+  apt: 'pkg={{ item }} state=installed'
   with_items:
     - dropbox
     - spotify-client
@@ -34,7 +34,7 @@
   sudo: true
 
 - name: install sublime-text and dependancies
-  apt: pkg={{ item }} state=installed
+  apt: 'pkg={{ item }} state=installed'
   with_items:
     - sublime-text
     - python-flake8

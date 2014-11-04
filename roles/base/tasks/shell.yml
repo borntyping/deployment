@@ -4,6 +4,6 @@
   sudo: yes
 
 - name: configure zsh
-  template: src=zshrc dest=~/.zshrc
+  template: 'src=zshrc dest={{ ansible_env.HOME }}/.zshrc'
   tags:
     - dotfiles

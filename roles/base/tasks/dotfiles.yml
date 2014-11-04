@@ -1,13 +1,7 @@
 - name: configure dotfiles
-  template: 'src={{ item }} dest=~/.{{ item }}'
+  template: "src={{ item }} dest={{ ansible_env.HOME }}/.{{ item }}"
   with_items:
     - gitconfig
     - htoprc
     - nanorc
     - tmux.conf
-
-- file: path=~/.bin state=directory
-
-- file: 'src={{ item }} dest=~/.bin/{{ item }} mode=+x'
-  with_items:
-    - use_rvm
