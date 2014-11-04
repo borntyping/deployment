@@ -13,11 +13,9 @@
     - python3-pip
     - python3-dev
 
-- name: install python modules
-  pip: 'name={{ item }} state=latest executable=pip3'
-  sudo: yes
-  with_items:
-    - pipsi
+- name: install pipsi
+  command: 'curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python'
+  args: {'creates': '{{ ansible_env.HOME }}/.local/bin/pipsi'}
 
 - name: deadsnakes | configure ppa
   command: apt-add-repository ppa:fkrull/deadsnakes
@@ -41,4 +39,6 @@
     - virtualenvwrapper
 
 - name: virtualenv | create scripts
-  copy: src=postmkvirtualenv dest=~/.virtualenvs/postmkvirtualenv mode=0755
+  copy: 'src={{ item }} dest={{ ansible_env.HOME }}/.virtualenvs/{{ item }} mode=0755'
+  with_items:
+    - postmkvirtualenv
