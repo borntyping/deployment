@@ -4,6 +4,7 @@
 
 - name: install development packages
   apt: pkg={{ item }} state=latest
+  sudo: yes
   with_items:
     - ack-grep
     - git
@@ -14,14 +15,13 @@
     - ruby-dev
     - tmux
     - tree
-  sudo: yes
 
 - name: install git scripts
   copy: 'src={{ item }} dest=/usr/local/bin/{{ item }} mode=0755'
+  sudo: yes
   with_items:
     - git-tag-version
     - git-overwritten
-  sudo: yes
 
 - name: link git-subtree
   file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link'
@@ -29,29 +29,11 @@
 
 - name: install development gems
   gem: 'state=latest name={{ item }}'
+  sudo: yes
   with_items:
     - git-hub
     - jekyll
     - travis
     - travis-lint
-  sudo: yes
   tags:
     - ruby
-
-- name: install development python modules
-  pip: 'name={{ item }} state=latest executable=pip3'
-  with_items:
-    - pipsi
-  sudo: yes
-  tags:
-    - python
-
-- name: configure dotfiles
-  template: 'src={{ item }} dest=~/.{{ item }}'
-  with_items:
-    - gitconfig
-    - nanorc
-    - htoprc
-    - tmux.conf
-  tags:
-    - dotfiles

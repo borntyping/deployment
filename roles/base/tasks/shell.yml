@@ -1,6 +1,9 @@
 ---
-- name: install zsh
+- name: install latest zsh package
   apt: pkg=zsh state=latest
+  sudo: yes
 
 - name: configure zsh
   template: src=zshrc dest=~/.zshrc
+  tags:
+    - dotfiles

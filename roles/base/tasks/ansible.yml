@@ -2,12 +2,12 @@
 # Install and update Ansible
 #
 
-- command: apt-add-repository ppa:ansible/ansible
+- name: add ansible PPA
+  command: apt-add-repository ppa:ansible/ansible
   args: {'creates': '/etc/apt/sources.list.d/ansible-ansible-trusty.list'}
-  when: ansible_distribution == 'Ubuntu'
-  tags:
-    - ansible
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Mint'
+  sudo: yes
 
-- apt: pkg=ansible state=latest
-  tags:
-    - ansible
+- name: install latest ansible package
+  apt: pkg=ansible state=latest
+  sudo: yes

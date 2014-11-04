@@ -4,6 +4,7 @@
 
 - name: install python packages
   apt: 'pkg={{ item }} state=latest'
+  sudo: yes
   with_items:
     - python
     - python-pip
@@ -12,20 +13,29 @@
     - python3-pip
     - python3-dev
 
+- name: install python modules
+  pip: 'name={{ item }} state=latest executable=pip3'
+  sudo: yes
+  with_items:
+    - pipsi
+
 - name: deadsnakes | configure ppa
-  when: ansible_distribution == 'Ubuntu'
   command: apt-add-repository ppa:fkrull/deadsnakes
   args: {'creates': '/etc/apt/sources.list.d/fkrull-deadsnakes-trusty.list'}
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Mint'
+  sudo: yes
 
 - name: deadsnakes | install python2.6
   when: ansible_distribution == 'Ubuntu'
   apt: 'pkg={{ item }} state=latest'
+  sudo: yes
   with_items:
     - python2.6
     - python2.6-dev
 
 - name: virtualenv | install packages
   apt: 'pkg={{ item }} state=latest'
+  sudo: yes
   with_items:
     - python-virtualenv
     - virtualenvwrapper
