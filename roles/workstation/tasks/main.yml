@@ -1,44 +1,47 @@
 ---
 - include: "ansible.yml tags=ansible"
+- include: "python.yml tags=python"
 
 - name: install common software
   apt: pkg={{ item }} state=latest
+  sudo: yes
   with_items:
     - firefox
     - terminator
     - git-cola
     - gitg
     - meld
-  sudo: yes
-  tags:
-    - gui
+    - crawl-tiles
 
 - name: configure terminator
   template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
   tags:
     - dotfiles
 
+#
+# Software from external sources
+#
+
 - name: add spotify repository
-  template: dest=/etc/apt/sources.list.d/spotify.list src=spotify.list owner=root group=root mode=0644
-  sudo: true
+  apt_repository: repo='deb http://repository.spotify.com stable non-free' state=present
+  sudo: yes
 
 #- name: add spotify repository key
 #  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
 
-- name: install software from external sources
+- name: install software from external sources - you may need to do this manually
   apt: 'pkg={{ item }} state=installed'
   with_items:
     - dropbox
+    - nemo-dropbox
     - spotify-client
-    - sublime-text
     - steam-launcher
-    - crawl-tiles
-  sudo: true
+  sudo: yes
 
 - name: install sublime-text and dependancies
   apt: 'pkg={{ item }} state=installed'
+  sudo: yes
   with_items:
     - sublime-text
     - python-flake8
     - python3-flake8
-  sudo: true

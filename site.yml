@@ -1,11 +1,14 @@
 ---
 
+- hosts: all
+  roles:
+    - { role: base-debian, when: ansible_os_family == 'Debian' }
+    - { role: base }
+
 - hosts: workstation
   roles:
-    - base
     - workstation
 
 - hosts: servers
   roles:
-    - base
     - server

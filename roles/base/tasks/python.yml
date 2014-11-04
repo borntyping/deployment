@@ -13,23 +13,9 @@
     - python3-pip
     - python3-dev
 
-- name: install pipsi
-  command: 'curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python'
-  args: {'creates': '{{ ansible_env.HOME }}/.local/bin/pipsi'}
-
-- name: deadsnakes | configure ppa
-  command: apt-add-repository ppa:fkrull/deadsnakes
-  args: {'creates': '/etc/apt/sources.list.d/fkrull-deadsnakes-trusty.list'}
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
-  sudo: yes
-
-- name: deadsnakes | install python2.6
-  apt: 'pkg={{ item }} state=latest'
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
-  sudo: yes
-  with_items:
-    - python2.6
-    - python2.6-dev
+#
+# Install virtualenv and virtualenvwrapper
+#
 
 - name: virtualenv | install packages
   apt: 'pkg={{ item }} state=latest'
@@ -38,7 +24,27 @@
     - python-virtualenv
     - virtualenvwrapper
 
+- name: virtualenv | create ~/.virtualenvs directory
+  file: 'name={{ ansible_env.HOME }}/.virtualenvs state=directory'
+
 - name: virtualenv | create scripts
   copy: 'src={{ item }} dest={{ ansible_env.HOME }}/.virtualenvs/{{ item }} mode=0755'
   with_items:
     - postmkvirtualenv
+
+#
+# Install pipsi - https://github.com/mitsuhiko/pipsi
+#
+
+- name: pipsi | create virtualenv
+  command: 'virtualenv {{ pipsi_venv }}'
+  args: {'creates': '{{ pipsi_venv }}/bin/python'}
+
+- name: pipsi | install pipsi
+  pip: 'name=pipsi state=latest virtualenv={{ pipsi_venv }}'
+
+- name: pipsi | create pipsi bin directory
+  file: 'name={{ pipsi_bin }} state=directory'
+
+- name: pipsi | link pipsi
+  file: 'src={{ pipsi_venv }}/bin/pipsi dest={{ pipsi_bin }}/pipsi state=link'
