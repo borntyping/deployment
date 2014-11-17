@@ -15,6 +15,15 @@
     - tmux
     - tree
 
+- name: check if /usr/bin/ack exists
+  stat: path=/usr/bin/ack
+  register: ack
+
+- name: link ack-grep to ack-grep
+  command: dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+  when: not ack.stat.exists
+  sudo: yes
+
 - name: install nodejs
   apt: pkg=nodejs state=latest
   when: ansible_distribution != 'Debian' or ansible_distribution_release != 'wheezy'
