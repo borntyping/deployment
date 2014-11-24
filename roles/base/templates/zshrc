@@ -123,6 +123,11 @@ export PATH="$HOME/.local/bin:$PATH"            # Used by pipsi for commands
 #
 
 function use_rvm() {                            # Avoid loading RVM for every shell
-    source "$HOME/.rvm/scripts/rvm"
-    export PATH="$PATH:$HOME/.rvm/bin"
+    source "$HOME/.rvm/scripts/rvm"             # Load RVM using `source`, as RVM provides a shell
+    export PATH="$PATH:$HOME/.rvm/bin"          #   function that modifies the environment
+    rvm use                                     # Start using RVM
 }
+
+if [[ -f /usr/local/bin/z.sh ]]; then
+    source /usr/local/bin/z.sh
+fi
