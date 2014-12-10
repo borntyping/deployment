@@ -33,6 +33,22 @@ example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
 
 If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run` or `ansible-playbook` (which is what the `ansible-pull` command above does).
 
+Bootstrapping
+-------------
+
+After logging in as the root user:
+
+ * Create personal user with `adduser USER`
+ * Add personal user to sudoers with `usermod -a -G sudo USER`
+
+Add the machine to the inventory:
+
+    HOSTNAME ansible_sudo_pass=PASSWORD
+
+After ansible has run:
+
+ * Set user passwords with `passwd USER`
+
 Licence
 -------
 
