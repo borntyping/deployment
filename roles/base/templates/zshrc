@@ -16,13 +16,11 @@ setopt RM_STAR_WAIT                             # Force the user to wait when do
 
 SAVEHIST=10000                                  # Lines of history to save to a file
 HISTSIZE=10000                                  # Lines of history to keep in memory
-HISTFILE=$ZSH_CACHE/history                     # Save history in .cache
+HISTFILE=$HOME/.cache/zsh/history               # Save history in .cache
 
 setopt APPEND_HISTORY                           # Append to the HISTFILE, not replace
 setopt HIST_IGNORE_DUPS                         # Ignore duplicate history entries
-setopt INC_APPEND_HISTORY                       # Append history immediately 
 setopt SHARE_HISTORY                            # Share history between ZSH instances
-setopt EXTENDED_HISTORY                         # Store more information on history items
 
 #
 # Completion
