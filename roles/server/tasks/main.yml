@@ -1,3 +1,4 @@
 ---
-- name: add user to sudoers
-  user: 'name={{ user_id }} comment={{ user_name }} groups=sudo append=true'
+- include: 'users.yml tags=server,users'
+- include: 'nginx.yml tags=server,nginx,sites'
+- include: 'site-borntyping.yml tags=server,sites,site-borntyping'

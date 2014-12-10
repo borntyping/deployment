@@ -1,3 +1,22 @@
 ---
-user_id: sam
-user_name: "Sam Clements"
+users:
+  sam:
+    comment: 'Sam Clements'
+    shell: /bin/zsh
+  yarrow:
+    comment: 'Yarrow Paddon-Butler'
+    shell: /bin/bash
+
+nginx_sites:
+  borntyping:
+    domain: borntyping.io
+    redirect:
+      - borntyping.com
+      - borntyping.co.uk
+      - borntyping.ninja
+    user: sam
+  goggles:
+    domain: 8bitgoggles.org.uk
+    redirect:
+      - paddonbutler.org.uk
+    user: yarrow

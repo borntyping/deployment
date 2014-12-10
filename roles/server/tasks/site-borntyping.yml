@@ -1,0 +1,22 @@
+---
+- name: install jekyll
+  gem: >
+    name=jekyll
+    state=latest
+    user_install=yes
+  tags:
+    - ruby
+
+- name: checkout borntyping source
+  git: >
+    repo=git@github.com:borntyping/borntyping.github.io.git
+    dest=/var/www/sam/borntyping
+    version=master
+    accept_hostkey=True
+  register: site_borntyping_checkout
+
+- name: build borntyping using jekyll
+  command: jekyll build
+  args:
+    chdir: /var/www/sam/borntyping
+  when: site_borntyping_checkout.changed

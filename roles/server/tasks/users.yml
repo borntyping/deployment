@@ -1,0 +1,27 @@
+---
+- name: modify users
+  user: >
+    name='{{ item.key }}'
+    comment='{{ item.value.comment }}'
+    shell='{{ item.value.shell }}'
+    groups=sudo
+    append=true
+  sudo: yes
+  with_dict: users
+
+- name: create missing ssh keys
+  command: >
+    su --command 'ssh-keygen -N "" -f /home/{{ item.key }}/.ssh/id_rsa' {{ item.key}}
+  args:
+    creates: '/home/{{ item.key }}/.ssh/id_rsa'
+  sudo: yes
+  with_dict: users
+
+- name: create user www paths
+  file: >
+    path=/var/www/{{ item.key }}
+    owner={{ item.key }}
+    group={{ item.key }}
+    state=directory
+  sudo: yes
+  with_dict: users
