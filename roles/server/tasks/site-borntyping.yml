@@ -7,7 +7,7 @@
   tags:
     - ruby
 
-- name: checkout borntyping source
+- name: checkout borntyping site source
   git: >
     repo=git@github.com:borntyping/borntyping.github.io.git
     dest=/var/www/sam/borntyping
@@ -15,8 +15,8 @@
     accept_hostkey=True
   register: site_borntyping_checkout
 
-- name: build borntyping using jekyll
-  command: jekyll build
+- name: build borntyping site using jekyll
+  command: '{{ ansible_env.HOME }}/.gem/ruby/1.9.1/bin/jekyll build'
   args:
     chdir: /var/www/sam/borntyping
   when: site_borntyping_checkout.changed
