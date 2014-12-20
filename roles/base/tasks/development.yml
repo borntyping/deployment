@@ -38,11 +38,16 @@
   copy: 'src={{ item }} dest=/usr/local/bin/{{ item }} mode=0755'
   sudo: yes
   with_items:
+    - git-hub
     - git-tag-version
     - git-overwritten
 
 - name: link git-subtree
   file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link force=yes'
+  sudo: yes
+
+- name: install gh - you may need to do this manually
+  apt: 'pkg=gh state=installed'
   sudo: yes
 
 - name: install development gems

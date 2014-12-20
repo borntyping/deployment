@@ -1,5 +1,5 @@
 ---
-- include: "development.yml tags=dev"
+- include: "development.yml tags=dev,development"
 - include: "dotfiles.yml tags=dotfiles"
 - include: "python.yml tags=python"
 - include: "shell.yml tags=shell"

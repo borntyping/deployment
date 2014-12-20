@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wraps the Github CLI so it can be called using `git hub`
+
+exec gh $@
