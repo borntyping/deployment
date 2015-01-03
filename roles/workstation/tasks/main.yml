@@ -13,31 +13,13 @@
     - meld
     - crawl-tiles
     - keepassx
+    - dropbox
+    - nemo-dropbox
 
 - name: configure terminator
   template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
   tags:
     - dotfiles
-
-#
-# Software from external sources
-#
-
-- name: add spotify repository
-  apt_repository: repo='deb http://repository.spotify.com stable non-free' state=present
-  sudo: yes
-
-#- name: add spotify repository key
-#  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
-
-- name: install software from external sources - you may need to do this manually
-  apt: 'pkg={{ item }} state=installed'
-  with_items:
-    - dropbox
-    - nemo-dropbox
-    - spotify-client
-    - steam-launcher
-  sudo: yes
 
 - name: install sublime-text and dependancies
   apt: 'pkg={{ item }} state=installed'
@@ -46,3 +28,32 @@
     - sublime-text
     - python-flake8
     - python3-flake8
+
+#
+# Software from external sources
+#
+
+- name: spotify | add repository
+  apt_repository: repo='deb http://repository.spotify.com stable non-free' state=present
+  register: spotify_repository
+  sudo: yes
+
+- name: spotify | add repository key
+  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
+  register: spotify_repository_key
+  sudo: yes
+  
+- name: spotify | update repositories
+  apt: 'update_cache=yes'
+  when: spotify_repository.changed or spotify_repository_key.changed
+  sudo: yes       
+
+- name: spotify | install package
+  apt: 'pkg=spotify-client state=installed'
+  sudo: yes
+
+- name: install software from external sources - you may need to do this manually
+  apt: 'pkg={{ item }} state=installed'
+  with_items:
+    - steam-launcher
+  sudo: yes
