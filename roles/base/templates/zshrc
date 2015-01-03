@@ -62,7 +62,7 @@ zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}?%{$reset_color%}"
 zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}%c%u " 
 zstyle ':vcs_info:*' actionformats "%s:%b(%a)%c%u "
 
-# Load virtualenvwrapper, and display the current virtualenv in the prompt
+# Load virtualenvwrapper, and stop virtualenv from modifying the prompt
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
     export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -113,18 +113,26 @@ export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
 # Bin
 #
 
-export PATH="$HOME/.bin:$PATH"                  # Used for personal scripts
-export PATH="$HOME/.local/bin:$PATH"            # Used by pipsi for commands
+function add_to_path() {
+    [[ -d $1 ]] && export PATH="$1:$PATH"
+}
 
-#
+add_to_path "$HOME/.bin"                        # Used for personal scripts
+add_to_path "$HOME/.local/bin"                  # Used by pipsi for commands
+add_to_path "$HOME/.gem/ruby/1.9.1/bin"         # Used by Ruby 1.9.1 for user gems
+add_to_path "$HOME/.gem/ruby/2.0.0/bin"         # Used by Ruby 2.0.0 for user gems
+
 # RVM
-#
+# https://rvm.io/
 
 function use_rvm() {                            # Avoid loading RVM for every shell
     source "$HOME/.rvm/scripts/rvm"             # Load RVM using `source`, as RVM provides a shell
-    export PATH="$PATH:$HOME/.rvm/bin"          #   function that modifies the environment
+    add_to_path "$HOME/.rvm/bin"                #   function that modifies the environment
     rvm use                                     # Start using RVM
 }
+
+# z directory script
+# https://github.com/rupa/z
 
 if [[ -f /usr/local/bin/z.sh ]]; then
     source /usr/local/bin/z.sh
