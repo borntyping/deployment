@@ -13,10 +13,10 @@
     dest=/var/www/sam/borntyping
     version=master
     accept_hostkey=True
-  register: site_borntyping_checkout
+  register: site_borntyping_source
 
 - name: build borntyping site using jekyll
   command: '{{ ansible_env.HOME }}/.gem/ruby/1.9.1/bin/jekyll build'
   args:
     chdir: /var/www/sam/borntyping
-  when: site_borntyping_checkout.changed
+  when: site_borntyping_source.changed
