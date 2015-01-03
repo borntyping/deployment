@@ -12,6 +12,7 @@
     - gitg
     - meld
     - crawl-tiles
+    - keepassx
 
 - name: configure terminator
   template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
