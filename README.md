@@ -28,7 +28,7 @@ The `./ansible-run` script is a wrapper around `ansible-playbook`, and requires 
 localhost ansible_connection=local ansible_sudo_pass=EXAMPLE
 
 [servers]
-example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
+remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
 ```
 
 If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run` or `ansible-playbook` (which is what the `ansible-pull` command above does).
