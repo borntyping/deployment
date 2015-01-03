@@ -46,15 +46,9 @@
   file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link force=yes'
   sudo: yes
 
-- name: install gh - you may need to do this manually
-  apt: 'pkg=gh state=installed'
-  sudo: yes
-
 - name: install development gems
   gem: 'state=latest name={{ item }}'
-  sudo: yes
   with_items:
-    - git-hub
     - jekyll
     - travis
     - travis-lint
