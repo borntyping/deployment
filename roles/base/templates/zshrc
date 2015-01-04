@@ -63,10 +63,10 @@ zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$rese
 zstyle ':vcs_info:*' actionformats "%s:%b(%a)%c%u "
 
 # Load virtualenvwrapper, and stop virtualenv from modifying the prompt
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+if [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
     export VIRTUAL_ENV_DISABLE_PROMPT=1
-    source /usr/local/bin/virtualenvwrapper.sh
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 fi
 
 # Display the current virtualenv when active
