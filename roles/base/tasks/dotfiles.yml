@@ -5,3 +5,13 @@
     - htoprc
     - nanorc
     - tmux.conf
+
+- name: scripts | create directory
+  file: 'name={{ script_bin }} state=directory'
+
+- name: scripts | install scripts
+  copy: 'src={{ item }} dest={{ script_bin }}/{{ item }} mode=0755'
+  sudo: yes
+  with_items:
+    - ansible-run
+    - tmux-attach
