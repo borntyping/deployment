@@ -1,0 +1,9 @@
+- name: install
+  apt: pkg=riemann state=latest
+  sudo: yes
+
+- name: install dashboard
+  gem: name=riemann-dash state=latest
+
+- name: install tools
+  gem: name=riemann-tools state=latest
