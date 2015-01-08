@@ -21,13 +21,11 @@
   tags:
     - dotfiles
 
-- name: install sublime-text and dependancies
+- name: install sublime-text and dependencies
   apt: 'pkg={{ item }} state=installed'
   sudo: yes
   with_items:
     - sublime-text
-    - python-flake8
-    - python3-flake8
 
 #
 # Software from external sources

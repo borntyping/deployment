@@ -39,7 +39,7 @@ setopt AUTO_PARAM_KEYS AUTO_PARAM_SLASH AUTO_REMOVE_SLASH
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path $ZSH_CACHE/completion/
+zstyle ':completion::complete:*' cache-path "$ZSH_CACHE/completion/"
 zstyle ':completion:*:*:*:users' ignored-patterns '*'
 
 # Fuzzy completion - case insensitive, partial-word and substring
@@ -64,7 +64,7 @@ zstyle ':vcs_info:*' actionformats "%s:%b(%a)%c%u "
 
 # Load virtualenvwrapper, and stop virtualenv from modifying the prompt
 if [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.4
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
     export VIRTUAL_ENV_DISABLE_PROMPT=1
     source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 fi
