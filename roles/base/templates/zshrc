@@ -92,6 +92,7 @@ ${vcs_info_msg_0_}${env_info_msg}\
 
 setopt AUTO_NAME_DIRS                           # Automatically create named directories
 borntyping="$HOME/Development/borntyping"
+sandbox="$HOME/Development/borntyping-sandbox"
 personal="$HOME/Development/personal"
 university="$HOME/Development/personal/university"
 phoenix="$HOME/Development/phoenix-ci"

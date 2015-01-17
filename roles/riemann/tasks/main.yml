@@ -7,3 +7,7 @@
 
 - name: install tools
   gem: name=riemann-tools state=latest
+
+- name: install protobuf-compiler
+  apt: pkg=protobuf-compiler state=latest
+  sudo: yes
