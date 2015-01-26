@@ -104,8 +104,9 @@ phoenix="$HOME/Development/phoenix-ci"
 alias ls='ls --color=auto'                      # Use colors with ls
 alias grep='grep --color=auto'                  # Use colors for grep output
 alias -g ...='../..'                            # Allow ... to mean ../.. anywhere
-alias gs='git status'
+alias gc='git commit -v -a'                     # Show diff in commit editor, commit everything
 alias gd='git diff'
+alias gs='git status'
 
 # Set colors to use with `ls --color`
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
