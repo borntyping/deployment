@@ -77,8 +77,8 @@ function env_info() {
     fi
 }
 
-function precmd() { print -Pn "\e]2;%n@%m\a"; vcs_info; env_info; }
-function preexec() { print -Pn "\e]2;$2\a"; }
+function precmd() { print -Pn "\e]2;%~\a"; vcs_info; env_info; }
+function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
 
 PROMPT='\
 %{$fg_bold[green]%}%n@%m%{$reset_color%} \
@@ -91,11 +91,13 @@ ${vcs_info_msg_0_}${env_info_msg}\
 #
 
 setopt AUTO_NAME_DIRS                           # Automatically create named directories
-borntyping="$HOME/Development/borntyping"
-sandbox="$HOME/Development/borntyping-sandbox"
-personal="$HOME/Development/personal"
-university="$HOME/Development/personal/university"
-phoenix="$HOME/Development/phoenix-ci"
+
+borntyping="$HOME/Development/borntyping"       # GitHub organisations
+sandbox="$HOME/Development/borntyping-sandbox"  # Experimental projects
+
+personal="$HOME/Development/personal"           # Private repositories
+university="${personal}/university"             # University repository
+mmp="${university}/CS39440"                     # Major project directory
 
 #
 # Aliases
