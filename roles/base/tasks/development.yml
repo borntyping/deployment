@@ -32,6 +32,8 @@
     - nodejs
     - nodejs-legacy
     - npm
+  tags:
+    - npm
 
 - name: install nodejs from wheezy-backports
   apt: 'pkg={{ item }} state=latest default_release=wheezy-backports'
