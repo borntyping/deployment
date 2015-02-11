@@ -1,0 +1,20 @@
+#
+# Install Ruby
+#
+
+- name: install ruby
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - ruby
+    - ruby-dev
+
+- name: install development gems
+  gem: 'state=latest name={{ item }}'
+  with_items:
+    - jekyll
+    - travis
+    - travis-lint
+  tags:
+    - ruby
+    - slow

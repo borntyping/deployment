@@ -1,5 +1,5 @@
 #!/bin/bash
 # Call the ansible-run script from borntyping/deployment
 
-cd $HOME/Development/borntyping/deployment
+cd "$HOME/Development/borntyping/deployment"
 ./ansible-run $@

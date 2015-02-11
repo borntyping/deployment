@@ -1,0 +1,4 @@
+#!/bin/bash
+# Open a terminal and connect to a remote tmux session
+
+terminator --title "tmux" --maximise --execute ssh "$*" -t -- tmux attach

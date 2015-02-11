@@ -1,29 +1,6 @@
 #
-# Prepares a Python development environment
+# Configure virtualenv
 #
-
-- name: install python packages
-  apt: 'pkg={{ item }} state=latest'
-  sudo: yes
-  with_items:
-    - python
-    - python-pip
-    - python-dev
-    - python3
-    - python3-pip
-    - python3-dev
-    - virtualenvwrapper
-
-#
-# Install virtualenv and virtualenvwrapper
-#
-
-- name: virtualenv | install packages
-  apt: 'pkg={{ item }} state=latest'
-  sudo: yes
-  with_items:
-    - python-virtualenv
-    - virtualenvwrapper
 
 - name: virtualenv | create ~/.virtualenvs directory
   file: 'name={{ ansible_env.HOME }}/.virtualenvs state=directory'

@@ -1,0 +1,38 @@
+#
+# Install user-specific configuration to $HOME
+#
+# This assumes that the remote ansible user is the user configuration should
+# be deployed to
+#
+
+- include: "shell.yml tags=shell"
+- include: "python.yml tags=python"
+
+- name: configure dotfiles
+  template: 'src={{ item }} dest={{ ansible_env.HOME }}/.{{ item }}'
+  with_items:
+    - gitconfig
+    - htoprc
+    - nanorc
+    - tmux.conf
+
+#
+# Installs scripts to ~/.local/bin
+#
+
+- name: scripts | create directory
+  file: 'name={{ script_bin }} state=directory'
+
+- name: scripts | install scripts
+  copy: 'src={{ item }} dest={{ script_bin }}/{{ item }} mode=0755'
+  sudo: yes
+  with_items:
+    - ansible-run
+    - tmux-attach
+
+#
+# Configures terminator
+#
+
+- name: configure terminator
+  template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'

@@ -1,7 +1,6 @@
----
-- include: "ansible.yml tags=ansible"
-- include: "python.yml tags=python"
-- include: "development.yml tags=development,dev"
+#
+# Install software only useful on a workstation or non-headless machine
+#
 
 - name: install common software
   apt: pkg={{ item }} state=latest
@@ -16,20 +15,11 @@
     - keepassx
     - dropbox
     - nemo-dropbox
-
-- name: configure terminator
-  template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
-  tags:
-    - dotfiles
-
-- name: install sublime-text and dependencies
-  apt: 'pkg={{ item }} state=installed'
-  sudo: yes
-  with_items:
     - sublime-text
+    - steam-launcher
 
 #
-# Software from external sources
+# Spotify Linux preview
 #
 
 - name: spotify | add repository
@@ -41,18 +31,12 @@
   apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
   register: spotify_repository_key
   sudo: yes
-  
+
 - name: spotify | update repositories
   apt: 'update_cache=yes'
   when: spotify_repository.changed or spotify_repository_key.changed
-  sudo: yes       
+  sudo: yes
 
 - name: spotify | install package
   apt: 'pkg=spotify-client state=installed'
-  sudo: yes
-
-- name: install software from external sources - you may need to do this manually
-  apt: 'pkg={{ item }} state=installed'
-  with_items:
-    - steam-launcher
   sudo: yes

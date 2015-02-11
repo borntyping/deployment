@@ -1,9 +1,0 @@
-#
-# Installs and configures development tools
-#
-
-- name: install gr - https://github.com/mixu/gr
-  npm: name=coffee-script global=yes
-  sudo: yes
-  tags:
-    - npm

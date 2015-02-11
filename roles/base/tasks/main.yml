@@ -1,5 +1,22 @@
----
-- include: "development.yml tags=dev,development"
-- include: "dotfiles.yml tags=dotfiles"
-- include: "python.yml tags=python"
-- include: "shell.yml tags=shell"
+#
+# Tasks that should be run on all hosts
+#
+
+- include: "os-debian.yml tags=debian"
+  when: ansible_distribution == 'Debian'
+
+- include: "os-ubuntu.yml tags=ubuntu"
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+
+- name: install utility packages
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - htop
+    - nano
+    - tmux
+    - tree
+
+- name: install ansible
+  apt: pkg=ansible state=latest
+  sudo: yes

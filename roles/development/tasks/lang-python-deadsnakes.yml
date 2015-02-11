@@ -1,26 +1,24 @@
 #
-# Install Python 2.6 using the deadsnakes PPA
+# Install Python 2.6 and 3.3 using the deadsnakes PPA
 #
 
 - name: deadsnakes | configure ppa
   command: apt-add-repository --yes ppa:fkrull/deadsnakes
   args: {'creates': '/etc/apt/sources.list.d/fkrull-deadsnakes-trusty.list'}
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
   sudo: yes
   register: deadsnakes_ppa
 
 - name: deadsnakes | update repositories
   apt: 'update_cache=yes'
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint'] and deadsnakes_ppa.changed
+  when: deadsnakes_ppa is defined and deadsnakes_ppa.changed
   sudo: yes
 
-- name: deadsnakes | install python2.6
+- name: deadsnakes | install python2.6 and python3.3
   apt: 'pkg={{ item }} state=latest'
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+
   sudo: yes
   with_items:
     - python2.6
     - python2.6-dev
     - python3.3
     - python3.3-dev
-    - pypy

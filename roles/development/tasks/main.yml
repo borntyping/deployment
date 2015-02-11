@@ -1,0 +1,21 @@
+#
+# Install development tools
+#
+
+- include: "tool-git.yml tags=git"
+
+- include: "tool-ack.yml tags=ack"
+
+#
+# Install programming languages and packages from their repositories
+#
+
+- include: "lang-node.yml tags=node"
+  when: ansible_distribution != 'Debian'
+
+- include: "lang-python.yml tags=python"
+
+- include: "lang-python-deadsnakes.yml tags=python,deadsnakes"
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+
+- include: "lang-ruby.yml tags=ruby"

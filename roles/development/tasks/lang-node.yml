@@ -1,0 +1,16 @@
+#
+# Install node.js
+#
+
+- name: node | install nodejs
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - nodejs
+    - nodejs-legacy
+    - npm
+
+# - name: node | install packages
+#   npm: 'name={{ item }} global=yes'
+#   sudo: yes
+#   with_items:

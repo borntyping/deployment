@@ -1,0 +1,25 @@
+#
+# Prepares a Python development environment
+#
+
+- name: install python packages
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - python
+    - python-pip
+    - python-dev
+    - python3
+    - python3-pip
+    - python3-dev
+
+#
+# Install virtualenv and virtualenvwrapper
+#
+
+- name: virtualenv | install packages
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - python-virtualenv
+    - virtualenvwrapper

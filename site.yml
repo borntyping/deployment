@@ -2,14 +2,19 @@
 
 - hosts: all
   roles:
-    - { role: base-debian, tags: ['base'], when: ansible_os_family == 'Debian' }
-    - { role: base, tags: ['base'] }
+    - role: base
+      tags: base
+    - role: user
+      tags: user
+    - role: development
+      tags: development
 
 - hosts: workstation
   roles:
-    - { role: workstation, tags: ['workstation'] }
-    - { role: riemann, tags: ['riemann'] }
+    - role: workstation
+      tags: workstation
 
 - hosts: servers
   roles:
-    - { role: server, tags: ['server'] }
+    - role: server
+      tags: server
