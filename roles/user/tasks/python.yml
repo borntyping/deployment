@@ -13,6 +13,8 @@
 #
 # Install pipsi - https://github.com/mitsuhiko/pipsi
 #
+# This does much the same things as the `get-pipsi.py` script
+#
 
 - name: pipsi | create virtualenv
   command: 'virtualenv {{ pipsi_venv }}'
@@ -26,3 +28,19 @@
 
 - name: pipsi | link pipsi
   file: 'src={{ pipsi_venv }}/bin/pipsi dest={{ pipsi_bin }}/pipsi state=link'
+
+#
+# Install python tools/packages with pipsi
+#
+
+- pipsi: 'name=tox state=latest'
+
+- pipsi: 'name={{ item }} state=present'
+  with_items:
+    - tox
+    - fig
+    - sphinx
+    - v
+    - restructuredtext-lint
+  tags:
+    - pipsi
