@@ -1,0 +1,11 @@
+#
+# Install local gems
+#
+
+- name: install ruby packages
+  gem: 'state=latest name={{ item }} user_install=yes'
+  with_items:
+    - jekyll
+    - travis
+    - travis-lint
+    - fpm
