@@ -40,3 +40,17 @@
 - name: spotify | install package
   apt: 'pkg=spotify-client state=installed'
   sudo: yes
+
+#
+# Ansible
+#
+
+- name: add ansible PPA
+  command: apt-add-repository ppa:ansible/ansible
+  args: {'creates': '/etc/apt/sources.list.d/ansible-ansible-trusty.list'}
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+  sudo: yes
+
+- name: install ansible
+  apt: pkg=ansible state=latest
+  sudo: yes

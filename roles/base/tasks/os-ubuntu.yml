@@ -1,9 +1,0 @@
-#
-# Add ansible PPA on Ubuntu based machines
-#
-
-- name: add ansible PPA
-  command: apt-add-repository ppa:ansible/ansible
-  args: {'creates': '/etc/apt/sources.list.d/ansible-ansible-trusty.list'}
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
-  sudo: yes

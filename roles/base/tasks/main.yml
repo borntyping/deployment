@@ -16,7 +16,3 @@
     - nano
     - tmux
     - tree
-
-- name: install ansible
-  apt: pkg=ansible state=latest
-  sudo: yes

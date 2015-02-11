@@ -5,7 +5,7 @@
 # be deployed to
 #
 
-- include: "lang-python.yml tags=python"
+- include: "lang-python.yml tags=python,pipsi"
 - include: "lang-ruby.yml tags=ruby"
 - include: "lang-zsh.yml tags=zsh,shell"
 
@@ -34,6 +34,9 @@
 #
 # Configures terminator
 #
+
+- name: configure terminator
+  file: 'name=/home/sam/.config/terminator state=directory'
 
 - name: configure terminator
   template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
