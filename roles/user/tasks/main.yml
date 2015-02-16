@@ -2,7 +2,7 @@
 # Install user-specific configuration to $HOME
 #
 # This assumes that the remote ansible user is the user configuration should
-# be deployed to
+# be deployed to.
 #
 
 - include: "lang-python.yml tags=python,pipsi"

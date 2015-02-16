@@ -4,17 +4,17 @@
   roles:
     - role: base
       tags: base
-    - role: user
-      tags: user
     - role: development
       tags: development
+    - role: user
+      tags: user
 
 - hosts: workstation
   roles:
     - role: workstation
       tags: workstation
 
-- hosts: servers
+- hosts: webserver
   roles:
-    - role: server
-      tags: server
+    - role: webserver
+      tags: webserver

@@ -1,12 +1,3 @@
----
-users:
-  sam:
-    comment: 'Sam Clements'
-    shell: /bin/zsh
-  yarrow:
-    comment: 'Yarrow Paddon-Butler'
-    shell: /bin/bash
-
 nginx_sites:
   borntyping:
     domain: borntyping.io
@@ -19,4 +10,4 @@ nginx_sites:
     domain: 8bitgoggles.org.uk
     redirect:
       - paddonbutler.org.uk
-    user: yarrow
+    user: skylar
