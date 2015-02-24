@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 # https://gist.github.com/davejamesmiller/1965569
 ask () {
@@ -30,17 +30,17 @@ ask () {
     done
 }
 
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
     echo "usage: git tag-version <version> [<commit>]"
     exit
 fi
 
 if ask "Has the package's version number been modified?" Y; then
     echo "Tagging version $1 (git tag -a \"v$1\" -m \"Version $1\" $2)"
-    git tag -a "v$1" -m "Version $1" $2
+    git tag -a "v$1" -m "Version $1" "$2"
 
-    if ask "Should the new tag be pushed?" Y; then
-        echo "Pushing tags and commits (git push --tags)"
-        git push --tags
+    if ask "Should the new commits and tags be pushed?" Y; then
+        echo "Pushing commits and tags (git push --follow-tags)"
+        git push --follow-tags
     fi
 fi
