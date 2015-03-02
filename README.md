@@ -1,27 +1,20 @@
 deployment
 ==========
 
-Deploys dotfiles, configuration and packages to my workstations using Ansible.
+Deploys dotfiles, configuration and packages to my machines using Ansible.
 
 Usage
 -----
 
-To pull the repository and run the playbook against the local machine in one command:
+Download the repository, create an inventory file, and run ansible with:
 
 ```bash
-ansible-pull --url=git@github.com:borntyping/deployment.git -i localhost, -K site.yml
+$ ./ansible-run
 ```
 
-If you intend to modify the repository:
+### Managing a workstation
 
-```bash
-git clone git@github.com:borntyping/deployment.git
-cd deployment
-$EDITOR inventory.conf
-./ansible-run
-```
-
-The `./ansible-run` script is a wrapper around `ansible-playbook`, and requires an inventory file to exist at `./inventory.conf` (it'll remind you if you forget to create it). An example inventory might look like this:
+The `./ansible-run` script is a wrapper around `ansible-playbook`, and requires an inventory file to exist at `./inventory.conf`. An example inventory might look like this:
 
 ```
 [workstation]
@@ -31,23 +24,47 @@ localhost ansible_connection=local ansible_sudo_pass=EXAMPLE
 remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
 ```
 
-If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run` or `ansible-playbook` (which is what the `ansible-pull` command above does).
+If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run`.
 
-Bootstrapping
--------------
+### Bootstrapping a new machine
 
 After logging in as the root user:
 
- * Create personal user with `adduser USER`
- * Add personal user to sudoers with `usermod -a -G sudo USER`
+```bash
+$ adduser sam
+$ usermod -a -G sudo USER
+```
 
-Add the machine to the inventory:
+After logging in as your personal user:
 
-    HOSTNAME ansible_sudo_pass=PASSWORD
+```bash
+$ apt-add-repository --yes ppa:fkrull/deadsnakes
+$ apt-add-repository --yes ppa:hansjorg/rust
+```
 
-After ansible has run:
+You can the either run Ansible from your workstation, or directly on the machine you are bootstrapping.
 
- * Set user passwords with `passwd USER`
+To run Ansible directly on the machine:
+
+```bash
+ansible-pull --url=git@github.com:borntyping/deployment.git -i localhost, -K site.yml
+```
+
+Or add the machine to the inventory and run it from your workstation:
+
+```
+HOSTNAME ansible_sudo_pass=PASSWORD
+```
+
+```bash
+$ ./ansible-run
+```
+
+Once ansible has run, set passwords for any addtional users:
+
+```bash
+$ sudo passwd USER
+```
 
 Licence
 -------

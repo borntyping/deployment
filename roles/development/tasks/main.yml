@@ -19,3 +19,6 @@
   when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 
 - include: "lang-ruby.yml tags=ruby"
+
+- include: "lang-rust.yml tags=rust"
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
