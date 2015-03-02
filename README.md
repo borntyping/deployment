@@ -31,15 +31,15 @@ If you don't want to create an inventory file, and only want to configure the lo
 After logging in as the root user:
 
 ```bash
-$ adduser sam
-$ usermod -a -G sudo USER
+adduser sam
+usermod -a -G sudo USER
 ```
 
-After logging in as your personal user:
+After logging in as your personal user (ansible does not correctly add PPA's on Linux Mint):
 
 ```bash
-$ apt-add-repository --yes ppa:fkrull/deadsnakes
-$ apt-add-repository --yes ppa:hansjorg/rust
+sudo apt-add-repository --yes ppa:fkrull/deadsnakes
+sudo aptitude update
 ```
 
 You can the either run Ansible from your workstation, or directly on the machine you are bootstrapping.
@@ -57,13 +57,13 @@ HOSTNAME ansible_sudo_pass=PASSWORD
 ```
 
 ```bash
-$ ./ansible-run
+./ansible-run
 ```
 
 Once ansible has run, set passwords for any addtional users:
 
 ```bash
-$ sudo passwd USER
+sudo passwd USER
 ```
 
 Licence
