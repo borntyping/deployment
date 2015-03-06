@@ -15,7 +15,4 @@
 
 - include: "lang-python.yml tags=python"
 
-- include: "lang-python-deadsnakes.yml tags=python,deadsnakes"
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
-
 - include: "lang-ruby.yml tags=ruby"

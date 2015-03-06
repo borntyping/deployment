@@ -6,10 +6,16 @@ Deploys dotfiles, configuration and packages to my machines using Ansible.
 Usage
 -----
 
-Download the repository, create an inventory file, and run ansible with:
+Download the repository, create an inventory file, and run the `./ansible-run` script.
+
+### Installing ansible
+
+Install the latest ansible release with:
 
 ```bash
-$ ./ansible-run
+sudo apt-add-repository --yes ppa:ansible/ansible
+sudo aptitude update
+sudo aptitude install ansible
 ```
 
 ### Managing a workstation
@@ -28,18 +34,11 @@ If you don't want to create an inventory file, and only want to configure the lo
 
 ### Bootstrapping a new machine
 
-After logging in as the root user:
+If the OS was not created with a personal user, create one:
 
 ```bash
 adduser sam
-usermod -a -G sudo USER
-```
-
-After logging in as your personal user (ansible does not correctly add PPA's on Linux Mint):
-
-```bash
-sudo apt-add-repository --yes ppa:fkrull/deadsnakes
-sudo aptitude update
+usermod -a -G sudo sam
 ```
 
 You can the either run Ansible from your workstation, or directly on the machine you are bootstrapping.
