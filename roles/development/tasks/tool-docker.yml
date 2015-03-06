@@ -6,6 +6,14 @@
   apt: 'pkg=docker.io state=latest'
   sudo: yes
 
+# https://github.com/docker/docker/issues/4734
+- name: docker | install useful packages
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - apparmor
+    - cgroup-lite
+
 - name: docker | add users to docker group
   user: 'name={{ item }} groups=docker append=true'
   with_items: users.keys()
