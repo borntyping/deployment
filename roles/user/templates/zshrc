@@ -92,12 +92,12 @@ ${vcs_info_msg_0_}${env_info_msg}\
 
 setopt AUTO_NAME_DIRS                           # Automatically create named directories
 
-borntyping="$HOME/Development/borntyping"       # GitHub organisations
-sandbox="$HOME/Development/borntyping-sandbox"  # Experimental projects
-
-personal="$HOME/Development/personal"           # Private repositories
-university="${personal}/university"             # University repository
-mmp="${university}/CS39440"                     # Major project directory
+borntyping="$HOME/Development/borntyping"
+sandbox="$HOME/Development/borntyping-sandbox"
+private="$HOME/Development/private"
+university="${personal}/university"
+dissertation="${university}/CS39440"
+src="$HOME/Development/src"
 
 #
 # Aliases
