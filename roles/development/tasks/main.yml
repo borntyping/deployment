@@ -2,9 +2,12 @@
 # Install development tools
 #
 
-- include: "tool-git.yml tags=git"
-
 - include: "tool-ack.yml tags=ack"
+
+- include: "tool-docker.yml tags=docker"
+  when: ansible_distribution != 'Debian'
+
+- include: "tool-git.yml tags=git"
 
 #
 # Install programming languages and packages from their repositories

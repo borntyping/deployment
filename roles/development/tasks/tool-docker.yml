@@ -1,0 +1,12 @@
+#
+# Install docker
+#
+
+- name: docker | install
+  apt: 'pkg=docker.io state=latest'
+  sudo: yes
+
+- name: docker | add users to docker group
+  user: 'name={{ item }} groups=docker append=true'
+  with_items: users.keys()
+  sudo: yes
