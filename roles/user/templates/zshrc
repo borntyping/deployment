@@ -95,7 +95,7 @@ setopt AUTO_NAME_DIRS                           # Automatically create named dir
 borntyping="$HOME/Development/borntyping"
 sandbox="$HOME/Development/borntyping-sandbox"
 private="$HOME/Development/private"
-university="${personal}/university"
+university="${private}/university"
 dissertation="${university}/CS39440"
 src="$HOME/Development/src"
 
