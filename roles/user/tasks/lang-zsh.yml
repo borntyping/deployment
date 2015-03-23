@@ -1,17 +1,21 @@
 ---
-- name: install latest zsh package
+- name: zsh | install
   apt: pkg=zsh state=latest
   sudo: yes
 
-- name: configure zsh
+- name: zsh | configure
   template: 'src=zshrc dest={{ ansible_env.HOME }}/.zshrc'
   tags:
     - dotfiles
-    - zshrc
 
-- name: create zsh cache
+- name: zsh | configure environment
+  template: 'src=zshenv dest={{ ansible_env.HOME }}/.zshenv'
+  tags:
+    - dotfiles
+
+- name: zsh | create cache directory
   file: 'path={{ ansible_env.HOME }}/.cache/zsh/ state=directory'
 
-- name: use zsh as default shell
-  user: 'name={{ ansible_env.USER }} shell=/bin/zsh'
-  sudo: yes
+# - name: use zsh as default shell
+#   user: 'name={{ ansible_env.USER }} shell=/bin/zsh'
+#   sudo: yes
