@@ -8,7 +8,9 @@
 - include: "lang-python.yml tags=python,pipsi"
 - include: "lang-ruby.yml tags=ruby"
 - include: "lang-zsh.yml tags=zsh,shell"
+
 - include: "tool-peru.yml tags=peru"
+  when: ansible_distribution != 'Debian' # Doesn't have Python >= 3.3
 
 - name: configure dotfiles
   template: 'src={{ item }} dest={{ ansible_env.HOME }}/.{{ item }}'
