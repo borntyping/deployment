@@ -20,6 +20,16 @@
     - gparted
 
 #
+# Configures terminator
+#
+
+- name: configure terminator
+  file: 'name=/home/sam/.config/terminator state=directory'
+
+- name: configure terminator
+  template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
+
+#
 # Spotify Linux preview
 #
 
