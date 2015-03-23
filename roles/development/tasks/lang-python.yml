@@ -1,6 +1,8 @@
 #
 # Prepares a Python development environment
 #
+# (libyaml-dev is a depedency for PyYAML)
+#
 
 - name: install python packages
   apt: 'pkg={{ item }} state=latest'
@@ -12,6 +14,7 @@
     - python3
     - python3-pip
     - python3-dev
+    - libyaml-dev
 
 #
 # Install virtualenv and virtualenvwrapper

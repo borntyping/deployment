@@ -1,0 +1,8 @@
+---
+- name: gws | install
+  copy: 'src=gws dest=/usr/local/bin/gws mode=0755'
+  sudo: yes
+
+- name: gws | add completion
+  copy: 'src=_gws dest=/usr/local/share/zsh/site-functions/_gws mode=0755'
+  sudo: yes

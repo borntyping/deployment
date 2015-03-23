@@ -65,6 +65,11 @@ Once ansible has run, set passwords for any addtional users:
 sudo passwd USER
 ```
 
+Development
+-----------
+
+Some external files are included using [Peru](https://github.com/buildinspace/peru). The `user` role installs this, so once the development machine is bootstraped you can run `peru reup` to update those files.
+
 Licence
 -------
 

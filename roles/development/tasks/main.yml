@@ -9,6 +9,8 @@
 
 - include: "tool-git.yml tags=git"
 
+- include: "tool-gws.yml tags=gws"
+
 #
 # Install programming languages and packages from their repositories
 #

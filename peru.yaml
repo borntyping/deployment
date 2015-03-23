@@ -1,0 +1,8 @@
+imports:
+  gws: roles/development/files
+
+git module gws:
+  url: https://github.com//StreakyCobra/gws
+  pick: ['gws', '_gws']
+  copy: {'src/gws': 'gws', 'completions/zsh': '_gws'}
+  rev: 9a390f466b8b36799b2c24379e15614cbf964330
