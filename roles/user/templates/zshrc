@@ -106,7 +106,8 @@ src="$HOME/Development/src"
 alias ls='ls --color=auto'                      # Use colors with ls
 alias grep='grep --color=auto'                  # Use colors for grep output
 alias -g ...='../..'                            # Allow ... to mean ../.. anywhere
-alias gc='git commit -v -a'                     # Show diff in commit editor, commit everything
+alias gc='git commit -v'                        # Show diff in commit editor
+alias gca='git commit -v -a'                    # Show diff in commit editor, commit everything
 alias gd='git diff'
 alias gs='git status'
 

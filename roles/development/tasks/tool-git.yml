@@ -10,7 +10,6 @@
   copy: 'src={{ item }} dest=/usr/local/bin/{{ item }} mode=0755'
   sudo: yes
   with_items:
-    - git-hub
     - git-tag-version
     - git-overwritten
 
