@@ -2,10 +2,12 @@
 # Install local gems
 #
 
+- include_vars: 'lang-ruby-{{ ansible_distribution | lower }}.yml'
+
 - name: install ruby packages
-  gem: 'state=latest name={{ item }} user_install=yes'
+  gem: 'state=latest name={{ item }} executable={{ gem }} user_install=yes'
   with_items:
-    - jekyll
+    - github-pages
     - travis
     - travis-lint
     - fpm

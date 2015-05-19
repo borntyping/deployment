@@ -4,11 +4,11 @@
 
 - include: "users.yml tags=users"
 
-- include: "os-debian.yml tags=debian"
-  when: ansible_distribution == 'Debian'
+# - include: "os-debian.yml tags=debian"
+#   when: ansible_distribution == 'Debian'
 
-- include: "os-ubuntu.yml tags=ubuntu"
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+# - include: "os-ubuntu.yml tags=ubuntu"
+#   when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 
 - name: install utility packages
   apt: 'pkg={{ item }} state=latest'

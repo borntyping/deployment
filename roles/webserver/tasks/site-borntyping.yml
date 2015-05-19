@@ -1,9 +1,6 @@
 ---
-- name: install jekyll
-  gem: >
-    name=jekyll
-    state=latest
-    user_install=yes
+- name: install github-pages gem
+  gem: name=github-pages state=latest user_install=yes
   tags:
     - ruby
 
@@ -16,7 +13,7 @@
   register: site_borntyping_source
 
 - name: build borntyping site using jekyll
-  command: '{{ ansible_env.HOME }}/.gem/ruby/1.9.1/bin/jekyll build'
+  command: '{{ ansible_env.HOME }}/.gem/ruby/2.1.0/bin/jekyll build'
   args:
     chdir: /var/www/sam/borntyping
   when: site_borntyping_source.changed

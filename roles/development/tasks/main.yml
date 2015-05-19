@@ -3,14 +3,9 @@
 #
 
 - include: "tool-ack.yml tags=ack"
-
 - include: "tool-docker.yml tags=docker"
-  when: ansible_distribution != 'Debian'
-
 - include: "tool-git.yml tags=git"
-
 - include: "tool-hub.yml tags=git,hub"
-
 - include: "tool-gws.yml tags=git,gws"
 
 #
@@ -18,8 +13,5 @@
 #
 
 - include: "lang-node.yml tags=node"
-  when: ansible_distribution != 'Debian'
-
 - include: "lang-python.yml tags=python"
-
 - include: "lang-ruby.yml tags=ruby"
