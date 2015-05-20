@@ -6,7 +6,7 @@ nginx_sites:
       - borntyping.co.uk
       - borntyping.ninja
     user: sam
-  goggles:
+  eightbitgoggles:
     domain: 8bitgoggles.org.uk
     redirect:
       - paddonbutler.org.uk
