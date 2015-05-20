@@ -6,61 +6,79 @@
 # Licence: MIT
 #
 
-ZSH_CACHE=$HOME/.cache/zsh                      # A cache directory for use in other options
-setopt INTERACTIVE_COMMENTS                     # Allow comments in interactive mode
-setopt RM_STAR_WAIT                             # Force the user to wait when doing `rm *`
+setopt INTERACTIVE_COMMENTS             # Allow comments in interactive mode
+setopt RM_STAR_WAIT                     # Force the user to wait before `rm *`
 
 #
 # History settings
 #
 
-SAVEHIST=10000                                  # Lines of history to save to a file
-HISTSIZE=10000                                  # Lines of history to keep in memory
-HISTFILE=$HOME/.cache/zsh/history               # Save history in .cache
+SAVEHIST=10000                          # Lines of history to save to a file
+HISTSIZE=10000                          # Lines of history to keep in memory
+HISTFILE=$HOME/.cache/zsh/history       # Save history in .cache
 
-setopt APPEND_HISTORY                           # Append to the HISTFILE, not replace
-setopt HIST_IGNORE_DUPS                         # Ignore duplicate history entries
-setopt SHARE_HISTORY                            # Share history between ZSH instances
+setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace
+setopt INC_APPEND_HISTORY               # Append to $HISTFILE while running
+setopt SHARE_HISTORY                    # Share history between ZSH instances
+setopt EXTENDED_HISTORY                 # Record additional information
+
+setopt HIST_IGNORE_DUPS                 # Ignore adjacent reapeated entries
+setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first
+setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
 
 #
 # Completion
 #
 
-autoload -Uz compinit && compinit               # Loads completion modules
-setopt AUTO_MENU                                # Show completion menu on succesive tab press
-setopt ALWAYS_TO_END                            # Move cursor after completion
-setopt COMPLETE_ALIASES                         # Allow autocompletion for aliases
-setopt COMPLETE_IN_WORD                         # Allow completion from middle of word
-setopt LIST_PACKED                              # Smallet completion menu
-
-# Intelligent handling of characters after a completion
-setopt AUTO_PARAM_KEYS AUTO_PARAM_SLASH AUTO_REMOVE_SLASH
+autoload -Uz compinit && compinit       # Loads completion modules
+setopt AUTO_MENU                        # Show completion menu on succesive tab press
+setopt ALWAYS_TO_END                    # Move cursor after completion
+setopt COMPLETE_ALIASES                 # Allow autocompletion for aliases
+setopt COMPLETE_IN_WORD                 # Allow completion from middle of word
+setopt LIST_PACKED                      # Smallest completion menu
+setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
+setopt AUTO_PARAM_SLASH                 #   after a completion
+setopt AUTO_REMOVE_SLASH
 
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$ZSH_CACHE/completion/"
+zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/completion/"
 zstyle ':completion:*:*:*:users' ignored-patterns '*'
-
-# Fuzzy completion - case insensitive, partial-word and substring
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 #
 # Prompt
 #
 
-autoload -U vcs_info                            # Version control information
-autoload -U colors && colors                    # Adds variables for printing colors
-setopt PROMPT_SUBST                             # Allow substitution in PROMPT
+autoload -U vcs_info                    # Version control information
+autoload -U colors && colors            # Adds variables for printing colors
+setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
-# Set styles for vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true 
+zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}!%{$reset_color%}"
-zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}?%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}%c%u " 
-zstyle ':vcs_info:*' actionformats "%s:%b(%a)%c%u "
+zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}!%{$reset_color%}"
+zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}%c%u%m "
+zstyle ':vcs_info:*' actionformats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}(%a)%c%u%m "
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
+
+# Add a marker to %u for untracked files
+function +vi-git-untracked(){
+    if git status --porcelain | fgrep '??' &> /dev/null; then
+        hook_com[unstaged]+="%{$fg[red]%}!%{$reset_color%}"
+    fi
+}
+
+# Show +N/-N when a local branch is ahead-of or behind remote HEAD.
+function +vi-git-remote() {
+    local ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && hook_com[misc]+=" %{$fg_bold[green]%}+${ahead}%{$reset_color%}"
+
+    local behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && hook_com[misc]+=" %{$fg[red]%}-${behind}%{$reset_color%}"
+}
 
 # Load virtualenvwrapper, and stop virtualenv from modifying the prompt
 if [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
@@ -71,74 +89,63 @@ fi
 
 # Display the current virtualenv when active
 function env_info() {
-    env_info_msg=""
     if [ -n "$VIRTUAL_ENV" ]; then
         env_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+    else
+        env_info_msg=""
     fi
 }
 
+# Set terminal title and run vcs_info/env_info before showing the prompt
 function precmd() { print -Pn "\e]2;%~\a"; vcs_info; env_info; }
+
+# Set terminal title before executing a command
 function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
 
-PROMPT='\
+# Assemble the prompt
+#   sam@hostname ~ $
+#   sam@hostname ~/directory git:master env:virtualenv $
+#
+# The %{ and %} characters are used to stop the prompt from counting invisible
+# characters when calculating the length
+PROMPT="\
 %{$fg_bold[green]%}%n@%m%{$reset_color%} \
 %{$fg_bold[blue]%}%~%{$reset_color%} \
-${vcs_info_msg_0_}${env_info_msg}\
-%{$fg_bold[blue]%}$%{$reset_color%} '
-
-#
-# Named directories 
-#
-
-setopt AUTO_NAME_DIRS                           # Automatically create named directories
-
-borntyping="$HOME/Development/borntyping"
-sandbox="$HOME/Development/sandbox"
-private="$HOME/Development/private"
-university="${private}/university"
-dissertation="${university}/CS39440"
-src="$HOME/Development/src"
+\${vcs_info_msg_0_}\${env_info_msg}\
+%{$fg_bold[blue]%}%(!.#.$)%{$reset_color%} "
 
 #
 # Aliases
 #
 
-alias ls='ls --color=auto'                      # Use colors with ls
-alias grep='grep --color=auto'                  # Use colors for grep output
-alias -g ...='../..'                            # Allow ... to mean ../.. anywhere
-alias gc='git commit -v'                        # Show diff in commit editor
-alias gca='git commit -v -a'                    # Show diff in commit editor, commit everything
+alias ls='ls --color=auto'              # Use colors with ls
+alias grep='grep --color=auto'          # Use colors for grep output
+alias -g ...='../..'                    # Allow ... to mean ../.. anywhere
+
 alias gd='git diff'
 alias gs='git status'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
 
-# Set colors to use with `ls --color`
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
 
 #
-# Bin
+# Named directories
 #
 
-function add_to_path() {
-    [[ -d $1 ]] && export PATH="$1:$PATH"
-}
+setopt AUTO_NAME_DIRS                   # Use named directories
+borntyping="$HOME/Development/borntyping"
+datasift="$HOME/Development/datasift"
+sandbox="$HOME/Development/borntyping-sandbox"
+src="$HOME/Development/src"
 
-add_to_path "$HOME/.bin"                        # Used for personal scripts
-add_to_path "$HOME/.local/bin"                  # Used by pipsi for commands
-add_to_path "$HOME/.gem/ruby/1.9.1/bin"         # Used by Ruby 1.9.1 for user gems
-add_to_path "$HOME/.gem/ruby/2.0.0/bin"         # Used by Ruby 2.0.0 for user gems
+#
+# Add directories to $PATH if they exist
+#
 
-# RVM
-# https://rvm.io/
+function add_to_path() { [[ -d $1 ]] && export PATH="$1:$PATH" }
 
-function use_rvm() {                            # Avoid loading RVM for every shell
-    source "$HOME/.rvm/scripts/rvm"             # Load RVM using `source`, as RVM provides a shell
-    add_to_path "$HOME/.rvm/bin"                #   function that modifies the environment
-    rvm use                                     # Start using RVM
-}
-
-# z directory script
-# https://github.com/rupa/z
-
-if [[ -f /usr/local/bin/z.sh ]]; then
-    source /usr/local/bin/z.sh
-fi
+add_to_path "$HOME/.gem/ruby/2.0.0/bin" # Executables installed by 'gem'
+add_to_path "$HOME/.gem/ruby/2.1.0/bin" # Executables installed by 'gem'
+add_to_path "$HOME/.local/bin"          # User installed executables
+add_to_path "$HOME/.bin"                # Personal scripts
