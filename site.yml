@@ -2,12 +2,12 @@
 
 - hosts: all
   roles:
-    - role: base
-      tags: base
-    - role: development
-      tags: development
-    - role: user
-      tags: user
+    - role: stage1-base
+      tags: stage1-base
+    - role: stage2-development
+      tags: stage2-development
+    - role: stage3-user
+      tags: stage4-user
 
 - hosts: workstation
   roles:
