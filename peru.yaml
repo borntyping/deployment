@@ -1,6 +1,6 @@
 imports:
-  gws: roles/development/files
-  hub: roles/development/files
+  gws: roles/stage2-development/files
+  hub: roles/stage2-development/files
 
 git module gws:
   url: https://github.com//StreakyCobra/gws
@@ -9,10 +9,10 @@ git module gws:
   rev: 9a390f466b8b36799b2c24379e15614cbf964330
 
 curl module hub:
-    url: https://github.com/github/hub/releases/download/v2.2.0/hub-linux-amd64-2.2.0.tar.gz
+    url: https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz
     unpack: tar
     pick: ['hub', 'hub.zsh']
     copy:
-      hub-linux-amd64-2.2.0/hub: 'hub'
-      hub-linux-amd64-2.2.0/etc/hub.zsh_completion: 'hub.zsh'
-    sha1: 048c944126f7c9fcb74bd798b3841a0e1ec63a2b
+      hub-linux-amd64-2.2.1/hub: 'hub'
+      hub-linux-amd64-2.2.1/etc/hub.zsh_completion: 'hub.zsh'
+    sha1: 198d0bdda7302531c306198fe45944bcffdf5d51

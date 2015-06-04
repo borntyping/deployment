@@ -59,7 +59,7 @@ HOSTNAME ansible_sudo_pass=PASSWORD
 ./ansible-run
 ```
 
-Once ansible has run, set passwords for any addtional users:
+Once ansible has run, set passwords for any additional users:
 
 ```bash
 sudo passwd USER
@@ -68,7 +68,7 @@ sudo passwd USER
 Development
 -----------
 
-Some external files are included using [Peru](https://github.com/buildinspace/peru). The `user` role installs this, so once the development machine is bootstraped you can run `peru reup` to update those files.
+Some dependencies are managed using [Peru](https://github.com/buildinspace/peru), which is installed by the `stage2-user` role. Once the development machine is bootstrapped you can run `peru reup` to update those files, which will fetch the lastest versions of the dependecies and copy them into this repository. Tasks that install these files are tagged with `peru`, so updating the deployed versions of those files can be done with `./ansible-run -t peru`.
 
 Licence
 -------

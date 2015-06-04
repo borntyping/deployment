@@ -10,7 +10,9 @@
 - name: gws | install
   copy: 'src=gws dest=/usr/local/bin/gws mode=0755'
   sudo: yes
+  tags: peru
 
 - name: gws | add completion
   copy: 'src=gws.zsh dest=/usr/local/share/zsh/site-functions/gws.zsh mode=0755'
   sudo: yes
+  tags: peru
