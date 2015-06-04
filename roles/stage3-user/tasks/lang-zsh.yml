@@ -16,6 +16,6 @@
 - name: zsh | create cache directory
   file: 'path={{ ansible_env.HOME }}/.cache/zsh/ state=directory'
 
-# - name: use zsh as default shell
-#   user: 'name={{ ansible_env.USER }} shell=/bin/zsh'
-#   sudo: yes
+- name: zsh | set user shell
+  user: 'name={{ ansible_ssh_user }} shell=/bin/zsh'
+  sudo: yes

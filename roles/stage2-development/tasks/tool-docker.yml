@@ -16,8 +16,7 @@
     - cgroup-lite
   when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 
-- name: docker | add users to docker group
-  user: 'name={{ item }} groups=docker append=true'
-  with_items: users.keys()
+- name: docker | add user to docker group
+  user: 'name={{ ansible_ssh_user }} groups=docker append=true'
   sudo: yes
   when: ansible_distribution != 'Debian'

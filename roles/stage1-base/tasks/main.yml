@@ -8,6 +8,10 @@
 # - include: "os-ubuntu.yml tags=ubuntu"
 #   when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 
+- name: generate ssh key
+  user: 'name={{ ansible_ssh_user }} generate_ssh_key=true'
+  sudo: yes
+
 - name: install utility packages
   apt: 'pkg={{ item }} state=latest'
   sudo: yes

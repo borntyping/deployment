@@ -4,27 +4,11 @@
     name='{{ item.key }}'
     comment='{{ item.value.comment }}'
     shell='{{ item.value.shell }}'
+    generate_ssh_key=true
     groups=sudo
     append=true
   sudo: yes
   with_dict: users
-
-- name: create user ssh paths
-  file: >
-    path=/home/{{ item }}/.ssh
-    owner={{ item }}
-    group={{ item }}
-    state=directory
-  sudo: yes
-  with_items: users.keys()
-
-- name: create missing ssh keys
-  command: >
-    su --command 'ssh-keygen -N "" -f /home/{{ item }}/.ssh/id_rsa' {{ item }}
-  args:
-    creates: '/home/{{ item }}/.ssh/id_rsa'
-  sudo: yes
-  with_items: users.keys()
 
 - name: create user www paths
   file: >
