@@ -15,7 +15,7 @@ setopt RM_STAR_WAIT                     # Force the user to wait before `rm *`
 
 SAVEHIST=10000                          # Lines of history to save to a file
 HISTSIZE=10000                          # Lines of history to keep in memory
-HISTFILE=$HOME/.cache/zsh/history       # Save history in .cache
+HISTFILE=$HOME/.zhistory                # Save history in .cache
 
 setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace
 setopt INC_APPEND_HISTORY               # Append to $HISTFILE while running

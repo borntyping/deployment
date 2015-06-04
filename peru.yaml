@@ -1,18 +1,47 @@
 imports:
-  gws: roles/stage2-development/files
-  hub: roles/stage2-development/files
+  gws|gws-executable: 'roles/stage2-development/files'
+  gws|gws-completion: 'roles/stage3-user/files/zsh/completions'
+  hub|hub-executable: 'roles/stage2-development/files'
+  hub|hub-completion: 'roles/stage3-user/files/zsh/completions'
+  zsh-syntax-highlighting: 'roles/stage3-user/files/zsh/plugins/syntax-highlighting'
+  zsh-autosuggestions: 'roles/stage3-user/files/zsh/plugins/zsh-autosuggestions'
+
+# Git repository management tool
 
 git module gws:
-  url: https://github.com//StreakyCobra/gws
-  pick: ['gws', 'gws.zsh']
-  copy: {'src/gws': 'gws', 'completions/zsh': 'gws.zsh'}
+  url: https://github.com/StreakyCobra/gws.git
   rev: 9a390f466b8b36799b2c24379e15614cbf964330
+
+rule gws-completion:
+  pick: gws.zsh
+  copy: {'completions/zsh': 'gws.zsh'}
+
+rule gws-executable:
+  export: src
+
+# Github command line tool
 
 curl module hub:
     url: https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz
     unpack: tar
-    pick: ['hub', 'hub.zsh']
-    copy:
-      hub-linux-amd64-2.2.1/hub: 'hub'
-      hub-linux-amd64-2.2.1/etc/hub.zsh_completion: 'hub.zsh'
     sha1: 198d0bdda7302531c306198fe45944bcffdf5d51
+
+rule hub-completion:
+  pick: hub.zsh
+  copy: {'hub-linux-amd64-2.2.1/etc/hub.zsh_completion': 'hub.zsh'}
+
+rule hub-executable:
+  pick: hub
+  copy: {'hub-linux-amd64-2.2.1/hub': 'hub'}
+
+# ZSH syntax highlighting plugin
+
+git module zsh-syntax-highlighting:
+  url: https://github.com/zsh-users/zsh-syntax-highlighting.git
+  rev: 3dc574190071ef59054f6d693132410b37aa3ae4
+
+# ZSH autosuggestion plugin
+
+git module zsh-autosuggestions:
+  url: https://github.com/tarruda/zsh-autosuggestions.git
+  rev: dde838c226913f846ca456fa7129a5bd5974a40e

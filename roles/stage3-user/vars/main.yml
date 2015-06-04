@@ -12,3 +12,6 @@ peru_bin: '{{ ansible_env.HOME }}/.local/bin'
 
 # Location that scripts managed by ansible are stored
 script_bin: '{{ ansible_env.HOME }}/.local/bin'
+
+# Directory used to store ZSH configuration
+zsh_home: "{{ ansible_env.HOME }}/.local/share/zsh"

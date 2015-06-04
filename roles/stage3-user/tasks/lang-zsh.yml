@@ -3,18 +3,14 @@
   apt: pkg=zsh state=latest
   sudo: yes
 
-- name: zsh | configure
-  template: 'src=zshrc dest={{ ansible_env.HOME }}/.zshrc'
-  tags:
-    - dotfiles
+- name: zsh | copy configuration
+  copy: 'src=zsh/ dest={{ zsh_home }}/'
 
-- name: zsh | configure environment
-  template: 'src=zshenv dest={{ ansible_env.HOME }}/.zshenv'
-  tags:
-    - dotfiles
+- name: zsh | link ~/.zshrc
+  file: 'src={{ zsh_home }}/zshrc dest={{ ansible_env.HOME }}/.zshrc state=link'
 
-- name: zsh | create cache directory
-  file: 'path={{ ansible_env.HOME }}/.cache/zsh/ state=directory'
+- name: zsh | link ~/.zshenv
+  file: 'src={{ zsh_home }}/zshenv dest={{ ansible_env.HOME }}/.zshenv state=link'
 
 - name: zsh | set user shell
   user: 'name={{ ansible_ssh_user }} shell=/bin/zsh'
