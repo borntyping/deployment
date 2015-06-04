@@ -4,14 +4,24 @@
   sudo: yes
 
 - name: zsh | copy configuration
-  copy: 'src=zsh/ dest={{ zsh_home }}/'
+  copy: >
+    src=zsh/
+    dest={{ ansible_env.HOME }}/.local/share/zsh/
 
 - name: zsh | link ~/.zshrc
-  file: 'src={{ zsh_home }}/zshrc dest={{ ansible_env.HOME }}/.zshrc state=link'
+  file: >
+    src={{ ansible_env.HOME }}/.local/share/zsh/zshrc
+    dest={{ ansible_env.HOME }}/.zshrc
+    state=link
 
 - name: zsh | link ~/.zshenv
-  file: 'src={{ zsh_home }}/zshenv dest={{ ansible_env.HOME }}/.zshenv state=link'
+  file: >
+    src={{ ansible_env.HOME }}/.local/share/zsh/zshenv
+    dest={{ ansible_env.HOME }}/.zshenv
+    state=link
 
 - name: zsh | set user shell
-  user: 'name={{ ansible_ssh_user }} shell=/bin/zsh'
+  user: >
+    name={{ ansible_ssh_user }}
+    shell=/bin/zsh
   sudo: yes
