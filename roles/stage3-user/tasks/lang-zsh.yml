@@ -5,7 +5,7 @@
 
 - name: zsh | copy configuration
   copy: >
-    src=zsh/
+    src=local/share/zsh/
     dest={{ ansible_env.HOME }}/.local/share/zsh/
 
 - name: zsh | link ~/.zshrc

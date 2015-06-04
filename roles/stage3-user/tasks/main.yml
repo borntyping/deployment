@@ -13,7 +13,9 @@
   when: ansible_distribution != 'Debian' # TODO: Doesn't have Python >= 3.3
 
 - name: configure dotfiles
-  template: 'src={{ item }} dest={{ ansible_env.HOME }}/.{{ item }}'
+  template: >
+    src={{ item }}
+    dest={{ ansible_env.HOME }}/.{{ item }}
   with_items:
     - gitconfig
     - htoprc
@@ -25,10 +27,15 @@
 #
 
 - name: bin | create directory
-  file: 'name={{ ansible_env.HOME }}/.local/bin state=directory'
+  file: >
+    name={{ ansible_env.HOME }}/.local/bin
+    state=directory
 
 - name: bin | install scripts
-  copy: 'src={{ item }} dest={{ ansible_env.HOME }}/.local/bin/{{ item }} mode=0755'
+  copy: >
+    src=local/bin/{{ item }}
+    dest={{ ansible_env.HOME }}/.local/bin/{{ item }}
+    mode=0755
   sudo: yes
   with_items:
     - ansible-run
