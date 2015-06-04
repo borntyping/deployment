@@ -155,10 +155,3 @@ add_to_path "$HOME/.bin"                # Personal scripts
 #
 
 source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/autosuggestions.zsh"
-
-zle-line-init() { zle autosuggest-start };
-zle -N zle-line-init
-
-AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=0,bold'
-AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1

@@ -4,7 +4,6 @@ imports:
   hub|hub-executable: 'roles/stage2-development/files'
   hub|hub-completion: 'roles/stage3-user/files/zsh/completions'
   zsh-syntax-highlighting: 'roles/stage3-user/files/zsh/plugins/syntax-highlighting'
-  zsh-autosuggestions: 'roles/stage3-user/files/zsh/plugins/zsh-autosuggestions'
 
 # Git repository management tool
 
@@ -39,9 +38,3 @@ rule hub-executable:
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
   rev: 3dc574190071ef59054f6d693132410b37aa3ae4
-
-# ZSH autosuggestion plugin
-
-git module zsh-autosuggestions:
-  url: https://github.com/tarruda/zsh-autosuggestions.git
-  rev: dde838c226913f846ca456fa7129a5bd5974a40e
