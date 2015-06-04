@@ -1,11 +1,7 @@
 
 users:
-  sam:
-    comment: 'Sam Clements'
-    shell: /bin/zsh
-  skylar:
-    comment: 'Skylar Paddon-Butler'
-    shell: /bin/bash
+  sam: 'Sam Clements'
+  skylar: 'Skylar Paddon-Butler'
 nginx_sites:
   borntyping:
     domain: borntyping.io

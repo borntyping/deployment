@@ -2,8 +2,7 @@
 - name: modify users
   user: >
     name='{{ item.key }}'
-    comment='{{ item.value.comment }}'
-    shell='{{ item.value.shell }}'
+    comment='{{ item.value }}'
     generate_ssh_key=true
     groups=sudo
     append=true
@@ -18,6 +17,9 @@
     state=directory
   sudo: yes
   with_items: users.keys()
+
+- include: 'site-borntyping.yml tags=sites,site-borntyping'
+- include: 'site-eightbitgoggles.yml tags=sites,site-8bitgoggles'
 
 - name: install nginx
   apt: pkg=nginx state=latest
@@ -40,11 +42,11 @@
 - name: enable sites
   sudo: yes
   file: >
-    src=/etc/nginx/sites-available/{{ item.key }}.conf
-    dest=/etc/nginx/sites-enabled/{{ item.key }}.conf
+    src=/etc/nginx/sites-available/{{ item }}.conf
+    dest=/etc/nginx/sites-enabled/{{ item }}.conf
     state=link
     force=yes
-  with_dict: nginx_sites
+  with_items: nginx_sites.keys()
   register: nginx_enabled_sites
   tags:
     - nginx
@@ -55,17 +57,3 @@
   sudo: yes
   tags:
     - nginx
-
-- name: create user www paths
-  file: >
-    path=/var/www/{{ item }}
-    owner={{ item }}
-    group={{ item }}
-    state=directory
-  sudo: yes
-  with_items:
-    - sam
-    - skylar
-
-- include: 'site-borntyping.yml tags=sites,site-borntyping'
-- include: 'site-eightbitgoggles.yml tags=sites,site-8bitgoggles'

@@ -1,13 +1,8 @@
 ---
-
 - hosts: all
   roles:
-    - role: stage1-base
-      tags: stage1-base
-    - role: stage2-development
-      tags: stage2-development
     - role: stage3-user
-      tags: stage4-user
+      tags: stage3
 
 - hosts: workstation
   roles:

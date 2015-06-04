@@ -1,3 +1,4 @@
 ---
 dependencies:
   - role: stage2-development
+    tags: stage2
