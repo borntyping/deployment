@@ -2,8 +2,6 @@
 # Tasks that should be run on all hosts
 #
 
-- include: "users.yml tags=users"
-
 # - include: "os-debian.yml tags=debian"
 #   when: ansible_distribution == 'Debian'
 
