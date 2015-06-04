@@ -30,11 +30,11 @@
 - name: configure sites
   sudo: yes
   template: >
-    src=site-{{ item.key }}.conf
-    dest=/etc/nginx/sites-available/{{ item.key }}.conf
-    owner={{ item.value.user }}
-    group={{ item.value.user }}
-  with_dict: nginx_sites
+    src=site-{{ item }}.conf
+    dest=/etc/nginx/sites-available/{{ item }}.conf
+    owner={{ nginx_sites[item].user }}
+    group={{ nginx_sites[item].user }}
+  with_items: nginx_sites.keys()
   register: nginx_config
   tags:
     - nginx

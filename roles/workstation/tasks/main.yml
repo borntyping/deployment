@@ -2,22 +2,32 @@
 # Install software only useful on a workstation or non-headless machine
 #
 
-- name: install common software
+- name: install personal software
   apt: pkg={{ item }} state=latest
   sudo: yes
   with_items:
     - firefox
+    - keepassx
+    - dropbox
+    - nemo-dropbox
+    - gparted
+
+- name: install development software
+  apt: pkg={{ item }} state=latest
+  sudo: yes
+  with_items:
     - terminator
     - git-cola
     - gitg
     - meld
-    - crawl-tiles
-    - keepassx
-    - dropbox
-    - nemo-dropbox
     - sublime-text
+
+- name: install games and steam
+  apt: pkg={{ item }} state=latest
+  sudo: yes
+  with_items:
     - steam-launcher
-    - gparted
+    - crawl-tiles
 
 #
 # Configures terminator
