@@ -1,9 +1,9 @@
 imports:
-  gws|gws-executable: 'roles/stage2-development/files'
-  gws|gws-completion: 'roles/stage3-user/files/zsh/completions'
-  hub|hub-executable: 'roles/stage2-development/files'
-  hub|hub-completion: 'roles/stage3-user/files/zsh/completions'
-  zsh-syntax-highlighting: 'roles/stage3-user/files/zsh/plugins/syntax-highlighting'
+  gws|gws-executable: 'roles/stage3-user/files/local/bin'
+  gws|gws-completion: 'roles/stage3-user/files/local/share/zsh/functions'
+  hub|hub-executable: 'roles/stage3-user/files/local/bin'
+  hub|hub-completion: 'roles/stage3-user/files/local/share/zsh/functions'
+  zsh-syntax-highlighting: 'roles/stage3-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 # Git repository management tool
 
@@ -16,7 +16,8 @@ rule gws-completion:
   copy: {'completions/zsh': 'gws.zsh'}
 
 rule gws-executable:
-  export: src
+  pick: gws
+  copy: {'src/gws': 'gws'}
 
 # Github command line tool
 
@@ -38,3 +39,11 @@ rule hub-executable:
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
   rev: 3dc574190071ef59054f6d693132410b37aa3ae4
+  pick:
+    - zsh-syntax-highlighting.zsh
+    - highlighters/main/main-highlighter.zsh
+    - highlighters/brackets/brackets-highlighter.zsh
+    - highlighters/pattern/pattern-highlighter.zsh
+    - highlighters/cursor/cursor-highlighter.zsh
+    - highlighters/root/root-highlighter.zsh
+    - highlighters/line/line-highlighter.zsh

@@ -6,13 +6,6 @@
   apt: 'pkg=git state=latest'
   sudo: yes
 
-- name: git | install scripts
-  copy: 'src={{ item }} dest=/usr/local/bin/{{ item }} mode=0755'
-  sudo: yes
-  with_items:
-    - git-tag-version
-    - git-overwritten
-
 - name: git | link git-subtree
   file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link force=yes'
   sudo: yes

@@ -30,6 +30,8 @@ setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
 # Completion
 #
 
+fpath=("$HOME/.local/share/zsh/functions" $fpath)
+
 autoload -Uz compinit && compinit       # Loads completion modules
 setopt AUTO_MENU                        # Show completion menu on succesive tab press
 setopt ALWAYS_TO_END                    # Move cursor after completion

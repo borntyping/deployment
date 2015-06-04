@@ -10,7 +10,7 @@
 - include: "lang-zsh.yml tags=zsh,shell"
 
 - include: "tool-peru.yml tags=peru"
-  when: ansible_distribution != 'Debian' # Doesn't have Python >= 3.3
+  when: ansible_distribution != 'Debian' # TODO: Doesn't have Python >= 3.3
 
 - name: configure dotfiles
   template: 'src={{ item }} dest={{ ansible_env.HOME }}/.{{ item }}'
@@ -24,12 +24,17 @@
 # Installs scripts to ~/.local/bin
 #
 
-- name: scripts | create directory
-  file: 'name={{ script_bin }} state=directory'
+- name: bin | create directory
+  file: 'name={{ ansible_env.HOME }}/.local/bin state=directory'
 
-- name: scripts | install scripts
-  copy: 'src={{ item }} dest={{ script_bin }}/{{ item }} mode=0755'
+- name: bin | install scripts
+  copy: 'src={{ item }} dest={{ ansible_env.HOME }}/.local/bin/{{ item }} mode=0755'
   sudo: yes
   with_items:
     - ansible-run
+    - git-hub
+    - git-overwritten
+    - git-tag-version
+    - gws
+    - hub
     - tmux-attach
