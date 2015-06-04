@@ -2,16 +2,24 @@
 # Install Ruby
 #
 # The ruby-nokogiri package is installed because many gems depend on it, and
-# it had a complicated mix of install/compile time dependencies usually break.
+# it has a complicated mix of install/compile time dependencies that usually
+# break.
 #
 
-- include_vars: 'lang-ruby-{{ ansible_distribution | lower }}.yml'
-
-- name: install ruby
+- name: install ruby2.0
   apt: 'pkg={{ item }} state=latest'
   sudo: yes
-  with_items: ruby_packages
+  with_items:
+    - ruby2.0
+    - ruby2.0-dev
+    - ruby-nokogiri
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 
-- name: install ruby-nokogiri
-  apt: 'pkg=ruby-nokogiri state=latest'
+- name: install ruby2.1
+  apt: 'pkg={{ item }} state=latest'
   sudo: yes
+  with_items:
+    - ruby2.1
+    - ruby2.1-dev
+    - ruby-nokogiri
+  when: ansible_distribution in ['Debian']
