@@ -5,8 +5,6 @@
 - include: "tool-ack.yml tags=ack"
 - include: "tool-docker.yml tags=docker"
 - include: "tool-git.yml tags=git"
-- include: "tool-hub.yml tags=git,hub"
-- include: "tool-gws.yml tags=git,gws"
 
 #
 # Install programming languages and packages from their repositories
