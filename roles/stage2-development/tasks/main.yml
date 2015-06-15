@@ -3,6 +3,7 @@
 #
 
 - include: "tool-ack.yml tags=ack"
+- include: "tool-chef.yml tags=chef"
 - include: "tool-docker.yml tags=docker"
 - include: "tool-git.yml tags=git"
 
