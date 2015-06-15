@@ -23,9 +23,7 @@ sudo apt-get install ansible git
 Clone this repository:
 
 ```bash
-mkdir -p ~/Development/borntyping
-cd ~/Development/borntyping
-git clone git@github.com:borntyping/deployment.git
+git clone https://github.com/borntyping/deployment.git
 cd deployment
 ```
 
