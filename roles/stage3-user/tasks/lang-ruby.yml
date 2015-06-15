@@ -2,7 +2,13 @@
 # Install local gems
 #
 
-- include_vars: 'lang-ruby-{{ ansible_distribution | lower }}.yml'
+- name: use gem from ruby 2.0
+  set_fact: 'gem=gem2.0'
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+
+- name: use gem from ruby 2.1
+  set_fact: 'gem=gem2.1'
+  when: ansible_distribution in ['Debian']
 
 - name: install ruby packages
   gem: 'state=latest name={{ item }} executable={{ gem }} user_install=yes'
