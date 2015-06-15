@@ -14,13 +14,24 @@ Install the latest ansible release with:
 
 ```bash
 sudo apt-add-repository --yes ppa:ansible/ansible
-sudo aptitude update
-sudo aptitude install ansible
+sudo apt-get update
+sudo apt-get install ansible git
 ```
 
-### Managing a workstation
+### Fetch this repository
 
-The `./ansible-run` script is a wrapper around `ansible-playbook`, and requires an inventory file to exist at `./inventory.conf`. An example inventory might look like this:
+Clone this repository:
+
+```bash
+mkdir -p ~/Development/borntyping
+cd ~/Development/borntyping
+git clone git@github.com:borntyping/deployment.git
+cd deployment
+```
+
+### Create an inventory file
+
+Create an inventory file named `./inventory.conf`. An example inventory might look like this:
 
 ```
 [workstation]
@@ -32,31 +43,26 @@ remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible
 
 If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run`.
 
-### Bootstrapping a new machine
+### Run ansible
 
-If the OS was not created with a personal user, create one:
+```bash
+./ansible-run
+```
+
+Bootstrapping a new server
+--------------------------
+
+If the OS was not created with a personal user, create one before running the above instructions:
 
 ```bash
 adduser sam
 usermod -a -G sudo sam
 ```
 
-You can the either run Ansible from your workstation, or directly on the machine you are bootstrapping.
-
-To run Ansible directly on the machine:
+You can the either run Ansible from your workstation by adding a remote connection to the inventory, or directly on the machine you are bootstrapping. To run Ansible directly on the machine:
 
 ```bash
 ansible-pull --url=git@github.com:borntyping/deployment.git -i localhost, -K site.yml
-```
-
-Or add the machine to the inventory and run it from your workstation:
-
-```
-HOSTNAME ansible_sudo_pass=PASSWORD
-```
-
-```bash
-./ansible-run
 ```
 
 Once ansible has run, set passwords for any additional users:
