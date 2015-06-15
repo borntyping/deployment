@@ -8,9 +8,15 @@
   with_items:
     - firefox
     - keepassx
+    - gparted
+
+- name: install dropbox
+  apt: pkg={{ item }} state=latest
+  sudo: yes
+  with_items:
     - dropbox
     - nemo-dropbox
-    - gparted
+  when: ansible_distribution == 'Linuxmint'
 
 - name: install development software
   apt: pkg={{ item }} state=latest
