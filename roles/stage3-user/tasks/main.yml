@@ -18,9 +18,11 @@
     dest={{ ansible_env.HOME }}/.{{ item }}
   with_items:
     - gitconfig
+    - gitignore
     - htoprc
     - nanorc
     - tmux.conf
+  tags: dotfiles
 
 #
 # Installs scripts to ~/.local/bin
