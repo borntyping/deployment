@@ -1,0 +1,9 @@
+- name: sublime | install
+  apt: "pkg=sublime-text state=latest"
+  sudo: yes
+
+- name: sublime | link configuration to dropbox
+  file: >
+    src="{{ ansible_env.HOME }}/Dropbox/Apps/Sublime Text/User"
+    dest="{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User"
+    state=link

@@ -2,6 +2,8 @@
 # Install software only useful on a workstation or non-headless machine
 #
 
+- include: "app-sublime.yml tags=sublime"
+
 - name: install personal software
   apt: pkg={{ item }} state=latest
   sudo: yes
