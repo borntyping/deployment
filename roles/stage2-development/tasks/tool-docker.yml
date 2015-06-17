@@ -5,7 +5,6 @@
 - name: docker | install
   apt: 'pkg=docker.io state=latest'
   sudo: yes
-  when: ansible_distribution != 'Debian'
 
 # https://github.com/docker/docker/issues/4734
 - name: docker | install useful packages
@@ -14,9 +13,7 @@
   with_items:
     - apparmor
     - cgroup-lite
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 
 - name: docker | add user to docker group
   user: 'name={{ ansible_ssh_user }} groups=docker append=true'
   sudo: yes
-  when: ansible_distribution != 'Debian'

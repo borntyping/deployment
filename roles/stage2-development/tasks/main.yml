@@ -5,6 +5,7 @@
 - include: "tool-ack.yml tags=ack"
 - include: "tool-chef.yml tags=chef"
 - include: "tool-docker.yml tags=docker"
+  when: ansible_distribution == 'Linuxmint'
 - include: "tool-git.yml tags=git"
 
 #
@@ -13,4 +14,6 @@
 
 - include: "lang-node.yml tags=node"
 - include: "lang-python.yml tags=python"
+- include: "lang-python-deadsnakes.yml tags=python,deadsnakes"
+  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
 - include: "lang-ruby.yml tags=ruby"

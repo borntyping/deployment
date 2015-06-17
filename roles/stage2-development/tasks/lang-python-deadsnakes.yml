@@ -4,6 +4,7 @@
 # Install the deadsnakes PPA with:
 #
 #   apt-add-repository --yes ppa:fkrull/deadsnakes
+#   apt-get update
 #
 
 - name: install python2.6 and python3.3 from deadsnakes
