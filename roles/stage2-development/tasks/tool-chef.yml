@@ -1,7 +1,3 @@
-- name: chef | about to download the chefdk package
-  debug: >
-    msg="Downloading chefdk, this may take some time."
-
 - name: chef | fetch package
   get_url: >
     url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.6.0-1_amd64.deb
