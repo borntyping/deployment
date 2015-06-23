@@ -90,32 +90,62 @@ if [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
 fi
 
 # Display the current virtualenv when active
-function env_info() {
+function virtualenv_info() {
     if [ -n "$VIRTUAL_ENV" ]; then
-        env_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        virtualenv_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     else
-        env_info_msg=""
+        virtualenv_info_msg=""
     fi
+}
+
+# Display the currently selected knife-block configuration file
+#
+
+# If the selected configuration is `none` the information will not be shown, and
+# if the selected configuration is `production` it will be shown in red.
+function knife_info() {
+    knife_info_msg=""
+
+    if [[ ! -L "$HOME/.chef/knife.rb" ]]; then
+        return
+    fi
+
+    local ENVIRONMENT_FILE=$(realpath "$HOME/.chef/knife.rb")
+    local ENVIRONMENT=$(basename $ENVIRONMENT_FILE | sed "s/knife-\(.*\).rb/\1/")
+    local COLOUR="$fg_bold[green]"
+
+    # When the environment is `none`, skip showing knife information
+    [[ "$ENVIRONMENT" == "none" ]] && return
+
+    # When the environment is `production`, show knife information in red
+    [[ "$ENVIRONMENT" == "production" ]] && local COLOUR="$fg_bold[red]"
+
+    knife_info_msg="%{$COLOUR%}knife:${ENVIRONMENT}%{$reset_color%} "
 }
 
 # Assemble the prompt
 #   sam@hostname ~ $
-#   sam@hostname ~/directory git:master env:virtualenv $
+#   sam@hostname ~/directory git:master env:virtualenv knife:production $
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
 PROMPT="\
 %{$fg_bold[green]%}%n@%m%{$reset_color%} \
 %{$fg_bold[blue]%}%~%{$reset_color%} \
-\${vcs_info_msg_0_}\${env_info_msg}\
+\${vcs_info_msg_0_}\${virtualenv_info_msg}\${knife_info_msg}\
 %{$fg_bold[blue]%}%(!.#.$)%{$reset_color%} "
 
 #
 # Title
 #
 
-# Set terminal title and run vcs_info/env_info before showing the prompt
-function precmd() { print -Pn "\e]2;%~\a"; vcs_info; env_info; }
+# Set terminal title and run vcs_info/virtualenv_info before showing the prompt
+function precmd() {
+    print -Pn "\e]2;%~\a"
+    vcs_info
+    virtualenv_info
+    knife_info
+}
 
 # Set terminal title before executing a command
 function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
