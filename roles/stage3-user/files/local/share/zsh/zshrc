@@ -98,12 +98,6 @@ function env_info() {
     fi
 }
 
-# Set terminal title and run vcs_info/env_info before showing the prompt
-function precmd() { print -Pn "\e]2;%~\a"; vcs_info; env_info; }
-
-# Set terminal title before executing a command
-function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
-
 # Assemble the prompt
 #   sam@hostname ~ $
 #   sam@hostname ~/directory git:master env:virtualenv $
@@ -115,6 +109,16 @@ PROMPT="\
 %{$fg_bold[blue]%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\${env_info_msg}\
 %{$fg_bold[blue]%}%(!.#.$)%{$reset_color%} "
+
+#
+# Title
+#
+
+# Set terminal title and run vcs_info/env_info before showing the prompt
+function precmd() { print -Pn "\e]2;%~\a"; vcs_info; env_info; }
+
+# Set terminal title before executing a command
+function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
 
 #
 # Aliases
