@@ -7,6 +7,8 @@
   copy: >
     src=local/share/zsh/
     dest={{ ansible_env.HOME }}/.local/share/zsh/
+  tags:
+    - dotfiles
 
 - name: zsh | link ~/.zshrc
   file: >

@@ -154,7 +154,7 @@ function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
 # Aliases
 #
 
-alias ls='ls --color=auto'              # Use colors with ls
+alias ls='ls --color=auto --hide="*.sublime-*"'
 alias grep='grep --color=auto'          # Use colors for grep output
 alias -g ...='../..'                    # Allow ... to mean ../.. anywhere
 
