@@ -14,3 +14,11 @@
     dest="{{ ansible_env.HOME }}/.config/sublime-text-3/Packages/User"
     state=link
 
+- name: sublime | install python linter packages
+  pip: 'name={{ item }} state=present executable=pip3 extra_args=--user'
+  with_items:
+    - pyyaml
+    - flake8
+    - pep257
+  tags:
+    - python
