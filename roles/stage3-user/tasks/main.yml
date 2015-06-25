@@ -41,9 +41,11 @@
   sudo: yes
   with_items:
     - ansible-run
+    - caddy
     - git-hub
     - git-overwritten
     - git-tag-version
     - gws
     - hub
     - tmux-attach
+  tags: bin

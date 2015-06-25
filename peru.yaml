@@ -1,9 +1,18 @@
 imports:
+  caddy: 'roles/stage3-user/files/local/bin'
   gws|gws-executable: 'roles/stage3-user/files/local/bin'
   gws|gws-completion: 'roles/stage3-user/files/local/share/zsh/functions'
   hub|hub-executable: 'roles/stage3-user/files/local/bin'
   hub|hub-completion: 'roles/stage3-user/files/local/share/zsh/functions'
   zsh-syntax-highlighting: 'roles/stage3-user/files/local/share/zsh/plugins/syntax-highlighting'
+
+# HTTP development server
+
+curl module caddy:
+  url: https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_linux_amd64.zip
+  unpack: zip
+  pick: caddy
+  sha1: fa27430b4bb8a2ced66976e9895c352b49b457c4
 
 # Git repository management tool
 
@@ -22,9 +31,9 @@ rule gws-executable:
 # Github command line tool
 
 curl module hub:
-    url: https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz
-    unpack: tar
-    sha1: 198d0bdda7302531c306198fe45944bcffdf5d51
+  url: https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz
+  unpack: tar
+  sha1: 198d0bdda7302531c306198fe45944bcffdf5d51
 
 rule hub-completion:
   pick: hub.zsh
