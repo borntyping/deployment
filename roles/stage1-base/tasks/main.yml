@@ -21,3 +21,4 @@
     - tmux
     - tree
     - aptitude
+    - realpath
