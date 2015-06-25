@@ -163,7 +163,10 @@ alias gs='git status'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
 
+alias chefspec='chef exec rspec'
+
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
+export EDITOR=nano
 
 #
 # Named directories

@@ -1,9 +1,14 @@
-- name: chef | fetch package
+- name: "chef | create directory"
+  file: "path={{ ansible_env.HOME }}/.chef state=directory"
+  
+- name: "chef | fetch package"
   get_url: >
     url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.6.0-1_amd64.deb
     sha256sum=cd8c92b9649835100a81101a2476423a4da3145b1cbbacc845c8e21413115feb
-    dest=/tmp/chefdk_0.6.0-1_amd64.deb
+    dest={{ ansible_env.HOME }}/.chef/chefdk_0.6.0-1_amd64.deb
+  tags: ['slow']
 
-- name: chef | install package
-  apt: deb=/tmp/chefdk_0.6.0-1_amd64.deb
+- name: "chef | install package"
+  apt: deb={{ ansible_env.HOME }}/.chef/chefdk_0.6.0-1_amd64.deb
   sudo: true
+  tags: ['slow']
