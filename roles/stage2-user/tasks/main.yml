@@ -8,9 +8,22 @@
 - include: "lang-python.yml tags=python,pipsi"
 - include: "lang-ruby.yml tags=ruby"
 - include: "lang-zsh.yml tags=zsh,shell"
-
 - include: "tool-peru.yml tags=peru"
-  when: ansible_distribution != 'Debian' # TODO: Doesn't have Python >= 3.3
+
+- name: generate ssh key
+  user: 'name={{ ansible_ssh_user }} generate_ssh_key=true'
+  sudo: yes
+
+- name: install utility packages
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - htop
+    - nano
+    - tmux
+    - tree
+    - aptitude
+    - realpath
 
 - name: configure dotfiles
   template: >

@@ -1,24 +1,17 @@
 #
-# Tasks that should be run on all hosts
+# Install development tools
 #
 
-# - include: "os-debian.yml tags=debian"
-#   when: ansible_distribution == 'Debian'
+- include: "tool-ack.yml tags=ack"
+- include: "tool-chef.yml tags=chef"
+- include: "tool-docker.yml tags=docker"
+- include: "tool-git.yml tags=git"
 
-# - include: "os-ubuntu.yml tags=ubuntu"
-#   when: ansible_distribution in ['Ubuntu', 'Linuxmint']
+#
+# Install programming languages and packages from their repositories
+#
 
-- name: generate ssh key
-  user: 'name={{ ansible_ssh_user }} generate_ssh_key=true'
-  sudo: yes
-
-- name: install utility packages
-  apt: 'pkg={{ item }} state=latest'
-  sudo: yes
-  with_items:
-    - htop
-    - nano
-    - tmux
-    - tree
-    - aptitude
-    - realpath
+- include: "lang-node.yml tags=node"
+- include: "lang-python.yml tags=python"
+- include: "lang-python-deadsnakes.yml tags=python,deadsnakes"
+- include: "lang-ruby.yml tags=ruby"
