@@ -1,17 +1,23 @@
 #
-# Install development tools
-#
-
-- include: "tool-ack.yml tags=ack"
-- include: "tool-chef.yml tags=chef"
-- include: "tool-docker.yml tags=docker"
-- include: "tool-git.yml tags=git"
-
-#
 # Install programming languages and packages from their repositories
 #
 
-- include: "lang-node.yml tags=node"
-- include: "lang-python.yml tags=python"
-- include: "lang-python-deadsnakes.yml tags=python,deadsnakes"
-- include: "lang-ruby.yml tags=ruby"
+- include: "lang-node.yml tags=languages,node"
+- include: "lang-python.yml tags=languages,python"
+- include: "lang-python-deadsnakes.yml tags=languages,python,deadsnakes"
+- include: "lang-ruby.yml tags=languages,ruby"
+
+#
+# Install services
+#
+
+- include: "service-supervisor.yml tags=services,supervisor"
+
+#
+# Install development tools
+#
+
+- include: "tool-ack.yml tags=tools,ack"
+- include: "tool-chef.yml tags=tools,chef"
+- include: "tool-docker.yml tags=tools,docker"
+- include: "tool-git.yml tags=tools,git"
