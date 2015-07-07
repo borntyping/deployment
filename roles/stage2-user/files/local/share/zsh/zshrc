@@ -163,7 +163,19 @@ alias gs='git status'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
 
-alias chefspec='chef exec rspec'
+function alert() {
+    local success=$?
+    local command=$history[$HISTCMD]
+    local icons="/usr/share/icons/Mint-X/status/scalable"
+
+    if [[ $success == 0 ]]; then
+        notify-send -i "${icons}/dialog-warning-symbolic.svg" \
+            "Command finished: ${command:0:-7}"
+    else
+        notify-send -i "${icons}/dialog-error-symbolic.svg" \
+            "Command failed: ${command:0:-7}"
+    fi
+}
 
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
 export EDITOR=nano
@@ -184,6 +196,7 @@ src="$HOME/Development/src"
 
 function add_to_path() { [[ -d $1 ]] && export PATH="$1:$PATH" }
 
+add_to_path "${datasift}/chef/bin"     # Chef scripts
 add_to_path "$HOME/.gem/ruby/2.0.0/bin" # Executables installed by 'gem'
 add_to_path "$HOME/.gem/ruby/2.1.0/bin" # Executables installed by 'gem'
 add_to_path "$HOME/.local/bin"          # User installed executables

@@ -36,6 +36,7 @@
   with_items:
     - steam-launcher
     - crawl-tiles
+    - mumble
 
 #
 # Configures terminator
