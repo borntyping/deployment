@@ -27,7 +27,7 @@
 # Aliases
 
 [pretty]
-    graph=%C(red)%h%C(reset) %s%C(yellow)%d %C(bold black)(%an)%C(reset)
+    graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
     history = log --graph --pretty=graph --date=short --decorate -n 10
@@ -37,6 +37,7 @@
 
 [status]
     displayCommentPrefix = false
+
 [color]
     diff = auto
     status = auto
@@ -49,6 +50,12 @@
     added = green
     changed = yellow
     untracked = red
+
+# GitHub
+# Always use SSH transport instead of HTTPS
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 
 # Utilities
 
