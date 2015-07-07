@@ -90,11 +90,11 @@ if [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
 fi
 
 # Display the current virtualenv when active
-function virtualenv_info() {
+function _info_virtualenv() {
     if [ -n "$VIRTUAL_ENV" ]; then
-        virtualenv_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        INFO_MSGS_VIRTUALENV="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     else
-        virtualenv_info_msg=""
+        INFO_MSGS_VIRTUALENV=""
     fi
 }
 
@@ -103,8 +103,8 @@ function virtualenv_info() {
 
 # If the selected configuration is `none` the information will not be shown, and
 # if the selected configuration is `production` it will be shown in red.
-function knife_info() {
-    knife_info_msg=""
+function _info_knife() {
+    INFO_MSGS_KNIFE=""
 
     if [[ ! -L "$HOME/.chef/knife.rb" ]]; then
         return
@@ -120,7 +120,7 @@ function knife_info() {
     # When the environment is `production`, show knife information in red
     [[ "$ENVIRONMENT" == "production" ]] && local COLOUR="$fg_bold[red]"
 
-    knife_info_msg="%{$COLOUR%}knife:${ENVIRONMENT}%{$reset_color%} "
+    INFO_MSGS_KNIFE="%{$COLOUR%}knife:${ENVIRONMENT}%{$reset_color%} "
 }
 
 # Assemble the prompt
@@ -132,23 +132,29 @@ function knife_info() {
 PROMPT="\
 %{$fg_bold[green]%}%n@%m%{$reset_color%} \
 %{$fg_bold[blue]%}%~%{$reset_color%} \
-\${vcs_info_msg_0_}\${virtualenv_info_msg}\${knife_info_msg}\
+\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\${INFO_MSGS_KNIFE}\
 %{$fg_bold[blue]%}%(!.#.$)%{$reset_color%} "
 
 #
 # Title
 #
 
-# Set terminal title and run vcs_info/virtualenv_info before showing the prompt
+# Set terminal title and collect information before showing the prompt
 function precmd() {
-    print -Pn "\e]2;%~\a"
+    case $TERM in
+        xterm*) print -Pn "\e]2;%~\a";;
+    esac
     vcs_info
-    virtualenv_info
-    knife_info
+    _info_virtualenv
+    _info_knife
 }
 
 # Set terminal title before executing a command
-function preexec() { print -Pn "\e]2;%~ $ $2\a"; }
+function preexec() {
+    case $TERM in
+        xterm*) print -Pn "\e]2;%~ $ $2\a";;
+    esac
+}
 
 #
 # Aliases
@@ -196,7 +202,7 @@ src="$HOME/Development/src"
 
 function add_to_path() { [[ -d $1 ]] && export PATH="$1:$PATH" }
 
-add_to_path "${datasift}/chef/bin"     # Chef scripts
+add_to_path "${datasift}/chef/bin"      # Chef scripts
 add_to_path "$HOME/.gem/ruby/2.0.0/bin" # Executables installed by 'gem'
 add_to_path "$HOME/.gem/ruby/2.1.0/bin" # Executables installed by 'gem'
 add_to_path "$HOME/.local/bin"          # User installed executables
