@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+git fetch
+git rebase -q -p origin/master 2>&1 | grep -v "Successfully rebased and updated"

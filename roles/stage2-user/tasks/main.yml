@@ -41,12 +41,12 @@
 # Installs scripts to ~/.local/bin
 #
 
-- name: bin | create directory
+- name: create bin directory
   file: >
     name={{ ansible_env.HOME }}/.local/bin
     state=directory
 
-- name: bin | install scripts
+- name: install scripts
   copy: >
     src=local/bin/{{ item }}
     dest={{ ansible_env.HOME }}/.local/bin/{{ item }}
@@ -57,6 +57,7 @@
     - caddy
     - git-hub
     - git-overwritten
+    - git-sync
     - git-tag-version
     - gws
     - hub

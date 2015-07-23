@@ -6,6 +6,7 @@
     editor = nano
     autocrlf = input
     excludesfile = ~/.gitignore
+    pager = less -+FX
 
 [push]
     default = current
@@ -35,12 +36,8 @@
     # List ignored files
     ignored = ls-files -o -i --exclude-standard
 
-    # Stash files when rebasing from a remote
-    sync = !git fetch && git rebase -p origin/master && git history
-
 [pager]
-    # Don't clear the screen when showing the short output from the `hist` alias
-    hist = less --no-init
+    hist = less -FX
 
 #
 # UI

@@ -189,7 +189,6 @@ function alert() {
 
 export EDITOR=nano
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
-export LESS="--quit-if-one-screen --RAW-CONTROL-CHARS --tabs=5,9"
 
 #
 # Named directories
