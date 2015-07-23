@@ -6,7 +6,6 @@
     editor = nano
     autocrlf = input
     excludesfile = ~/.gitignore
-    pager = less -FRX -x 5,9
 
 [push]
     default = current
@@ -21,19 +20,31 @@
 [credential]
     helper = store
 
-[merge]
-    tool = meld
-
+#
 # Aliases
+#
 
 [pretty]
     graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-    history = log --graph --pretty=graph --date=short --decorate -n 10
+    # Show logs in a pretty format
+    hist = log --graph --pretty=graph --date=short --decorate -n 10
+    history = log --graph --pretty=graph --date=short --decorate
+
+    # List ignored files
     ignored = ls-files -o -i --exclude-standard
 
+    # Stash files when rebasing from a remote
+    sync = !git fetch && git rebase -p origin/master && git history
+
+[pager]
+    # Don't clear the screen when showing the short output from the `hist` alias
+    hist = less --no-init
+
+#
 # UI
+#
 
 [status]
     displayCommentPrefix = false
@@ -51,13 +62,12 @@
     changed = yellow
     untracked = red
 
-# GitHub
-# Always use SSH transport instead of HTTPS
-
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-
+#
 # Utilities
+#
+
+[merge]
+    tool = meld
 
 [gui]
     historybrowser = gitg
@@ -65,3 +75,11 @@
 [cola]
     tabwidth = 4
     fontdiff = DejaVu Sans Mono,9,-1,5,50,0,0,0,0,0
+
+#
+# GitHub
+#
+
+# Always use SSH transport instead of HTTPS
+[url "git@github.com:"]
+    insteadOf = https://github.com/
