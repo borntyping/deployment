@@ -1,0 +1,23 @@
+#
+# Installs the Chef Development Kit.
+#
+
+- name: "chefdk | check if chefdk is installed"
+  command: dpkg -s chefdk
+  register: dpkg_chefdk
+  failed_when: dpkg_chefdk.rc > 1
+  changed_when: no
+
+- name: "chefdk | fetch package"
+  get_url: >
+    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.6.0-1_amd64.deb
+    sha256sum=cd8c92b9649835100a81101a2476423a4da3145b1cbbacc845c8e21413115feb
+    dest=/tmp/chefdk_0.6.0-1_amd64.deb
+  when: dpkg_chefdk.rc == 1
+  tags: ['slow']
+
+- name: "chefdk | install package"
+  apt: "deb=/tmp/chefdk_0.6.0-1_amd64.deb"
+  sudo: true
+  when: dpkg_chefdk.rc == 1
+  tags: ['slow']

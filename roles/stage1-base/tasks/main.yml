@@ -18,6 +18,6 @@
 #
 
 - include: "tool-ack.yml tags=tools,ack"
-- include: "tool-chef.yml tags=tools,chef"
+- include: "tool-chefdk.yml tags=tools,chefdk"
 - include: "tool-docker.yml tags=tools,docker"
 - include: "tool-git.yml tags=tools,git"
