@@ -1,15 +1,10 @@
 ---
-- hosts: all
-  roles:
-    - role: stage2-user
-      tags: stage2
-
 - hosts: workstation
   roles:
-    - role: workstation
-      tags: workstation
+  - role: workstation
+    tags: workstation
 
 - hosts: webserver
   roles:
-    - role: webserver
-      tags: webserver
+  - role: webserver
+    tags: webserver

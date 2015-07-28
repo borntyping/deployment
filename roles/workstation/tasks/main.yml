@@ -2,7 +2,10 @@
 # Install software only useful on a workstation or non-headless machine
 #
 
+- include: "app-ansible.yml tags=ansible"
+- include: "app-spotify.yml tags=spotify"
 - include: "app-sublime.yml tags=sublime"
+- include: "app-terminator.yml tags=terminator"
 
 - name: install personal software
   apt: pkg={{ item }} state=latest
@@ -24,11 +27,9 @@
   apt: pkg={{ item }} state=latest
   sudo: yes
   with_items:
-    - terminator
     - git-cola
     - gitg
     - meld
-    - sublime-text
 
 - name: install games and steam
   apt: pkg={{ item }} state=latest
@@ -38,49 +39,3 @@
     - crawl-tiles
     - mumble
 
-#
-# Configures terminator
-#
-
-- name: configure terminator
-  file: 'name=/home/sam/.config/terminator state=directory'
-
-- name: configure terminator
-  template: 'dest={{ ansible_env.HOME }}/.config/terminator/config src=terminator.conf'
-
-#
-# Spotify Linux preview
-#
-
-- name: spotify | add repository
-  apt_repository: repo='deb http://repository.spotify.com stable non-free' state=present
-  register: spotify_repository
-  sudo: yes
-
-- name: spotify | add repository key
-  apt_key: id=94558F59 keyserver=hkp://keyserver.ubuntu.com:80
-  register: spotify_repository_key
-  sudo: yes
-
-- name: spotify | update repositories
-  apt: 'update_cache=yes'
-  when: spotify_repository.changed or spotify_repository_key.changed
-  sudo: yes
-
-- name: spotify | install package
-  apt: 'pkg=spotify-client state=installed'
-  sudo: yes
-
-#
-# Ansible
-#
-
-- name: add ansible PPA
-  command: apt-add-repository ppa:ansible/ansible
-  args: {'creates': '/etc/apt/sources.list.d/ansible-ansible-trusty.list'}
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
-  sudo: yes
-
-- name: install ansible
-  apt: pkg=ansible state=latest
-  sudo: yes

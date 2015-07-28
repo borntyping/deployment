@@ -1,0 +1,24 @@
+#
+# Ansible
+#
+
+- name: ansible | add repository
+  apt_repository: >
+    repo='deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main'
+    state=present
+  register: ansible_repository
+  sudo: yes
+
+- name: ansible | add repository key
+  apt_key: id=7BB9C367 keyserver=hkp://keyserver.ubuntu.com:80
+  register: ansible_repository_key
+  sudo: yes
+
+- name: ansible | update repositories
+  apt: 'update_cache=yes'
+  when: ansible_repository.changed or ansible_repository_key.changed
+  sudo: yes
+
+- name: install ansible
+  apt: pkg=ansible state=latest
+  sudo: yes

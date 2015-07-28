@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: stage2-user
+    tags: stage2
