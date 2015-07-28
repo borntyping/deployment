@@ -2,6 +2,7 @@
 # Install programming languages and packages from their repositories
 #
 
+- include: "lang-go.yml tags=languages,go"
 - include: "lang-node.yml tags=languages,node"
 - include: "lang-python.yml tags=languages,python"
 - include: "lang-python-deadsnakes.yml tags=languages,python,deadsnakes"

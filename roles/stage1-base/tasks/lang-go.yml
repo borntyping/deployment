@@ -1,0 +1,7 @@
+#
+# Install Golang
+#
+
+- name: go | install
+  apt: 'pkg=golang state=latest'
+  sudo: yes
