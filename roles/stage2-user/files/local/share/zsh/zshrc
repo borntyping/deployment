@@ -98,31 +98,6 @@ function _info_virtualenv() {
     fi
 }
 
-# Display the currently selected knife-block configuration file
-#
-
-# If the selected configuration is `none` the information will not be shown, and
-# if the selected configuration is `production` it will be shown in red.
-function _info_knife() {
-    INFO_MSGS_KNIFE=""
-
-    if [[ ! -L "$HOME/.chef/knife.rb" ]]; then
-        return
-    fi
-
-    local ENVIRONMENT_FILE=$(realpath "$HOME/.chef/knife.rb")
-    local ENVIRONMENT=$(basename $ENVIRONMENT_FILE | sed "s/knife-\(.*\).rb/\1/")
-    local COLOUR="$fg_bold[green]"
-
-    # When the environment is `none`, skip showing knife information
-    [[ "$ENVIRONMENT" == "none" ]] && return
-
-    # When the environment is `production`, show knife information in red
-    [[ "$ENVIRONMENT" == "production" ]] && local COLOUR="$fg_bold[red]"
-
-    INFO_MSGS_KNIFE="%{$COLOUR%}knife:${ENVIRONMENT}%{$reset_color%} "
-}
-
 # Assemble the prompt
 #   sam@hostname ~ $
 #   sam@hostname ~/directory git:master env:virtualenv knife:production $
@@ -132,7 +107,7 @@ function _info_knife() {
 PROMPT="\
 %{$fg_bold[green]%}%n@%m%{$reset_color%} \
 %{$fg_bold[blue]%}%~%{$reset_color%} \
-\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\${INFO_MSGS_KNIFE}\
+\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\
 %{$fg_bold[blue]%}%(!.#.$)%{$reset_color%} "
 
 #
@@ -146,7 +121,6 @@ function precmd() {
     esac
     vcs_info
     _info_virtualenv
-    _info_knife
 }
 
 # Set terminal title before executing a command
