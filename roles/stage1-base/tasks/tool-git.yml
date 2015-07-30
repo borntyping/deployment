@@ -1,11 +1,32 @@
 #
-# Install git and related scripts
+# Install git.
 #
 
-- name: git | install
-  apt: 'pkg=git state=latest'
+- name: git | add repository
+  apt_repository: >
+    repo='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
+    state=present
+  register: git_ppa
   sudo: yes
 
-- name: git | link git-subtree
-  file: 'src=/usr/share/doc/git/contrib/subtree/git-subtree.sh dest=/usr/local/bin/git-subtree state=link force=yes'
+- name: git | add repository key
+  apt_key: id=E1DF1F24 keyserver=hkp://keyserver.ubuntu.com:80
+  register: git_ppa_key
   sudo: yes
+
+- name: git | update repositories
+  apt: update_cache=yes
+  when: git_ppa.changed or git_ppa_key.changed
+  sudo: yes
+
+- name: git | install
+  apt: pkg=git state=latest
+  sudo: yes
+
+# - name: git | link git-subtree
+#   file: >
+#     src=/usr/share/doc/git/contrib/subtree/git-subtree.sh
+#     dest=/usr/local/bin/git-subtree
+#     state=link
+#     force=yes
+#   sudo: yes
