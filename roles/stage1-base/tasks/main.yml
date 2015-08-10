@@ -21,4 +21,5 @@
 - include: "tool-ack.yml tags=tools,ack"
 - include: "tool-chefdk.yml tags=tools,chefdk"
 - include: "tool-docker.yml tags=tools,docker"
+- include: "tool-nix.yml tags=tools,nix"
 - include: "tool-git.yml tags=tools,git"
