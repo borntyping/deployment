@@ -55,6 +55,8 @@
   with_items:
     - ansible-run
     - caddy
+    - docker-gc
+    - git-cleanup
     - git-hub
     - git-overwritten
     - git-sync
@@ -62,4 +64,4 @@
     - gws
     - hub
     - tmux-attach
-  tags: bin
+  tags: dotfiles
