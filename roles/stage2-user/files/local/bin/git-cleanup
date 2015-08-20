@@ -1,8 +1,7 @@
 #!/bin/bash
 
-BRANCH=${1:=master}
+BRANCH=${1:-master}
 
-git branch --merged "$BRANCH" |\
-    grep -v "$BRANCH" |\
-    xargs --no-run-if-empty --max-args=1 "git branch -d"
+git branch --merged "$BRANCH" | grep -v "$BRANCH" |\
+    xargs --no-run-if-empty --max-args=1 -- git branch -d
 git remote prune origin

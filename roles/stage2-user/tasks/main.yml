@@ -64,4 +64,6 @@
     - gws
     - hub
     - tmux-attach
-  tags: dotfiles
+  tags:
+    - bin
+    - dotfiles
