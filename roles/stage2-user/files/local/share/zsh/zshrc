@@ -106,9 +106,7 @@ function _info_virtualenv() {
 function _info_knife() {
     INFO_MSGS_KNIFE=""
 
-    if [[ ! -L "$HOME/.chef/knife.rb" ]]; then
-        return
-    fi
+    [[ ! -L "$HOME/.chef/knife.rb" ]] && return
 
     local ENVIRONMENT_FILE=$(realpath "$HOME/.chef/knife.rb")
     local ENVIRONMENT=$(basename $ENVIRONMENT_FILE | sed "s/knife-\(.*\).rb/\1/")
@@ -117,10 +115,13 @@ function _info_knife() {
     # When the environment is `none`, skip showing knife information
     [[ "$ENVIRONMENT" == "none" ]] && return
 
-    # When the environment is `production`, show knife information in red
-    [[ "$ENVIRONMENT" == "production" ]] && local COLOUR="$fg_bold[red]"
+    # Set colors based on the environment
+    [[ "$ENVIRONMENT" == "production"  ]] && COLOUR="$fg[red]"
+    [[ "$ENVIRONMENT" == "staging"     ]] && COLOUR="$fg[yellow]"
+    [[ "$ENVIRONMENT" == "development" ]] && COLOUR="$fg[green]"
 
-    INFO_MSGS_KNIFE="%{$COLOUR%}knife:${ENVIRONMENT}%{$reset_color%} "
+    ENVIRONMENT="%{$COLOUR%}${ENVIRONMENT}%{$reset_color%}"
+    INFO_MSGS_KNIFE="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
 }
 
 # Assemble the prompt
