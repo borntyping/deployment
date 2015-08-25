@@ -23,3 +23,22 @@
 - include: "tool-docker.yml tags=tools,docker"
 - include: "tool-nix.yml tags=tools,nix"
 - include: "tool-git.yml tags=tools,git"
+
+#
+# Install other packages
+#
+
+- name: install utility packages
+  apt: 'pkg={{ item }} state=latest'
+  sudo: yes
+  with_items:
+    - htop
+    - nano
+    - tmux
+    - tree
+    - aptitude
+    - realpath
+    - jq
+  tags:
+    - bin
+    - util

@@ -12,18 +12,6 @@
 
 - name: generate ssh key
   user: 'name={{ ansible_ssh_user }} generate_ssh_key=true'
-  sudo: yes
-
-- name: install utility packages
-  apt: 'pkg={{ item }} state=latest'
-  sudo: yes
-  with_items:
-    - htop
-    - nano
-    - tmux
-    - tree
-    - aptitude
-    - realpath
 
 - name: configure dotfiles
   template: >
@@ -51,7 +39,6 @@
     src=local/bin/{{ item }}
     dest={{ ansible_env.HOME }}/.local/bin/{{ item }}
     mode=0755
-  sudo: yes
   with_items:
     - ansible-run
     - caddy
