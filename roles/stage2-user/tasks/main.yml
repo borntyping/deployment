@@ -34,13 +34,14 @@
     name={{ ansible_env.HOME }}/.local/bin
     state=directory
 
-- name: install scripts
+- name: install executables and scripts
   copy: >
     src=local/bin/{{ item }}
     dest={{ ansible_env.HOME }}/.local/bin/{{ item }}
     mode=0755
   with_items:
     - ansible-run
+    - blink1-tool
     - caddy
     - docker-gc
     - git-cleanup
@@ -54,3 +55,5 @@
   tags:
     - bin
     - dotfiles
+    - blink
+    - git
