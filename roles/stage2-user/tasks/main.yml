@@ -54,6 +54,5 @@
     - tmux-attach
   tags:
     - bin
-    - dotfiles
     - blink
     - git

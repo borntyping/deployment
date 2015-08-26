@@ -9,18 +9,25 @@
     dest={{ ansible_env.HOME }}/.local/share/zsh/
   tags:
     - dotfiles
+    - zshrc
 
 - name: zsh | link ~/.zshrc
   file: >
     src={{ ansible_env.HOME }}/.local/share/zsh/zshrc
     dest={{ ansible_env.HOME }}/.zshrc
     state=link
+  tags:
+    - dotfiles
+    - zshrc
 
 - name: zsh | link ~/.zshenv
   file: >
     src={{ ansible_env.HOME }}/.local/share/zsh/zshenv
     dest={{ ansible_env.HOME }}/.zshenv
     state=link
+  tags:
+    - dotfiles
+    - zshrc
 
 - name: zsh | set user shell
   user: >

@@ -131,10 +131,9 @@ function _info_knife() {
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
 PROMPT="\
-%{$fg_bold[green]%}%n@%m%{$reset_color%} \
-%{$fg_bold[blue]%}%~%{$reset_color%} \
-\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\${INFO_MSGS_KNIFE}\
-%{$fg_bold[blue]%}%(!.#.$)%{$reset_color%} "
+%{$fg_bold[green]%}$ %n@%m %~%{$reset_color%} \
+\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\${INFO_MSGS_KNIFE}
+%{$fg_bold[blue]%}$%{$reset_color%} "
 
 #
 # Title
