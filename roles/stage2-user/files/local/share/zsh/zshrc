@@ -169,6 +169,8 @@ alias gs='git status'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
 
+alias dct='ds-cookbook-test'
+
 function alert() {
     local success=$?
     local command=$history[$HISTCMD]
@@ -189,6 +191,7 @@ function alert() {
 
 export EDITOR=nano
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
+export SSH_RUN_SUDO_KEYRING=1
 
 #
 # Named directories
