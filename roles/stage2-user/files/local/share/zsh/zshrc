@@ -33,14 +33,14 @@ setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
 fpath=("$HOME/.local/share/zsh/functions" $fpath)
 
 autoload -Uz compinit && compinit       # Loads completion modules
-setopt AUTO_MENU                        # Show completion menu on succesive tab press
+setopt AUTO_MENU                        # Show completion menu on tab press
 setopt ALWAYS_TO_END                    # Move cursor after completion
 setopt COMPLETE_ALIASES                 # Allow autocompletion for aliases
 setopt COMPLETE_IN_WORD                 # Allow completion from middle of word
 setopt LIST_PACKED                      # Smallest completion menu
 setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
 setopt AUTO_PARAM_SLASH                 #   after a completion
-setopt AUTO_REMOVE_SLASH
+setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed
 
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:*:*:*' menu select
@@ -62,8 +62,8 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}!%{$reset_color%}"
 zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}!%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}%c%u%m "
-zstyle ':vcs_info:*' actionformats "%{$fg_bold[green]%}%s:%{$fg_bold[green]%}%b%{$reset_color%}(%a)%c%u%m "
+zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%b%{$reset_color%}%c%u%m "
+zstyle ':vcs_info:*' actionformats "%{$fg_bold[green]%}%s:%b%{$reset_color%}(%a)%c%u%m "
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
 
 # Add a marker to %u for untracked files
@@ -99,10 +99,6 @@ function _info_virtualenv() {
 }
 
 # Display the currently selected knife-block configuration file
-#
-
-# If the selected configuration is `none` the information will not be shown, and
-# if the selected configuration is `production` it will be shown in red.
 function _info_knife() {
     INFO_MSGS_KNIFE=""
 
@@ -119,25 +115,11 @@ function _info_knife() {
     [[ "$ENVIRONMENT" == "production"  ]] && COLOUR="$fg[red]"
     [[ "$ENVIRONMENT" == "staging"     ]] && COLOUR="$fg[yellow]"
     [[ "$ENVIRONMENT" == "development" ]] && COLOUR="$fg[green]"
+    [[ "$ENVIRONMENT" == "berksapi"    ]] && COLOUR="$fg[blue]"
 
     ENVIRONMENT="%{$COLOUR%}${ENVIRONMENT}%{$reset_color%}"
     INFO_MSGS_KNIFE="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
 }
-
-# Assemble the prompt
-#   sam@hostname ~ $
-#   sam@hostname ~/directory git:master env:virtualenv knife:production $
-#
-# The %{ and %} characters are used to stop the prompt from counting invisible
-# characters when calculating the length
-PROMPT="\
-%{$fg_bold[green]%}$ %n@%m %~%{$reset_color%} \
-\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\${INFO_MSGS_KNIFE}
-%{$fg_bold[blue]%}$%{$reset_color%} "
-
-#
-# Title
-#
 
 # Set terminal title and collect information before showing the prompt
 function precmd() {
@@ -156,32 +138,44 @@ function preexec() {
     esac
 }
 
+# Assemble the prompt
+#   sam@hostname ~ $
+#   sam@hostname ~/directory git:master env:virtualenv knife:production $
+#
+# The %{ and %} characters are used to stop the prompt from counting invisible
+# characters when calculating the length
+PROMPT="\
+%{$fg_bold[green]%}$ %n@%m %~%{$reset_color%} \
+\${vcs_info_msg_0_}\${INFO_MSGS_VIRTUALENV}\${INFO_MSGS_KNIFE}
+%{$fg_bold[blue]%}$%{$reset_color%} "
+
 #
 # Aliases
 #
 
-alias ls='ls --color=auto --hide="*.sublime-*"'
+alias ls='ls --color=auto'              # Use colors for ls output
 alias grep='grep --color=auto'          # Use colors for grep output
 alias -g ...='../..'                    # Allow ... to mean ../.. anywhere
 
 alias gd='git diff'
 alias gs='git status'
-alias gc='git commit -v'
-alias gca='git commit -v -a'
+alias gc='git commit -v'                # Show diff in commit editor
+alias gca='git commit -v -a'            # Show diff in commit editor, commit all
 
 alias dct='ds-cookbook-test'
 alias dke='knife block use'
 
+# Send an alert with the status of the previous command
 function alert() {
     local success=$?
     local command=$history[$HISTCMD]
-    local icons="/usr/share/icons/Mint-X/status/scalable"
+    local icons="/usr/share/icons/Mint-X/status/16"
 
     if [[ $success == 0 ]]; then
-        notify-send -i "${icons}/dialog-warning-symbolic.svg" \
+        notify-send -i "${icons}/dialog-information.png" \
             "Command finished: ${command:0:-7}"
     else
-        notify-send -i "${icons}/dialog-error-symbolic.svg" \
+        notify-send -i "${icons}/dialog-error.png" \
             "Command failed: ${command:0:-7}"
     fi
 }
