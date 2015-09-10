@@ -165,12 +165,12 @@ alias gca='git commit -v -a'            # Show diff in commit editor, commit all
 alias dct='ds-cookbook-test'
 alias dke='knife block use'
 
-alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc; alert'
+alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
 
 # Send an alert with the status of the previous command
 function alert() {
     local SUCCESS=$?
-    local COMMAND=$(echo $history[$HISTCMD] | sed "s/; alert//")
+    local COMMAND="$(echo $history[$HISTCMD] | sed "s/; alert//")"
     local ICONS="/usr/share/icons/Mint-X/status/16"
 
     paplay "/usr/share/sounds/pop.wav"
@@ -217,5 +217,15 @@ add_to_path "$HOME/.bin"                # Personal scripts
 #
 # Plugins
 #
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta,bold'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('knife block use production' 'fg=white,bold,bg=red')
 
 source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
