@@ -206,7 +206,7 @@ src="$HOME/Development/src"
 # Add directories to $PATH if they exist
 #
 
-function add_to_path() { [[ -d $1 ]] && export PATH="$1:$PATH" }
+function add_to_path() { [[ -d $1 ]] && export PATH="$1:$PATH"; }
 
 add_to_path "${datasift}/chef/bin"      # Chef scripts
 add_to_path "$HOME/.gem/ruby/2.0.0/bin" # Executables installed by 'gem'
@@ -218,6 +218,8 @@ add_to_path "$HOME/.bin"                # Personal scripts
 # Plugins
 #
 
+source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
+
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
@@ -227,5 +229,3 @@ ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('knife block use production' 'fg=white,bold,bg=red')
-
-source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
