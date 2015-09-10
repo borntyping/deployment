@@ -17,3 +17,5 @@
     - travis
     - travis-lint
     - fpm
+    - middleman
+    - ruby-graphviz
