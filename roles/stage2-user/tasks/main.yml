@@ -52,6 +52,7 @@
     - gws
     - hub
     - tmux-attach
+    - wago
   tags:
     - bin
     - blink
