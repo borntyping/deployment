@@ -20,7 +20,7 @@
 
 - include: "tool-ack.yml tags=tools,ack"
 - include: "tool-blink1.yml tags=tools,blink1"
-- include: "tool-chefdk.yml tags=tools,chefdk"
+- include: "tool-chefdk.yml tags=tools,chefdk,chef"
 - include: "tool-docker.yml tags=tools,docker"
 - include: "tool-nix.yml tags=tools,nix"
 - include: "tool-git.yml tags=tools,git"

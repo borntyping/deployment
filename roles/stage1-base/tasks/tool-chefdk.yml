@@ -2,22 +2,34 @@
 # Installs the Chef Development Kit.
 #
 
+- name: "chefdk | set version"
+  set_fact: chefdk_version="0.7.0-1"
+
 - name: "chefdk | check if chefdk is installed"
   command: dpkg -s chefdk
-  register: dpkg_chefdk
-  failed_when: dpkg_chefdk.rc > 1
+  register: chefdk_dpkg
+  failed_when: chefdk_dpkg.rc > 1
   changed_when: no
+
+- name: "chefdk | check if chefdk should be installed"
+  set_fact: >
+    chefdk_install='{{ chefdk_dpkg.rc == 1 }}'
+
+- name: "chefdk | check if chefdk should be updated"
+  set_fact: >
+    chefdk_update='{{ chefdk_dpkg.rc == 0 and
+      'Version: %s' % chefdk_version not in chefdk_dpkg.stdout }}'
 
 - name: "chefdk | fetch package"
   get_url: >
-    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.6.0-1_amd64.deb
-    sha256sum=cd8c92b9649835100a81101a2476423a4da3145b1cbbacc845c8e21413115feb
-    dest=/tmp/chefdk_0.6.0-1_amd64.deb
-  when: dpkg_chefdk.rc == 1
+    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
+    sha256sum=58b2e95768427f479b2114e02c924af1c51ed6b98fce829b439cc90692c3ca64
+    dest=/tmp/chefdk_{{ chefdk_version }}_amd64.deb
+  when: chefdk_install or chefdk_update
   tags: ['slow']
 
 - name: "chefdk | install package"
-  apt: "deb=/tmp/chefdk_0.6.0-1_amd64.deb"
+  apt: "deb=/tmp/chefdk_{{ chefdk_version }}_amd64.deb"
   sudo: true
-  when: dpkg_chefdk.rc == 1
+  when: chefdk_install or chefdk_update
   tags: ['slow']
