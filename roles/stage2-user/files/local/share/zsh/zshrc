@@ -165,6 +165,10 @@ alias gca='git commit -v -a'            # Show diff in commit editor, commit all
 alias dct='ds-cookbook-test'
 alias dke='knife block use'
 
+alias blink-busy='blink1-tool --id all --rgb 250,0,0'
+alias blink-maybe='blink1-tool --id all --rgb 200,150,0'
+alias blink-free='blink1-tool --id all --rgb 0,150,0'
+
 alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
 
 # Send an alert with the status of the previous command
