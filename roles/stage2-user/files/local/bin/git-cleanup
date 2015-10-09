@@ -5,7 +5,7 @@ BRANCH=${1:-master}
 # Remove brances merged into the named branch.
 # The 'master' and 'develop' branches are never merged.
 git branch --merged "$BRANCH" | \
-    grep -v -e "$BRANCH" -e "develop" -e "master" |\
+    grep -v -e "$BRANCH" -e "develop" -e "master" -e "* " |\
     xargs --no-run-if-empty --max-args=1 -- git branch -d
 
 # Prune remote branches.
