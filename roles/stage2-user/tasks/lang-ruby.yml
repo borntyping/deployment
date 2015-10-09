@@ -11,12 +11,15 @@
   when: ansible_distribution in ['Debian']
 
 - name: install ruby packages
-  gem: 'state=latest name={{ item }} executable={{ gem }} user_install=yes'
+  gem:
+    state: latest
+    name: '{{ item }}'
+    executable: '{{ gem }}'
+    user_install: yes
   with_items:
+    - bundler
     - fpm
-    - github-pages
-    - middleman
-    - riemann-dash
+    - mdless
     - ruby-graphviz
     - travis
     - travis-lint
