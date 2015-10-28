@@ -6,7 +6,8 @@ Deploys dotfiles, configuration and packages to my machines using Ansible.
 Usage
 -----
 
-Download the repository, create an inventory file, and run the `./ansible-run` script.
+Download the repository, create an inventory file, and run the `./ansible-run`
+script.
 
 ### Installing ansible
 
@@ -29,7 +30,8 @@ cd deployment
 
 ### Create an inventory file
 
-Create an inventory file named `./inventory.conf`. An example inventory might look like this:
+Create an inventory file named `./inventory.conf`. An example inventory might
+look like this:
 
 ```
 [workstation]
@@ -39,7 +41,9 @@ localhost ansible_connection=local ansible_sudo_pass=EXAMPLE
 remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
 ```
 
-If you don't want to create an inventory file, and only want to configure the local machine, you can pass `--inventory=localhost,` as an argument to `./ansible-run`.
+If you don't want to create an inventory file, and only want to configure the
+local machine, you can pass `--inventory=localhost,` as an argument to
+`./ansible-run`.
 
 ### Run ansible
 
@@ -50,14 +54,17 @@ If you don't want to create an inventory file, and only want to configure the lo
 Bootstrapping a new server
 --------------------------
 
-If the OS was not created with a personal user, create one before running the above instructions:
+If the OS was not created with a personal user, create one before running the
+above instructions:
 
 ```bash
 adduser sam
 usermod -a -G sudo sam
 ```
 
-You can the either run Ansible from your workstation by adding a remote connection to the inventory, or directly on the machine you are bootstrapping. To run Ansible directly on the machine:
+You can the either run Ansible from your workstation by adding a remote
+connection to the inventory, or directly on the machine you are bootstrapping.
+To run Ansible directly on the machine:
 
 ```bash
 ansible-pull --url=git@github.com:borntyping/deployment.git -i localhost, -K site.yml
@@ -72,7 +79,18 @@ sudo passwd USER
 Development
 -----------
 
-Some dependencies are managed using [Peru](https://github.com/buildinspace/peru), which is installed by the `stage2-user` role. Once the development machine is bootstrapped you can run `peru reup` to update those files, which will fetch the lastest versions of the dependecies and copy them into this repository. Tasks that install these files are tagged with `peru`, so updating the deployed versions of those files can be done with `./ansible-run -t peru`.
+Some dependencies are managed using [Peru], which is installed by the
+`stage2-user` role. Once the development machine is bootstrapped you can run
+`peru reup` to update those files, which will fetch the lastest versions of the
+dependecies and copy them into this repository. Tasks that install these files
+are tagged with `peru`, so updating the deployed versions of those files can be
+done with `./ansible-run -t peru`.
+
+### Todo
+
+- [`devd`](http://corte.si/posts/devd/intro/index.html)
+
+[Peru]: https://github.com/buildinspace/peru
 
 Licence
 -------
