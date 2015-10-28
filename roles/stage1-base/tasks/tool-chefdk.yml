@@ -3,7 +3,9 @@
 #
 
 - name: "chefdk | set version"
-  set_fact: chefdk_version="0.7.0-1"
+  set_fact: >
+    chefdk_version="0.9.0-1"
+    chefdk_sha256sum="26cfeef1cca36038cd4bea7f9bd7c7146b66e0dd08fc6a8a4b713bbb913b2967"
 
 - name: "chefdk | check if chefdk is installed"
   command: dpkg -s chefdk
@@ -22,8 +24,8 @@
 
 - name: "chefdk | fetch package"
   get_url: >
-    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
-    sha256sum=58b2e95768427f479b2114e02c924af1c51ed6b98fce829b439cc90692c3ca64
+    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.9.0-1_amd64.deb
+    sha256sum={{ chefdk_sha256sum }}
     dest=/tmp/chefdk_{{ chefdk_version }}_amd64.deb
   when: chefdk_install or chefdk_update
   tags: ['slow']
@@ -33,3 +35,18 @@
   sudo: true
   when: chefdk_install or chefdk_update
   tags: ['slow']
+
+- name: "chefdk | fetch patch for kitchen"
+  get_url: >
+    url=https://patch-diff.githubusercontent.com/raw/test-kitchen/test-kitchen/pull/824.diff
+    dest=/tmp/kitchen_824.patch
+    validate_certs=False
+  tags: ['kitchen']
+
+- name: "chefdk | patch kitchen"
+  patch: >
+    src=/tmp/kitchen_824.patch
+    basedir=/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2
+    strip=1
+  sudo: true
+  tags: ['kitchen']
