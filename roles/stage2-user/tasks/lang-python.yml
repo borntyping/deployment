@@ -38,3 +38,4 @@
     - v
     - httpie
     - restructuredtext-lint
+    - youtube_dl
