@@ -19,7 +19,6 @@
   with_items:
     - bundler
     - fpm
-    - mdless
     - ruby-graphviz
     - travis
     - travis-lint
