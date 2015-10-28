@@ -11,31 +11,16 @@
     - postmkvirtualenv
 
 #
-# Install pipsi - https://github.com/mitsuhiko/pipsi
-#
-# This does much the same things as the `get-pipsi.py` script
+# Install python packages
 #
 
-- name: pipsi | create virtualenv
-  command: 'virtualenv {{ pipsi_venv }}'
-  args: {'creates': '{{ pipsi_venv }}/bin/python'}
-
-- name: pipsi | install pipsi
-  pip: 'name=pipsi state=latest virtualenv={{ pipsi_venv }}'
-
-- name: pipsi | create pipsi bin directory
-  file: 'name={{ pipsi_bin }} state=directory'
-
-- name: pipsi | link pipsi
-  file: 'src={{ pipsi_venv }}/bin/pipsi dest={{ pipsi_bin }}/pipsi state=link'
-
-- name: pipsi | install python tools with pipsi
-  pipsi: "name={{ item }} state=present"
+- name: python | install packages
+  pip: "name={{ item }} state=present executable=pip3 extra_args=--user"
   with_items:
-    - tox
-    - fig
-    - sphinx
-    - v
     - httpie
-    - restructuredtext-lint
+    - pex
+    - tox
+    - v
+    - watch-fs
+    - wheel
     - youtube_dl

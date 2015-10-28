@@ -5,7 +5,7 @@
 # be deployed to.
 #
 
-- include: "lang-python.yml tags=python,pipsi"
+- include: "lang-python.yml tags=python,virtualenv"
 - include: "lang-ruby.yml tags=ruby"
 - include: "lang-zsh.yml tags=zsh,shell"
 - include: "tool-peru.yml tags=peru"
