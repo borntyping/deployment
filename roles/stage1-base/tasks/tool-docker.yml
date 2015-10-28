@@ -3,26 +3,20 @@
 #
 
 - name: docker | add repository key
-  apt_key: url=https://get.docker.io/gpg
+  apt_key: >
+    id=58118E89F3A912897C070ADBF76221572C52609D
+    keyserver=hkp://pgp.mit.edu:80
   sudo: true
 
 - name: docker | configure repository
-  apt_repository: repo='deb http://get.docker.io/ubuntu docker main'
+  apt_repository: >
+    repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main'
   sudo: true
 
 - name: docker | install
-  apt: 'pkg=lxc-docker state=latest'
+  apt: 'pkg={{ item }} state=latest'
   sudo: yes
-
-# # https://github.com/docker/docker/issues/4734
-# - name: docker | install useful packages
-#   apt: 'pkg={{ item }} state=latest'
-#   sudo: yes
-#   with_items:
-#     - apparmor
-#     - cgroup-lite
-
-# # This is only needed for the docker.io package distributed by Ubuntu
-# - name: docker | add user to docker group
-#   user: 'name={{ ansible_ssh_user }} groups=docker append=true'
-#   sudo: yes
+  with_items:
+    - docker-engine
+    - apparmor
+    - cgroup-lite
