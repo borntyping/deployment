@@ -61,7 +61,7 @@ rule hub-executable:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 3dc574190071ef59054f6d693132410b37aa3ae4
+  rev: 59fbdda64c21dd9e911329f31fbbedc69123865b
   pick:
     - zsh-syntax-highlighting.zsh
     - highlighters/main/main-highlighter.zsh
