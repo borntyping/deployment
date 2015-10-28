@@ -196,6 +196,11 @@ export EDITOR=nano
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
 export SSH_RUN_SUDO_KEYRING=1
 
+# Use 256color when running in terminator
+if [[ $COLORTERM = gnome-terminal && ! $TERM = screen-256color ]]; then
+    TERM=xterm-256color
+fi
+
 #
 # Named directories
 #
