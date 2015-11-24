@@ -76,6 +76,22 @@ Once ansible has run, set passwords for any additional users:
 sudo passwd USER
 ```
 
+Post-ansible setup
+------------------
+
+Ansible sets up everything possible automatically, but there are still some
+things that must be done manually on a new workstation:
+
+- Login to [Firefox Sync].
+- Finish the [Dropbox] install and login.
+- Register Sublime Text and install [Package Control].
+- Set keyboard shortcuts (workspace switching).
+
+There are also some things this repository doesn't do yet:
+
+- Install [Rust].
+- Install Rust development tools (rustfmt, racer).
+
 Development
 -----------
 
@@ -85,12 +101,6 @@ Some dependencies are managed using [Peru], which is installed by the
 dependecies and copy them into this repository. Tasks that install these files
 are tagged with `peru`, so updating the deployed versions of those files can be
 done with `./ansible-run -t peru`.
-
-### Todo
-
-- [`devd`](http://corte.si/posts/devd/intro/index.html)
-
-[Peru]: https://github.com/buildinspace/peru
 
 Licence
 -------
@@ -116,3 +126,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[Peru]: https://github.com/buildinspace/peru
