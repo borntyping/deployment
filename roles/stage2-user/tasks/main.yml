@@ -23,7 +23,9 @@
     - htoprc
     - nanorc
     - tmux.conf
-  tags: dotfiles
+  tags:
+    - dotfiles
+    - git
 
 #
 # Installs scripts to ~/.local/bin
@@ -47,7 +49,6 @@
     - git-cleanup
     - git-hub
     - git-overwritten
-    - git-sync
     - git-tag-version
     - gws
     - hub

@@ -29,11 +29,9 @@
     graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-    # Show logs in a pretty format
+    sync = !git pull && git push
     hist = log --graph --pretty=graph --date=short --decorate -n 10
     history = log --graph --pretty=graph --date=short --decorate
-
-    # List ignored files
     ignored = ls-files -o -i --exclude-standard
 
 [pager]
