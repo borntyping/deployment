@@ -82,15 +82,16 @@ Post-ansible setup
 Ansible sets up everything possible automatically, but there are still some
 things that must be done manually on a new workstation:
 
-- Login to [Firefox Sync].
-- Finish the [Dropbox] install and login.
+- Finish the proprietary [Dropbox] install by starting the client.
 - Register Sublime Text and install [Package Control].
 - Set keyboard shortcuts (workspace switching).
+- Setup a [Whatsapp Web] client using Chrome.
+- Login to [Firefox Sync], [Steam] and [Dropbox].
 
 There are also some things this repository doesn't do yet:
 
-- Install [Rust].
-- Install Rust development tools (rustfmt, racer).
+- Install [Rust] and development tools (rustfmt, racer).
+- Install Chrome.
 
 Development
 -----------
