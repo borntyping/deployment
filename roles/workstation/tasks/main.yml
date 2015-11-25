@@ -2,13 +2,13 @@
 # Install software only useful on a workstation or non-headless machine
 #
 
-- include: "app-ansible.yml tags=ansible"
+- include: "app-slack.yml tags=slack"
 - include: "app-spotify.yml tags=spotify"
 - include: "app-sublime.yml tags=sublime"
 - include: "app-terminator.yml tags=terminator"
 
 - name: install personal software
-  apt: pkg={{ item }} state=latest
+  apt: "pkg={{ item }} state=latest"
   sudo: yes
   with_items:
     - firefox
@@ -16,15 +16,14 @@
     - gparted
 
 - name: install dropbox
-  apt: pkg={{ item }} state=latest
+  apt: "pkg={{ item }} state=latest"
   sudo: yes
   with_items:
     - dropbox
     - nemo-dropbox
-  when: ansible_distribution == 'Linuxmint'
 
 - name: install development software
-  apt: pkg={{ item }} state=latest
+  apt: "pkg={{ item }} state=latest"
   sudo: yes
   with_items:
     - git-cola
@@ -32,7 +31,7 @@
     - meld
 
 - name: install games and steam
-  apt: pkg={{ item }} state=latest
+  apt: "pkg={{ item }} state=latest"
   sudo: yes
   with_items:
     - steam-launcher

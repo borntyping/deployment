@@ -1,31 +1,4 @@
 #
-# Install programming languages and packages from their repositories
-#
-
-- include: "lang-go.yml tags=languages,go"
-- include: "lang-node.yml tags=languages,node"
-- include: "lang-python.yml tags=languages,python"
-- include: "lang-python-deadsnakes.yml tags=languages,python,deadsnakes"
-- include: "lang-ruby.yml tags=languages,ruby"
-
-#
-# Install services
-#
-
-- include: "service-supervisor.yml tags=services,supervisor"
-
-#
-# Install development tools
-#
-
-- include: "tool-ack.yml tags=tools,ack"
-- include: "tool-blink1.yml tags=tools,blink1"
-- include: "tool-chefdk.yml tags=tools,chefdk,chef"
-- include: "tool-docker.yml tags=tools,docker"
-- include: "tool-nix.yml tags=tools,nix"
-- include: "tool-git.yml tags=tools,git"
-
-#
 # Install other packages
 #
 
@@ -43,3 +16,31 @@
   tags:
     - bin
     - util
+
+#
+# Install programming languages and packages from their repositories
+#
+
+- include: "lang-go.yml tags=languages,go"
+- include: "lang-node.yml tags=languages,node"
+- include: "lang-python-deadsnakes.yml tags=languages,python,deadsnakes"
+- include: "lang-python.yml tags=languages,python"
+- include: "lang-ruby.yml tags=languages,ruby"
+
+#
+# Install services
+#
+
+- include: "service-supervisor.yml tags=services,supervisor"
+
+#
+# Install development tools
+#
+
+- include: "tool-ack.yml tags=tools,ack"
+- include: "tool-ansible.yml tags=tools,ansible"
+- include: "tool-blink1.yml tags=tools,blink1"
+- include: "tool-chefdk.yml tags=tools,chefdk,chef"
+- include: "tool-docker.yml tags=tools,docker"
+- include: "tool-git.yml tags=tools,git"
+- include: "tool-nix.yml tags=tools,nix"
