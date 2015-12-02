@@ -22,3 +22,9 @@
     - ruby-graphviz
     - travis
     - travis-lint
+
+- name: bundler | directory
+  file: 'name={{ ansible_env.HOME }}/.bundle state=directory'
+
+- name: bundler | config
+  template: 'src=bundler_config dest={{ ansible_env.HOME }}/.bundle/config'

@@ -1,0 +1,4 @@
+---
+BUNDLE_PATH: '~/.gem/bundler'
+BUNDLE_GEM__COC: 'true'
+BUNDLE_GEM__TEST: rspec
