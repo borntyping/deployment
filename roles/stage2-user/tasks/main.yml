@@ -21,11 +21,13 @@
     - gitconfig
     - gitignore
     - htoprc
+    - kitchen.local.yml
     - nanorc
     - tmux.conf
   tags:
     - dotfiles
     - git
+    - chefdk
 
 #
 # Installs scripts to ~/.local/bin

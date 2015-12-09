@@ -3,9 +3,7 @@
 #
 
 - name: "chefdk | set version"
-  set_fact: >
-    chefdk_version="0.9.0-1"
-    chefdk_sha256sum="26cfeef1cca36038cd4bea7f9bd7c7146b66e0dd08fc6a8a4b713bbb913b2967"
+  set_fact: chefdk_version="0.10.0-1"
 
 - name: "chefdk | check if chefdk is installed"
   command: dpkg -s chefdk
@@ -24,16 +22,15 @@
 
 - name: "chefdk | fetch package"
   get_url: >
-    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.9.0-1_amd64.deb
-    sha256sum={{ chefdk_sha256sum }}
+    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_{{ chefdk_version }}_amd64.deb
     dest=/tmp/chefdk_{{ chefdk_version }}_amd64.deb
-  when: chefdk_install or chefdk_update
+  when: (chefdk_install or chefdk_update)
   tags: ['slow']
 
 - name: "chefdk | install package"
   apt: "deb=/tmp/chefdk_{{ chefdk_version }}_amd64.deb"
   sudo: true
-  when: chefdk_install or chefdk_update
+  when: (chefdk_install or chefdk_update)
   tags: ['slow']
 
 - name: "chefdk | fetch patch for kitchen"
