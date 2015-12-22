@@ -38,3 +38,9 @@
     - crawl-tiles
     - mumble
 
+- name: configure XDG directories
+  template: >
+    dest={{ ansible_env.HOME }}/.config/user-dirs.dirs
+    src=user-dirs.dirs
+  tags:
+  - xdg
