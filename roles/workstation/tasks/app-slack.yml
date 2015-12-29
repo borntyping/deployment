@@ -7,3 +7,7 @@
     name=slack
     url='deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main'
     key=D59097AB
+
+- name: slack | install package
+  apt: pkg=slack state=latest
+  sudo: yes

@@ -2,22 +2,8 @@
 # Installs the Nix package manager
 #
 
-- name: "nix | check if nix is installed"
-  command: dpkg -s nix
-  register: dpkg_nix
-  failed_when: dpkg_nix.rc > 1
-  changed_when: no
-
-- name: "nix | fetch package"
-  get_url: >
-    url=http://hydra.nixos.org/build/23017497/download/1/nix_1.9-1_amd64.deb
-    sha256sum=3410f215734d0a2c0b6f946e607e6e16272e77bfe3efdb88611cabd1ad165671
-    dest=/tmp/nix_1.9-1_amd64.deb
-  when: dpkg_nix.rc == 1
-  tags: ['slow']
-
-- name: "nix | install package"
-  apt: "deb=/tmp/nix_1.9-1_amd64.deb"
-  sudo: true
-  when: dpkg_nix.rc == 1
-  tags: ['slow']
+- include: >
+    ../../../tasks/deb.yml
+    name=nix
+    version=1.10.0
+    url=http://hydra.nixos.org/build/25489743/download/1/nix_1.10-1_amd64.deb

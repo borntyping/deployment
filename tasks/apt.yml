@@ -18,7 +18,3 @@
   apt: 'update_cache=yes'
   when: apt_repository.changed or apt_repository_key.changed
   sudo: yes
-
-- name: "{{ name }} | install package"
-  apt: 'pkg={{ name }} state=latest'
-  sudo: yes

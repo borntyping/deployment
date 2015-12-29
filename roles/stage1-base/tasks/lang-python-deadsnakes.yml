@@ -1,29 +1,12 @@
 #
 # Install Python 2.6 and 3.3 using the deadsnakes PPA
 #
-# Install the deadsnakes PPA with:
-#
-#   apt-add-repository --yes ppa:fkrull/deadsnakes
-#   apt-get update
-#
 
-- name: python-deadsnakes | add repository
-  apt_repository: >
-    repo='deb http://ppa.launchpad.net/fkrull/deadsnakes/ubuntu trusty main'
-    state=present
-  register: deadsnakes_repository
-  sudo: yes
-
-- name: python-deadsnakes | add repository key
-  apt_key: id=D2C19886 keyserver=hkp://keyserver.ubuntu.com:80
-  register: deadsnakes_repository_key
-  sudo: yes
-
-- name: python-deadsnakes | update repositories
-  apt: 'update_cache=yes'
-  when: deadsnakes_repository.changed or deadsnakes_repository_key.changed
-  sudo: yes
-
+- include: >
+    ../../../tasks/apt.yml
+    name=python-deadsnakes
+    url='deb http://ppa.launchpad.net/fkrull/deadsnakes/ubuntu trusty main'
+    key=D2C19886
 
 - name: python-deadsnakes | install python2.6 and python3.3 from deadsnakes
   apt: 'pkg={{ item }} state=latest'

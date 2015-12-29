@@ -1,24 +1,24 @@
 #
-# Install {{ name }}
+# Fetch {{ url }} and use it to install {{ name }}.
 #
 
-- name: "{{ name }} | set version to {{ version }}"
+- name: "{{ name }} | version {{ version }}"
   set_fact: "deb_version={{ version }}"
 
-- name: "{{ name }} | check if {{ name }} is installed"
+- name: "{{ name }} | query dpkg"
   command: "dpkg -s {{ name }}"
   register: "deb_dpkg"
   failed_when: "deb_dpkg.rc > 1"
   changed_when: no
 
-- name: "{{ name }} | check if {{ name }} should be installed"
+- name: "{{ name }} | check if {{ name }} is installed"
   set_fact: >
     deb_install='{{
       (not deb_dpkg.get('skipped', False)) and
       deb_dpkg.rc == 1
     }}'
 
-- name: "{{ name }} | check if {{ name }} should be updated"
+- name: "{{ name }} | check if {{ name }} is outdated"
   set_fact: >
     deb_update='{{
       (not deb_dpkg.get('skipped', False)) and

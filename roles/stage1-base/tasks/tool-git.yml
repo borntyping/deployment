@@ -2,22 +2,11 @@
 # Install git.
 #
 
-- name: git | add repository
-  apt_repository: >
-    repo='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
-    state=present
-  register: git_ppa
-  sudo: yes
-
-- name: git | add repository key
-  apt_key: id=E1DF1F24 keyserver=hkp://keyserver.ubuntu.com:80
-  register: git_ppa_key
-  sudo: yes
-
-- name: git | update repositories
-  apt: update_cache=yes
-  when: git_ppa.changed or git_ppa_key.changed
-  sudo: yes
+- include: >
+    ../../../tasks/apt.yml
+    name=git
+    url='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
+    key=E1DF1F24
 
 - name: git | install
   apt: pkg=git state=latest

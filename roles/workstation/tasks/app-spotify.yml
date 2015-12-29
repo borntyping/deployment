@@ -4,6 +4,10 @@
 
 - include: >
     ../../../tasks/apt.yml
-    name=spotify-client
+    name=spotify
     url='deb http://repository.spotify.com stable non-free'
     key=D2C19886
+
+- name: spotify | install package
+  apt: pkg=spotify-client state=latest
+  sudo: yes

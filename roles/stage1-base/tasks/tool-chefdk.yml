@@ -2,36 +2,11 @@
 # Installs the Chef Development Kit.
 #
 
-- name: "chefdk | set version"
-  set_fact: chefdk_version="0.10.0-1"
-
-- name: "chefdk | check if chefdk is installed"
-  command: dpkg -s chefdk
-  register: chefdk_dpkg
-  failed_when: chefdk_dpkg.rc > 1
-  changed_when: no
-
-- name: "chefdk | check if chefdk should be installed"
-  set_fact: >
-    chefdk_install='{{ chefdk_dpkg.rc == 1 }}'
-
-- name: "chefdk | check if chefdk should be updated"
-  set_fact: >
-    chefdk_update='{{ chefdk_dpkg.rc == 0 and
-      'Version: %s' % chefdk_version not in chefdk_dpkg.stdout }}'
-
-- name: "chefdk | fetch package"
-  get_url: >
-    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_{{ chefdk_version }}_amd64.deb
-    dest=/tmp/chefdk_{{ chefdk_version }}_amd64.deb
-  when: (chefdk_install or chefdk_update)
-  tags: ['slow']
-
-- name: "chefdk | install package"
-  apt: "deb=/tmp/chefdk_{{ chefdk_version }}_amd64.deb"
-  sudo: true
-  when: (chefdk_install or chefdk_update)
-  tags: ['slow']
+- include: >
+    ../../../tasks/deb.yml
+    name=chefdk
+    version=0.10.0
+    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.10.0-1_amd64.deb
 
 - name: "chefdk | fetch patch for kitchen"
   get_url: >
