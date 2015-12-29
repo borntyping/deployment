@@ -1,37 +1,9 @@
 #
-# Install Slack
+# Install Slack desktop client
 #
 
-- name: "slack | set version"
-  set_fact: >
-    slack_version="0.9.0-1"
-    slack_sha256sum="f7a10e7b565e2251f63bff879e9a31728af374c5e0aa36b577d3c542a3e25760"
-
-- name: "slack | check if slack is installed"
-  command: dpkg -s slack
-  register: slack_dpkg
-  failed_when: slack_dpkg.rc > 1
-  changed_when: no
-
-- name: "slack | check if slack should be installed"
-  set_fact: >
-    slack_install='{{ slack_dpkg.rc == 1 }}'
-
-- name: "slack | check if slack should be updated"
-  set_fact: >
-    slack_update='{{ slack_dpkg.rc == 0 and
-      'Version: %s' % slack_version not in slack_dpkg.stdout }}'
-
-- name: "slack | fetch package"
-  get_url: >
-    url=https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.6-amd64.deb
-    sha256sum={{ slack_sha256sum }}
-    dest=/tmp/slack-desktop-{{ slack_version }}-amd64.deb
-  when: slack_install or slack_update
-  tags: ['slow']
-
-- name: "slack | install package"
-  apt: "deb=/tmp/slack-desktop-{{ slack_version }}-amd64.deb"
-  sudo: true
-  when: slack_install or slack_update
-  tags: ['slow']
+- include: >
+    ../../../tasks/apt.yml
+    name=slack
+    url='deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main'
+    key=D59097AB

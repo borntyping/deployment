@@ -1,0 +1,24 @@
+#
+# Configure a repository and install a package from it
+#
+
+- name: "{{ name }} | add repository"
+  apt_repository: >
+    repo='{{ url }}'
+    state=present
+  register: apt_repository
+  sudo: yes
+
+- name: "{{ name }} | add repository key"
+  apt_key: "id={{ key }} keyserver=hkp://keyserver.ubuntu.com:80"
+  register: apt_repository_key
+  sudo: yes
+
+- name: "{{ name }} | update repositories"
+  apt: 'update_cache=yes'
+  when: apt_repository.changed or apt_repository_key.changed
+  sudo: yes
+
+- name: "{{ name }} | install package"
+  apt: 'pkg={{ name }} state=latest'
+  sudo: yes

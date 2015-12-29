@@ -2,23 +2,8 @@
 # Spotify Linux preview
 #
 
-- name: spotify | add repository
-  apt_repository: >
-    repo='deb http://repository.spotify.com stable non-free'
-    state=present
-  register: spotify_repository
-  sudo: yes
-
-- name: spotify | add repository key
-  apt_key: id=D2C19886 keyserver=hkp://keyserver.ubuntu.com:80
-  register: spotify_repository_key
-  sudo: yes
-
-- name: spotify | update repositories
-  apt: 'update_cache=yes'
-  when: spotify_repository.changed or spotify_repository_key.changed
-  sudo: yes
-
-- name: spotify | install package
-  apt: 'pkg=spotify-client state=installed'
-  sudo: yes
+- include: >
+    ../../../tasks/apt.yml
+    name=spotify-client
+    url='deb http://repository.spotify.com stable non-free'
+    key=D2C19886

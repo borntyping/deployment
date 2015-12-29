@@ -1,0 +1,36 @@
+#
+# Install {{ name }}
+#
+
+- name: "{{ name }} | set version to {{ version }}"
+  set_fact: "deb_version={{ version }}"
+
+- name: "{{ name }} | check if {{ name }} is installed"
+  command: "dpkg -s {{ name }}"
+  register: "deb_dpkg"
+  failed_when: "deb_dpkg.rc > 1"
+  changed_when: no
+
+- name: "{{ name }} | check if {{ name }} should be installed"
+  set_fact: >
+    deb_install='{{
+      (not deb_dpkg.get('skipped', False)) and
+      deb_dpkg.rc == 1
+    }}'
+
+- name: "{{ name }} | check if {{ name }} should be updated"
+  set_fact: >
+    deb_update='{{
+      (not deb_dpkg.get('skipped', False)) and
+      deb_dpkg.rc == 0 and
+      'Version: %s' % deb_version not in deb_dpkg.stdout
+    }}'
+
+- name: "{{ name }} | fetch package"
+  get_url: "url={{ url }} dest=/tmp/{{ name }}.deb"
+  when: "deb_install or deb_update"
+
+- name: "{{ name }} | install package"
+  apt: "deb=/tmp/{{ name }}.deb"
+  sudo: true
+  when: "deb_install or deb_update"
