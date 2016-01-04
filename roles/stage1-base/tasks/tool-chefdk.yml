@@ -13,6 +13,7 @@
     url=https://patch-diff.githubusercontent.com/raw/test-kitchen/test-kitchen/pull/824.diff
     dest=/tmp/kitchen_824.patch
     validate_certs=False
+  always_run: yes
   tags: ['kitchen']
 
 - name: "chefdk | patch kitchen"
