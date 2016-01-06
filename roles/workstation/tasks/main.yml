@@ -3,6 +3,7 @@
 #
 
 - include: "app-atom.yml tags=atom"
+- include: "app-jetbrains.yml tags=jetbrains"
 - include: "app-slack.yml tags=slack"
 - include: "app-spotify.yml tags=spotify"
 - include: "app-sublime.yml tags=sublime"

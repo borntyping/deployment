@@ -1,0 +1,19 @@
+- name: "jetbrains | create directory"
+  file: name=/opt/jetbrains state=directory
+  sudo: yes
+
+- name: "jetbrains | rubymine | fetch archive"
+  get_url: >
+    url=https://download.jetbrains.com/ruby/RubyMine-8.0.3.tar.gz
+    dest=/tmp/RubyMine.tar.gz
+    validate_certs=False
+  tags:
+    - rubymine
+
+- name: "jetbrains | rubymine | unpack archive"
+  unarchive: >
+    src=/tmp/RubyMine.tar.gz
+    dest=/opt/jetbrains
+  sudo: yes
+  tags:
+    - rubymine
