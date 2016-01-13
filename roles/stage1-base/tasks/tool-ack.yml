@@ -4,7 +4,7 @@
 
 - name: ack | install
   apt: 'pkg=ack-grep state=latest'
-  sudo: yes
+  become: yes
 
 - name: ack | check if /usr/bin/ack exists
   stat: path=/usr/bin/ack
@@ -13,4 +13,4 @@
 - name: ack | link ack-grep to ack-grep
   command: dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
   when: not ack.stat.exists
-  sudo: yes
+  become: yes

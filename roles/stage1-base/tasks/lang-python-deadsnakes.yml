@@ -2,7 +2,8 @@
 # Install Python 2.6 and 3.3 using the deadsnakes PPA
 #
 
-- include: >
+- name: python-deadsnakes | add repository
+  include: >
     ../../../tasks/apt.yml
     name=python-deadsnakes
     url='deb http://ppa.launchpad.net/fkrull/deadsnakes/ubuntu trusty main'
@@ -10,7 +11,7 @@
 
 - name: python-deadsnakes | install python2.6 and python3.3 from deadsnakes
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - python2.6
     - python2.6-dev

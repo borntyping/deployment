@@ -6,7 +6,7 @@
 
 - name: install python packages
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - python
     - python-pip
@@ -22,7 +22,7 @@
 
 - name: virtualenv | install packages
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - python-virtualenv
     - virtualenvwrapper

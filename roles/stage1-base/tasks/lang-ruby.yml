@@ -8,7 +8,7 @@
 
 - name: install ruby2.0
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - ruby2.0
     - ruby2.0-dev
@@ -17,7 +17,7 @@
 
 - name: install ruby2.1
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - ruby2.1
     - ruby2.1-dev

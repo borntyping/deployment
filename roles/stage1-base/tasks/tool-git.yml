@@ -2,7 +2,8 @@
 # Install git.
 #
 
-- include: >
+- name: git | add repository
+  include: >
     ../../../tasks/apt.yml
     name=git
     url='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
@@ -10,7 +11,7 @@
 
 - name: git | install
   apt: pkg=git state=latest
-  sudo: yes
+  become: yes
 
 # - name: git | link git-subtree
 #   file: >
@@ -18,4 +19,4 @@
 #     dest=/usr/local/bin/git-subtree
 #     state=link
 #     force=yes
-#   sudo: yes
+#   become: yes

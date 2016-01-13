@@ -5,13 +5,25 @@
 # be deployed to.
 #
 
-- include: "lang-python.yml tags=python,virtualenv"
-- include: "lang-ruby.yml tags=ruby"
-- include: "lang-zsh.yml tags=zsh,shell"
-- include: "tool-peru.yml tags=peru"
+- include: lang-python.yml
+  tags:
+    - python
+    - virtualenv
+- include: lang-ruby.yml
+  tags:
+    - ruby
+- include: lang-zsh.yml
+  tags:
+    - zsh
+    - shell
+- include: tool-peru.yml
+  tags:
+    - peru
 
 - name: generate ssh key
-  user: 'name={{ ansible_ssh_user }} generate_ssh_key=true'
+  user: 'name={{ ansible_env.USER }} generate_ssh_key=true'
+  tags:
+    - ssh
 
 - name: configure dotfiles
   template: >
@@ -22,6 +34,7 @@
     - gitignore
     - htoprc
     - kitchen.local.yml
+    - multitailrc
     - nanorc
     - tmux.conf
   tags:

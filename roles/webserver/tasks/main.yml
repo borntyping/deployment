@@ -6,7 +6,7 @@
     generate_ssh_key=true
     groups=sudo
     append=true
-  sudo: yes
+  become: yes
   with_dict: users
 
 - name: create user www paths
@@ -15,20 +15,22 @@
     owner={{ item }}
     group={{ item }}
     state=directory
-  sudo: yes
+  become: yes
   with_items: users.keys()
 
-- include: 'site-borntyping.yml tags=sites,site-borntyping'
-- include: 'site-eightbitgoggles.yml tags=sites,site-8bitgoggles'
+- include: site-borntyping.yml
+  tags: ['sites', 'site-borntyping']
+- include: site-eightbitgoggles.yml
+  tags: ['sites', 'site-8bitgoggles']
 
 - name: install nginx
   apt: pkg=nginx state=latest
-  sudo: yes
+  become: yes
   tags:
     - nginx
 
 - name: configure sites
-  sudo: yes
+  become: yes
   template: >
     src=site-{{ item }}.conf
     dest=/etc/nginx/sites-available/{{ item }}.conf
@@ -40,7 +42,7 @@
     - nginx
 
 - name: enable sites
-  sudo: yes
+  become: yes
   file: >
     src=/etc/nginx/sites-available/{{ item }}.conf
     dest=/etc/nginx/sites-enabled/{{ item }}.conf
@@ -54,6 +56,6 @@
 - name: restart nginx
   when: nginx_config.changed or nginx_enabled_sites.changed
   service: name=nginx state=restarted
-  sudo: yes
+  become: yes
   tags:
     - nginx

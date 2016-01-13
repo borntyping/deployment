@@ -1,0 +1,12 @@
+colorscheme:log
+cs_re:green,,bold:....-..-.. ..:..:..
+cs_re:cyan,,bold:\[|\]
+cs_re:red,,bold:FATAL
+cs_re:red:ERROR
+cs_re:yellow:WARN
+cs_re:green:INFO
+cs_re:blue,,bold:DEBUG
+cs_re_s:red,,bold:\[FATAL\] (.*)
+cs_re_s:red:\[ERROR\] (.*)
+cs_re_s:yellow:\[WARN\] (.*)
+cs_re_s:green,,bold:\[DEBUG\] (.*)

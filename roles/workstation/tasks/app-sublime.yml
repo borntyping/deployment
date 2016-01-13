@@ -1,6 +1,6 @@
 - name: sublime | install
   apt: "pkg=sublime-text state=latest"
-  sudo: yes
+  become: yes
 
 - name: sublime | create sublime configuration directories
   file: "path='{{ item }}' state=directory"

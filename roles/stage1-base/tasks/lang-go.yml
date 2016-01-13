@@ -4,4 +4,4 @@
 
 - name: go | install
   apt: 'pkg=golang state=latest'
-  sudo: yes
+  become: yes

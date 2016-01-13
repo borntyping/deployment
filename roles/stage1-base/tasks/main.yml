@@ -4,15 +4,16 @@
 
 - name: install utility packages
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
+    - aptitude
     - htop
+    - jq
+    - multitail
     - nano
+    - realpath
     - tmux
     - tree
-    - aptitude
-    - realpath
-    - jq
   tags:
     - bin
     - util
@@ -21,26 +22,52 @@
 # Install programming languages and packages from their repositories
 #
 
-- include: "lang-go.yml tags=languages,go"
-- include: "lang-node.yml tags=languages,node"
-- include: "lang-python-deadsnakes.yml tags=languages,python,deadsnakes"
-- include: "lang-python.yml tags=languages,python"
-- include: "lang-ruby.yml tags=languages,ruby"
+- name: go
+  include: lang-go.yml
+  tags: ['languages', 'go']
+- name: node
+  include: lang-node.yml
+  tags: ['languages', 'node']
+- name: python
+  include: lang-python-deadsnakes.yml
+  tags: ['languages', 'python', 'deadsnakes']
+- name: python
+  include: lang-python.yml
+  tags: ['languages', 'python']
+- name: ruby
+  include: lang-ruby.yml
+  tags: ['languages', 'ruby']
 
 #
 # Install services
 #
 
-- include: "service-supervisor.yml tags=services,supervisor"
+- name: supervisor
+  include: service-supervisor.yml
+  tags: ['services', 'supervisor']
 
 #
 # Install development tools
 #
 
-- include: "tool-ack.yml tags=tools,ack"
-- include: "tool-ansible.yml tags=tools,ansible"
-- include: "tool-blink1.yml tags=tools,blink1"
-- include: "tool-chefdk.yml tags=tools,chefdk,chef"
-- include: "tool-docker.yml tags=tools,docker"
-- include: "tool-git.yml tags=tools,git"
-- include: "tool-nix.yml tags=tools,nix"
+- name: ack
+  include: tool-ack.yml
+  tags: ['tools', 'ack']
+- name: ansible
+  include: tool-ansible.yml
+  tags: ['tools', 'ansible']
+- name: blink1
+  include: tool-blink1.yml
+  tags: ['tools', 'blink1']
+- name: chefdk
+  include: tool-chefdk.yml
+  tags: ['tools', 'chefdk', 'chef']
+- name: docker
+  include: tool-docker.yml
+  tags: ['tools', 'docker']
+- name: git
+  include: tool-git.yml
+  tags: ['tools', 'git']
+- name: nix
+  include: tool-nix.yml
+  tags: ['tools', 'nix']

@@ -2,7 +2,8 @@
 # Ansible
 #
 
-- include: >
+- name: ansible | add repository
+  include: >
     ../../../tasks/apt.yml
     name=ansible
     url='deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main'
@@ -10,4 +11,4 @@
 
 - name: install ansible
   apt: pkg=ansible state=latest
-  sudo: yes
+  become: yes

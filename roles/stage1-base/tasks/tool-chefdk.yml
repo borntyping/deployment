@@ -2,7 +2,8 @@
 # Installs the Chef Development Kit.
 #
 
-- include: >
+- name: chefdk | install pacakge
+  include: >
     ../../../tasks/deb.yml
     name=chefdk
     version=0.10.0
@@ -21,5 +22,5 @@
     src=/tmp/kitchen_824.patch
     basedir=/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2
     strip=1
-  sudo: true
+  become: yes
   tags: ['kitchen']

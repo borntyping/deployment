@@ -10,4 +10,4 @@
 
 - name: spotify | install package
   apt: pkg=spotify-client state=latest
-  sudo: yes
+  become: yes

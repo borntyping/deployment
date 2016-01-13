@@ -3,7 +3,8 @@
 #
 # keyserver=hkp://pgp.mit.edu:80
 
-- include: >
+- name: docker | add repository
+  include: >
     ../../../tasks/apt.yml
     name=docker
     url='deb https://apt.dockerproject.org/repo ubuntu-trusty main'
@@ -11,7 +12,7 @@
 
 - name: docker | install
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - docker-engine
     - apparmor

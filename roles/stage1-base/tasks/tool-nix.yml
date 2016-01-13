@@ -2,7 +2,8 @@
 # Installs the Nix package manager
 #
 
-- include: >
+- name: nix | install package
+  include: >
     ../../../tasks/deb.yml
     name=nix
     version=1.10.0

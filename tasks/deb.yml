@@ -23,7 +23,7 @@
     deb_update='{{
       (not deb_dpkg.get('skipped', False)) and
       deb_dpkg.rc == 0 and
-      'Version: %s' % deb_version not in deb_dpkg.stdout
+      "Version: %s" % deb_version not in deb_dpkg.stdout
     }}'
 
 - name: "{{ name }} | fetch package"
@@ -32,5 +32,5 @@
 
 - name: "{{ name }} | install package"
   apt: "deb=/tmp/{{ name }}.deb"
-  sudo: true
+  become: yes
   when: "deb_install or deb_update"

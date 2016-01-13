@@ -4,7 +4,7 @@
 
 - name: node | install nodejs
   apt: 'pkg={{ item }} state=latest'
-  sudo: yes
+  become: yes
   with_items:
     - nodejs
     - nodejs-legacy
@@ -12,5 +12,5 @@
 
 # - name: node | install packages
 #   npm: 'name={{ item }} global=yes'
-#   sudo: yes
+#   become: yes
 #   with_items:

@@ -10,4 +10,4 @@
 
 - name: slack | install package
   apt: pkg=slack state=latest
-  sudo: yes
+  become: yes

@@ -4,7 +4,7 @@
 
 - name: terminator | install
   apt: pkg=terminator state=latest
-  sudo: yes
+  become: yes
 
 - name: terminator | configure terminator
   file: 'name=/home/sam/.config/terminator state=directory'

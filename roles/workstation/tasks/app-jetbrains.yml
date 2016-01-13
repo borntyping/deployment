@@ -1,6 +1,6 @@
 - name: "jetbrains | create directory"
   file: name=/opt/jetbrains state=directory
-  sudo: yes
+  become: yes
 
 - name: "jetbrains | rubymine | fetch archive"
   get_url: >
@@ -14,6 +14,6 @@
   unarchive: >
     src=/tmp/RubyMine.tar.gz
     dest=/opt/jetbrains
-  sudo: yes
+  become: yes
   tags:
     - rubymine

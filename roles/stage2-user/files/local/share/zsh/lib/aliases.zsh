@@ -1,24 +1,27 @@
 #!/bin/zsh
 
+alias -g ...='../..'
+alias -g ....='../../..'
+
+# Color basic commands.
 alias ls='ls --color=auto'              # Use colors for ls output
 alias grep='grep --color=auto'          # Use colors for grep output
-alias -g ...='../..'                    # Allow ... to mean ../.. anywhere
 
+# Short git helpers.
 alias gd='git diff'
 alias gs='git status'
-alias gc='git commit -v'                # Show diff in commit editor
-alias gca='git commit -v -a'            # Show diff in commit editor, commit all
+alias gc='git commit -v'
+# alias gca='git commit -v -a'
 
-alias dct='ds-cookbook-test'
-alias dke='knife block use'
-
+# Set blink to specific colors.
 alias blink1-red='blink1-tool --id all --rgb 250,0,0'
 alias blink1-orange='blink1-tool --id all --rgb 200,150,0'
 alias blink1-green='blink1-tool --id all --rgb 0,150,0'
 
+# Run ansible and reload ZSH.
 alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
 
-alias rac='rubocop --auto-correct'
+alias sift-dev='chef exec bundle exec sift'
 
 # Send an alert with the status of the previous command
 function alert() {
