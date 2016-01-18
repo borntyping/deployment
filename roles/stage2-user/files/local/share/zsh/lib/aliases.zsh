@@ -11,7 +11,7 @@ alias grep='grep --color=auto'          # Use colors for grep output
 alias gd='git diff'
 alias gs='git status'
 alias gc='git commit -v'
-# alias gca='git commit -v -a'
+alias gca='git commit -v -a'
 
 # Set blink to specific colors.
 alias blink1-red='blink1-tool --id all --rgb 250,0,0'
@@ -21,7 +21,7 @@ alias blink1-green='blink1-tool --id all --rgb 0,150,0'
 # Run ansible and reload ZSH.
 alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
 
-alias sift-dev='chef exec bundle exec sift'
+alias -g sift-dev='chef exec bundle exec sift'
 
 # Send an alert with the status of the previous command
 function alert() {

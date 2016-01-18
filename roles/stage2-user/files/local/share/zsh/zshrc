@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-export ZSH_DIRECTORY="$"
-
 source "$HOME/.local/share/zsh/lib/aliases.zsh"
 source "$HOME/.local/share/zsh/lib/completion.zsh"
 source "$HOME/.local/share/zsh/lib/environment.zsh"

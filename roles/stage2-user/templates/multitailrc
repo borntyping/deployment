@@ -1,3 +1,4 @@
+scheme:log:sift\.log
 colorscheme:log
 cs_re:green,,bold:....-..-.. ..:..:..
 cs_re:cyan,,bold:\[|\]
@@ -10,3 +11,6 @@ cs_re_s:red,,bold:\[FATAL\] (.*)
 cs_re_s:red:\[ERROR\] (.*)
 cs_re_s:yellow:\[WARN\] (.*)
 cs_re_s:green,,bold:\[DEBUG\] (.*)
+
+dsblwm:no
+default_linewrap:l
