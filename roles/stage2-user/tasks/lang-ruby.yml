@@ -28,3 +28,5 @@
 
 - name: bundler | config
   template: 'src=bundler_config dest={{ ansible_env.HOME }}/.bundle/config'
+  tags:
+    - dotfiles
