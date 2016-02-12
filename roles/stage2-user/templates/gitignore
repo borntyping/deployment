@@ -1,4 +1,9 @@
+*.iml
+*.ipr
+*.iws
+*.rakeTasks
 *.sublime-project
 *.sublime-workspace
-.kitchen/
 .idea/
+.kitchen/
+.yardoc/

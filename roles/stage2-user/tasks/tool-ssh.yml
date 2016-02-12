@@ -1,0 +1,10 @@
+- name: create ~/.ssh directory
+  file: 'name={{ ansible_env.HOME }}/.ssh state=directory'
+
+- name: create ~/.ssh/config.d directory
+  file: 'name={{ ansible_env.HOME }}/.ssh/config.d state=directory'
+
+- name: generate ssh key
+  user: 'name={{ ansible_env.USER }} generate_ssh_key=true'
+  tags:
+    - ssh

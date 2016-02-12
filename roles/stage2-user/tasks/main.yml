@@ -9,21 +9,24 @@
   tags:
     - python
     - virtualenv
+
 - include: lang-ruby.yml
   tags:
     - ruby
+
 - include: lang-zsh.yml
   tags:
     - zsh
     - shell
+
 - include: tool-peru.yml
   tags:
     - peru
 
-- name: generate ssh key
-  user: 'name={{ ansible_env.USER }} generate_ssh_key=true'
+- include: tool-ssh.yml
   tags:
     - ssh
+
 
 - name: configure dotfiles
   template: >
@@ -68,9 +71,11 @@
     - git-tag-version
     - gws
     - hub
+    - gen-ssh-config
     - tmux-attach
     - wago
   tags:
     - bin
     - blink
     - git
+    - ssh

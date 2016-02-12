@@ -50,15 +50,15 @@
 # Install development tools
 #
 
+- name: asciinema
+  include: tool-asciinema.yml
+  tags: ['tools', 'asciinema']
 - name: ack
   include: tool-ack.yml
   tags: ['tools', 'ack']
 - name: ansible
   include: tool-ansible.yml
   tags: ['tools', 'ansible']
-- name: blink1
-  include: tool-blink1.yml
-  tags: ['tools', 'blink1']
 - name: chefdk
   include: tool-chefdk.yml
   tags: ['tools', 'chefdk', 'chef']
@@ -68,6 +68,9 @@
 - name: git
   include: tool-git.yml
   tags: ['tools', 'git']
+- name: keybase
+  include: tool-keybase.yml
+  tags: ['tools', 'keybase']
 - name: nix
   include: tool-nix.yml
   tags: ['tools', 'nix']

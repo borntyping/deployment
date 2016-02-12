@@ -17,3 +17,26 @@
   become: yes
   tags:
     - rubymine
+
+- name: "jetbrains | IntelliJ IDEA | install JDK"
+  apt: pkg=openjdk-7-jdk state=latest
+  tags:
+    - idea
+
+- name: "jetbrains | IntelliJ IDEA | fetch archive"
+  get_url: >
+    url=https://download.jetbrains.com/idea/ideaIU-15.0.3.tar.gz
+    dest=/tmp/ideaIU.tar.gz
+    validate_certs=False
+  tags:
+    - idea
+
+- name: "jetbrains | IntelliJ IDEA | unpack archive"
+  unarchive: >
+    src=/tmp/ideaIU.tar.gz
+    dest=/opt/jetbrains
+  become: yes
+  tags:
+    - idea
+
+

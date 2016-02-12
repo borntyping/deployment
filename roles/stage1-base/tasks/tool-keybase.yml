@@ -1,0 +1,6 @@
+- name: keybase | install pacakge
+  include: >
+    ../../../tasks/deb.yml
+    name=keybase
+    version=0.0.0
+    url=https://dist.keybase.io/linux/deb/keybase-latest-amd64.deb

@@ -29,7 +29,6 @@ alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
 # DataSift/Chef aliases
 alias ce='chef exec'
 alias cebe='chef exec bundle exec'
-alias -g sift-dev='chef exec bundle exec sift'
 
 # Send an alert with the status of the previous command
 function alert() {
