@@ -44,7 +44,6 @@
     - htoprc
     - kitchen.local.yml
     - multitailrc
-    - nanorc
     - tmux.conf
   tags:
     - dotfiles

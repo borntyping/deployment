@@ -1,7 +1,2 @@
-- name: nano | copy configuration
-  file: "src=nanorc dest={{ ansible_env.HOME }}/.nanorc"
-
-# - name: nano | copy syntax highlighting files
-#   copy: >
-#     src=local/share/nanorc/build/
-#     dest={{ ansible_env.HOME }}/.local/share/nano/
+- name: 'nano | copy configuration'
+  copy: 'src=nanorc dest={{ ansible_env.HOME }}/.nanorc'
