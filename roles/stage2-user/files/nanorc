@@ -1,0 +1,41 @@
+## Nano init file
+## See $ man nanorc
+
+## UI
+set morespace
+set smooth
+set nohelp
+set quickblank 4
+
+## Grammar
+set autoindent
+set brackets ""')>]}"
+set matchbrackets "(<[{)>]}"
+set punct "!.?"
+set fill -2
+set tabsize 4
+set tabstospaces
+set wordbounds
+set softwrap
+
+## Files
+set multibuffer
+set noconvert
+
+## Keys
+set rebinddelete
+set smarthome
+bind M-I insert main
+
+## Highlighting
+syntax "gitcommit" "COMMIT_EDITMSG$"
+color white "#.*"
+color green start="# Changes to be committed.*" end="#$"
+color yellow start="# Changes not staged for commit.*" end="#$"
+color red start="# Untracked files.*" end="#$"
+color brightgreen "^(diff|index|---|\+\+\+).*"
+color brightgreen "@@.*@@"
+color green "^\+.*"
+color red "^-.*"
+color white "# (Change[ds]|Untracked) .*"
+color white "^#"

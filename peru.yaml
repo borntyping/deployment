@@ -6,7 +6,6 @@ imports:
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/local/bin'
-  nano-highlight: 'roles/stage2-user/files/local/share/nano'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 # Blink udev rules and command line tool
@@ -57,11 +56,6 @@ rule hub-completion:
 rule hub-executable:
   pick: hub
   copy: {'hub-linux-amd64-2.2.1/hub': 'hub'}
-
-# Nano highlighters
-
-git module nano-highlight:
-  url: git@github.com:serialhex/nano-highlight.git
 
 # ZSH syntax highlighting plugin
 
