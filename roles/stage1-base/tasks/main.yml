@@ -2,6 +2,27 @@
 # Install other packages
 #
 
+- name: sid | set debian sid pinning
+  copy: src=sid.pref dest=/etc/apt/preferences.d/sid.pref
+  become: yes
+  tags:
+    - sid
+
+- name: sid | add debian sid repository
+  include: >
+    ../../../tasks/apt.yml
+    name=sid
+    url='deb http://ftp.debian.org/debian/ sid main contrib non-free'
+    key=7638D0442B90D010
+  tags:
+    - sid
+
+- name: nano | install
+  apt: pkg=nano state=latest default_release=sid
+  become: yes
+  tags:
+    - nano
+
 - name: install utility packages
   apt: 'pkg={{ item }} state=latest'
   become: yes
@@ -10,7 +31,6 @@
     - htop
     - jq
     - multitail
-    - nano
     - realpath
     - tmux
     - tree
@@ -28,9 +48,6 @@
 - name: node
   include: lang-node.yml
   tags: ['languages', 'node']
-- name: python
-  include: lang-python-deadsnakes.yml
-  tags: ['languages', 'python', 'deadsnakes']
 - name: python
   include: lang-python.yml
   tags: ['languages', 'python']

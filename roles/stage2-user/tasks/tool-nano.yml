@@ -1,0 +1,7 @@
+- name: nano | copy configuration
+  template: "src=nanorc dest={{ ansible_env.HOME }}/.nanorc"
+
+- name: nano | copy syntax highlighting files
+  copy: >
+    src=local/share/nano/
+    dest={{ ansible_env.HOME }}/.local/share/nano/

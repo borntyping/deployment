@@ -27,6 +27,11 @@
   tags:
     - ssh
 
+- include: tool-nano.yml
+  tags:
+    - nano
+    - dotfiles
+
 
 - name: configure dotfiles
   template: >

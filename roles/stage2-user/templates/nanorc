@@ -25,5 +25,7 @@ set noconvert
 ## Keys
 set rebinddelete
 set smarthome
-set undo
 bind M-I insert main
+
+## Highlighting
+include ~/.local/share/nano/*.nanorc

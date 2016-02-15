@@ -14,9 +14,11 @@
     - python
     - python-dev
     - python-pip
-    - python3
-    - python3-dev
-    - python3-pip
+    - python-pip-whl
+    - python3.4
+    - python3.4-dev
+    - python3.5
+    - python3.5-dev
 
 #
 # Install virtualenv and virtualenvwrapper
