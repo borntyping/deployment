@@ -29,7 +29,6 @@
   with_items:
     - aptitude
     - htop
-    - jq
     - multitail
     - realpath
     - tmux

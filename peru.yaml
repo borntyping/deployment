@@ -6,6 +6,7 @@ imports:
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/local/bin'
+  jq: 'roles/stage2-user/files/local/bin'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 # Blink udev rules and command line tool
@@ -57,11 +58,16 @@ rule hub-executable:
   pick: hub
   copy: {'hub-linux-amd64-2.2.1/hub': 'hub'}
 
+curl module jq:
+  url: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+  filename: jq
+  sha1: d8e36831c3c94bb58be34dd544f44a6c6cb88568
+
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 59fbdda64c21dd9e911329f31fbbedc69123865b
+  rev: 7044c1986e2f6b15eec27a03651207fccb0a2fbe
   pick:
     - .revision-hash
     - .version

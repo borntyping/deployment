@@ -69,13 +69,14 @@
     - blink1-tool
     - caddy
     - docker-gc
+    - gen-ssh-config
     - git-cleanup
     - git-hub
     - git-overwritten
     - git-tag-version
     - gws
     - hub
-    - gen-ssh-config
+    - jq
     - tmux-attach
     - wago
   tags:
