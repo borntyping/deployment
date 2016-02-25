@@ -15,4 +15,3 @@ setopt EXTENDED_HISTORY                 # Record additional information
 setopt HIST_IGNORE_DUPS                 # Ignore adjacent reapeated entries
 setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first
 setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
-

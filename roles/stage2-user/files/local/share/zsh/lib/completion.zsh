@@ -15,6 +15,8 @@ setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
 setopt AUTO_PARAM_SLASH                 #   after a completion
 setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed
 
+bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus
+
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion::complete:*' use-cache on
