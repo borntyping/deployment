@@ -23,3 +23,8 @@ zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/completion/"
 zstyle ':completion:*:*:*:users' ignored-patterns '*'
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Edit current line (Ctrl+e)
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
