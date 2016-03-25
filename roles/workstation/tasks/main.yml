@@ -4,6 +4,10 @@
 
 - include: app-atom.yml
   tags: ['atom']
+- include: app-dropbox.yml
+  tags: ['dropbox']
+- include: app-idea.yml
+  tags: ['idea']
 - include: app-slack.yml
   tags: ['slack']
 - include: app-spotify.yml
@@ -13,37 +17,30 @@
 - include: app-terminator.yml
   tags: ['terminator']
 
-- name: install personal software
-  apt: "pkg={{ item }} state=latest"
+- name: 'install'
+  apt: 'pkg={{ item }} state=latest'
   become: yes
   with_items:
     - firefox
     - keepassx
     - gparted
 
-- name: install dropbox
-  apt: "pkg={{ item }} state=latest"
-  become: yes
-  with_items:
-    - dropbox
-    - nemo-dropbox
-
-- name: install development software
-  apt: "pkg={{ item }} state=latest"
+- name: 'install UI tools for Git'
+  apt: 'pkg={{ item }} state=latest'
   become: yes
   with_items:
     - git-cola
     - gitg
     - meld
 
-- name: configure XDG directories
+- name: 'configure XDG directories'
   template: >
     dest={{ ansible_env.HOME }}/.config/user-dirs.dirs
     src=user-dirs.dirs
   tags:
   - xdg
 
-- name: "install fonts"
+- name: 'install fonts'
   copy: >
     src=fonts
     dest={{ ansible_env.HOME }}/.fonts/
