@@ -4,8 +4,6 @@
 
 - include: app-atom.yml
   tags: ['atom']
-- include: app-jetbrains.yml
-  tags: ['jetbrains']
 - include: app-slack.yml
   tags: ['slack']
 - include: app-spotify.yml
@@ -38,17 +36,16 @@
     - gitg
     - meld
 
-- name: install games and steam
-  apt: "pkg={{ item }} state=latest"
-  become: yes
-  with_items:
-    - steam-launcher
-    - crawl-tiles
-    - mumble
-
 - name: configure XDG directories
   template: >
     dest={{ ansible_env.HOME }}/.config/user-dirs.dirs
     src=user-dirs.dirs
   tags:
   - xdg
+
+- name: "install fonts"
+  copy: >
+    src=fonts
+    dest={{ ansible_env.HOME }}/.fonts/
+  tags:
+    - fonts
