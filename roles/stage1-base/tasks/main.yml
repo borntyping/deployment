@@ -87,6 +87,3 @@
 - name: keybase
   include: tool-keybase.yml
   tags: ['tools', 'keybase']
-- name: nix
-  include: tool-nix.yml
-  tags: ['tools', 'nix']

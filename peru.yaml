@@ -2,6 +2,7 @@ imports:
   blink1-tool: 'roles/stage2-user/files/local/bin'
   blink1-udev: 'roles/stage1-base/files'
   caddy: 'roles/stage2-user/files/local/bin'
+  fantasque: 'roles/workstation/files/fonts'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -29,7 +30,19 @@ curl module caddy:
   pick: caddy
   sha1: fa27430b4bb8a2ced66976e9895c352b49b457c4
 
+# Fantasque Sans Mono font.
+
+curl module fantasque:
+  url: https://github.com/belluzj/fantasque-sans/releases/download/v1.7.0/FantasqueSansMono.zip
+  unpack: zip
+  pick:
+    - FantasqueSansMono-Bold.ttf
+    - FantasqueSansMono-BoldItalic.ttf
+    - FantasqueSansMono-Italic.ttf
+    - FantasqueSansMono-Regular.ttf
+
 # Git repository management tool
+  sha1: bf8a386e0e79256e35147720de439dc886af75ac
 
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
@@ -67,7 +80,7 @@ curl module jq:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 7044c1986e2f6b15eec27a03651207fccb0a2fbe
+  rev: bc7f8ea433adf3efd71a3e950e9a8dec846a1171
   pick:
     - .revision-hash
     - .version
