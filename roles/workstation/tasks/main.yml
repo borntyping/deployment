@@ -21,10 +21,10 @@
   become: yes
   with_items:
     - firefox
-    - keepassx
     - gparted
-    - spotify
+    - keepassx
     - slack
+    - spotify-client
 
 - name: 'install UI tools for Git'
   apt: 'pkg={{ item }} state=latest'
