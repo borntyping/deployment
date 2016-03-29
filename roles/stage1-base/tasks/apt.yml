@@ -1,0 +1,29 @@
+#
+# Configure APT repos in one place, then update metadata.
+#
+
+- name: 'configure repositories'
+  apt_repository: >
+    repo='{{ item }}'
+    state=present
+  become: yes
+  with_items:
+    - 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main'
+    - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
+    - 'deb http://ppa.launchpad.net/zanchey/asciinema/ubuntu trusty main'
+    - 'deb https://apt.dockerproject.org/repo ubuntu-trusty main'
+    - 'deb https://packagecloud.io/chef/stable/ubuntu/ trusty main'
+
+- name: 'configure repository keys'
+  apt_key: "id={{ item }} keyserver=hkp://keyserver.ubuntu.com:80"
+  become: yes
+  with_list:
+    - '7BB9C367' # ansible
+    - '0F833EAD' # asciinema
+    - 'C2E73424D59097AB' # chef
+    - '58118E89F3A912897C070ADBF76221572C52609D' # docker
+    - 'E1DF1F24' # git
+
+- name: 'update repositories'
+  apt: 'update_cache=yes'
+  become: yes

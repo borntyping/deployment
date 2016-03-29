@@ -2,16 +2,15 @@
 # Install software only useful on a workstation or non-headless machine
 #
 
+- include: apt.yml
+  tags: ['apt']
+
 - include: app-atom.yml
   tags: ['atom']
 - include: app-dropbox.yml
   tags: ['dropbox']
 - include: app-idea.yml
   tags: ['idea']
-- include: app-slack.yml
-  tags: ['slack']
-- include: app-spotify.yml
-  tags: ['spotify']
 - include: app-sublime.yml
   tags: ['sublime']
 - include: app-terminator.yml
@@ -24,6 +23,8 @@
     - firefox
     - keepassx
     - gparted
+    - spotify
+    - slack
 
 - name: 'install UI tools for Git'
   apt: 'pkg={{ item }} state=latest'

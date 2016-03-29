@@ -2,13 +2,6 @@
 # Install git.
 #
 
-- name: git | add repository
-  include: >
-    ../../../tasks/apt.yml
-    name=git
-    url='deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
-    key=E1DF1F24
-
 - name: git | install
   apt: pkg=git state=latest
   become: yes

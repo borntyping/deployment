@@ -32,7 +32,6 @@
     - nano
     - dotfiles
 
-
 - name: configure dotfiles
   template: >
     src={{ item }}

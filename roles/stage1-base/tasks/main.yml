@@ -2,26 +2,8 @@
 # Install other packages
 #
 
-- name: sid | set debian sid pinning
-  copy: src=sid.pref dest=/etc/apt/preferences.d/sid.pref
-  become: yes
-  tags:
-    - sid
-
-- name: sid | add debian sid repository
-  include: >
-    ../../../tasks/apt.yml
-    name=sid
-    url='deb http://ftp.debian.org/debian/ sid main contrib non-free'
-    key=7638D0442B90D010
-  tags:
-    - sid
-
-- name: nano | install
-  apt: pkg=nano state=latest default_release=sid
-  become: yes
-  tags:
-    - nano
+- include: apt.yml
+  tags: ['apt']
 
 - name: install utility packages
   apt: 'pkg={{ item }} state=latest'
@@ -30,6 +12,7 @@
     - aptitude
     - htop
     - multitail
+    - nano
     - realpath
     - tmux
     - tree

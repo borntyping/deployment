@@ -3,13 +3,6 @@
 #
 # keyserver=hkp://pgp.mit.edu:80
 
-- name: docker | add repository
-  include: >
-    ../../../tasks/apt.yml
-    name=docker
-    url='deb https://apt.dockerproject.org/repo ubuntu-trusty main'
-    key=58118E89F3A912897C070ADBF76221572C52609D
-
 - name: docker | install
   apt: 'pkg={{ item }} state=latest'
   become: yes
