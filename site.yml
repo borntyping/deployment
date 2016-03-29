@@ -1,8 +1,10 @@
 ---
-- hosts: workstation
+- hosts: workstation-datasift
   roles:
   - role: workstation
     tags: workstation
+  - role: workstation-datasift
+    tags: workstation-datasift
 
 - hosts: webserver
   roles:
