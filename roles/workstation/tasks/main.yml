@@ -26,6 +26,8 @@
     - slack-desktop
     - spotify-client
     - zeal
+  tags:
+    - zeal
 
 - name: 'install UI tools for Git'
   apt: 'pkg={{ item }} state=latest'
