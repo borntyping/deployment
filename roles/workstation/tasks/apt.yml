@@ -11,6 +11,7 @@
   with_items:
     - deb http://repository.spotify.com stable non-free
     - deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
+    - deb http://ppa.launchpad.net/jerzy-kozera/zeal-ppa/ubuntu trusty main
 
 - name: configure repository keys
   apt_key:
@@ -21,6 +22,7 @@
   with_items:
     - D2C19886 # spotify
     - D59097AB # slack
+    - 0810A609CCA22779F264CFE18C6710872FF96FD1 # zeal
 
 - name: update repositories
   apt:
