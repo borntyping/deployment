@@ -25,6 +25,7 @@
     - keepassx
     - slack-desktop
     - spotify-client
+    - zeal
 
 - name: 'install UI tools for Git'
   apt: 'pkg={{ item }} state=latest'
