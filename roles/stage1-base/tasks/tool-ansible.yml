@@ -2,13 +2,6 @@
 # Ansible
 #
 
-- name: ansible | add repository
-  include: >
-    ../../../tasks/apt.yml
-    name=ansible
-    url='deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main'
-    key=7BB9C367
-
 - name: install ansible
   apt: pkg=ansible state=latest
   become: yes

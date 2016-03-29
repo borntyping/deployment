@@ -2,25 +2,17 @@
 # Installs the Chef Development Kit.
 #
 
-- name: chefdk | install pacakge
-  include: >
-    ../../../tasks/deb.yml
-    name=chefdk
-    version=0.10.0
-    url=https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.10.0-1_amd64.deb
+# - name: chefdk | install pacakge
+#   include: >
+#     ../../../tasks/deb.yml
+#     name=chefdk
+#     version=0.12.0
+#     validate_certs=False
+#     url=https://packages.chef.io/stable/ubuntu/12.04/chefdk_0.12.0-1_amd64.deb
 
-- name: "chefdk | fetch patch for kitchen"
-  get_url: >
-    url=https://patch-diff.githubusercontent.com/raw/test-kitchen/test-kitchen/pull/824.diff
-    dest=/tmp/kitchen_824.patch
-    validate_certs=False
-  always_run: yes
-  tags: ['kitchen']
-
-- name: "chefdk | patch kitchen"
-  patch: >
-    src=/tmp/kitchen_824.patch
-    basedir=/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.4.2
-    strip=1
+- name: chefdk | install package
+  apt: 'pkg={{ item }} state=latest'
   become: yes
-  tags: ['kitchen']
+  with_items:
+    - chefdk
+    - delivery-cli

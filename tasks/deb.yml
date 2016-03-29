@@ -27,10 +27,13 @@
     }}'
 
 - name: "{{ name }} | fetch package"
-  get_url: "url={{ url }} dest=/tmp/{{ name }}.deb"
+  get_url:
+    url: '{{ url }}'
+    dest: '/tmp/{{ name }}.deb'
+    validate_certs: '{{ validate_certs|default("true") }}'
   when: "deb_install or deb_update"
 
 - name: "{{ name }} | install package"
-  apt: "deb=/tmp/{{ name }}.deb"
+  apt: deb=/tmp/{{ name }}.deb
   become: yes
   when: "deb_install or deb_update"
