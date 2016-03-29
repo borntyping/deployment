@@ -84,3 +84,17 @@
     - blink
     - git
     - ssh
+
+#
+# Create development directories.
+#
+
+- name: create development directory
+  file: >
+    name={{ ansible_env.HOME }}/{{ item }}
+    state=directory
+  with_items:
+    - Development
+    - Development/borntyping
+    - Development/datasift
+    - Development/src
