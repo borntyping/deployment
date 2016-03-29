@@ -2,19 +2,11 @@
 # Install local gems
 #
 
-- name: use gem from ruby 2.0
-  set_fact: 'gem=gem2.0'
-  when: ansible_distribution in ['Ubuntu', 'Linuxmint']
-
-- name: use gem from ruby 2.1
-  set_fact: 'gem=gem2.1'
-  when: ansible_distribution in ['Debian']
-
 - name: install ruby packages
   gem:
     state: latest
     name: '{{ item }}'
-    executable: '{{ gem }}'
+    executable: gem2.0
     user_install: yes
   with_items:
     - bundler
@@ -23,10 +15,18 @@
     - travis
     - travis-lint
 
-- name: bundler | directory
-  file: 'name={{ ansible_env.HOME }}/.bundle state=directory'
-
-- name: bundler | config
-  template: 'src=bundler_config dest={{ ansible_env.HOME }}/.bundle/config'
+- name: bundle | directory
+  file:
+    name: '{{ ansible_env.HOME }}/.bundle'
+    state: directory
   tags:
     - dotfiles
+    - bundle
+
+- name: bundle | config
+  template:
+    src: bundle_config
+    dest: '{{ ansible_env.HOME }}/.bundle/config'
+  tags:
+    - dotfiles
+    - bundle

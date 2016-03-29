@@ -23,7 +23,7 @@
     - firefox
     - gparted
     - keepassx
-    - slack
+    - slack-desktop
     - spotify-client
 
 - name: 'install UI tools for Git'

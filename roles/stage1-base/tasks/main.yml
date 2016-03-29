@@ -10,6 +10,7 @@
   become: yes
   with_items:
     - aptitude
+    - curl
     - htop
     - multitail
     - nano

@@ -1,4 +1,0 @@
----
-BUNDLE_GEM__COC: 'true'
-BUNDLE_GEM__TEST: rspec
-BUNDLE_PATH: vendor/bundle
