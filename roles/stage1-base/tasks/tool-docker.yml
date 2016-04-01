@@ -10,3 +10,9 @@
     - docker-engine
     - apparmor
     - cgroup-lite
+
+# - name: docker | add user to docker group
+#   user:
+#     name: '{{ ansible_env.USER }}'
+#     groups: ['docker']
+#     append: true
