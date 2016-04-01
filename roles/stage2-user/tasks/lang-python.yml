@@ -19,6 +19,8 @@
   with_items:
     - httpie
     - pex
+    - secretstorage
+    - ssh-run
     - tox
     - v
     - watch-fs
