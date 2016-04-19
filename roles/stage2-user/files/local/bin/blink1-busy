@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec /home/sam/.local/bin/blink1-tool --id all --red

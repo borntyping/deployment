@@ -59,6 +59,9 @@
 - name: ansible
   include: tool-ansible.yml
   tags: ['tools', 'ansible']
+- name: blink1
+  include: tool-blink1.yml
+  tags: ['tools', 'blink1']
 - name: chefdk
   include: tool-chefdk.yml
   tags: ['tools', 'chefdk', 'chef']

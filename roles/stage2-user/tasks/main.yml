@@ -66,6 +66,8 @@
   with_items:
     - ansible-run
     - blink1-tool
+    - blink1-busy
+    - blink1-free
     - caddy
     - docker-gc
     - gen-ssh-config
@@ -80,9 +82,27 @@
     - wago
   tags:
     - bin
-    - blink
+    - blink1
     - git
     - ssh
+
+- name: blink1 | turn on at 9AM
+  cron:
+    name: 'enable blink(1)'
+    hour: 9
+    minute: 0
+    job: /home/sam/.local/bin/blink1-tool --blue
+  tags:
+    - blink1
+
+- name: blink1 | turn off at 6PM
+  cron:
+    name: 'disable blink(1)'
+    hour: 18
+    minute: 0
+    job: /home/sam/.local/bin/blink1-tool --id all --off
+  tags:
+    - blink1
 
 #
 # Create development directories.
