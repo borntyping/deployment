@@ -3,6 +3,7 @@
 source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ZSH_HIGHLIGHT_STYLES[comment]='fg=green,bold'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue,bold'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue,bold'
