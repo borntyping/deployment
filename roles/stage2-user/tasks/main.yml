@@ -91,7 +91,7 @@
     name: 'enable blink(1)'
     hour: 9
     minute: 0
-    job: /home/sam/.local/bin/blink1-tool --blue
+    job: /home/sam/.local/bin/blink1-tool --rgb 150,150,0
   tags:
     - blink1
 
