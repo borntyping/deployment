@@ -21,9 +21,10 @@ alias cola='git-cola &'
 # Run ansible and reload ZSH.
 alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
 
-# DataSift/Chef aliases
+# Bundler/Chef aliases
 alias ce='chef exec'
-alias cebe='chef exec bundle exec'
+alias cb='chef exec bundle exec'
+alias be='bundle exec'
 
 # Send an alert with the status of the previous command
 function alert() {
