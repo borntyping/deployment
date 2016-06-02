@@ -4,25 +4,12 @@
 
 - name: terminator | install
   apt:
-    pkg: {{ item }}
+    pkg: '{{ item }}'
     state: latest
   with_items:
     - terminator
     - python-keybinder
   become: yes
-
-# - name: terminator | configure terminator directories
-#   file:
-#     name: /home/sam/.config/{{ item }}
-#     state: directory
-#   with_items:
-#     - terminator
-#     - terminator/plugins
-#
-# - name: terminator | configure terminator
-#   template:
-#     src: 'terminator.conf'
-#     dest: '{{ ansible_env.HOME }}/.config/terminator/config'
 
 - name: terminator | configure terminator
   copy:
