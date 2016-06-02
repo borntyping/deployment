@@ -14,7 +14,7 @@ class FileURLHandler(plugin.URLHandler):
     capabilities = ['url_handler']
     handler_name = 'FileURLHandler'
 
-    match = r'[a-zA-Z0-9_-/\.]*(:[0-9]*)?'
+    match = r'([a-zA-Z0-9/._-]+)(:[0-9]+)?'
 
     def get_cwd(self):
         """ Return current working directory. """
@@ -36,3 +36,20 @@ class FileURLHandler(plugin.URLHandler):
 
         # Stop `xdg-open` opening a second instance of the URL.
         return '--version'
+
+if __name__ == '__main__':
+    import re
+
+    pattern = re.compile(FileURLHandler.match)
+
+    def assert_match(string, result=None):
+        result = string if (result is None) else result
+        assert pattern.match(string).group(0) == result
+
+    assert_match('files/terminator/plugins/file_url_handler.py:86')
+    assert_match('terminator:87')
+    assert_match('terminator.py:87')
+    assert_match('/terminator.py:87')
+    assert_match('/terminator.py:87:in', '/terminator.py:87')
+    assert_match('/tmp/terminator.py:87:in', '/tmp/terminator.py:87')
+    assert_match('/tmp/terminator.py')
