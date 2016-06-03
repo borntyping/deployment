@@ -26,6 +26,9 @@ alias ce='chef exec'
 alias cb='chef exec bundle exec'
 alias be='bundle exec'
 
+# I always get this wrong...
+alias httpie='http'
+
 # Send an alert with the status of the previous command
 function alert() {
     local SUCCESS=$?
