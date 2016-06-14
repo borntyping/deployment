@@ -52,9 +52,6 @@
 # UI
 #
 
-[status]
-    displayCommentPrefix = false
-
 [color]
     diff = auto
     status = auto
@@ -67,6 +64,10 @@
     added = green
     changed = yellow
     untracked = red
+
+[diff]
+    # Try and break diffs at blank lines.
+    compactionHeuristic = true
 
 #
 # Utilities
