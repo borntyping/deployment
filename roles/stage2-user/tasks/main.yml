@@ -19,6 +19,10 @@
     - zsh
     - shell
 
+- include: tool-git.yml
+  tags:
+    - git
+
 - include: tool-peru.yml
   tags:
     - peru
@@ -38,15 +42,12 @@
     dest={{ ansible_env.HOME }}/.{{ item }}
   with_items:
     - ackrc
-    - gitconfig
-    - gitignore
     - htoprc
     - kitchen.local.yml
     - multitailrc
     - tmux.conf
   tags:
     - dotfiles
-    - git
     - chefdk
 
 #
@@ -83,7 +84,6 @@
   tags:
     - bin
     - blink1
-    - git
     - ssh
 
 - name: blink1 | turn on at 9AM

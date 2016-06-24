@@ -5,8 +5,9 @@
 [core]
     editor = nano
     autocrlf = input
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.config/git/gitignore
     pager = less -+FX
+    hooksPath = ~/.config/git/hooks
 
 [push]
     default = current

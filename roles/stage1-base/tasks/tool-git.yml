@@ -3,7 +3,9 @@
 #
 
 - name: git | install
-  apt: pkg=git state=latest
+  apt:
+    pkg: git
+    state: latest
   become: yes
 
 # - name: git | link git-subtree
