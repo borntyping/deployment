@@ -14,8 +14,8 @@ alias la='ls -la'
 # Short git helpers.
 alias gd='git diff'
 alias gs='git status'
-alias gc='git commit -v'
-alias gca='git commit -v -a'
+alias gc='git commit'
+alias gca='git commit -a'
 alias cola='git-cola &'
 
 # Run ansible and reload ZSH.

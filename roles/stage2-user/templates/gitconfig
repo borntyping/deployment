@@ -69,6 +69,10 @@
     # Try and break diffs at blank lines.
     compactionHeuristic = true
 
+[commit]
+    # Always show verbose commits
+    verbose = true
+
 #
 # Utilities
 #
