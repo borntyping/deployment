@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Adds a ticket number to commit messages when a branch is named feature/ABC-123
+#
+
+BRANCH=$(git symbolic-ref --short -q HEAD)
+
+# Never make changes if the commit message is empty.
+if [ -s "$1" ]; then
+  exit
+fi
+
+# Only continue if we are on a feature branch.
+if [[ ! "$BRANCH" == *"feature/"* ]]; then
+  exit
+fi
+
+NAME=$(echo "$BRANCH" | grep -Eo '[A-Z]+-[0-9]+')
+
+# Don't add the ticket if it already is included
+if head -n 1 "$1" | grep "$NAME" >/dev/null; then
+  exit
+fi
+
+echo "[$NAME] $(cat "$1")" > "$1"

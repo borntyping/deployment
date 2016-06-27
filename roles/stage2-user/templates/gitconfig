@@ -5,9 +5,9 @@
 [core]
     editor = nano
     autocrlf = input
-    excludesfile = ~/.config/git/gitignore
     pager = less -+FX
-    hooksPath = ~/.config/git/hooks
+    excludesfile = {{ ansible_env.HOME }}/.config/git/gitignore
+    hooksPath = {{ ansible_env.HOME }}/.config/git/hooks/
 
 [push]
     default = current
