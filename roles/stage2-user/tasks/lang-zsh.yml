@@ -3,7 +3,7 @@
   apt: pkg=zsh state=latest
   become: yes
 
-- name: zsh | copy configuration
+- name: zsh | copy libaries
   copy: >
     src=local/share/zsh/
     dest={{ ansible_env.HOME }}/.local/share/zsh/
@@ -11,9 +11,17 @@
     - dotfiles
     - zshrc
 
+- name: zsh | copy configuration
+  copy: >
+    src=local/etc/
+    dest={{ ansible_env.HOME }}/.local/etc/
+  tags:
+    - dotfiles
+    - zshrc
+
 - name: zsh | link ~/.zshrc
   file: >
-    src={{ ansible_env.HOME }}/.local/share/zsh/zshrc
+    src={{ ansible_env.HOME }}/.local/etc/zshrc
     dest={{ ansible_env.HOME }}/.zshrc
     state=link
   tags:
@@ -22,7 +30,7 @@
 
 - name: zsh | link ~/.zshenv
   file: >
-    src={{ ansible_env.HOME }}/.local/share/zsh/zshenv
+    src={{ ansible_env.HOME }}/.local/etc/zshenv
     dest={{ ansible_env.HOME }}/.zshenv
     state=link
   tags:
