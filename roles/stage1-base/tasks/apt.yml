@@ -12,7 +12,7 @@
     - deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
     - deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main
     - deb http://ppa.launchpad.net/zanchey/asciinema/ubuntu trusty main
-    - deb https://apt.dockerproject.org/repo ubuntu-trusty main
+    - deb https://apt.dockerproject.org/repo ubuntu-xenial main
 
 - name: configure repository keys
   apt_key:
