@@ -46,7 +46,7 @@
 
 - name: 'install fonts'
   copy: >
-    src=fonts
-    dest={{ ansible_env.HOME }}/.fonts/
+    src=fonts/
+    dest={{ ansible_env.HOME }}/.fonts
   tags:
     - fonts

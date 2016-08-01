@@ -3,7 +3,11 @@
 #
 
 - include: apt.yml
-  tags: ['apt']
+  tags:
+    - apt
+    - docker
+    - spotify
+    - slack
 
 - name: install utility packages
   apt: 'pkg={{ item }} state=latest'
@@ -16,6 +20,7 @@
     - multitail
     - nano
     - realpath
+    - supervisor
     - tmux
     - tree
   tags:

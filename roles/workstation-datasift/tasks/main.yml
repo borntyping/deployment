@@ -3,9 +3,6 @@
   become: yes
   with_items:
     - bsdtar
-    - php5-cli
-    - php5-curl
-    - php5-sqlite
     - rpm
     - supervisor
     - vpnc

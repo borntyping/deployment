@@ -17,10 +17,7 @@
     - python-pip-whl
     - python3
     - python3-pip
-    - python3.4
-    - python3.4-dev
-    - python3.5
-    - python3.5-dev
+    - python3-dev
 
 #
 # Install virtualenv and virtualenvwrapper
