@@ -27,6 +27,11 @@
     - bin
     - util
 
+- name: sysctl
+  include: sysctl.yml
+  tags:
+    - sysctl
+
 #
 # Install programming languages and packages from their repositories
 #
