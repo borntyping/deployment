@@ -1,0 +1,9 @@
+- name: sysctl | configure inotify
+  copy: src=60-inotify.conf dest=/etc/sysctl.d/60-inotify.conf
+  become: yes
+  register: blink1_udev
+
+- name: sysctl | reload udev
+  command: sysctl -p --system
+  when: blink1_udev.changed
+  become: yes
