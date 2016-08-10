@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$(find '*.rb' -quit | wc -l)" -gt 0 ]]; then
+  chef exec rubocop --auto-correct --format=clang
+fi
