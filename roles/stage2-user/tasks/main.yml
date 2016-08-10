@@ -71,7 +71,6 @@
     - blink1-free
     - caddy
     - docker-gc
-    - gen-ssh-config
     - git-cleanup
     - git-hub
     - git-overwritten
@@ -84,7 +83,6 @@
   tags:
     - bin
     - blink1
-    - ssh
 
 - name: blink1 | turn on at 9AM
   cron:
