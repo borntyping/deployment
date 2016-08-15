@@ -9,9 +9,9 @@ BRANCH=$(git symbolic-ref --short -q HEAD)
 [ ! -s "$1" ] && exit
 
 # Only continue if we are on a feature branch.
-[[ ! "$BRANCH" == *"feature/"* ]] && exit
-
-NAME=$(echo "$BRANCH" | grep -Eo '[A-Z]+-[0-9]+')
+if [[ "$BRANCH" == *"feature/"* ]]; then
+  NAME=$(echo "$BRANCH" | grep -Eo '[A-Z]+-[0-9]+')
+fi
 
 # Don't add the ticket if it already is included
 head -n 1 "$1" | grep "$NAME" >/dev/null && exit
