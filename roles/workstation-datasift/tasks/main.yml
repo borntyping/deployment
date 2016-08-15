@@ -1,8 +1,0 @@
-- name: install packages
-  apt: 'pkg={{ item }} state=latest'
-  become: yes
-  with_items:
-    - bsdtar
-    - rpm
-    - supervisor
-    - vpnc
