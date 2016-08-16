@@ -1,26 +1,43 @@
 [global_config]
-  enabled_plugins = FileURLHandler,
+  handle_size = 1
   title_hide_sizetext = True
+  focus = mouse
+  title_transmit_fg_color = "#0064ff"
+  title_inactive_fg_color = "#1c424c"
+  suppress_multiple_term_dialog = True
+  enabled_plugins = ,
+  title_receive_bg_color = "#d6d6d6"
+  title_transmit_bg_color = "#d6d6d6"
+  title_receive_fg_color = "#ff0000"
+  inactive_color_offset = 1.0
+  title_inactive_bg_color = "#d6d6d6"
 [keybindings]
+  go_left = <Primary><Shift>Left
+  go_down = <Primary><Shift>Down
+  go_right = <Primary><Shift>Right
+  go_up = <Primary><Shift>Right
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    word_chars = "-A-Za-z0-9,./?%&#:_~@"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    background_image = None
+    background_darkness = 0.9
+    background_type = transparent
+    use_system_font = False
+    foreground_color = "#fdf6e3"
+    scroll_on_output = False
+    show_titlebar = False
+    font = Fantasque Sans Mono 10
+    background_color = "#002b36"
+    allow_bold = False
+    scrollback_infinite = True
 [layouts]
   [[default]]
     [[[child1]]]
-      parent = window0
       type = Terminal
+      parent = window0
     [[[window0]]]
-      parent = ""
       type = Window
+      parent = ""
 [plugins]
-[profiles]
-  [[default]]
-    allow_bold = False
-    background_darkness = 0.83
-    background_image = None
-    background_type = transparent
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    foreground_color = "#fdf6e3"
-    background_color = "#002b36"
-    scroll_on_output = False
-    scrollback_infinite = True
-    scrollbar_position = hidden
-    show_titlebar = False
