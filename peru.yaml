@@ -8,6 +8,7 @@ imports:
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/local/bin'
   jq: 'roles/stage2-user/files/local/bin'
+  with: 'roles/stage2-user/files/local/bin'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 # Blink udev rules and command line tool
@@ -76,11 +77,18 @@ curl module jq:
   filename: jq
   sha1: d8e36831c3c94bb58be34dd544f44a6c6cb88568
 
+# `with` script
+
+git module with:
+  url: https://github.com/mchav/with.git
+  pick: with
+  rev: afa1654c49142a5b6e6678eed107b77c17fde9d3
+
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: bc7f8ea433adf3efd71a3e950e9a8dec846a1171
+  rev: 11c908196700c00c4662295f44747a5826615c4b
   pick:
     - .revision-hash
     - .version
