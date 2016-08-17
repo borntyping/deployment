@@ -21,4 +21,4 @@ export sandbox="$HOME/Development/borntyping-sandbox"
 export src="$HOME/Development/src"
 
 export PROV_PATH="$HOME/.provision/state"
-# export PROV_PATH="$HOME/.sift/provision/state"
+export GOPATH="${HOME}/.go"
