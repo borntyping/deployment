@@ -80,6 +80,7 @@
     - jq
     - tmux-attach
     - wago
+    - with
   tags:
     - bin
     - blink1
