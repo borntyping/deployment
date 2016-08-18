@@ -82,7 +82,7 @@ curl module jq:
 git module with:
   url: https://github.com/mchav/with.git
   pick: with
-  rev: afa1654c49142a5b6e6678eed107b77c17fde9d3
+  rev: 61d059d7df4002db80b09bfe7ebb9c874b8a6782
 
 # ZSH syntax highlighting plugin
 
