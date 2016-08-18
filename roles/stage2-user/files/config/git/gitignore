@@ -8,3 +8,4 @@
 .kitchen/
 .vagrant/
 .yardoc/
+gem_graph.png
