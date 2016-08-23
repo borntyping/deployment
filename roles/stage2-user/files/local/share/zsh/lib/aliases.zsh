@@ -29,6 +29,8 @@ alias be='bundle exec'
 # I always get this wrong...
 alias httpie='http'
 
+alias dc='docker-compose'
+
 # Send an alert with the status of the previous command
 function alert() {
     local SUCCESS=$?
