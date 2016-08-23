@@ -23,3 +23,12 @@
     groups: docker
     append: true
   become: yes
+
+# - name: docker | add resolvable service
+#   copy: src=docker.resolvable.service dest=/etc/systemd/user/docker.resolvable.service
+#   become: yes
+#   tags: ['target']
+#   register: docker_resolveable_service
+#
+# - name: docker | start resolvable
+#   when: docker_resolveable_service.changed
