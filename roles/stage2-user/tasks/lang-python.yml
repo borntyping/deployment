@@ -17,8 +17,10 @@
 - name: python | install packages
   pip: "name={{ item }} state=latest executable=pip3 extra_args=--user"
   with_items:
+    - docker-compose
     - httpie
     - pex
+    - pip
     - secretstorage
     - ssh-run
     - tox
