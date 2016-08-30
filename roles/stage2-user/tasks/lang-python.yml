@@ -22,6 +22,7 @@
     - pex
     - pip
     - secretstorage
+    - selecta
     - ssh-run
     - tox
     - v
