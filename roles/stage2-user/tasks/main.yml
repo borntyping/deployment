@@ -23,6 +23,16 @@
   tags:
     - git
 
+- include: tool-nano.yml
+  tags:
+    - nano
+    - dotfiles
+
+- include: tool-npm.yml
+  tags:
+    - npm
+    - dotfiles
+
 - include: tool-peru.yml
   tags:
     - peru
@@ -30,11 +40,6 @@
 - include: tool-ssh.yml
   tags:
     - ssh
-
-- include: tool-nano.yml
-  tags:
-    - nano
-    - dotfiles
 
 - name: configure dotfiles
   template: >

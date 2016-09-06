@@ -1,0 +1,11 @@
+- name: npm | create ~/.npm directory
+  file:
+    name: "{{ ansible_env.HOME }}/.npm"
+    state: directory
+
+- name: npm | install packages
+  npm:
+    name: "{{ item }}"
+    path: "{{ ansible_env.HOME }}/.npm"
+  with_items:
+    - jsonlint
