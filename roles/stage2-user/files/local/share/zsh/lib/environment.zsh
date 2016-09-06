@@ -22,3 +22,4 @@ export src="$HOME/Development/src"
 
 export PROV_PATH="$HOME/.provision/state"
 export GOPATH="${HOME}/.go"
+export NPM_CONFIG_PREFIX="$HOME/.npm"
