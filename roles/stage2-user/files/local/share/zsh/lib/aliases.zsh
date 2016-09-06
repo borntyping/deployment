@@ -17,6 +17,7 @@ alias gs='git status'
 alias gc='git commit'
 alias gca='git commit -a'
 alias cola='git-cola &'
+alias gg='gitg &'
 
 # Run ansible and reload ZSH.
 alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
