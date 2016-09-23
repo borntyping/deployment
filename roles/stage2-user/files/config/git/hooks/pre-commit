@@ -2,6 +2,10 @@
 
 set -e
 
+if [ "${PWD##${datasift}/chef}" != "$PWD" ]; then
+  exit 0
+fi
+
 if [[ "$(find -name '*.rb' | wc -l)" -gt 0 ]]; then
   chef exec rubocop --format=clang
 fi
