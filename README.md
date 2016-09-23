@@ -83,21 +83,18 @@ Ansible sets up everything possible automatically, but there are still some
 things that must be done manually on a new workstation:
 
 - Set keyboard shortcuts (workspace switching, terminal).
-- Register Sublime Text and install [Package Control].
 - Start the Dropbox client to run the proprietary installer.
 
 Afterwards, you should login to various applications:
 
 - Dropbox
-- Firefox (first Sync, then LastPass)
+- Firefox
 - Slack
 - Steam
 
 There are also some things this repository doesn't do yet:
 
 - Install [Rust] and development tools (rustfmt, racer).
-- Install Chrome.
-- Setup a Whatsapp Web client using Chrome.
 - Configure the Slack repository.
 - Configure startup applications.
 - Hide desktop icons.
@@ -117,7 +114,7 @@ Licence
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Sam Clements
+Copyright (c) 2014-2016 Sam Clements
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
