@@ -47,7 +47,7 @@ curl module fantasque:
 
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
-  rev: 3618de83937c895ab38fba75d8cf85b237d343e2
+  rev: a45c2da2ff1a00e8b8cc6116e9fb4cdd5cca533d
 
 rule gws-completion:
   pick: gws.zsh
@@ -82,13 +82,13 @@ curl module jq:
 git module with:
   url: https://github.com/mchav/with.git
   pick: with
-  rev: 61d059d7df4002db80b09bfe7ebb9c874b8a6782
+  rev: 3262a411f6a43aa578d725545d825fc0ea676607
 
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 11c908196700c00c4662295f44747a5826615c4b
+  rev: 28d7056a7a0652fafe84e38b58ac5366326531d9
   pick:
     - .revision-hash
     - .version
