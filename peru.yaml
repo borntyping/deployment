@@ -26,10 +26,10 @@ curl module blink1-udev:
 # HTTP development server
 
 curl module caddy:
-  url: https://github.com/mholt/caddy/releases/download/v0.7.1/caddy_linux_amd64.zip
-  unpack: zip
+  url: https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors
+  unpack: tar
   pick: caddy
-  sha1: fa27430b4bb8a2ced66976e9895c352b49b457c4
+  sha1: f9736c92ba0ca409bdf2a42122430497f7ecf0ab
 
 # Fantasque Sans Mono font.
 
