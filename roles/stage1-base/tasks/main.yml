@@ -20,6 +20,7 @@
     - multitail
     - nano
     - realpath
+    - shellcheck
     - supervisor
     - tmux
     - tree
