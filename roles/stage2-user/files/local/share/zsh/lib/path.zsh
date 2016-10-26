@@ -3,7 +3,11 @@
 # $PATH
 #
 
-function add_to_path() { [[ -d $1 ]] && export PATH="$1:$PATH"; }
+function add_to_path() {
+  if [[ -d $1 ]] && echo $PATH | grep -v $1 >/dev/null; then
+    export PATH="$1:$PATH"
+  fi
+}
 
 add_to_path "${datasift}/chef/bin"
 add_to_path "${datasift}/siftdk/src/bin"
