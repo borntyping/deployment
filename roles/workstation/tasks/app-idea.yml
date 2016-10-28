@@ -2,13 +2,13 @@
   file: name=/opt/jetbrains state=directory owner=sam group=sam
   become: yes
 
-# - name: "IntelliJ IDEA : fetch archive"
-#   get_url: >
-#     url=https://download.jetbrains.com/idea/ideaIU-2016.1.tar.gz
-#     dest=/tmp/ideaIU.tar.gz
-#     validate_certs=False
-#
-# - name: "IntelliJ IDEA : unpack archive"
-#   unarchive: >
-#     src=/tmp/ideaIU.tar.gz
-#     dest=/opt/jetbrains
+- name: "IntelliJ IDEA : fetch archive"
+  get_url: >
+    url=https://download-cf.jetbrains.com/idea/ideaIU-2016.3-PublicPreview.tar.gz
+    dest=/tmp/ideaIU.tar.gz
+    validate_certs=False
+
+- name: "IntelliJ IDEA : unpack archive"
+  unarchive: >
+    src=/tmp/ideaIU.tar.gz
+    dest=/opt/jetbrains
