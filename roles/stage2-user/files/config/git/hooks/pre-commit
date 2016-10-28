@@ -6,6 +6,6 @@ if [ "${PWD##${datasift}/chef}" != "$PWD" ]; then
   exit 0
 fi
 
-if [[ "$(find -name '*.rb' | wc -l)" -gt 0 ]]; then
+if [[ "$(find -name '*.rb' | grep -v node_modules | wc -l)" -gt 0 ]]; then
   chef exec rubocop --format=clang
 fi
