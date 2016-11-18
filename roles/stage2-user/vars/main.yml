@@ -2,10 +2,3 @@
 # User details used to configure git
 git_name: "Sam Clements"
 git_email: "sam@borntyping.co.uk"
-
-# Directories used to setup pipsi
-pipsi_venv: '{{ ansible_env.HOME }}/.local/venvs/pipsi'
-pipsi_bin: '{{ ansible_env.HOME }}/.local/bin'
-
-peru_venv: '{{ ansible_env.HOME }}/.local/venvs/peru'
-peru_bin: '{{ ansible_env.HOME }}/.local/bin'
