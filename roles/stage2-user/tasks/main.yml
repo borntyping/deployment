@@ -33,10 +33,6 @@
     - npm
     - dotfiles
 
-- include: tool-peru.yml
-  tags:
-    - peru
-
 - include: tool-ssh.yml
   tags:
     - ssh
