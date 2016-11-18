@@ -2,10 +2,8 @@
 
 set -e
 
-if [ "${PWD##${datasift}/chef}" != "$PWD" ]; then
-  exit 0
-fi
-
-if [[ "$(find -name '*.rb' | grep -v node_modules | wc -l)" -gt 0 ]]; then
-  chef exec rubocop --format=clang
+if [ "$(git config --get --bool hooks.rubocop)" != "false" ]; then
+  if [[ "$(find -name '*.rb' | grep -v node_modules | wc -l)" -gt 0 ]]; then
+    chef exec rubocop --format=clang
+  fi
 fi
