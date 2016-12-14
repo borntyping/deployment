@@ -73,13 +73,13 @@ curl module jq:
 git module with:
   url: https://github.com/mchav/with.git
   pick: with
-  rev: 3262a411f6a43aa578d725545d825fc0ea676607
+  rev: 6993a8311d906306680abcacc488e3accdc1a5f9
 
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 28d7056a7a0652fafe84e38b58ac5366326531d9
+  rev: b8fa1b9dc954d66748cc5b593f531687f24b8d48
   pick:
     - .revision-hash
     - .version
