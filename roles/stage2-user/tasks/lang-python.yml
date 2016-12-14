@@ -20,6 +20,7 @@
     - docker-compose
     - gitless
     - httpie
+    - peru
     - pex
     - pip
     - secretstorage
