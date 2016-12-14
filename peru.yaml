@@ -1,7 +1,6 @@
 imports:
   blink1-tool: 'roles/stage2-user/files/local/bin'
   blink1-udev: 'roles/stage1-base/files'
-  caddy: 'roles/stage2-user/files/local/bin'
   fantasque: 'roles/workstation/files/fonts'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
@@ -22,14 +21,6 @@ curl module blink1-tool:
 curl module blink1-udev:
   url: https://raw.githubusercontent.com/todbot/blink1/master/linux/51-blink1.rules
   sha1: cbf05a407ee78517e31502bada72bf1aec813723
-
-# HTTP development server
-
-curl module caddy:
-  url: https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors
-  unpack: tar
-  pick: caddy
-  sha1: f9736c92ba0ca409bdf2a42122430497f7ecf0ab
 
 # Fantasque Sans Mono font.
 
