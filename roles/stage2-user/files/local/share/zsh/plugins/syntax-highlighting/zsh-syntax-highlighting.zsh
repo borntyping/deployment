@@ -27,6 +27,13 @@
 # vim: ft=zsh sw=2 ts=2 et
 # -------------------------------------------------------------------------------------------------
 
+# First of all, ensure predictable parsing.
+zsh_highlight__aliases=`builtin alias -Lm '[^+]*'`
+# In zsh <= 5.2, `alias -L` emits aliases that begin with a plus sign ('alias -- +foo=42')
+# them without a '--' guard, so they don't round trip.
+#
+# Hence, we exclude them from unaliasing:
+builtin unalias -m '[^+]*'
 
 # Set $0 to the expected value, regardless of functionargzero.
 0=${(%):-%N}
@@ -390,4 +397,11 @@ zmodload zsh/parameter 2>/dev/null || true
 autoload -U is-at-least
 
 # Initialize the array of active highlighters if needed.
-[[ $#ZSH_HIGHLIGHT_HIGHLIGHTERS -eq 0 ]] && ZSH_HIGHLIGHT_HIGHLIGHTERS=(main) || true
+[[ $#ZSH_HIGHLIGHT_HIGHLIGHTERS -eq 0 ]] && ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+
+# Restore the aliases we unned
+eval "$zsh_highlight__aliases"
+builtin unset zsh_highlight__aliases
+
+# Set $?.
+true
