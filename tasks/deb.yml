@@ -5,20 +5,20 @@
 - name: "{{ name }} | version {{ version }}"
   set_fact: "deb_version={{ version }}"
 
-- name: "{{ name }} | query dpkg"
+- name: "{{ name }} | dpkg | query"
   command: "dpkg -s {{ name }}"
   register: "deb_dpkg"
   failed_when: "deb_dpkg.rc > 1"
   changed_when: no
 
-- name: "{{ name }} | check if {{ name }} is installed"
+- name: "{{ name }} | dpkg | installed?"
   set_fact: >
     deb_install='{{
       (not deb_dpkg.get('skipped', False)) and
       deb_dpkg.rc == 1
     }}'
 
-- name: "{{ name }} | check if {{ name }} is outdated"
+- name: "{{ name }} | dpkg | outdated?"
   set_fact: >
     deb_update='{{
       (not deb_dpkg.get('skipped', False)) and
@@ -26,14 +26,15 @@
       "Version: %s" % deb_version not in deb_dpkg.stdout
     }}'
 
-- name: "{{ name }} | fetch package"
+- name: "{{ name }} | fetch"
   get_url:
-    url: '{{ url }}'
-    dest: '/tmp/{{ name }}.deb'
-    validate_certs: '{{ validate_certs|default("true") }}'
+    url: "{{ url }}"
+    dest: "/tmp/{{ url | basename }}"
+    validate_certs: "{{ validate_certs|default('true') }}"
   when: "deb_install or deb_update"
 
-- name: "{{ name }} | install package"
-  apt: deb=/tmp/{{ name }}.deb
+- name: "{{ name }} | install"
+  apt:
+    deb: "/tmp/{{ url | basename }}"
   become: yes
   when: "deb_install or deb_update"
