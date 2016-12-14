@@ -2,3 +2,13 @@
 dependencies:
   - role: stage2-user
     tags: stage2
+  - role: deb
+    name: atom
+    version: 1.11.2
+    url: https://github.com/atom/atom/releases/download/v1.11.2/atom-amd64.deb
+    tags: atom
+  - role: deb
+    name: hyper
+    version: 1.0.0
+    url: https://github.com/zeit/hyper/releases/download/1.0.0/hyper-1.0.0.deb
+    tags: hyper

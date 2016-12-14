@@ -1,0 +1,15 @@
+---
+dependencies:
+  - role: deb
+    name: nix
+    version: 1.10.0
+    url: http://hydra.nixos.org/build/25489743/download/1/nix_1.10-1_amd64.deb
+  - role: deb
+    name: keybase
+    version: 1.0.16
+    url: https://dist.keybase.io/linux/deb/keybase-latest-amd64.deb
+    tags: keybase
+  - role: deb
+    name: chefdk
+    version: 0.17.17
+    url: https://packages.chef.io/files/stable/chefdk/0.17.17/ubuntu/14.04/chefdk_0.17.17-1_amd64.deb

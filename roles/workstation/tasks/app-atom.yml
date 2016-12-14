@@ -1,9 +1,0 @@
-#
-# Install Atom editor
-#
-
-- include: >
-    ../../../tasks/deb.yml
-    name=atom
-    version=1.11.2
-    url=https://github.com/atom/atom/releases/download/v1.11.2/atom-amd64.deb

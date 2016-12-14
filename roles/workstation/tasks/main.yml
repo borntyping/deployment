@@ -5,12 +5,8 @@
 - include: apt.yml
   tags: ['apt']
 
-- include: app-atom.yml
-  tags: ['atom']
 - include: app-dropbox.yml
   tags: ['dropbox']
-- include: app-hyper.yml
-  tags: ['hyper']
 - include: app-idea.yml
   tags: ['idea']
 - include: app-terminator.yml
