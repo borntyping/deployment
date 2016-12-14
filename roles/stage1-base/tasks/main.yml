@@ -74,15 +74,9 @@
 - name: blink1
   include: tool-blink1.yml
   tags: ['tools', 'blink1']
-- name: chefdk
-  include: tool-chefdk.yml
-  tags: ['tools', 'chefdk', 'chef']
 - name: docker
   include: tool-docker.yml
   tags: ['tools', 'docker']
 - name: git
   include: tool-git.yml
   tags: ['tools', 'git']
-- name: keybase
-  include: tool-keybase.yml
-  tags: ['tools', 'keybase']
