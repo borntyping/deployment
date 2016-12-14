@@ -11,8 +11,6 @@
   tags: ['dropbox']
 - include: app-idea.yml
   tags: ['idea']
-- include: app-sublime.yml
-  tags: ['sublime']
 - include: app-terminator.yml
   tags: ['terminator']
 
