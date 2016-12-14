@@ -1,0 +1,9 @@
+#
+# Install Hyper terminal.
+#
+
+- include: >
+    ../../../tasks/deb.yml
+    name=hyper
+    version=1.0.0
+    url=https://github.com/zeit/hyper/releases/download/1.0.0/hyper-1.0.0.deb
