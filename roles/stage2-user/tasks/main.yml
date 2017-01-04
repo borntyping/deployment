@@ -33,6 +33,11 @@
     - npm
     - dotfiles
 
+- include: tool-ntfy.yml
+  tags:
+    - ntfy
+    - dotfiles
+
 - include: tool-ssh.yml
   tags:
     - ssh

@@ -3,10 +3,15 @@
 #
 
 - name: virtualenv | create ~/.virtualenvs directory
-  file: 'name={{ ansible_env.HOME }}/.virtualenvs state=directory'
+  file:
+    name: '{{ ansible_env.HOME }}/.virtualenvs'
+    state: directory
 
 - name: virtualenv | create scripts
-  copy: 'src={{ item }} dest={{ ansible_env.HOME }}/.virtualenvs/{{ item }} mode=0755'
+  copy:
+    src: '{{ item }}'
+    dest: '{{ ansible_env.HOME }}/.virtualenvs/{{ item }}'
+    mode: '0755'
   with_items:
     - postmkvirtualenv
 
@@ -15,11 +20,15 @@
 #
 
 - name: python | install packages
-  pip: "name={{ item }} state=latest executable=pip3 extra_args=--user"
+  pip:
+    name: '{{ item }}'
+    state: latest
+    executable: pip3
+    extra_args: --user
   with_items:
     - docker-compose
-    - gitless
     - httpie
+    - ntfy
     - peru
     - pex
     - pip
@@ -31,8 +40,14 @@
     - watch-fs
     - wheel
     - youtube_dl
+  tags:
+    - ntfy
 
 - name: python | install legacy packages
-  pip: "name={{ item }} state=latest executable=pip2 extra_args=--user"
+  pip:
+    name: '{{ item }}'
+    state: latest
+    executable: pip2
+    extra_args: --user
   with_items:
     - colout
