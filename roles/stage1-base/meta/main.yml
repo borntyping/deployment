@@ -7,5 +7,6 @@ dependencies:
     tags: keybase
   - role: deb
     name: chefdk
-    version: 0.17.17
-    url: https://packages.chef.io/files/stable/chefdk/0.17.17/ubuntu/14.04/chefdk_0.17.17-1_amd64.deb
+    version: 1.1.16
+    url: https://packages.chef.io/files/stable/chefdk/1.1.16/ubuntu/16.04/chefdk_1.1.16-1_amd64.deb
+    tags: [chef, chefdk]
