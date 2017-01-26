@@ -1,3 +1,11 @@
+---
+- name: 'ntfy : install python package'
+  pip:
+    name: ntfy
+    state: latest
+    executable: pip3
+    extra_args: --user
+
 - name: 'ntfy : create ~/.config/ntfy directory'
   file:
     name: '{{ ansible_env.HOME }}/.config/ntfy'
