@@ -1,11 +1,21 @@
-- name: ssh | create ~/.ssh directory
-  file: 'name={{ ansible_env.HOME }}/.ssh state=directory'
+- name: 'ssh : create ~/.ssh directory'
+  file:
+    name: '{{ ansible_env.HOME }}/.ssh'
+    state: directory
 
-- name: ssh | create ~/.ssh/config.d directory
-  file: 'name={{ ansible_env.HOME }}/.ssh/config.d state=directory'
+- name: 'ssh : create ~/.ssh sub-directories'
+  file:
+    name: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
+    state: directory
+  with_items:
+    - config.d
+    - hosts
+    - keys
 
-- name: ssh | create ~/.ssh/config
-  shell: "cat {{ ansible_env.HOME }}/.ssh/config.d/*.config > ~/.ssh/config"
+- name: 'ssh : create ~/.ssh/config.d/base.config'
+  copy:
+    src: 'ssh/config.d/base.config'
+    dest: '{{ ansible_env.HOME }}/.ssh/config.d/base.config'
 
-# - name: ssh | generate ssh key
-#   user: 'name={{ ansible_env.USER }} generate_ssh_key=true'
+- name: 'ssh : generate ~/.ssh/config from ~/.ssh/config.d'
+  shell: 'cat {{ ansible_env.HOME }}/.ssh/config.d/*.config > ~/.ssh/config'
