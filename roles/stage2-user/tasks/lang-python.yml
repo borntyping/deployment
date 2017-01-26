@@ -43,12 +43,3 @@
     - youtube_dl
   tags:
     - ntfy
-
-- name: python | install legacy packages
-  pip:
-    name: '{{ item }}'
-    state: latest
-    executable: pip2
-    extra_args: --user
-  with_items:
-    - colout

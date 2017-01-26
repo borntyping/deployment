@@ -75,7 +75,6 @@
     - blink1-tool
     - blink1-busy
     - blink1-free
-    - caddy
     - docker-gc
     - gen-ssh-config
     - git-cleanup

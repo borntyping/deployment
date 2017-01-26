@@ -4,7 +4,7 @@
 
 - name: "IntelliJ IDEA : fetch archive"
   get_url: >
-    url=https://download-cf.jetbrains.com/idea/ideaIU-2016.3-PublicPreview.tar.gz
+    url=https://download.jetbrains.com/idea/ideaIC-2016.3.3.tar.gz
     dest=/tmp/ideaIU.tar.gz
     validate_certs=False
 
