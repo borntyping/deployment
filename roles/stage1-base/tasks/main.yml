@@ -1,3 +1,5 @@
+---
+
 #
 # Install other packages
 #
@@ -9,18 +11,25 @@
     - spotify
     - slack
 
-- name: install utility packages
-  apt: 'pkg={{ item }} state=latest'
-  become: yes
+- name: install packages
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  become: 'yes'
   with_items:
+    - ansible
     - aptitude
+    - asciinema
     - colordiff
     - curl
+    - git
+    - golang
     - htop
     - multitail
     - nano
     - realpath
     - shellcheck
+    - supervisor
     - supervisor
     - tmux
     - tree
@@ -37,9 +46,6 @@
 # Install programming languages and packages from their repositories
 #
 
-- name: go
-  include: lang-go.yml
-  tags: ['languages', 'go']
 - name: node
   include: lang-node.yml
   tags: ['languages', 'node']
@@ -51,32 +57,15 @@
   tags: ['languages', 'ruby']
 
 #
-# Install services
-#
-
-- name: supervisor
-  include: service-supervisor.yml
-  tags: ['services', 'supervisor']
-
-#
 # Install development tools
 #
 
-- name: asciinema
-  include: tool-asciinema.yml
-  tags: ['tools', 'asciinema']
 - name: ack
   include: tool-ack.yml
   tags: ['tools', 'ack']
-- name: ansible
-  include: tool-ansible.yml
-  tags: ['tools', 'ansible']
 - name: blink1
   include: tool-blink1.yml
   tags: ['tools', 'blink1']
 - name: docker
   include: tool-docker.yml
   tags: ['tools', 'docker']
-- name: git
-  include: tool-git.yml
-  tags: ['tools', 'git']

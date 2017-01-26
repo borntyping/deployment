@@ -1,44 +1,46 @@
 ---
-- name: zsh | install
-  apt: pkg=zsh state=latest
-  become: yes
+- name: 'zsh : install'
+  apt:
+    pkg: zsh
+    state: latest
+  become: 'yes'
 
-- name: zsh | copy libaries
-  copy: >
-    src=local/share/zsh/
-    dest={{ ansible_env.HOME }}/.local/share/zsh/
+- name: 'zsh : copy libaries'
+  copy:
+    src: 'local/share/zsh/'
+    dest: '{{ ansible_env.HOME }}/.local/share/zsh/'
   tags:
     - dotfiles
     - zshrc
 
-- name: zsh | copy configuration
-  copy: >
-    src=local/etc/
-    dest={{ ansible_env.HOME }}/.local/etc/
+- name: 'zsh : copy configuration'
+  copy:
+    src: 'local/etc/'
+    dest: '{{ ansible_env.HOME }}/.local/etc/'
   tags:
     - dotfiles
     - zshrc
 
-- name: zsh | link ~/.zshrc
-  file: >
-    src={{ ansible_env.HOME }}/.local/etc/zshrc
-    dest={{ ansible_env.HOME }}/.zshrc
-    state=link
+- name: 'zsh : link ~/.zshrc'
+  file:
+    src: '{{ ansible_env.HOME }}/.local/etc/zshrc'
+    dest: '{{ ansible_env.HOME }}/.zshrc'
+    state: link
   tags:
     - dotfiles
     - zshrc
 
-- name: zsh | link ~/.zshenv
-  file: >
-    src={{ ansible_env.HOME }}/.local/etc/zshenv
-    dest={{ ansible_env.HOME }}/.zshenv
-    state=link
+- name: 'zsh : link ~/.zshenv'
+  file:
+    src: '{{ ansible_env.HOME }}/.local/etc/zshenv'
+    dest: '{{ ansible_env.HOME }}/.zshenv'
+    state: link
   tags:
     - dotfiles
     - zshrc
 
-- name: zsh | set user shell
-  user: >
-    name={{ ansible_env.USER }}
-    shell=/bin/zsh
-  become: yes
+- name: 'zsh : set user shell'
+  user:
+    name: '{{ ansible_env.USER }}'
+    shell: /bin/zsh
+  become: 'yes'

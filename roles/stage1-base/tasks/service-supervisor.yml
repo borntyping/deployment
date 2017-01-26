@@ -1,3 +1,0 @@
-- name: supervisor | install
-  apt: 'pkg=supervisor state=latest'
-  become: yes

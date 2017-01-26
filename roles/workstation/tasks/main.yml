@@ -1,10 +1,10 @@
+---
 #
-# Install software only useful on a workstation or non-headless machine
+# Install software only useful on a workstation or non-headless machine.
 #
 
 - include: apt.yml
   tags: ['apt']
-
 - include: app-dropbox.yml
   tags: ['dropbox']
 - include: app-idea.yml
@@ -13,8 +13,10 @@
   tags: ['terminator']
 
 - name: 'install'
-  apt: 'pkg={{ item }} state=latest'
-  become: yes
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  become: 'yes'
   with_items:
     - firefox
     - gparted
@@ -22,12 +24,12 @@
     - slack-desktop
     - spotify-client
     - zeal
-  tags:
-    - zeal
 
 - name: 'install UI tools for Git'
-  apt: 'pkg={{ item }} state=latest'
-  become: yes
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  become: 'yes'
   with_items:
     - git-cola
     - gitg
@@ -37,12 +39,8 @@
   template: >
     dest={{ ansible_env.HOME }}/.config/user-dirs.dirs
     src=user-dirs.dirs
-  tags:
-  - xdg
 
 - name: 'install fonts'
   copy: >
     src=fonts/
     dest={{ ansible_env.HOME }}/.fonts
-  tags:
-    - fonts

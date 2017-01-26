@@ -1,3 +1,4 @@
+---
 imports:
   blink1-tool: 'roles/stage2-user/files/local/bin'
   blink1-udev: 'roles/stage1-base/files'
@@ -32,9 +33,9 @@ curl module fantasque:
     - FantasqueSansMono-BoldItalic.ttf
     - FantasqueSansMono-Italic.ttf
     - FantasqueSansMono-Regular.ttf
+  sha1: bf8a386e0e79256e35147720de439dc886af75ac
 
 # Git repository management tool
-  sha1: bf8a386e0e79256e35147720de439dc886af75ac
 
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
