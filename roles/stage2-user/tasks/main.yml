@@ -1,80 +1,55 @@
-#
-# Install user-specific configuration to $HOME
-#
-# This assumes that the remote ansible user is the user configuration should
-# be deployed to.
-#
-
+---
 - include: lang-python.yml
-  tags:
-    - python
-    - virtualenv
-
+  tags: ['python', 'virtualenv']
 - include: lang-ruby.yml
-  tags:
-    - ruby
-
+  tags: ['ruby']
 - include: lang-zsh.yml
-  tags:
-    - zsh
-    - shell
-
+  tags: ['zsh', 'shell']
 - include: tool-git.yml
-  tags:
-    - git
-
-- include: tool-nano.yml
-  tags:
-    - nano
-    - dotfiles
-
+  tags: ['git']
 - include: tool-npm.yml
-  tags:
-    - npm
-    - dotfiles
-
+  tags: ['npm', 'dotfiles']
 - include: tool-ntfy.yml
-  tags:
-    - ntfy
-    - dotfiles
-
+  tags: ['ntfy', 'dotfiles']
 - include: tool-ssh.yml
-  tags:
-    - ssh
+  tags: ['ssh']
 
-- name: configure dotfiles
-  template: >
-    src={{ item }}
-    dest={{ ansible_env.HOME }}/.{{ item }}
+#
+# Dotfiles.
+#
+
+- name: 'configure dotfiles'
+  template:
+    src: '{{ item }}'
+    dest: '{{ ansible_env.HOME }}/.{{ item }}'
   with_items:
     - ackrc
     - htoprc
-    - kitchen.local.yml
     - multitailrc
+    - nanorc
     - tmux.conf
   tags:
     - dotfiles
-    - chefdk
 
 #
-# Installs scripts to ~/.local/bin
+# Installs scripts to `~/.local/bin`.
 #
 
-- name: create bin directory
-  file: >
-    name={{ ansible_env.HOME }}/.local/bin
-    state=directory
+- name: 'create bin directory'
+  file:
+    name: '{{ ansible_env.HOME }}/.local/bin'
+    state: directory
 
-- name: install executables and scripts
-  copy: >
-    src=local/bin/{{ item }}
-    dest={{ ansible_env.HOME }}/.local/bin/{{ item }}
-    mode=0755
+- name: 'install executables and scripts'
+  copy:
+    src: 'local/bin/{{ item }}'
+    dest: '{{ ansible_env.HOME }}/.local/bin/{{ item }}'
+    mode: '0755'
   with_items:
     - ansible-run
-    - blink1-tool
     - blink1-busy
     - blink1-free
+    - blink1-tool
     - docker-gc
     - gen-ssh-config
     - git-cleanup
@@ -89,34 +64,15 @@
     - with
   tags:
     - bin
-    - blink1
-
-- name: blink1 | turn on at 9AM
-  cron:
-    name: 'enable blink(1)'
-    hour: 9
-    minute: 0
-    job: /home/sam/.local/bin/blink1-tool --id all --off
-  tags:
-    - blink1
-
-- name: blink1 | turn off at 6PM
-  cron:
-    name: 'disable blink(1)'
-    hour: 18
-    minute: 0
-    job: /home/sam/.local/bin/blink1-tool --id all --off
-  tags:
-    - blink1
 
 #
 # Create development directories.
 #
 
-- name: create development directory
-  file: >
-    name={{ ansible_env.HOME }}/{{ item }}
-    state=directory
+- name: 'create development directories'
+  file:
+    name: '{{ ansible_env.HOME }}/{{ item }}'
+    state: directory
   with_items:
     - Development
     - Development/borntyping

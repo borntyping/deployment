@@ -1,31 +1,28 @@
-#
-# Configure APT repos in one place, then update metadata.
-#
-
+---
 - name: configure repositories
   apt_repository:
     repo: '{{ item }}'
     state: present
   register: apt_repositories
-  become: yes
+  become: 'yes'
   with_items:
     - deb http://repository.spotify.com stable non-free
     - deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
-    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu trusty main 
+    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu trusty main
 
 - name: configure repository keys
   apt_key:
     id: '{{ item }}'
     keyserver: hkp://keyserver.ubuntu.com:80
   register: apt_repositories_key
-  become: yes
+  become: 'yes'
   with_items:
-    - D2C19886 # spotify
-    - D59097AB # slack
-    - 786285426B130F8C8C67CEF87F73D5BEFC1B6133 # zeal
+    - D2C19886  # spotify
+    - D59097AB  # slack
+    - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
 
 - name: update repositories
   apt:
-    update_cache: yes
+    update_cache: 'yes'
   when: apt_repositories.changed or apt_repositories_key.changed
-  become: yes
+  become: 'yes'

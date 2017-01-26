@@ -1,13 +1,10 @@
-#
-# Configure virtualenv
-#
-
-- name: virtualenv | create ~/.virtualenvs directory
+---
+- name: 'python : create ~/.virtualenvs directory'
   file:
     name: '{{ ansible_env.HOME }}/.virtualenvs'
     state: directory
 
-- name: virtualenv | create scripts
+- name: 'python : create scripts'
   copy:
     src: '{{ item }}'
     dest: '{{ ansible_env.HOME }}/.virtualenvs/{{ item }}'
@@ -19,7 +16,7 @@
 # Install python packages
 #
 
-- name: python | install packages
+- name: 'python : install python packages'
   pip:
     name: '{{ item }}'
     state: latest

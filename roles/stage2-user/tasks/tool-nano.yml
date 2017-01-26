@@ -1,2 +1,0 @@
-- name: 'nano | copy configuration'
-  copy: 'src=nanorc dest={{ ansible_env.HOME }}/.nanorc'

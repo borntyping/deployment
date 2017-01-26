@@ -1,3 +1,0 @@
-- name: asciinema | install
-  apt: pkg=asciinema state=latest
-  become: yes

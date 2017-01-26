@@ -1,13 +1,10 @@
-#
-# Install local gems
-#
-
-- name: install ruby packages
+---
+- name: 'ruby : install'
   gem:
     state: latest
     name: '{{ item }}'
     executable: gem2.3
-    user_install: yes
+    user_install: 'yes'
   with_items:
     - bundler
     - fpm
@@ -15,7 +12,7 @@
     - travis
     - travis-lint
 
-- name: bundle | directory
+- name: 'ruby : create ~/.bundle'
   file:
     name: '{{ ansible_env.HOME }}/.bundle'
     state: directory
@@ -23,7 +20,7 @@
     - dotfiles
     - bundle
 
-- name: bundle | config
+- name: 'ruby : create ~/.bundle/config'
   template:
     src: bundle_config
     dest: '{{ ansible_env.HOME }}/.bundle/config'

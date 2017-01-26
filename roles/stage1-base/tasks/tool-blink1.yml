@@ -1,9 +1,10 @@
-- name: blink1 | configure udev
+---
+- name: 'blink1 : configure udev'
   copy: src=51-blink1.rules dest=/etc/udev/rules.d/51-blink1.rules
-  become: yes
+  become: 'yes'
   register: blink1_udev
 
-- name: blink1 | reload udev
+- name: 'blink1 : reload udev'
   command: udevadm control --reload-rules
   when: blink1_udev.changed
-  become: yes
+  become: 'yes'

@@ -1,3 +1,5 @@
+---
+
 #
 # Fetch {{ url }} and use it to install {{ name }}.
 #
@@ -36,5 +38,5 @@
 - name: "{{ name }} : install"
   apt:
     deb: "/tmp/{{ url | basename }}"
-  become: yes
+  become: "yes"
   when: "deb_install or deb_update"

@@ -1,4 +1,0 @@
-provisioner:
-  client_rb:
-    diff_disabled: true
-    add_formatter: min

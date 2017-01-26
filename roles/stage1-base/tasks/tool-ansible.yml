@@ -1,7 +1,0 @@
-#
-# Ansible
-#
-
-- name: install ansible
-  apt: pkg=ansible state=latest
-  become: yes

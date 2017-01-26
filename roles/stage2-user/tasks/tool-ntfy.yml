@@ -9,7 +9,7 @@
 - name: 'ntfy : create ~/.config/ntfy directory'
   file:
     name: '{{ ansible_env.HOME }}/.config/ntfy'
-    state: 'directory'
+    state: directory
 
 - name: 'ntfy : create ~/.config/ntfy/ntfy.yml'
   copy:

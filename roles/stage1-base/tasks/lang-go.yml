@@ -1,7 +1,0 @@
-#
-# Install Golang
-#
-
-- name: go | install
-  apt: 'pkg=golang state=latest'
-  become: yes

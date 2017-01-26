@@ -1,3 +1,4 @@
+---
 - name: 'ssh : create ~/.ssh directory'
   file:
     name: '{{ ansible_env.HOME }}/.ssh'

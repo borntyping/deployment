@@ -1,16 +1,10 @@
-#
-# Install node.js
-#
-
-- name: node | install nodejs
-  apt: 'pkg={{ item }} state=latest'
-  become: yes
+---
+- name: 'node : install nodejs'
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  become: 'yes'
   with_items:
     - nodejs
     - nodejs-legacy
     - npm
-
-# - name: node | install packages
-#   npm: 'name={{ item }} global=yes'
-#   become: yes
-#   with_items:

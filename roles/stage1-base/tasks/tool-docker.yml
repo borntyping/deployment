@@ -1,34 +1,23 @@
-#
-# Install docker
-#
-# keyserver=hkp://pgp.mit.edu:80
-
-- name: docker | install
-  apt: 'pkg={{ item }} state=latest'
-  become: yes
+---
+- name: 'docker : install'
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  become: 'yes'
   with_items:
     - docker-engine
     - apparmor
     - cgroup-lite
 
-- name: docker | create group
+- name: 'docker : create group'
   group:
     name: docker
     state: present
-  become: yes
+  become: 'yes'
 
-- name: docker | add user to docker group
+- name: 'docker : add user to docker group'
   user:
     name: '{{ ansible_env.USER }}'
     groups: docker
     append: true
-  become: yes
-
-# - name: docker | add resolvable service
-#   copy: src=docker.resolvable.service dest=/etc/systemd/user/docker.resolvable.service
-#   become: yes
-#   tags: ['target']
-#   register: docker_resolveable_service
-#
-# - name: docker | start resolvable
-#   when: docker_resolveable_service.changed
+  become: 'yes'
