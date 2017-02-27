@@ -23,7 +23,6 @@
     executable: pip3
     extra_args: --user
   with_items:
-    - docker-compose
     - httpie
     - ntfy
     - peru
