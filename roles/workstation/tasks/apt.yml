@@ -18,7 +18,7 @@
   become: 'yes'
   with_items:
     - D2C19886  # spotify
-    - D59097AB  # slack
+    - C6ABDCF64DB9A0B2  # slack
     - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
 
 - name: update repositories
