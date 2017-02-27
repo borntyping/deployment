@@ -11,6 +11,8 @@
   tags: ['idea']
 - include: app-terminator.yml
   tags: ['terminator']
+- include: app-virtualbox.yml
+  tags: ['virtualbox']
 
 - name: 'install'
   apt:
