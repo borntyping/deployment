@@ -1,0 +1,6 @@
+---
+- name: "virtualbox : install"
+  apt:
+    pkg: virtualbox-5.1
+    state: latest
+  become: 'yes'
