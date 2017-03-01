@@ -21,6 +21,11 @@
     - dotfiles
     - zshrc
 
+- name: 'zsh : touch ~/.local/etc/local.zsh'
+  file:
+    path: '{{ ansible_env.HOME }}/.local/etc/local.zsh'
+    state: touch
+
 - name: 'zsh : link ~/.zshrc'
   file:
     src: '{{ ansible_env.HOME }}/.local/etc/zshrc'
