@@ -7,7 +7,6 @@
   become: 'yes'
   with_items:
     - deb http://repository.spotify.com stable non-free
-    - deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
     - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu trusty main
     - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
 
@@ -20,7 +19,6 @@
   with_items:
     - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF  # virtualbox
     - D2C19886  # spotify
-    - C6ABDCF64DB9A0B2  # slack
     - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
 
 - name: update repositories
