@@ -76,5 +76,5 @@
   with_items:
     - Development
     - Development/borntyping
-    - Development/datasift
+    - Development/generalbioinformatics
     - Development/src
