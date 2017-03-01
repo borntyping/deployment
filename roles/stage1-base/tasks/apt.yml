@@ -6,7 +6,6 @@
   register: apt_repositories
   become: 'yes'
   with_items:
-    - deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
     - deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main
     - deb http://ppa.launchpad.net/zanchey/asciinema/ubuntu trusty main
     - deb https://apt.dockerproject.org/repo ubuntu-xenial main
@@ -18,7 +17,6 @@
   register: apt_repositories_key
   become: 'yes'
   with_list:
-    - 7BB9C367  # ansible
     - 0F833EAD  # asciinema
     - 58118E89F3A912897C070ADBF76221572C52609D  # docker
     - E1DF1F24  # git
