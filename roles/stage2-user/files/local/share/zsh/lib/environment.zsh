@@ -27,8 +27,7 @@ export NPM_CONFIG_PREFIX="$HOME/.npm"
 
 setopt AUTO_NAME_DIRS
 export borntyping="$HOME/Development/borntyping"
-export generalbioinformatics="$HOME/Development/generalbioinformatics"
-export gb="${generalbioinformatics}"
+export gb="$HOME/Development/generalbioinformatics"
 export sandbox="$HOME/Development/borntyping-sandbox"
 export src="$HOME/Development/src"
 
