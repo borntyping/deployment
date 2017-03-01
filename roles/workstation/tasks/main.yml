@@ -7,6 +7,8 @@
   tags: ['apt']
 - include: app-dropbox.yml
   tags: ['dropbox']
+- include: app-jetbrains.yml
+  tags: ['jetbrains']
 - include: app-terminator.yml
   tags: ['terminator']
 - include: app-virtualbox.yml
