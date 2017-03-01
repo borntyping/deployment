@@ -1,0 +1,19 @@
+---
+- name: "Jetbrains Toolbox : create user owned /opt/jetbrains"
+  file:
+    name: /opt/jetbrains
+    state: directory
+    owner: sam
+    group: sam
+  become: 'yes'
+
+- name: "Jetbrains Toolbox : fetch archive"
+  get_url:
+    url: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.2.2259.tar.gz
+    dest: /tmp/jetbrains-toolbox.tar.gz
+    validate_certs: 'false'
+
+- name: "Jetbrains Toolbox : unpack archive"
+  unarchive:
+    src: /tmp/jetbrains-toolbox.tar.gz
+    dest: /opt/jetbrains
