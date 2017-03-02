@@ -59,6 +59,7 @@
     - gws
     - hub
     - jq
+    - ssh-proxy
     - tmux-attach
     - wago
     - with
