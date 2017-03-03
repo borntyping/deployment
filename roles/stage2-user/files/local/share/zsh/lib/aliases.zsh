@@ -32,6 +32,7 @@ alias httpie='http'
 
 # Molecule is hard to spell
 alias mc='molecule'
+alias mcc='mc converge; mc verify'
 
 # Send an alert with the status of the previous command
 function alert() {
