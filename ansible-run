@@ -1,7 +1,3 @@
 #!/bin/bash
 
-INVENTORY='inventory.conf'
-
-[[ -f $INVENTORY ]] || echo "Create an inventory file named $INVENTORY"
-
-ansible-playbook --inventory-file="$INVENTORY" "$@" "site.yml"
+exec ansible-playbook --inventory-file="inventory.conf" "$@" "site.yml"
