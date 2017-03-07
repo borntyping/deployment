@@ -25,6 +25,7 @@
     - git
     - golang
     - htop
+    - letsencrypt
     - multitail
     - nano
     - realpath
