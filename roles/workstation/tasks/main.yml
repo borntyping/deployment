@@ -24,6 +24,7 @@
     - gparted
     - keepassx
     - spotify-client
+    - typora
     - zeal
 
 - name: 'install UI tools for Git'
