@@ -47,6 +47,9 @@
 # Install programming languages and packages from their repositories
 #
 
+- name: java
+  include: lang-java.yml
+  tags: ['languages', 'java']
 - name: node
   include: lang-node.yml
   tags: ['languages', 'node']

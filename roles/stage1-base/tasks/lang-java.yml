@@ -1,0 +1,8 @@
+---
+- name: 'java : install openjdk'
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  become: 'yes'
+  with_items:
+    - openjdk-8-jdk
