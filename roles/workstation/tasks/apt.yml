@@ -1,15 +1,4 @@
 ---
-- name: configure repositories
-  apt_repository:
-    repo: '{{ item }}'
-    state: present
-  register: apt_repositories
-  become: 'yes'
-  with_items:
-    - deb http://repository.spotify.com stable non-free
-    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu trusty main
-    - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
-
 - name: configure repository keys
   apt_key:
     id: '{{ item }}'
@@ -17,9 +6,22 @@
   register: apt_repositories_key
   become: 'yes'
   with_items:
-    - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF  # virtualbox
-    - D2C19886  # spotify
     - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
+    - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF  # virtualbox
+    - BA300B7755AFCFAE # typora
+    - D2C19886  # spotify
+
+- name: configure repositories
+  apt_repository:
+    repo: '{{ item }}'
+    state: present
+  register: apt_repositories
+  become: 'yes'
+  with_items:
+    - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
+    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu trusty main
+    - deb http://repository.spotify.com stable non-free
+    - deb https://typora.io linux/
 
 - name: update repositories
   apt:
