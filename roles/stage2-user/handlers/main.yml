@@ -1,0 +1,4 @@
+---
+- name: 'ssh : generate ~/.ssh/config from ~/.ssh/config.d'
+  shell: 'cat {{ ansible_env.HOME }}/.ssh/config.d/*.config > ~/.ssh/config'
+  listen: 'generate ssh config'
