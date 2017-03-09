@@ -17,6 +17,4 @@
   copy:
     src: 'ssh/config.d/base.config'
     dest: '{{ ansible_env.HOME }}/.ssh/config.d/base.config'
-
-- name: 'ssh : generate ~/.ssh/config from ~/.ssh/config.d'
-  shell: 'cat {{ ansible_env.HOME }}/.ssh/config.d/*.config > ~/.ssh/config'
+  notify: 'generate ssh config'
