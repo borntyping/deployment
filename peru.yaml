@@ -64,6 +64,8 @@ rule hub-executable:
   pick: hub
   copy: {'hub-linux-amd64-2.2.1/hub': 'hub'}
 
+# JSON transformation tool.
+
 curl module jq:
   url: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
   filename: jq
@@ -74,13 +76,13 @@ curl module jq:
 git module with:
   url: https://github.com/mchav/with.git
   pick: with
-  rev: 6993a8311d906306680abcacc488e3accdc1a5f9
+  rev: f919baf65a94bca4502fd0cbacdb7a01b87a77d1
 
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: b8fa1b9dc954d66748cc5b593f531687f24b8d48
+  rev: 73cb83270262bbb6bf110a8a6a99f36db8f56cef
   pick:
     - .revision-hash
     - .version

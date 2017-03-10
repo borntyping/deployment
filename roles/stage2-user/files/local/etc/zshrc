@@ -1,5 +1,10 @@
 #!/bin/zsh
 
-source $HOME/.local/etc/zsh/*.zsh
-source $HOME/.local/etc/zsh/tools/*.zsh
-source $HOME/.local/etc/local.zsh
+function source_directory() {
+  for FILE in $1/*.zsh; do
+    source "$FILE"
+  done
+}
+
+source_directory "$HOME/.local/etc/zsh"
+source_directory "$HOME/.local/etc/zsh/tools"
