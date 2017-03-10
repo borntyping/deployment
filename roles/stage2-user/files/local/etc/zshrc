@@ -1,16 +1,5 @@
 #!/bin/zsh
 
-source "$HOME/.local/share/zsh/lib/aliases.zsh"
-source "$HOME/.local/share/zsh/lib/completion.zsh"
-source "$HOME/.local/share/zsh/lib/environment.zsh"
-source "$HOME/.local/share/zsh/lib/history.zsh"
-source "$HOME/.local/share/zsh/lib/man.zsh"
-source "$HOME/.local/share/zsh/lib/path.zsh"
-source "$HOME/.local/share/zsh/lib/prompt.zsh"
-source "$HOME/.local/share/zsh/lib/syntax-highlighting.zsh"
-
-source "$HOME/.local/share/zsh/lib/virtualenvwrapper.zsh"
-source "$HOME/.local/share/zsh/lib/ntfy.zsh"
-source "$HOME/.local/share/zsh/lib/selecta.zsh"
-
-source "$HOME/.local/etc/local.zsh" || :
+source $HOME/.local/etc/zsh/*.zsh
+source $HOME/.local/etc/zsh/tools/*.zsh
+source $HOME/.local/etc/local.zsh
