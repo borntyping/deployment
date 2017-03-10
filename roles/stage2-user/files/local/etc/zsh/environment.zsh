@@ -12,6 +12,12 @@ setopt RM_STAR_WAIT                     # Force the user to wait before `rm *`
 
 export EDITOR=nano
 export LS_COLORS='rs=0:di=01;34:ln=target:or=41:ex=32'
+
+#
+# Secrets
+#
+
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible-secret
 export SSH_RUN_SUDO_KEYRING=1
 
 #
