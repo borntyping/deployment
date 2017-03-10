@@ -1,7 +1,7 @@
 #!/bin/zsh
-
-alias -g ...='../..'
-alias -g ....='../../..'
+#
+# Aliases
+#
 
 # Color basic commands.
 alias ls='ls --color=auto'
@@ -21,6 +21,7 @@ alias gg='gitg &'
 
 # Run ansible and reload ZSH.
 alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
+alias ansible-ssh='ansible-run -t ssh'
 
 # Bundler/Chef aliases
 alias ce='chef exec'
@@ -33,20 +34,3 @@ alias httpie='http'
 # Molecule is hard to spell
 alias mc='molecule'
 alias mcc='mc converge; mc verify'
-
-# Send an alert with the status of the previous command
-function alert() {
-    local SUCCESS=$?
-    local COMMAND="$(echo $history[$HISTCMD] | sed "s/; alert//")"
-    local ICONS="/usr/share/icons/Mint-X/status/16"
-
-    paplay "/usr/share/sounds/pop.wav"
-
-    if [[ $SUCCESS == 0 ]]; then
-        notify-send -i "${ICONS}/dialog-information.png" \
-            "Command finished: ${COMMAND}"
-    else
-        notify-send -i "${ICONS}/dialog-error.png" \
-            "Command failed: ${COMMAND}"
-    fi
-}

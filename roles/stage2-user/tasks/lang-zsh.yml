@@ -35,15 +35,6 @@
     - dotfiles
     - zshrc
 
-- name: 'zsh : link ~/.zshenv'
-  file:
-    src: '{{ ansible_env.HOME }}/.local/etc/zshenv'
-    dest: '{{ ansible_env.HOME }}/.zshenv'
-    state: link
-  tags:
-    - dotfiles
-    - zshrc
-
 - name: 'zsh : set user shell'
   user:
     name: '{{ ansible_env.USER }}'
