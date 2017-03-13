@@ -35,34 +35,11 @@
 # Installs scripts to `~/.local/bin`.
 #
 
-- name: 'create bin directory'
-  file:
-    name: '{{ ansible_env.HOME }}/.local/bin'
-    state: directory
-
 - name: 'install executables and scripts'
   copy:
-    src: 'local/bin/{{ item }}'
-    dest: '{{ ansible_env.HOME }}/.local/bin/{{ item }}'
+    src: 'local/bin/'
+    dest: '{{ ansible_env.HOME }}/.local/bin'
     mode: '0755'
-  with_items:
-    - ansible-run
-    - blink1-busy
-    - blink1-free
-    - blink1-tool
-    - docker-gc
-    - gen-ssh-config
-    - git-cleanup
-    - git-hub
-    - git-overwritten
-    - git-tag-version
-    - gws
-    - hub
-    - jq
-    - ssh-proxy
-    - tmux-attach
-    - wago
-    - with
   tags:
     - bin
 
