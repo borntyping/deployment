@@ -5,7 +5,7 @@
     state: latest
   become: 'yes'
 
-- name: 'zsh : copy libaries'
+- name: 'zsh : copy zsh libraries'
   copy:
     src: 'local/share/zsh/'
     dest: '{{ ansible_env.HOME }}/.local/share/zsh/'
@@ -13,24 +13,10 @@
     - dotfiles
     - zshrc
 
-- name: 'zsh : copy configuration'
+- name: 'zsh : copy zsh config'
   copy:
-    src: 'local/etc/'
-    dest: '{{ ansible_env.HOME }}/.local/etc/'
-  tags:
-    - dotfiles
-    - zshrc
-
-- name: 'zsh : touch ~/.local/etc/local.zsh'
-  file:
-    path: '{{ ansible_env.HOME }}/.local/etc/local.zsh'
-    state: touch
-
-- name: 'zsh : link ~/.zshrc'
-  file:
-    src: '{{ ansible_env.HOME }}/.local/etc/zshrc'
+    src: 'zshrc'
     dest: '{{ ansible_env.HOME }}/.zshrc'
-    state: link
   tags:
     - dotfiles
     - zshrc
