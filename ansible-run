@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec ansible-playbook --inventory-file="inventory.conf" "$@" "site.yml"

@@ -6,7 +6,7 @@ Deploys dotfiles, configuration and packages to my machines using Ansible.
 Usage
 -----
 
-Download the repository, create an inventory file, and run the `./ansible-run`
+Download the repository, create an inventory file, and run the `./reconfigure`
 script.
 
 ### Installing ansible
@@ -43,12 +43,12 @@ remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible
 
 If you don't want to create an inventory file, and only want to configure the
 local machine, you can pass `--inventory=localhost,` as an argument to
-`./ansible-run`.
+`./reconfigure`.
 
 ### Run ansible
 
 ```bash
-./ansible-run
+./reconfigure
 ```
 
 Bootstrapping a new server
@@ -107,7 +107,7 @@ Some dependencies are managed using [Peru], which is installed by the
 `peru reup` to update those files, which will fetch the lastest versions of the
 dependecies and copy them into this repository. Tasks that install these files
 are tagged with `peru`, so updating the deployed versions of those files can be
-done with `./ansible-run -t peru`.
+done with `./reconfigure -t peru`.
 
 Licence
 -------
