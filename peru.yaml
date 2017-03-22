@@ -3,6 +3,7 @@ imports:
   blink1-tool: 'roles/stage2-user/files/local/bin'
   blink1-udev: 'roles/stage1-base/files'
   fantasque: 'roles/workstation/files/fonts'
+  gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -34,6 +35,13 @@ curl module fantasque:
     - FantasqueSansMono-Italic.ttf
     - FantasqueSansMono-Regular.ttf
   sha1: bf8a386e0e79256e35147720de439dc886af75ac
+
+# GDrive cli
+
+curl module gdrive:
+  url: https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download
+  filename: gdrive
+  sha1: 4fd8391b300cac45963e53da44dcfe68da08d843
 
 # Git repository management tool
 
