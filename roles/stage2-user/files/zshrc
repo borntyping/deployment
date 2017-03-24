@@ -255,11 +255,13 @@ ZSH_HIGHLIGHT_PATTERNS+=('knife block use n*' 'fg=white,bold,bg=green')
 # Other plugins.
 #
 
+function source_if { [[ -f $1 ]] && source $1; }
+
 # Notifications for long running commands.
-which ntfy >/dev/null && eval "$(ntfy shell-integration)"
+source_if /home/sam/.local/share/ntfy/auto-ntfy-done.sh
 
 # Virtualenvwrapper
-# [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]] && source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source_if /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # https://github.com/vindolin/selecta
 function selecta_widget {

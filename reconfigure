@@ -1,8 +1,5 @@
 #!/bin/bash
-
-set -e
-
 REPO="$(readlink -f $(dirname "${BASH_SOURCE[0]}"))"
+export ANSIBLE_CONFIG="${REPO}/ansible.cfg"
 export ANSIBLE_INVENTORY="${REPO}/inventory.conf"
-export ANSIBLE_VAULT_PASSWORD_FILE="${HOME}/.ansible-secret"
 exec ansible-playbook --diff "$@" "${REPO}/playbook.yml"
