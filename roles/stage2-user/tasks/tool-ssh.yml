@@ -17,4 +17,4 @@
   copy:
     src: 'ssh/config.d/base.config'
     dest: '{{ ansible_env.HOME }}/.ssh/config.d/base.config'
-  notify: 'generate ssh config'
+  notify: ssh
