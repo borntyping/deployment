@@ -21,8 +21,8 @@ alias cola='git-cola &'
 alias gg='gitg &'
 
 # Run ansible and reload ZSH.
-alias ansible-zshrc='ansible-run -t zshrc; source ~/.zshrc'
-alias ansible-ssh='ansible-run -t ssh'
+alias reconfigure-ssh='reconfigure -t ssh'
+alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 # Bundler/Chef aliases
 alias ce='chef exec'
@@ -74,7 +74,7 @@ export src="$HOME/Development/src"
 # Environment variables
 #
 
-export ANSIBLE_INVENTORY="~/Development/generalbioinformatics/ansible/inventory.conf"
+export ANSIBLE_INVENTORY="~/Development/generalbioinformatics/it/ansible/inventory.conf"
 export ANSIBLE_VAULT_PASSWORD_FILE="~/.ansible-secret"
 export AUTO_NTFY_DONE_LONGER_THAN="-L60"
 export EDITOR="nano"
