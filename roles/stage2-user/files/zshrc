@@ -269,3 +269,6 @@ function selecta_widget {
 }
 zle -N selecta selecta_widget
 bindkey '^y' selecta
+
+# Load Desk environment
+[ -n "$DESK_ENV" ] && source "$DESK_ENV"

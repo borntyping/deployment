@@ -1,5 +1,7 @@
 ---
 imports:
+  desk|desk-completion: 'roles/stage2-user/files/local/share/zsh/functions'
+  desk|desk-script: 'roles/stage2-user/files/local/bin'
   fantasque: 'roles/workstation/files/fonts'
   gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -9,6 +11,19 @@ imports:
   jq: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
+
+# Desk environment switcher.
+
+git module desk:
+  url: git@github.com:jamesob/desk.git
+  rev: 4adef606321dea6028d0a6a451fa14011ee54cd5
+
+rule desk-completion:
+  pick: desk.zsh
+  copy: {'shell_plugins/zsh/_desk': 'desk.zsh'}
+
+rule desk-script:
+  pick: desk
 
 # Fantasque Sans Mono font.
 
