@@ -30,12 +30,10 @@
     - pip
     - pipenv
     - secretstorage
-    - selecta
     - ssh-run
     - tox
     - v
     - watch-fs
     - wheel
-    - youtube_dl
   tags:
     - ntfy

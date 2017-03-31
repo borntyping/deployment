@@ -263,12 +263,5 @@ source_if /home/sam/.local/share/ntfy/auto-ntfy-done.sh
 # Virtualenvwrapper
 source_if /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
-# https://github.com/vindolin/selecta
-function selecta_widget {
-  selecta --remove-bash-prefix --revert-order --remove-duplicates --show-hits <(fc -l)
-}
-zle -N selecta selecta_widget
-bindkey '^y' selecta
-
 # Load Desk environment
 [ -n "$DESK_ENV" ] && source "$DESK_ENV"
