@@ -172,17 +172,24 @@ function +vi-git-remote() {
     (( behind )) && hook_com[misc]+=" %{$fg[red]%}-${behind}%{$reset_color%}"
 }
 
+function desk_info() {
+    desk_info_msg=""
+    if [[ -n "$DESK_NAME" ]]; then
+        desk_info_msg="%{$fg_bold[green]%}desk:$DESK_NAME%{$reset_color%} "
+    fi
+}
+
 # Display the current virtualenv when active
-function _info_virtualenv() {
-    virtualenv_info_msg_=""
+function virtualenv_info() {
+    virtualenv_info_msg=""
     if [ -n "$VIRTUAL_ENV" ]; then
-        virtualenv_info_msg_="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        virtualenv_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
 
 # Display the currently selected knife-block configuration file
-function _info_knife() {
-    knife_info_msg_=""
+function knife_info() {
+    knife_info_msg=""
 
     local ENVIRONMENT_FILE ENVIRONMENT COLOUR
 
@@ -199,10 +206,9 @@ function _info_knife() {
     [[ "$ENVIRONMENT" == "production"  ]] && COLOUR="$fg[red]"
     [[ "$ENVIRONMENT" == "staging"     ]] && COLOUR="$fg[yellow]"
     [[ "$ENVIRONMENT" == "development" ]] && COLOUR="$fg[green]"
-    [[ "$ENVIRONMENT" == "berksapi"    ]] && COLOUR="$fg[blue]"
 
     ENVIRONMENT="%{$COLOUR%}${ENVIRONMENT}%{$reset_color%}"
-    knife_info_msg_="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
+    knife_info_msg="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
 }
 
 # Set terminal title and collect information before showing the prompt
@@ -211,8 +217,9 @@ function precmd() {
         xterm*) print -Pn "\e]2;%~\a";;
     esac
     vcs_info
-    _info_virtualenv
-    _info_knife
+    desk_info
+    virtualenv_info
+    knife_info
 }
 
 # Set terminal title before executing a command
@@ -223,13 +230,20 @@ function preexec() {
 }
 
 # Assemble the prompt
-#   sam@hostname ~ $
-#   sam@hostname ~/directory git:master env:virtualenv knife:production $
+#
+#   $ sam@hostname ~
+#   $ ...
+#   $ sam@hostname ~/directory git:master desk:example env:virtualenv knife:production
+#   $ ...
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
 PROMPT="%{$fg_bold[green]%}$ %n@%m %~%{$reset_color%} \
-\${vcs_info_msg_0_}\${virtualenv_info_msg_}\${knife_info_msg_}
+\${vcs_info_msg_0_}\
+\${desk_info_msg}\
+\${virtualenv_info_msg}\
+\${knife_info_msg}\
+
 %{$fg_bold[blue]%}$%{$reset_color%} "
 
 #
@@ -255,13 +269,14 @@ ZSH_HIGHLIGHT_PATTERNS+=('knife block use n*' 'fg=white,bold,bg=green')
 # Other plugins.
 #
 
-function source_if { [[ -f $1 ]] && source $1; }
+function source_if_path { [[ -f $1 ]] && source $1; }
+function source_if_variable { [[ -n $1 ]] && source $1; }
 
 # Notifications for long running commands.
-source_if /home/sam/.local/share/ntfy/auto-ntfy-done.sh
+source_if_path "/home/sam/.local/share/ntfy/auto-ntfy-done.sh"
 
 # Virtualenvwrapper
-source_if /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source_if_path "/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
 
 # Load Desk environment
-[ -n "$DESK_ENV" ] && source "$DESK_ENV"
+source_if_variable "$DESK_ENV"
