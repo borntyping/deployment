@@ -1,7 +1,5 @@
 ---
 imports:
-  blink1-tool: 'roles/stage2-user/files/local/bin'
-  blink1-udev: 'roles/stage1-base/files'
   fantasque: 'roles/workstation/files/fonts'
   gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -11,18 +9,6 @@ imports:
   jq: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
-
-# Blink udev rules and command line tool
-
-curl module blink1-tool:
-  url: http://thingm.com/blink1/downloads/blink1-tool-linux_x86_64.zip
-  unpack: zip
-  pick: blink1-tool
-  sha1: 7feee0ea0bad4e2eacf31183bcf7461d5d938c44
-
-curl module blink1-udev:
-  url: https://raw.githubusercontent.com/todbot/blink1/master/linux/51-blink1.rules
-  sha1: cbf05a407ee78517e31502bada72bf1aec813723
 
 # Fantasque Sans Mono font.
 
