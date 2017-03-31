@@ -76,7 +76,7 @@ git module with:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 73cb83270262bbb6bf110a8a6a99f36db8f56cef
+  rev: 462779629a0c66e652d3bf9f8a1f18330f379ee7
   pick:
     - .revision-hash
     - .version
