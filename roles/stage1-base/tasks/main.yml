@@ -67,9 +67,6 @@
 - name: ack
   include: tool-ack.yml
   tags: ['tools', 'ack']
-- name: blink1
-  include: tool-blink1.yml
-  tags: ['tools', 'blink1']
 - name: docker
   include: tool-docker.yml
   tags: ['tools', 'docker']
