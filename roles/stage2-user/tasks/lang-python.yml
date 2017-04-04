@@ -1,4 +1,14 @@
 ---
+- name: 'python : create ~/.config/pip/ directory'
+  file:
+    name: '{{ ansible_env.HOME }}/.config/pip/'
+    state: directory
+
+- name: 'python : copy ~/.config/pip/pip.conf'
+  copy:
+    src: config/pip/pip.conf
+    dest: '{{ ansible_env.HOME }}/.config/pip/pip.conf'
+
 - name: 'python : create ~/.virtualenvs directory'
   file:
     name: '{{ ansible_env.HOME }}/.virtualenvs'
