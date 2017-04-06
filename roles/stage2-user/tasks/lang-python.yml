@@ -35,7 +35,6 @@
   with_items:
     - ctop
     - httpie
-    - ntfy
     - peru
     - pex
     - pip
@@ -46,5 +45,3 @@
     - v
     - watch-fs
     - wheel
-  tags:
-    - ntfy
