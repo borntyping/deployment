@@ -76,7 +76,6 @@ export src="$HOME/Development/src"
 
 export ANSIBLE_INVENTORY="~/Development/generalbioinformatics/it/ansible/inventory.conf"
 export ANSIBLE_VAULT_PASSWORD_FILE="~/.ansible-secret"
-export AUTO_NTFY_DONE_LONGER_THAN="-L60"
 export EDITOR="nano"
 export GOPATH="$HOME/.go"
 export LS_COLORS="rs=0:di=01;34:ln=target:or=41:ex=32"
@@ -271,9 +270,6 @@ ZSH_HIGHLIGHT_PATTERNS+=('knife block use n*' 'fg=white,bold,bg=green')
 
 function source_if_path { [[ -f $1 ]] && source $1; }
 function source_if_variable { [[ -n $1 ]] && source $1; }
-
-# Notifications for long running commands.
-source_if_path "/home/sam/.local/share/ntfy/auto-ntfy-done.sh"
 
 # Virtualenvwrapper
 source_if_path "/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
