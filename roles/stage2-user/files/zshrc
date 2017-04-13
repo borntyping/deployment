@@ -74,8 +74,6 @@ export src="$HOME/Development/src"
 # Environment variables
 #
 
-export ANSIBLE_INVENTORY="~/Development/generalbioinformatics/it/ansible/inventory.conf"
-export ANSIBLE_VAULT_PASSWORD_FILE="~/.ansible-secret"
 export EDITOR="nano"
 export GOPATH="$HOME/.go"
 export LS_COLORS="rs=0:di=01;34:ln=target:or=41:ex=32"
@@ -84,6 +82,11 @@ export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+
+export ANSIBLE_CONFIG="${HOME}/Development/generalbioinformatics/it/ansible/ansible.cfg"
+export ANSIBLE_INVENTORY="${HOME}/Development/generalbioinformatics/it/ansible/inventory.conf"
+export ANSIBLE_ROLES_PATH="${HOME}/Development/generalbioinformatics/it/ansible/roles/"
+export ANSIBLE_VAULT_PASSWORD_FILE="${HOME}/.ansible-secret"
 
 #
 # $PATH
