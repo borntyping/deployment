@@ -1,5 +1,8 @@
 #!/bin/bash
-REPO="$(readlink -f $(dirname "${BASH_SOURCE[0]}"))"
-export ANSIBLE_CONFIG="${REPO}/ansible.cfg"
-export ANSIBLE_INVENTORY="${REPO}/inventory.conf"
-exec ansible-playbook --diff "$@" "${REPO}/playbook.yml"
+export ANSIBLE_REPO="$(readlink -f $(dirname "${BASH_SOURCE[0]}"))"
+export ANSIBLE_CONFIG="${ANSIBLE_REPO}/ansible.cfg"
+export ANSIBLE_INVENTORY="${ANSIBLE_REPO}/inventory.conf"
+export ANSIBLE_ROLES_PATH="${ANSIBLE_REPO}/roles/:/home/sam/Development/generalbioinformatics/sclements/deployment/roles/"
+export ANSIBLE_VAULT_PASSWORD_FILE=""
+
+exec ansible-playbook --diff "$@" "${ANSIBLE_REPO}/playbook.yml"
