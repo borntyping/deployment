@@ -11,3 +11,5 @@
     src: 'config/git/'
     dest: '{{ ansible_env.HOME }}/.config/git/'
     mode: '755'
+  tags:
+    - ruby
