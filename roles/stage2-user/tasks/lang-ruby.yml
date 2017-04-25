@@ -8,6 +8,8 @@
   with_items:
     - bundler
     - fpm
+    - rake
+    - rubocop
     - ruby-graphviz
     - travis
     - travis-lint
