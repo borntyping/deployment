@@ -4,8 +4,8 @@ dependencies:
     tags: stage2
   - role: deb
     name: atom
-    version: 1.11.2
-    url: https://github.com/atom/atom/releases/download/v1.11.2/atom-amd64.deb
+    version: 1.16.0
+    url: https://github.com/atom/atom/releases/download/v1.16.0/atom-amd64.deb
     tags: atom
   - role: deb
     name: hyper
