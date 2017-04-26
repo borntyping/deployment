@@ -77,7 +77,7 @@ export sandbox="$HOME/Development/github.com/borntyping-sandbox"
 
 export EDITOR="nano"
 export GOPATH="$HOME/.go"
-export LS_COLORS="rs=0:di=01;34:ln=target:or=41:ex=32"
+export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="$HOME/.npm"
 export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
@@ -148,13 +148,16 @@ autoload -U vcs_info                    # Version control information
 autoload -U colors && colors            # Adds variables for printing colors
 setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
+prompt_status_fg="$fg_bold[magenta]"
+prompt_fg="$fg[magenta]"
+
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}+%{$reset_color%}"
 zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}+%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%b%{$reset_color%}%c%u%m "
-zstyle ':vcs_info:*' actionformats "%{$fg_bold[green]%}%s:%b%{$reset_color%}(%a)%c%u%m "
+zstyle ':vcs_info:*' formats "%{$prompt_status_fg%}%s:%b(%{$reset_color%}%c%u%m%{$prompt_status_fg%})%{$reset_color%} "
+zstyle ':vcs_info:*' actionformats "%{$prompt_status_fg%}%s:%b(%{$reset_color%}%c%u%m|%a%{$prompt_status_fg%})%{$reset_color%} "
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
 
 # Add a marker to %u for untracked files
@@ -169,16 +172,16 @@ function +vi-git-remote() {
     local ahead behind
 
     ahead=$(git rev-list "${hook_com[branch]}@{upstream}..HEAD" 2>/dev/null | wc -l)
-    (( ahead )) && hook_com[misc]+=" %{$fg_bold[green]%}+${ahead}%{$reset_color%}"
+    (( ahead )) && hook_com[misc]+="%{$fg_bold[green]%}↑${ahead}%{$reset_color%}"
 
     behind=$(git rev-list "HEAD..${hook_com[branch]}@{upstream}" 2>/dev/null | wc -l)
-    (( behind )) && hook_com[misc]+=" %{$fg[red]%}-${behind}%{$reset_color%}"
+    (( behind )) && hook_com[misc]+="%{$fg[red]%}↓${behind}%{$reset_color%}"
 }
 
 function desk_info() {
     desk_info_msg=""
     if [[ -n "$DESK_NAME" ]]; then
-        desk_info_msg="%{$fg_bold[green]%}desk:$DESK_NAME%{$reset_color%} "
+        desk_info_msg="%{$prompt_status_fg%}desk:$DESK_NAME%{$reset_color%} "
     fi
 }
 
@@ -186,7 +189,7 @@ function desk_info() {
 function virtualenv_info() {
     virtualenv_info_msg=""
     if [ -n "$VIRTUAL_ENV" ]; then
-        virtualenv_info_msg="%{$fg_bold[green]%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        virtualenv_info_msg="%{$prompt_status_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
 
@@ -240,13 +243,12 @@ function preexec() {
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
-PROMPT="%{$fg_bold[green]%}$ %n@%m %~%{$reset_color%} \
+PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
 \${vcs_info_msg_0_}\
 \${desk_info_msg}\
 \${virtualenv_info_msg}\
-\${knife_info_msg}\
 
-%{$fg_bold[blue]%}$%{$reset_color%} "
+%{$prompt_fg%}$%{$reset_color%} "
 
 #
 # ZSH syntax highlighting plugin.
