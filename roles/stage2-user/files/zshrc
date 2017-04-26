@@ -151,8 +151,8 @@ setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
-zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}!%{$reset_color%}"
-zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}!%{$reset_color%}"
+zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}+%{$reset_color%}"
+zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}+%{$reset_color%}"
 zstyle ':vcs_info:*' formats "%{$fg_bold[green]%}%s:%b%{$reset_color%}%c%u%m "
 zstyle ':vcs_info:*' actionformats "%{$fg_bold[green]%}%s:%b%{$reset_color%}(%a)%c%u%m "
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
@@ -160,7 +160,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
 # Add a marker to %u for untracked files
 function +vi-git-untracked(){
     if git status --porcelain | fgrep '??' &> /dev/null; then
-        hook_com[unstaged]+="%{$fg[red]%}!%{$reset_color%}"
+        hook_com[unstaged]+="%{$fg[red]%}+%{$reset_color%}"
     fi
 }
 
