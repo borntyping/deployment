@@ -148,7 +148,8 @@ autoload -U vcs_info                    # Version control information
 autoload -U colors && colors            # Adds variables for printing colors
 setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
-prompt_status_fg="$fg_bold[magenta]"
+prompt_status_fg="$fg[magenta]"
+prompt_highlight_fg="$fg[magenta]"
 prompt_fg="$fg[magenta]"
 
 zstyle ':vcs_info:*' enable git
@@ -156,9 +157,18 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}+%{$reset_color%}"
 zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}+%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$prompt_status_fg%}%s:%b(%{$reset_color%}%c%u%m%{$prompt_status_fg%})%{$reset_color%} "
-zstyle ':vcs_info:*' actionformats "%{$prompt_status_fg%}%s:%b(%{$reset_color%}%c%u%m|%a%{$prompt_status_fg%})%{$reset_color%} "
+zstyle ':vcs_info:*' formats "%{$prompt_status_fg%}%s:%{$prompt_highlight_fg%}%b%{$reset_color%}%c%u%m"
+zstyle ':vcs_info:*' actionformats "%{$prompt_status_fg%}%s:%{$prompt_highlight_fg%}%b%{$reset_color%}%c%u%m|%a "
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
+
+
+function +vi-git-clean(){
+    if [[ $(git status --porcelain | wc -c) -eq 0 ]]; then
+        backend_misc[clean]+="%{$fg[red]%}CLEAN%{$reset_color%}"
+    else
+        backend_misc[clean]+="%{$fg[red]%}NOT CLEAN%{$reset_color%}"
+    fi
+}
 
 # Add a marker to %u for untracked files
 function +vi-git-untracked(){
@@ -172,16 +182,16 @@ function +vi-git-remote() {
     local ahead behind
 
     ahead=$(git rev-list "${hook_com[branch]}@{upstream}..HEAD" 2>/dev/null | wc -l)
-    (( ahead )) && hook_com[misc]+="%{$fg_bold[green]%}↑${ahead}%{$reset_color%}"
+    (( ahead )) && hook_com[misc]+=" %{$fg_bold[green]%}↑${ahead}%{$reset_color%}"
 
     behind=$(git rev-list "HEAD..${hook_com[branch]}@{upstream}" 2>/dev/null | wc -l)
-    (( behind )) && hook_com[misc]+="%{$fg[red]%}↓${behind}%{$reset_color%}"
+    (( behind )) && hook_com[misc]+=" %{$fg[red]%}↓${behind}%{$reset_color%}"
 }
 
 function desk_info() {
     desk_info_msg=""
     if [[ -n "$DESK_NAME" ]]; then
-        desk_info_msg="%{$prompt_status_fg%}desk:$DESK_NAME%{$reset_color%} "
+        desk_info_msg="%{$prompt_status_fg%}desk:%{$prompt_highlight_fg%}$DESK_NAME%{$reset_color%} "
     fi
 }
 
@@ -189,7 +199,7 @@ function desk_info() {
 function virtualenv_info() {
     virtualenv_info_msg=""
     if [ -n "$VIRTUAL_ENV" ]; then
-        virtualenv_info_msg="%{$prompt_status_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        virtualenv_info_msg="%{$prompt_status_fg%}virtualenv:%{$prompt_highlight_fg%}$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
 
