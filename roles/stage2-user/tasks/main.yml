@@ -54,6 +54,6 @@
     state: directory
   with_items:
     - Development
-    - Development/borntyping
-    - Development/generalbioinformatics
-    - Development/src
+    - Development/github.com/borntyping
+    - Development/github.com/borntyping-sandbox
+    - Development/gitlab.com/borntyping

@@ -65,10 +65,11 @@ setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
 # Named directories
 #
 
-export borntyping="$HOME/Development/borntyping"
-export gb="$HOME/Development/generalbioinformatics"
-export sandbox="$HOME/Development/borntyping-sandbox"
-export src="$HOME/Development/src"
+export borntyping="$HOME/Development/github.com/borntyping"
+export gb="$HOME/Development/gitlab.generalbioinformatics.com"
+export github="$HOME/Development/github.com"
+export gitlab="$HOME/Development/gitlab.com"
+export sandbox="$HOME/Development/github.com/borntyping-sandbox"
 
 #
 # Environment variables
