@@ -190,29 +190,29 @@ function virtualenv_info() {
     fi
 }
 
-# Display the currently selected knife-block configuration file
-function knife_info() {
-    knife_info_msg=""
-
-    local ENVIRONMENT_FILE ENVIRONMENT COLOUR
-
-    [[ ! -L "$HOME/.chef/knife.rb" ]] && return
-
-    ENVIRONMENT_FILE=$(realpath "$HOME/.chef/knife.rb")
-    ENVIRONMENT=$(basename $ENVIRONMENT_FILE | sed "s/knife-\(.*\).rb/\1/")
-    COLOUR="$fg_bold[green]"
-
-    # When the environment is `none`, skip showing knife information
-    [[ "$ENVIRONMENT" == "none" ]] && return
-
-    # Set colors based on the environment
-    [[ "$ENVIRONMENT" == "production"  ]] && COLOUR="$fg[red]"
-    [[ "$ENVIRONMENT" == "staging"     ]] && COLOUR="$fg[yellow]"
-    [[ "$ENVIRONMENT" == "development" ]] && COLOUR="$fg[green]"
-
-    ENVIRONMENT="%{$COLOUR%}${ENVIRONMENT}%{$reset_color%}"
-    knife_info_msg="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
-}
+## Display the currently selected knife-block configuration file
+#function knife_info() {
+#    knife_info_msg=""
+#
+#    local ENVIRONMENT_FILE ENVIRONMENT COLOUR
+#
+#    [[ ! -L "$HOME/.chef/knife.rb" ]] && return
+#
+#    ENVIRONMENT_FILE=$(realpath "$HOME/.chef/knife.rb")
+#    ENVIRONMENT=$(basename $ENVIRONMENT_FILE | sed "s/knife-\(.*\).rb/\1/")
+#    COLOUR="$fg_bold[green]"
+#
+#    # When the environment is `none`, skip showing knife information
+#    [[ "$ENVIRONMENT" == "none" ]] && return
+#
+#    # Set colors based on the environment
+#    [[ "$ENVIRONMENT" == "production"  ]] && COLOUR="$fg[red]"
+#    [[ "$ENVIRONMENT" == "staging"     ]] && COLOUR="$fg[yellow]"
+#    [[ "$ENVIRONMENT" == "development" ]] && COLOUR="$fg[green]"
+#
+#    ENVIRONMENT="%{$COLOUR%}${ENVIRONMENT}%{$reset_color%}"
+#    knife_info_msg="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
+#}
 
 # Set terminal title and collect information before showing the prompt
 function precmd() {
@@ -222,7 +222,6 @@ function precmd() {
     vcs_info
     desk_info
     virtualenv_info
-    knife_info
 }
 
 # Set terminal title before executing a command
