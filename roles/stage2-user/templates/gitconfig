@@ -7,7 +7,7 @@
     autocrlf = input
     pager = less -+FX
     excludesfile = {{ ansible_env.HOME }}/.config/git/gitignore
-    hooksPath = {{ ansible_env.HOME }}/.config/git/hooks/
+    hooksPath = {{ ansible_env.HOME }}/.config/git/hooks
 
 [push]
     default = current
