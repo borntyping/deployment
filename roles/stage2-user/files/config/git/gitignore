@@ -9,3 +9,6 @@
 .vagrant/
 .yardoc/
 gem_graph.png
+gradle/
+gradlew
+gradlew.bat
