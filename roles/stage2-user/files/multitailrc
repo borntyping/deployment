@@ -1,13 +1,3 @@
-colorscheme:log
-cs_re_s:black,,bold:(....-..-.. ..:..:..,...)
-cs_re_s:blue:^[^\s]+ [^\s]+ \w+ ([a-z\._]+)
-cs_re:red,,bold:FATAL
-cs_re:red:ERROR
-cs_re:yellow:WARN
-cs_re:green:INFO
-cs_re:blue,,bold:DEBUG
-
-scheme:log:odyssey\.log
-
-dsblwm:no
 default_linewrap:l
+dsblwm:no
+include:/home/sam/Development/gitlab.generalbioinformatics.com/marrs/odyssey/multitailrc
