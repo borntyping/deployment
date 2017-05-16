@@ -1,16 +1,13 @@
-scheme:log:sift\.log
 colorscheme:log
-cs_re:green,,bold:....-..-.. ..:..:..
-cs_re:cyan,,bold:\[|\]
+cs_re_s:black,,bold:(....-..-.. ..:..:..,...)
+cs_re_s:blue:^[^\s]+ [^\s]+ \w+ ([a-z\._]+)
 cs_re:red,,bold:FATAL
 cs_re:red:ERROR
 cs_re:yellow:WARN
 cs_re:green:INFO
 cs_re:blue,,bold:DEBUG
-cs_re_s:red,,bold:\[FATAL\] (.*)
-cs_re_s:red:\[ERROR\] (.*)
-cs_re_s:yellow:\[WARN\] (.*)
-cs_re_s:green,,bold:\[DEBUG\] (.*)
+
+scheme:log:odyssey\.log
 
 dsblwm:no
 default_linewrap:l
