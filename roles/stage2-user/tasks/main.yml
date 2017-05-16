@@ -19,7 +19,7 @@
 #
 
 - name: 'configure dotfiles'
-  template:
+  copy:
     src: '{{ item }}'
     dest: '{{ ansible_env.HOME }}/.{{ item }}'
   with_items:
