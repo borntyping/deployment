@@ -84,9 +84,9 @@ export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
-export ANSIBLE_CONFIG="${HOME}/Development/generalbioinformatics/it/ansible/ansible.cfg"
-export ANSIBLE_INVENTORY="${HOME}/Development/generalbioinformatics/it/ansible/inventory.conf"
-export ANSIBLE_ROLES_PATH="${HOME}/Development/generalbioinformatics/it/ansible/roles/"
+export ANSIBLE_CONFIG="${gb}/it/ansible/ansible.cfg"
+export ANSIBLE_INVENTORY="${gb}/it/ansible/inventory.conf"
+export ANSIBLE_ROLES_PATH="${gb}/it/ansible/roles/"
 export ANSIBLE_VAULT_PASSWORD_FILE="${HOME}/.ansible-secret"
 
 #
