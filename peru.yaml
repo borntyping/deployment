@@ -11,6 +11,7 @@ imports:
   jq: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
+  z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
 
 # Desk environment switcher.
 
@@ -48,7 +49,7 @@ curl module gdrive:
 
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
-  rev: a45c2da2ff1a00e8b8cc6116e9fb4cdd5cca533d
+  rev: 3ea1c5435ab30069935968afa71d5affd557f0c3
 
 rule gws-completion:
   pick: gws.zsh
@@ -91,7 +92,7 @@ git module with:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 462779629a0c66e652d3bf9f8a1f18330f379ee7
+  rev: ad522a091429ba180c930f84b2a023b40de4dbcc
   pick:
     - .revision-hash
     - .version
@@ -102,3 +103,9 @@ git module zsh-syntax-highlighting:
     - highlighters/pattern/pattern-highlighter.zsh
     - highlighters/root/root-highlighter.zsh
     - zsh-syntax-highlighting.zsh
+
+git module z:
+  url: https://github.com/rupa/z.git
+  pick:
+    - z.sh
+  rev: 1a361f6dc10e54e34e42f1e03850692959c6b413
