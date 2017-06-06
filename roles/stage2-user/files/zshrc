@@ -67,6 +67,7 @@ setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
 
 export borntyping="$HOME/Development/github.com/borntyping"
 export gb="$HOME/Development/gitlab.generalbioinformatics.com"
+export marrs="${gb}/marrs"
 export github="$HOME/Development/github.com"
 export gitlab="$HOME/Development/gitlab.com"
 export sandbox="$HOME/Development/github.com/borntyping-sandbox"
@@ -262,6 +263,7 @@ PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
 
 #
 # ZSH syntax highlighting plugin.
+# https://github.com/zsh-users/zsh-syntax-highlighting
 #
 
 source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -278,6 +280,13 @@ ZSH_HIGHLIGHT_PATTERNS+=('rm -r *' 'fg=white,bold,bg=yellow')
 ZSH_HIGHLIGHT_PATTERNS+=('knife block use p*' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('knife block use s*' 'fg=white,bold,bg=yellow')
 ZSH_HIGHLIGHT_PATTERNS+=('knife block use n*' 'fg=white,bold,bg=green')
+
+#
+# z - jump around
+# https://github.com/rupa/z
+#
+
+source "$HOME/.local/share/zsh/plugins/z/z.sh"
 
 #
 # Other plugins.
