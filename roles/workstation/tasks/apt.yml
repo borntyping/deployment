@@ -19,7 +19,8 @@
   become: 'yes'
   with_items:
     - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
-    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu trusty main
+    - deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu xenial main
+    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu xenial main
     - deb http://repository.spotify.com stable non-free
     - deb https://typora.io linux/
 
