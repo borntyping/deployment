@@ -36,6 +36,10 @@ alias httpie='http'
 alias mc='molecule'
 alias mcc='mc converge; mc verify'
 
+function yapf() {
+    command yapf --diff "$@" | colordiff && command yapf -i "$@"
+}
+
 #
 # ZSH options
 #
