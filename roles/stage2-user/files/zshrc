@@ -302,5 +302,8 @@ function source_if_variable { [[ -n $1 ]] && source $1; }
 # Virtualenvwrapper
 source_if_path "/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
 
+# Tilix VTE patch
+source_if_path "/etc/profile.d/vte-2.91.sh"
+
 # Load Desk environment
 source_if_variable "$DESK_ENV"
