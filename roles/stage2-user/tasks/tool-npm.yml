@@ -10,3 +10,4 @@
     path: '{{ ansible_env.HOME }}/.npm'
   with_items:
     - jsonlint
+    - pokemon-terminal
