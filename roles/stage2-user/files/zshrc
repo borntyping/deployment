@@ -36,8 +36,9 @@ alias httpie='http'
 alias mc='molecule'
 alias mcc='mc converge; mc verify'
 
-function yapf() {
-    command yapf --diff "$@" | colordiff && command yapf -i "$@"
+# Find files with a matching md5sum
+function find_similar() {
+    find "$1" -type f -exec md5sum '{}' + | grep "^$(md5sum "$2" | awk '{ print $1 }')" | awk '{ print $2 }'
 }
 
 #
