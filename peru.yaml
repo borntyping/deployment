@@ -17,7 +17,7 @@ imports:
 
 git module desk:
   url: git@github.com:jamesob/desk.git
-  rev: 4adef606321dea6028d0a6a451fa14011ee54cd5
+  rev: 20369d7e49a5d75413687c50f7d74c6683251f64
 
 rule desk-completion:
   pick: desk.zsh
@@ -49,7 +49,7 @@ curl module gdrive:
 
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
-  rev: 3ea1c5435ab30069935968afa71d5affd557f0c3
+  rev: 04a6a014ed7daa4b227a8769fec9c3557a0afb60
 
 rule gws-completion:
   pick: gws.zsh
@@ -108,4 +108,4 @@ git module z:
   url: https://github.com/rupa/z.git
   pick:
     - z.sh
-  rev: 1a361f6dc10e54e34e42f1e03850692959c6b413
+  rev: 3eb64444d713b9fc6c9ad1a8fc8814639c584faa
