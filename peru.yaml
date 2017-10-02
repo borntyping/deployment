@@ -50,7 +50,8 @@ curl module gdrive:
 
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
-  rev: 04a6a014ed7daa4b227a8769fec9c3557a0afb60
+  submodules: false
+  rev: f2452e90f808ea80c0498279431c77a3f594c249
 
 rule gws-completion:
   pick: gws.zsh
@@ -87,6 +88,7 @@ curl module jq:
 curl module micro:
   url: https://github.com/zyedidia/micro/releases/download/v1.3.3/micro-1.3.3-linux64.tar.gz
   unpack: tar
+  sha1: 91d4de0a6b93ae3fa1e32597f5e7e4e46f3ce690
 
 rule micro-executable:
   pick: micro
@@ -97,13 +99,13 @@ rule micro-executable:
 git module with:
   url: https://github.com/mchav/with.git
   pick: with
-  rev: f919baf65a94bca4502fd0cbacdb7a01b87a77d1
+  rev: a4f59e951489b6b00059b772b3cc98649400269b
 
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: ad522a091429ba180c930f84b2a023b40de4dbcc
+  rev: 8146d58bb2c77e6b9ff7424ba09508071a3fcf12
   pick:
     - .revision-hash
     - .version
@@ -119,4 +121,4 @@ git module z:
   url: https://github.com/rupa/z.git
   pick:
     - z.sh
-  rev: 3eb64444d713b9fc6c9ad1a8fc8814639c584faa
+  rev: 0a47c9ceca790604df5c9a4a2bc74aba63005c21
