@@ -43,6 +43,7 @@
   tags:
     - bin
     - ansible
+    - micro
 
 #
 # Create development directories.
