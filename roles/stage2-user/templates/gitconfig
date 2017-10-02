@@ -3,7 +3,7 @@
     email = {{ git_email }}
 
 [core]
-    editor = nano
+    editor = micro
     autocrlf = input
     pager = less -+FX
     excludesfile = {{ ansible_env.HOME }}/.config/git/gitignore
