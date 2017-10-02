@@ -9,9 +9,10 @@ imports:
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/local/bin'
   jq: 'roles/stage2-user/files/local/bin'
+  micro|micro-executable: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
-  zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
   z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
+  zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 # Desk environment switcher.
 
@@ -80,6 +81,16 @@ curl module jq:
   url: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
   filename: jq
   sha1: d8e36831c3c94bb58be34dd544f44a6c6cb88568
+
+# `micro` editor
+
+curl module micro:
+  url: https://github.com/zyedidia/micro/releases/download/v1.3.3/micro-1.3.3-linux64.tar.gz
+  unpack: tar
+
+rule micro-executable:
+  pick: micro
+  copy: {'micro-1.3.3/micro': 'micro'}
 
 # `with` script
 
