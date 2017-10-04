@@ -1,5 +1,5 @@
 ---
-- hosts: workstation
+- hosts: all
   roles:
   - role: workstation
     tags: workstation
