@@ -7,6 +7,8 @@
   tags: ['zsh', 'shell']
 - include: tool-git.yml
   tags: ['git']
+- include: tool-micro.yml
+  tags: ['micro', 'dotfiles']
 - include: tool-npm.yml
   tags: ['npm', 'dotfiles']
 - include: tool-ntfy.yml
