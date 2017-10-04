@@ -29,6 +29,7 @@
     - multitail
     - nano
     - realpath
+    - rpm
     - shellcheck
     - supervisor
     - supervisor
