@@ -1,5 +1,7 @@
 ---
 - name: 'ssh : generate ~/.ssh/config from ~/.ssh/config.d'
-  shell: 'cat {{ ansible_env.HOME }}/.ssh/config.d/*.config > ~/.ssh/config'
+  assemble:
+    src: '{{ ansible_env.HOME }}/.ssh/config.d/'
+    dest: '{{ ansible_env.HOME }}/.ssh/config'
   listen: ssh
   tags: ssh
