@@ -27,6 +27,7 @@
   with_items:
     - ackrc
     - htoprc
+    - inputrc
     - multitailrc
     - nanorc
     - tmux.conf
