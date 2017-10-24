@@ -2,6 +2,6 @@
 export ANSIBLE_REPO="$(readlink -f $(dirname $(dirname "${BASH_SOURCE[0]}")))"
 export ANSIBLE_CONFIG="${ANSIBLE_REPO}/ansible.cfg"
 export ANSIBLE_INVENTORY="${ANSIBLE_REPO}/inventory.conf"
-export ANSIBLE_ROLES_PATH="${ANSIBLE_REPO}/roles/:${GB}/sclements/deployment/roles/"
+export ANSIBLE_ROLES_PATH="${ANSIBLE_REPO}/roles/:${gb}/sclements/deployment/roles/"
 export ANSIBLE_VAULT_PASSWORD_FILE=""
 exec ansible-playbook --diff "$@" "${ANSIBLE_REPO}/playbook.yml"
