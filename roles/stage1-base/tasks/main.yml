@@ -8,8 +8,9 @@
   tags:
     - apt
     - docker
-    - spotify
+    - git
     - slack
+    - spotify
 
 - name: install packages
   apt:
@@ -23,6 +24,7 @@
     - colordiff
     - curl
     - git
+    - git-lfs
     - golang
     - htop
     - letsencrypt
@@ -38,6 +40,7 @@
     - plantuml
   tags:
     - bin
+    - git
     - util
 
 - name: sysctl

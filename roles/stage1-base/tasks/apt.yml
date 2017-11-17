@@ -9,6 +9,7 @@
     - deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main
     - deb http://ppa.launchpad.net/zanchey/asciinema/ubuntu trusty main
     - deb https://apt.dockerproject.org/repo ubuntu-xenial main
+    - deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main
 
 - name: 'configure repository keys'
   apt_key:
