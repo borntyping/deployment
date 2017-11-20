@@ -290,6 +290,13 @@ ZSH_HIGHLIGHT_PATTERNS+=('knife block use n*' 'fg=white,bold,bg=green')
 source "$HOME/.local/share/zsh/plugins/z/z.sh"
 
 #
+# direnv - directory specific environment configuration
+# https://direnv.net/
+#
+
+eval "$(direnv hook zsh)"
+
+#
 # Other plugins.
 #
 

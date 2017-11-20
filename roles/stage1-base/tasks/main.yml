@@ -23,6 +23,7 @@
     - asciinema
     - colordiff
     - curl
+    - direnv
     - git
     - git-lfs
     - golang
@@ -30,6 +31,7 @@
     - letsencrypt
     - multitail
     - nano
+    - plantuml
     - realpath
     - rpm
     - shellcheck
@@ -37,7 +39,6 @@
     - supervisor
     - tmux
     - tree
-    - plantuml
   tags:
     - bin
     - git
