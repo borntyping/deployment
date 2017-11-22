@@ -9,7 +9,6 @@
     - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
     - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF  # virtualbox
     - BA300B7755AFCFAE # typora
-    - D2C19886  # spotify
 
 - name: configure repositories
   apt_repository:
