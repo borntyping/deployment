@@ -1,19 +1,19 @@
 ---
-- include: lang-python.yml
+- import_tasks: lang-python.yml
   tags: ['python', 'virtualenv']
-- include: lang-ruby.yml
+- import_tasks: lang-ruby.yml
   tags: ['ruby']
-- include: lang-zsh.yml
+- import_tasks: lang-zsh.yml
   tags: ['zsh', 'shell']
-- include: tool-git.yml
+- import_tasks: tool-git.yml
   tags: ['git']
-- include: tool-micro.yml
+- import_tasks: tool-micro.yml
   tags: ['micro', 'dotfiles']
-- include: tool-npm.yml
+- import_tasks: tool-npm.yml
   tags: ['npm', 'dotfiles']
-- include: tool-ntfy.yml
+- import_tasks: tool-ntfy.yml
   tags: ['ntfy', 'dotfiles']
-- include: tool-ssh.yml
+- import_tasks: tool-ssh.yml
   tags: ['ssh']
 
 #
