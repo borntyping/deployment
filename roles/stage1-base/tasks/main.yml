@@ -4,7 +4,7 @@
 # Install other packages
 #
 
-- include: apt.yml
+- import_tasks: apt.yml
   tags:
     - apt
     - docker
@@ -45,7 +45,7 @@
     - util
 
 - name: sysctl
-  include: sysctl.yml
+  import_tasks: sysctl.yml
   tags:
     - sysctl
 
@@ -54,16 +54,16 @@
 #
 
 - name: java
-  include: lang-java.yml
+  import_tasks: lang-java.yml
   tags: ['languages', 'java']
 - name: node
-  include: lang-node.yml
+  import_tasks: lang-node.yml
   tags: ['languages', 'node']
 - name: python
-  include: lang-python.yml
+  import_tasks: lang-python.yml
   tags: ['languages', 'python']
 - name: ruby
-  include: lang-ruby.yml
+  import_tasks: lang-ruby.yml
   tags: ['languages', 'ruby']
 
 #
@@ -71,8 +71,8 @@
 #
 
 - name: ack
-  include: tool-ack.yml
+  import_tasks: tool-ack.yml
   tags: ['tools', 'ack']
 - name: docker
-  include: tool-docker.yml
+  import_tasks: tool-docker.yml
   tags: ['tools', 'docker']

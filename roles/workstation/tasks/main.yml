@@ -3,15 +3,15 @@
 # Install software only useful on a workstation or non-headless machine.
 #
 
-- include: apt.yml
+- import_tasks: apt.yml
   tags: ['apt']
-- include: app-dropbox.yml
+- import_tasks: app-dropbox.yml
   tags: ['dropbox']
-- include: app-jetbrains.yml
+- import_tasks: app-jetbrains.yml
   tags: ['jetbrains']
-- include: app-terminator.yml
+- import_tasks: app-terminator.yml
   tags: ['terminator']
-- include: app-virtualbox.yml
+- import_tasks: app-virtualbox.yml
   tags: ['virtualbox']
 
 - name: 'install'
