@@ -46,6 +46,7 @@
     history = log --graph --pretty=graph --date=short --decorate
     ignored = ls-files -o -i --exclude-standard
     rubocop = !git ls-files -m | xargs rubocop
+    fixup = rebase -i --autosquash
 
 [pager]
     hist = less -FX
