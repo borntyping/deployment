@@ -3,6 +3,7 @@ imports:
   desk|desk-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   desk|desk-script: 'roles/stage2-user/files/local/bin'
   fantasque: 'roles/workstation/files/fonts'
+  fira: 'roles/workstation/files/fonts'
   gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
@@ -39,7 +40,24 @@ curl module fantasque:
     - FantasqueSansMono-Regular.ttf
   sha1: bf8a386e0e79256e35147720de439dc886af75ac
 
+curl module fira:
+  url: https://github.com/tonsky/FiraCode/releases/download/1.204/FiraCode_1.204.zip
+  unpack: zip
+  pick:
+    - FiraCode-Bold.ttf
+    - FiraCode-Light.ttf
+    - FiraCode-Medium.ttf
+    - FiraCode-Regular.ttf
+    - FiraCode-Retina.ttf
+  move:
+    ttf/FiraCode-Bold.ttf: FiraCode-Bold.ttf
+    ttf/FiraCode-Light.ttf: FiraCode-Light.ttf
+    ttf/FiraCode-Medium.ttf: FiraCode-Medium.ttf
+    ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
+    ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
+
 # GDrive cli
+  sha1: 591b6f9bb9800431355f052baef24bac336afd25
 
 curl module gdrive:
   url: https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download
