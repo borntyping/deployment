@@ -9,8 +9,6 @@
   tags: ['git']
 - import_tasks: tool-micro.yml
   tags: ['micro', 'dotfiles']
-- import_tasks: tool-npm.yml
-  tags: ['npm', 'dotfiles']
 - import_tasks: tool-ntfy.yml
   tags: ['ntfy', 'dotfiles']
 - import_tasks: tool-ssh.yml
