@@ -47,6 +47,8 @@
   copy: >
     src=fonts/
     dest={{ ansible_env.HOME }}/.fonts
+  tags:
+    - fonts
 
 - name: 'install networking tools used at GB'
   apt:

@@ -2,7 +2,8 @@
 imports:
   desk|desk-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   desk|desk-script: 'roles/stage2-user/files/local/bin'
-  fantasque: 'roles/workstation/files/fonts'
+  fantasque17: 'roles/workstation/files/fonts'
+  fantasque18: 'roles/workstation/files/fonts'
   fira: 'roles/workstation/files/fonts'
   gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -30,15 +31,35 @@ rule desk-script:
 
 # Fantasque Sans Mono font.
 
-curl module fantasque:
-  url: https://github.com/belluzj/fantasque-sans/releases/download/v1.7.0/FantasqueSansMono.zip
+curl module fantasque17:
+  url: https://github.com/belluzj/fantasque-sans/releases/download/v1.7.2/FantasqueSansMono-Normal.zip
   unpack: zip
   pick:
-    - FantasqueSansMono-Bold.ttf
-    - FantasqueSansMono-BoldItalic.ttf
-    - FantasqueSansMono-Italic.ttf
-    - FantasqueSansMono-Regular.ttf
-  sha1: bf8a386e0e79256e35147720de439dc886af75ac
+    - FantasqueSansMono-1.7-Bold.ttf
+    - FantasqueSansMono-1.7-BoldItalic.ttf
+    - FantasqueSansMono-1.7-Italic.ttf
+    - FantasqueSansMono-1.7-Regular.ttf
+  move:
+    TTF/FantasqueSansMono-Bold.ttf: FantasqueSansMono-1.7-Bold.ttf
+    TTF/FantasqueSansMono-BoldItalic.ttf: FantasqueSansMono-1.7-BoldItalic.ttf
+    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-1.7-Italic.ttf
+    TTF/FantasqueSansMono-Regular.ttf: FantasqueSansMono-1.7-Regular.ttf
+  sha1: f21b844705f7161d46eb2ce84b27dec128f0c48a
+
+curl module fantasque18:
+  url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8-alpha/FantasqueSansMono-Normal.zip
+  unpack: zip
+  pick:
+    - FantasqueSansMono-1.8-Bold.ttf
+    - FantasqueSansMono-1.8-BoldItalic.ttf
+    - FantasqueSansMono-1.8-Italic.ttf
+    - FantasqueSansMono-1.8-Regular.ttf
+  move:
+    TTF/FantasqueSansMono-Bold.ttf: FantasqueSansMono-1.8-Bold.ttf
+    TTF/FantasqueSansMono-BoldItalic.ttf: FantasqueSansMono-1.8-BoldItalic.ttf
+    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-1.8-Italic.ttf
+    TTF/FantasqueSansMono-Regular.ttf: FantasqueSansMono-1.8-Regular.ttf
+  sha1: d7633c7ece4622a85146f2860cd45eda31735adb
 
 curl module fira:
   url: https://github.com/tonsky/FiraCode/releases/download/1.204/FiraCode_1.204.zip

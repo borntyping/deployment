@@ -6,6 +6,7 @@
 *.sublime-workspace
 .idea/tasks.xml
 .idea/workspace.xml
+.idea/dictionaries/sam.xml
 .kitchen/
 .vagrant/
 .yardoc/
