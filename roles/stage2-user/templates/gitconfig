@@ -90,14 +90,6 @@
     tabwidth = 4
     fontdiff = DejaVu Sans Mono,9,-1,5,50,0,0,0,0,0
 
-#
-# GitHub
-#
-
-# Always use SSH transport instead of HTTPS
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
