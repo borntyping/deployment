@@ -18,8 +18,15 @@
 [rebase]
     autostash = true
 
+[merge]
+    tool = meld
+    conflictstyle = diff3
+
 [credential]
     helper = store
+
+[rerere]
+    enabled = true
 
 #
 # Check object integrity
@@ -79,9 +86,6 @@
 #
 # Utilities
 #
-
-[merge]
-    tool = meld
 
 [gui]
     historybrowser = gitg
