@@ -1,12 +1,10 @@
-*.iml
-*.ipr
 *.iws
 *.rakeTasks
 *.sublime-project
 *.sublime-workspace
-.idea/tasks.xml
-.idea/workspace.xml
-.idea/dictionaries/sam.xml
+.idea/**/tasks.xml
+.idea/**/workspace.xml
+.idea/dictionaries
 .kitchen/
 .vagrant/
 .yardoc/
