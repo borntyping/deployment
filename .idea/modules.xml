@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/deployment.iml" filepath="$PROJECT_DIR$/.idea/deployment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../gitlab.generalbioinformatics.com/sclements/deployment/.idea/deployment-gb.iml" filepath="$PROJECT_DIR$/../../../gitlab.generalbioinformatics.com/sclements/deployment/.idea/deployment-gb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../gitlab.generalbioinformatics.com/sclements/workstation/.idea/workstation.iml" filepath="$PROJECT_DIR$/../../../gitlab.generalbioinformatics.com/sclements/workstation/.idea/workstation.iml" />
     </modules>
   </component>
 </project>

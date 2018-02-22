@@ -6,7 +6,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="R Skeletons" level="application" />
     <orderEntry type="library" name="R User Library" level="project" />
-    <orderEntry type="module" module-name="deployment-gb" />
+    <orderEntry type="module" module-name="workstation" />
+    <orderEntry type="module" module-name="workstation" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
