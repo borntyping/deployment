@@ -17,6 +17,7 @@ Install the latest ansible release with:
 sudo apt-add-repository --yes ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install ansible git
+sudo apt-get install tilix cinnamon-desktop-environment
 ```
 
 ### Fetch this repository
@@ -36,9 +37,6 @@ look like this:
 ```
 [workstation]
 localhost ansible_connection=local ansible_sudo_pass=EXAMPLE
-
-[servers]
-remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE
 ```
 
 If you don't want to create an inventory file, and only want to configure the
