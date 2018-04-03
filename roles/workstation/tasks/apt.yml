@@ -1,30 +1,37 @@
 ---
-- name: configure repository keys
-  apt_key:
-    id: '{{ item }}'
-    keyserver: hkp://keyserver.ubuntu.com:80
-  register: apt_repositories_key
-  become: 'yes'
-  with_items:
-    - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
-    - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF  # virtualbox
-    - BA300B7755AFCFAE # typora
+- tags:
+    - apt
+    - workstation/apt
+  block:
+    - name: configure repository keys
+      apt_key:
+        id: '{{ item }}'
+        keyserver: 'hkp://keyserver.ubuntu.com:80'
+      register: apt_repositories_key
+      become: 'yes'
+      with_items:
+        - 786285426B130F8C8C67CEF87F73D5BEFC1B6133  # zeal
+        - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF  # virtualbox
+        - BA300B7755AFCFAE # typora
+        - C2518248EEA14886 # virtualbox ?
+        - EFDC8610341D9410 # spotify
+        - 0DF731E45CE24F27EEEB1450EFDC8610341D9410 # spotify
 
-- name: configure repositories
-  apt_repository:
-    repo: '{{ item }}'
-    state: present
-  register: apt_repositories
-  become: 'yes'
-  with_items:
-    - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
-    - deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu xenial main
-    - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu xenial main
-    - deb http://repository.spotify.com stable non-free
-    - deb https://typora.io linux/
+    - name: configure repositories
+      apt_repository:
+        repo: '{{ item }}'
+        state: present
+      register: apt_repositories
+      become: 'yes'
+      with_items:
+        - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
+        - deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu xenial main
+        - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu xenial main
+        - deb http://repository.spotify.com stable non-free
+        - deb https://typora.io linux/
 
-- name: update repositories
-  apt:
-    update_cache: 'yes'
-  when: apt_repositories.changed or apt_repositories_key.changed
-  become: 'yes'
+    - name: update repositories
+      apt:
+        update_cache: 'yes'
+      #when: apt_repositories.changed or apt_repositories_key.changed
+      become: 'yes'

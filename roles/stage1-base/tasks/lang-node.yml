@@ -6,5 +6,4 @@
   become: 'yes'
   with_items:
     - nodejs
-    - nodejs-legacy
     - npm
