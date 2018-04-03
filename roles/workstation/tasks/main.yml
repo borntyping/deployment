@@ -5,14 +5,9 @@
 
 - import_tasks: apt.yml
   tags: ['apt']
-- import_tasks: app-dropbox.yml
-  tags: ['dropbox']
+
 - import_tasks: app-jetbrains.yml
   tags: ['jetbrains']
-- import_tasks: app-terminator.yml
-  tags: ['terminator']
-- import_tasks: app-virtualbox.yml
-  tags: ['virtualbox']
 
 - name: 'install'
   apt:
@@ -49,11 +44,3 @@
     dest={{ ansible_env.HOME }}/.fonts
   tags:
     - fonts
-
-- name: 'install networking tools used at GB'
-  apt:
-    pkg: '{{ item }}'
-    state: latest
-  become: 'yes'
-  with_items:
-    - network-manager-openconnect-gnome

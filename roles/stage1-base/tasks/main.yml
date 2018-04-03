@@ -34,6 +34,7 @@
     - plantuml
     - realpath
     - rpm
+    - silversearcher-ag
     - shellcheck
     - supervisor
     - supervisor
@@ -70,9 +71,9 @@
 # Install development tools
 #
 
-- name: ack
-  import_tasks: tool-ack.yml
-  tags: ['tools', 'ack']
+#- name: ack
+#  import_tasks: tool-ack.yml
+#  tags: ['tools', 'ack']
 - name: docker
   import_tasks: tool-docker.yml
   tags: ['tools', 'docker']

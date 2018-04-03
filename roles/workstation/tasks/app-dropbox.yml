@@ -6,4 +6,3 @@
   become: 'yes'
   with_items:
     - dropbox
-    - nemo-dropbox

@@ -2,8 +2,3 @@
 dependencies:
   - role: stage2-user
     tags: stage2
-  - role: deb
-    name: atom
-    version: 1.23.3
-    url: https://github.com/atom/atom/releases/download/v1.23.3/atom-amd64.deb
-    tags: atom
