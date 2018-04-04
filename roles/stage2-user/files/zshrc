@@ -179,7 +179,7 @@ function +vi-git-remote() {
     local ahead behind
 
     ahead=$(git rev-list "${hook_com[branch]}@{upstream}..HEAD" 2>/dev/null | wc -l)
-    (( ahead )) && hook_com[misc]+=" %{$fg_bold[green]%}↑${ahead}%{$reset_color%}"
+    (( ahead )) && hook_com[misc]+=" %{$fg[green]%}↑${ahead}%{$reset_color%}"
 
     behind=$(git rev-list "HEAD..${hook_com[branch]}@{upstream}" 2>/dev/null | wc -l)
     (( behind )) && hook_com[misc]+=" %{$fg[red]%}↓${behind}%{$reset_color%}"
