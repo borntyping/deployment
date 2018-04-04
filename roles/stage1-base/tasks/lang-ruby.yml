@@ -17,5 +17,5 @@
     - libxml2-dev
     - libxslt1-dev
     - ruby-nokogiri
-    - ruby2.3
-    - ruby2.3-dev
+    - ruby2.5
+    - ruby2.5-dev

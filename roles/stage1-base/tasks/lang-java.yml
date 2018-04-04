@@ -6,4 +6,3 @@
   become: 'yes'
   with_items:
     - openjdk-8-jdk
-    - groovy2

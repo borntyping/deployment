@@ -3,7 +3,7 @@
   gem:
     state: latest
     name: '{{ item }}'
-    executable: gem2.3
+    executable: gem2.5
     user_install: 'yes'
   with_items:
     - bundler
