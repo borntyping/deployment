@@ -28,10 +28,9 @@
         - deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu xenial main
         - deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu xenial main
         - deb http://repository.spotify.com stable non-free
-        - deb https://typora.io linux/
+        - deb https://typora.io/linux ./
 
     - name: update repositories
       apt:
         update_cache: 'yes'
-      #when: apt_repositories.changed or apt_repositories_key.changed
       become: 'yes'
