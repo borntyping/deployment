@@ -30,13 +30,12 @@
   pip:
     name: '{{ item }}'
     state: latest
-    executable: pip3
     extra_args: --user
+  when: false
   with_items:
     - ctop
     - httpie
     - peru
-    - pex
     - pip
     - pipenv
     - secretstorage
