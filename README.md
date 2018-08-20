@@ -16,7 +16,8 @@ Install the latest ansible release with:
 ```bash
 sudo apt-add-repository --yes ppa:ansible/ansible
 sudo apt update
-sudo apt install ansible git tilix cinnamon-core
+sudo apt install ansible git tilix curl
+sudo apt install cinnamon-core # optional
 curl -L https://packagecloud.io/github/git-lfs/gpgkey | sudo apt-key add -
 ```
 
