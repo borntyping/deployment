@@ -9,8 +9,6 @@
     - apt
     - docker
     - git
-    - slack
-    - spotify
 
 - name: install packages
   apt:

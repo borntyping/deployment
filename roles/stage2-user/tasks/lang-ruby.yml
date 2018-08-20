@@ -10,9 +10,6 @@
     - fpm
     - rake
     - rubocop
-    - ruby-graphviz
-    - travis
-    - travis-lint
 
 - name: 'ruby : create ~/.bundle'
   file:

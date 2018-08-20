@@ -17,7 +17,6 @@
   with_items:
     - firefox
     - gparted
-    - keepassx
     - tilix
     - typora
     - zeal

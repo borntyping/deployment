@@ -3,8 +3,3 @@
   roles:
   - role: workstation
     tags: workstation
-
-#- hosts: workstation-gb
-#  roles:
-#  - role: workstation-gb
-#    tags: workstation-gb
