@@ -1,2 +1,2 @@
 #!/bin/bash
-exec "${borntyping}/deployment/bin/reconfigure" "$@"
+exec "${borntyping}/deployment/reconfigure" "$@"

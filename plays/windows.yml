@@ -1,5 +1,0 @@
----
-- hosts: windows
-  roles:
-  - role: stage2-user
-    tags: stage2-user
