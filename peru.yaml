@@ -90,7 +90,7 @@ curl module gdrive:
 git module gws:
   url: https://github.com/StreakyCobra/gws.git
   submodules: false
-  rev: f2452e90f808ea80c0498279431c77a3f594c249
+  rev: 8f4be111867bf658171feece523a1e5cdec59c3e
 
 rule gws-completion:
   pick: gws.zsh
@@ -138,13 +138,13 @@ rule micro-executable:
 git module with:
   url: https://github.com/mchav/with.git
   pick: with
-  rev: a4f59e951489b6b00059b772b3cc98649400269b
+  rev: 28eb40bbc08d171daabf0210f420477ad75e16d6
 
 # ZSH syntax highlighting plugin
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 8146d58bb2c77e6b9ff7424ba09508071a3fcf12
+  rev: db6cac391bee957c20ff3175b2f03c4817253e60
   pick:
     - .revision-hash
     - .version
@@ -160,4 +160,4 @@ git module z:
   url: https://github.com/rupa/z.git
   pick:
     - z.sh
-  rev: 0a47c9ceca790604df5c9a4a2bc74aba63005c21
+  rev: 9d5a3fe0407101e2443499e4b95bca33f7a9a9ca
