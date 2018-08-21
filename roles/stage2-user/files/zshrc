@@ -301,6 +301,9 @@ function source_if_variable { [[ -n $1 ]] && source $1; }
 # Virtualenvwrapper
 # source_if_path "/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
 
+# Local ZSH config
+source_if_path "$HOME/.config/zsh/zshrc"
+
 # Tilix VTE patch
 source_if_path "/etc/profile.d/vte-2.91.sh"
 
