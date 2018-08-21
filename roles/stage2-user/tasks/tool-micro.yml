@@ -1,10 +1,12 @@
 ---
-- name: 'micro : create ~/.config/micro directory'
-  file:
-    name: '{{ ansible_env.HOME }}/.config/micro'
-    state: directory
+- tags: micro
+  block:
+    - name: create micro configuration directory
+      file:
+        name: '{{ ansible_env.HOME }}/.config/micro'
+        state: directory
 
-- name: 'micro : create ~/.config/micro/settings.json'
-  copy:
-    src: 'config/micro/settings.json'
-    dest: '{{ ansible_env.HOME }}/.config/micro/settings.json'
+    - name: create micro configuration
+      copy:
+        src: 'config/micro/settings.json'
+        dest: '{{ ansible_env.HOME }}/.config/micro/settings.json'

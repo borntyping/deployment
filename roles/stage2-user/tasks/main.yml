@@ -1,59 +1,47 @@
 ---
-- import_tasks: lang-python.yml
-  tags: ['python', 'virtualenv']
-- import_tasks: lang-ruby.yml
-  tags: ['ruby']
-- import_tasks: lang-zsh.yml
-  tags: ['zsh', 'shell']
-- import_tasks: tool-git.yml
-  tags: ['git']
-- import_tasks: tool-micro.yml
-  tags: ['micro', 'dotfiles']
-- import_tasks: tool-ssh.yml
-  tags: ['ssh']
+- tags:
+    - stage2
+    - stage2-user
+  block:
+    - import_tasks: lang-python.yml
+    - import_tasks: lang-ruby.yml
+    - import_tasks: lang-zsh.yml
+    - import_tasks: tool-git.yml
+    - import_tasks: tool-micro.yml
+    - import_tasks: tool-ssh.yml
 
-#
-# Dotfiles.
-#
+    - name: configure dotfiles
+      copy:
+        src: '{{ item }}'
+        dest: '{{ ansible_env.HOME }}/.{{ item }}'
+      with_items:
+        - ackrc
+        - htoprc
+        - inputrc
+        - multitailrc
+        - nanorc
+        - tmux.conf
+      tags:
+        - dotfiles
 
-- name: 'configure dotfiles'
-  copy:
-    src: '{{ item }}'
-    dest: '{{ ansible_env.HOME }}/.{{ item }}'
-  with_items:
-    - ackrc
-    - htoprc
-    - inputrc
-    - multitailrc
-    - nanorc
-    - tmux.conf
-  tags:
-    - dotfiles
+    - name: install executables and scripts
+      copy:
+        src: 'local/bin/'
+        dest: '{{ ansible_env.HOME }}/.local/bin'
+        mode: '0755'
+      tags:
+        - bin
+        - ansible
+        - micro
 
-#
-# Installs scripts to `~/.local/bin`.
-#
+    - name: create development directories
+      file:
+        name: '{{ ansible_env.HOME }}/{{ item }}'
+        state: directory
+      with_items:
+        - 'Development'
+        - 'Development/github.com/borntyping'
+        - 'Development/github.com/borntyping-sandbox'
+        - 'Development/gitlab.com/borntyping'
 
-- name: 'install executables and scripts'
-  copy:
-    src: 'local/bin/'
-    dest: '{{ ansible_env.HOME }}/.local/bin'
-    mode: '0755'
-  tags:
-    - bin
-    - ansible
-    - micro
-
-#
-# Create development directories.
-#
-
-- name: 'create development directories'
-  file:
-    name: '{{ ansible_env.HOME }}/{{ item }}'
-    state: directory
-  with_items:
-    - Development
-    - Development/github.com/borntyping
-    - Development/github.com/borntyping-sandbox
-    - Development/gitlab.com/borntyping
+    - meta: flush_handlers

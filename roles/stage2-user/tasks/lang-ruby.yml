@@ -1,28 +1,30 @@
 ---
-- name: 'ruby : install'
-  gem:
-    state: latest
-    name: '{{ item }}'
-    executable: gem2.5
-    user_install: 'yes'
-  with_items:
-    - bundler
-    - fpm
-    - rake
-    - rubocop
+- tags: ruby
+  block:
+    - name: install ruby packages
+      gem:
+        state: latest
+        name: '{{ item }}'
+        executable: gem2.5
+        user_install: 'yes'
+      with_items:
+        - bundler
+        - fpm
+        - rake
+        - rubocop
 
-- name: 'ruby : create ~/.bundle'
-  file:
-    name: '{{ ansible_env.HOME }}/.bundle'
-    state: directory
-  tags:
-    - dotfiles
-    - bundle
+    - name: create bundle directory
+      file:
+        name: '{{ ansible_env.HOME }}/.bundle'
+        state: directory
+      tags:
+        - dotfiles
+        - bundle
 
-- name: 'ruby : create ~/.bundle/config'
-  template:
-    src: bundle_config
-    dest: '{{ ansible_env.HOME }}/.bundle/config'
-  tags:
-    - dotfiles
-    - bundle
+    - name: create bundle configuration
+      template:
+        src: bundle_config
+        dest: '{{ ansible_env.HOME }}/.bundle/config'
+      tags:
+        - dotfiles
+        - bundle

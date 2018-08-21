@@ -1,5 +1,5 @@
-[workstation]
+[local]
 localhost ansible_connection=local ansible_sudo_pass=EXAMPLE
 
-[servers]
+[remote]
 remotehost ansible_ssh_host=remotehost.example.co.uk ansible_ssh_port=22 ansible_sudo_pass=EXAMPLE

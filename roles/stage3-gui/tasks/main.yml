@@ -1,0 +1,43 @@
+---
+#
+# Install software only useful on a stage3-gui or non-headless machine.
+#
+- tags:
+    - stage3
+    - stage3-gui
+  block:
+    - import_tasks: apt.yml
+
+    - name: install packages
+      apt:
+        pkg: '{{ item }}'
+        state: latest
+      become: 'yes'
+      with_items:
+        - firefox
+        - gparted
+        - tilix
+        - typora
+        - zeal
+
+    - name: install UI tools for Git
+      apt:
+        pkg: '{{ item }}'
+        state: latest
+      become: 'yes'
+      with_items:
+        - git-cola
+        - gitg
+        - meld
+
+    - name: configure XDG directories
+      template:
+        dest: '{{ ansible_env.HOME }}/.config/user-dirs.dirs'
+        src: 'user-dirs.dirs'
+
+    - name: install fonts
+      copy:
+        src: 'fonts/'
+        dest: '{{ ansible_env.HOME }}/.fonts'
+      tags:
+        - fonts

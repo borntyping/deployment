@@ -1,5 +1,4 @@
 ---
-- hosts: workstation
+- hosts: local
   roles:
-  - role: workstation
-    tags: workstation
+    - role: stage3-gui

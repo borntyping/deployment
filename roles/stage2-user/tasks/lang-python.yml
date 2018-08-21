@@ -1,46 +1,44 @@
 ---
-- name: 'python : create ~/.config/pip/ directory'
-  file:
-    name: '{{ ansible_env.HOME }}/.config/pip/'
-    state: directory
+- tags: python
+  block:
+    - name: create pip configuration directory
+      file:
+        name: '{{ ansible_env.HOME }}/.config/pip/'
+        state: directory
 
-- name: 'python : copy ~/.config/pip/pip.conf'
-  copy:
-    src: config/pip/pip.conf
-    dest: '{{ ansible_env.HOME }}/.config/pip/pip.conf'
+    - name: create pip configuration
+      copy:
+        src: 'config/pip/pip.conf'
+        dest: '{{ ansible_env.HOME }}/.config/pip/pip.conf'
 
-- name: 'python : create ~/.virtualenvs directory'
-  file:
-    name: '{{ ansible_env.HOME }}/.virtualenvs'
-    state: directory
+    - name: create virtualenv directory
+      file:
+        name: '{{ ansible_env.HOME }}/.virtualenvs'
+        state: directory
 
-- name: 'python : create scripts'
-  copy:
-    src: '{{ item }}'
-    dest: '{{ ansible_env.HOME }}/.virtualenvs/{{ item }}'
-    mode: '0755'
-  with_items:
-    - postmkvirtualenv
+    - name: create virtualenv configuration
+      copy:
+        src: '{{ item }}'
+        dest: '{{ ansible_env.HOME }}/.virtualenvs/{{ item }}'
+        mode: '0755'
+      with_items:
+        - postmkvirtualenv
 
-#
-# Install python packages
-#
-
-- name: 'python : install python packages'
-  pip:
-    name: '{{ item }}'
-    state: latest
-    extra_args: --user
-  when: false
-  with_items:
-    - ctop
-    - httpie
-    - peru
-    - pip
-    - pipenv
-    - secretstorage
-    - ssh-run
-    - tox
-    - v
-    - watch-fs
-    - wheel
+    - name: install python packages
+      pip:
+        name: '{{ item }}'
+        state: latest
+        executable: pip3
+        extra_args: --user
+      with_items:
+        - ctop
+        - httpie
+        - peru
+        - pip
+        - pipenv
+        - secretstorage
+        - ssh-run
+        - tox
+        - v
+        - watch-fs
+        - wheel

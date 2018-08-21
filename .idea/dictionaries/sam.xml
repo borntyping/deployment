@@ -1223,6 +1223,7 @@
       <w>anovalist.trls</w>
       <w>ansari.test</w>
       <w>anscombe</w>
+      <w>ansible</w>
       <w>any</w>
       <w>anyDuplicated</w>
       <w>anyDuplicated.array</w>
@@ -1524,6 +1525,7 @@
       <w>boot</w>
       <w>boot.array</w>
       <w>boot.ci</w>
+      <w>borntyping</w>
       <w>box</w>
       <w>boxcox</w>
       <w>boxplot</w>
