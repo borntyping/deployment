@@ -1,20 +1,24 @@
 ---
-- name: 'ssh : create ~/.ssh directory'
-  file:
-    name: '{{ ansible_env.HOME }}/.ssh'
-    state: directory
+- tags: ssh
+  block:
+    - name: create ssh directory
+      file:
+        name: '{{ ansible_env.HOME }}/.ssh'
+        state: directory
 
-- name: 'ssh : create ~/.ssh sub-directories'
-  file:
-    name: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
-    state: directory
-  with_items:
-    - config.d
-    - hosts
-    - keys
+    - name: create ssh sub-directories
+      file:
+        name: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
+        state: directory
+      with_items:
+        - config.d
+        - hosts
+        - keys
 
-- name: 'ssh : create ~/.ssh/config.d/base.config'
-  copy:
-    src: 'ssh/config.d/base.config'
-    dest: '{{ ansible_env.HOME }}/.ssh/config.d/base.config'
-  notify: ssh
+    - name: create ssh fragments
+      copy:
+        src: 'ssh/config.d/base.config'
+        dest: '{{ ansible_env.HOME }}/.ssh/config.d/base.config'
+      notify: ssh
+
+    - meta: flush_handlers

@@ -2,9 +2,9 @@
 imports:
   desk|desk-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   desk|desk-script: 'roles/stage2-user/files/local/bin'
-  fantasque17: 'roles/workstation/files/fonts'
-  fantasque18: 'roles/workstation/files/fonts'
-  fira: 'roles/workstation/files/fonts'
+  fantasque17: 'roles/stage3-gui/files/fonts'
+  fantasque18: 'roles/stage3-gui/files/fonts'
+  fira: 'roles/stage3-gui/files/fonts'
   gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'

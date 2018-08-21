@@ -1,28 +1,22 @@
 ---
-- name: 'zsh : install'
-  apt:
-    pkg: zsh
-    state: latest
-  become: 'yes'
-
-- name: 'zsh : copy zsh libraries'
-  copy:
-    src: 'local/share/zsh/'
-    dest: '{{ ansible_env.HOME }}/.local/share/zsh/'
-  tags:
+- tags:
     - dotfiles
+    - shell
+    - zsh
     - zshrc
+  block:
+    - name: copy zsh libraries
+      copy:
+        src: 'local/share/zsh/'
+        dest: '{{ ansible_env.HOME }}/.local/share/zsh/'
 
-- name: 'zsh : copy zsh config'
-  copy:
-    src: 'zshrc'
-    dest: '{{ ansible_env.HOME }}/.zshrc'
-  tags:
-    - dotfiles
-    - zshrc
+    - name: copy zsh config
+      copy:
+        src: 'zshrc'
+        dest: '{{ ansible_env.HOME }}/.zshrc'
 
-- name: 'zsh : set user shell'
-  user:
-    name: '{{ ansible_env.USER }}'
-    shell: /bin/zsh
-  become: 'yes'
+    - name: set shell to zsh
+      user:
+        name: '{{ ansible_env.USER }}'
+        shell: '/bin/zsh'
+      become: 'yes'

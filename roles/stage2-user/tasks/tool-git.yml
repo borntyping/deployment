@@ -1,16 +1,15 @@
 ---
-- name: 'git : configure'
-  template:
-    src: 'gitconfig'
-    dest: '{{ ansible_env.HOME }}/.gitconfig'
-  tags:
+- tags:
     - dotfiles
+    - git
+  block:
+    - name: create git configuration
+      template:
+        src: 'gitconfig'
+        dest: '{{ ansible_env.HOME }}/.gitconfig'
 
-- name: 'git : install hooks and global gitignore'
-  copy:
-    src: 'config/git/'
-    dest: '{{ ansible_env.HOME }}/.config/git/'
-    mode: '755'
-  tags:
-    - ruby
-    - gitignore
+    - name: create additional git configuration
+      copy:
+        src: 'config/git/'
+        dest: '{{ ansible_env.HOME }}/.config/git/'
+        mode: '755'

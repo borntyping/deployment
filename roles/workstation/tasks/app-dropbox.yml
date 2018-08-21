@@ -1,8 +1,0 @@
----
-- name: "dropbox : install"
-  apt:
-    pkg: '{{ item }}'
-    state: latest
-  become: 'yes'
-  with_items:
-    - dropbox
