@@ -1,9 +1,0 @@
----
-- name: 'node : install nodejs'
-  apt:
-    pkg: '{{ item }}'
-    state: latest
-  become: 'yes'
-  with_items:
-    - nodejs
-    - npm

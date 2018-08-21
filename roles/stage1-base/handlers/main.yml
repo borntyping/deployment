@@ -1,0 +1,4 @@
+- name: reload sysctl
+  command: sysctl -p --system
+  listen: sysctl
+  become: 'yes'
