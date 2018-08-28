@@ -10,7 +10,7 @@
     hooksPath = {{ ansible_env.HOME }}/.config/git/hooks
 
 [push]
-    default = simple
+    default = current
 
 [branch]
     autosetuprebase = always
