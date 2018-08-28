@@ -2,4 +2,4 @@
 export ANSIBLE_REPO="$(readlink -f $(dirname "${BASH_SOURCE[0]}"))"
 export ANSIBLE_CONFIG="${ANSIBLE_REPO}/ansible.cfg"
 export ANSIBLE_INVENTORY="${ANSIBLE_REPO}/inventory.conf"
-exec ansible-playbook --diff "${ANSIBLE_REPO}/playbook.yml" "$@"
+exec ansible-playbook "$@"
