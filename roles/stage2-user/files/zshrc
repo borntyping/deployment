@@ -263,7 +263,7 @@ PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
 
 source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
@@ -271,11 +271,6 @@ ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red')
-ZSH_HIGHLIGHT_PATTERNS+=('rm -r *' 'fg=white,bg=yellow')
-ZSH_HIGHLIGHT_PATTERNS+=('knife block use p*' 'fg=white,bg=red')
-ZSH_HIGHLIGHT_PATTERNS+=('knife block use s*' 'fg=white,bg=yellow')
-ZSH_HIGHLIGHT_PATTERNS+=('knife block use n*' 'fg=white,bg=green')
 
 #
 # z - jump around
@@ -290,6 +285,15 @@ source "$HOME/.local/share/zsh/plugins/z/z.sh"
 #
 
 eval "$(direnv hook zsh)"
+
+#
+# Kubernetes completion
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
+#
+
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
 
 #
 # Other plugins.
