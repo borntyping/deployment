@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 #
 # Aliases
@@ -199,37 +199,33 @@ function virtualenv_info() {
     fi
 }
 
-## Display the currently selected knife-block configuration file
-#function knife_info() {
-#    knife_info_msg=""
-#
-#    local ENVIRONMENT_FILE ENVIRONMENT COLOUR
-#
-#    [[ ! -L "$HOME/.chef/knife.rb" ]] && return
-#
-#    ENVIRONMENT_FILE=$(realpath "$HOME/.chef/knife.rb")
-#    ENVIRONMENT=$(basename $ENVIRONMENT_FILE | sed "s/knife-\(.*\).rb/\1/")
-#    COLOUR="$fg_bold[green]"
-#
-#    # When the environment is `none`, skip showing knife information
-#    [[ "$ENVIRONMENT" == "none" ]] && return
-#
-#    # Set colors based on the environment
-#    [[ "$ENVIRONMENT" == "production"  ]] && COLOUR="$fg[red]"
-#    [[ "$ENVIRONMENT" == "staging"     ]] && COLOUR="$fg[yellow]"
-#    [[ "$ENVIRONMENT" == "development" ]] && COLOUR="$fg[green]"
-#
-#    ENVIRONMENT="%{$COLOUR%}${ENVIRONMENT}%{$reset_color%}"
-#    knife_info_msg="%{$fg_bold[green]%}knife:%{$reset_color%}${ENVIRONMENT} "
-#}
+# Display the current kubectl context
+function kubectl_info() {
+    kubectl_info_msg=""
+
+    local CONTEXT COLOUR
+
+    [[ ! -n "$KUBECONFIG" ]] && return
+
+    COLOUR="$fg[white]"
+    CONTEXT=$(kubectl config current-context)
+
+    # Set colors based on the environment
+    [[ "$CONTEXT" == "k8s.staging.infosum.io" ]] && COLOUR="$fg[red]"
+    [[ "$CONTEXT" == "k8s.sandbox.infosum.io" ]] && COLOUR="$fg[yellow]"
+    [[ "$CONTEXT" == "k8s.infra.infosum.io"   ]] && COLOUR="$fg[green]"
+    [[ "$CONTEXT" == "minikube"               ]] && COLOUR=""
+
+    kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+}
 
 # Set terminal title and collect information before showing the prompt
 function precmd() {
     case $TERM in
         xterm*) print -Pn "\e]2;%~\a";;
     esac
+    kubectl_info
     vcs_info
-    desk_info
     virtualenv_info
 }
 
@@ -251,7 +247,7 @@ function preexec() {
 # characters when calculating the length
 PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
 \${vcs_info_msg_0_}\
-\${desk_info_msg}\
+\${kubectl_info_msg}\
 \${virtualenv_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
@@ -293,6 +289,10 @@ eval "$(direnv hook zsh)"
 
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
+fi
+
+if [ $commands[helm] ]; then
+  source <(helm completion zsh)
 fi
 
 #
