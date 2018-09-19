@@ -2708,6 +2708,7 @@
       <w>influence</w>
       <w>influence.gam</w>
       <w>influence.measures</w>
+      <w>infosum</w>
       <w>inheritedSlotNames</w>
       <w>inherits</w>
       <w>init</w>
@@ -2904,6 +2905,7 @@
       <w>kruskal.test</w>
       <w>ks.test</w>
       <w>ksmooth</w>
+      <w>kubectl</w>
       <w>kyphosis</w>
       <w>l10n_info</w>
       <w>labels</w>
@@ -3188,6 +3190,7 @@
       <w>mimemap</w>
       <w>min</w>
       <w>minify</w>
+      <w>minikube</w>
       <w>minn38</w>
       <w>mirror2html</w>
       <w>missing</w>
