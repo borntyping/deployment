@@ -211,10 +211,10 @@ function kubectl_info() {
     CONTEXT=$(kubectl config current-context)
 
     # Set colors based on the environment
-    [[ "$CONTEXT" == "k8s.staging.infosum.io" ]] && COLOUR="$fg[red]"
-    [[ "$CONTEXT" == "k8s.sandbox.infosum.io" ]] && COLOUR="$fg[yellow]"
-    [[ "$CONTEXT" == "k8s.infra.infosum.io"   ]] && COLOUR="$fg[green]"
-    [[ "$CONTEXT" == "minikube"               ]] && COLOUR=""
+    [[ "$CONTEXT" == "k8s.staging.infosum.io" || "$CONTEXT" == "staging" ]] && COLOUR="$fg[red]"
+    [[ "$CONTEXT" == "k8s.sandbox.infosum.io" || "$CONTEXT" == "sandbox" ]] && COLOUR="$fg[yellow]"
+    [[ "$CONTEXT" == "k8s.infra.infosum.io"   || "$CONTEXT" == "infra"   ]] && COLOUR="$fg[green]"
+    [[ "$CONTEXT" == "minikube"                                          ]] && COLOUR=""
 
     kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
 }
