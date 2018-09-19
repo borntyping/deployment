@@ -21,7 +21,6 @@ alias cola='git-cola &'
 alias gg='gitg &'
 
 # Run ansible and reload ZSH.
-alias reconfigure-ssh='reconfigure -t ssh'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 # Bundler/Chef aliases
@@ -95,12 +94,9 @@ function add_to_path() {
   fi
 }
 
-add_to_path "${HOME}/.chefdk/gem/ruby/2.1.0/bin"
+add_to_path "${HOME}/.cargo/bin"
 add_to_path "${HOME}/.gem/ruby/2.5.0/bin"
 add_to_path "${HOME}/.go/bin"
-add_to_path "${HOME}/.multirust/toolchains/beta/cargo/bin"
-add_to_path "${HOME}/.multirust/toolchains/nightly/cargo/bin"
-add_to_path "${HOME}/.multirust/toolchains/stable/cargo/bin"
 add_to_path "${HOME}/.npm/bin"
 
 add_to_path "${HOME}/.local/bin"
