@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BashSupportProjectSettings">
+    <option name="globalVariables">
+      <set>
+        <option value="DESK_NAME" />
+        <option value="TERM" />
+        <option value="VIRTUAL_ENV" />
+        <option value="argument" />
+        <option value="back" />
+        <option value="branch" />
+        <option value="commands" />
+        <option value="comment" />
+        <option value="dollar" />
+        <option value="double" />
+        <option value="fg" />
+        <option value="globbing" />
+        <option value="hook_com" />
+        <option value="quoted" />
+        <option value="reset_color" />
+        <option value="single" />
+        <option value="token" />
+        <option value="unknown" />
+      </set>
+    </option>
+  </component>
+</project>
