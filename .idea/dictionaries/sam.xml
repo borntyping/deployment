@@ -1438,6 +1438,7 @@
       <w>augPred</w>
       <w>austres</w>
       <w>authenticate</w>
+      <w>autocompletion</w>
       <w>autoload</w>
       <w>autoloader</w>
       <w>available.packages</w>
@@ -2043,6 +2044,7 @@
       <w>dir</w>
       <w>dir.create</w>
       <w>dir.exists</w>
+      <w>direnv</w>
       <w>dirname</w>
       <w>disassemble</w>
       <w>discover_repository</w>
@@ -2328,6 +2330,7 @@
       <w>formula.gam</w>
       <w>forwardsolve</w>
       <w>fourfoldplot</w>
+      <w>fpath</w>
       <w>fractions</w>
       <w>frailty</w>
       <w>frailty.gamma</w>
@@ -2511,6 +2514,7 @@
       <w>gnls</w>
       <w>gnlsControl</w>
       <w>gnlsStruct</w>
+      <w>gopath</w>
       <w>gpar</w>
       <w>grDevices</w>
       <w>grSoftVersion</w>
@@ -2660,8 +2664,10 @@
       <w>hist.FD</w>
       <w>hist.default</w>
       <w>hist.scott</w>
+      <w>histfile</w>
       <w>histogram</w>
       <w>history</w>
+      <w>histsize</w>
       <w>hmac</w>
       <w>hmac_sha1</w>
       <w>housing</w>
@@ -3646,6 +3652,7 @@
       <w>predict.glm</w>
       <w>predict.lm</w>
       <w>predict.trls</w>
+      <w>preexec</w>
       <w>prepanel.default.bwplot</w>
       <w>prepanel.default.cloud</w>
       <w>prepanel.default.densityplot</w>
@@ -4082,6 +4089,7 @@
       <w>savePlot</w>
       <w>savePlotAsImage</w>
       <w>saveRDS</w>
+      <w>savehist</w>
       <w>savehistory</w>
       <w>scale</w>
       <w>scale.default</w>
@@ -4907,6 +4915,7 @@
       <w>untar</w>
       <w>untrace</w>
       <w>untracemem</w>
+      <w>untracked</w>
       <w>unz</w>
       <w>unzip</w>
       <w>upViewport</w>
@@ -4999,6 +5008,7 @@
       <w>vignette</w>
       <w>vignetteDepends</w>
       <w>vignetteEngine</w>
+      <w>virtualenvwrapper</w>
       <w>vis.gam</w>
       <w>volcano</w>
       <w>volume</w>
@@ -5139,9 +5149,11 @@
       <w>yinch</w>
       <w>yscale.components.default</w>
       <w>zapsmall</w>
+      <w>zhistory</w>
       <w>ziP</w>
       <w>zip</w>
       <w>ziplss</w>
+      <w>zshrc</w>
     </words>
   </dictionary>
 </component>

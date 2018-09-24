@@ -1,5 +1,12 @@
 #!/bin/bash
 
+export SOURCE_TRACE=1
+
+function source_if_path { [[ -f $1 ]] && source $1; }
+function source_if_variable { [[ -n $1 ]] && source $1; }
+
+source_if_path "$HOME/.config/zsh/zshrc"
+
 #
 # Aliases
 #
@@ -22,11 +29,6 @@ alias gg='gitg &'
 
 # Run ansible and reload ZSH.
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
-
-# Bundler/Chef aliases
-alias ce='chef exec'
-alias cb='chef exec bundle exec'
-alias be='bundle exec'
 
 # I always get this wrong...
 alias httpie='http'
@@ -65,11 +67,14 @@ setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
 # Named directories
 #
 
-export github="$HOME/Development/github.com"
-export gitlab="$HOME/Development/gitlab.com"
+export dev="$HOME/Development"
+export dep="$HOME/Deployment"
 
-export borntyping="$HOME/Development/github.com/borntyping"
-export sandbox="$HOME/Development/github.com/borntyping-sandbox"
+export github="${dev}/github.com"
+export gitlab="${dev}/gitlab.com"
+
+export borntyping="${github}/borntyping"
+export sandbox="${github}/borntyping-sandbox"
 
 #
 # Environment variables
@@ -82,7 +87,6 @@ export NPM_CONFIG_PREFIX="$HOME/.npm"
 export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
 #
 # $PATH
@@ -140,9 +144,9 @@ autoload -U vcs_info                    # Version control information
 autoload -U colors && colors            # Adds variables for printing colors
 setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
-prompt_status_fg="$fg[magenta]"
-prompt_highlight_fg="$fg[magenta]"
-prompt_fg="$fg[magenta]"
+prompt_fg="$fg[$(cat "$HOME/.config/zsh/theme" || echo "magenta")]"
+prompt_status_fg="$prompt_fg"
+prompt_highlight_fg="$prompt_fg"
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
@@ -200,24 +204,21 @@ function kubectl_info() {
     kubectl_info_msg=""
 
     local CONTEXT COLOUR
-
-    [[ ! -n "$KUBECONFIG" ]] && return
-
     COLOUR="$fg[white]"
-    CONTEXT=$(kubectl config current-context)
+    CONTEXT="$(kubectl config current-context 2>/dev/null)"
 
-    # Set colors based on the environment
-    [[ "$CONTEXT" == "k8s.staging.infosum.io" || "$CONTEXT" == "staging" ]] && COLOUR="$fg[red]"
-    [[ "$CONTEXT" == "k8s.sandbox.infosum.io" || "$CONTEXT" == "sandbox" ]] && COLOUR="$fg[yellow]"
-    [[ "$CONTEXT" == "k8s.infra.infosum.io"   || "$CONTEXT" == "infra"   ]] && COLOUR="$fg[green]"
-    [[ "$CONTEXT" == "minikube"                                          ]] && COLOUR=""
-
-    kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+    if [[ ! -z "$CONTEXT" ]]; then
+        # Set colors based on the environment
+        [[ "$CONTEXT" == "k8s.staging.infosum.io" || "$CONTEXT" == "staging" ]] && COLOUR="$fg[red]"
+        [[ "$CONTEXT" == "k8s.sandbox.infosum.io" || "$CONTEXT" == "sandbox" ]] && COLOUR="$fg[yellow]"
+        [[ "$CONTEXT" == "k8s.infra.infosum.io"   || "$CONTEXT" == "infra"   ]] && COLOUR="$fg[green]"
+        kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+    fi
 }
 
 # Set terminal title and collect information before showing the prompt
 function precmd() {
-    case $TERM in
+    case "$TERM" in
         xterm*) print -Pn "\e]2;%~\a";;
     esac
     kubectl_info
@@ -227,7 +228,7 @@ function precmd() {
 
 # Set terminal title before executing a command
 function preexec() {
-    case $TERM in
+    case "$TERM" in
         xterm*) print -Pn "\e]2;%~ $ $2\a";;
     esac
 }
@@ -253,30 +254,34 @@ PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
 # https://github.com/zsh-users/zsh-syntax-highlighting
 #
 
-source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -f "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+    ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
+    ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+    ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
+    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
+    ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
+    ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
+fi
 
 #
 # z - jump around
 # https://github.com/rupa/z
 #
 
-source "$HOME/.local/share/zsh/plugins/z/z.sh"
+source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 
 #
 # direnv - directory specific environment configuration
 # https://direnv.net/
 #
 
-eval "$(direnv hook zsh)"
+if [ $commands[direnv] ]; then
+    eval "$(direnv hook zsh)"
+fi
 
 #
 # Kubernetes completion
@@ -294,15 +299,6 @@ fi
 #
 # Other plugins.
 #
-
-function source_if_path { [[ -f $1 ]] && source $1; }
-function source_if_variable { [[ -n $1 ]] && source $1; }
-
-# Virtualenvwrapper
-# source_if_path "/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
-
-# Local ZSH config
-source_if_path "$HOME/.config/zsh/zshrc"
 
 # Tilix VTE patch
 source_if_path "/etc/profile.d/vte-2.91.sh"
