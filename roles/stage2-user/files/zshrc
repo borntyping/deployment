@@ -1,11 +1,14 @@
 #!/bin/bash
 
-export SOURCE_TRACE=1
+# Load a local ZSHRC which may set other defaults before doing anything else.
+[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
+
+#
+# Functions
+#
 
 function source_if_path { [[ -f $1 ]] && source $1; }
 function source_if_variable { [[ -n $1 ]] && source $1; }
-
-source_if_path "$HOME/.config/zsh/zshrc"
 
 #
 # Aliases
@@ -32,11 +35,6 @@ alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 # I always get this wrong...
 alias httpie='http'
-
-# Find files with a matching md5sum
-function find_similar() {
-    find "${2:-$(pwd)}" -type f -exec md5sum '{}' + | grep "^$(md5sum "$1" | awk '{ print $1 }')" | awk '{ print $2 }'
-}
 
 #
 # ZSH options
@@ -144,7 +142,8 @@ autoload -U vcs_info                    # Version control information
 autoload -U colors && colors            # Adds variables for printing colors
 setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
-prompt_fg="$fg[$(cat "$HOME/.config/zsh/theme" || echo "magenta")]"
+theme=$(cat "$HOME/.config/zsh/theme" 2>/dev/null || echo "magenta")
+prompt_fg="$fg[$theme]"
 prompt_status_fg="$prompt_fg"
 prompt_highlight_fg="$prompt_fg"
 
