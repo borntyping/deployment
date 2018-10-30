@@ -2,6 +2,7 @@
 *.rakeTasks
 *.sublime-project
 *.sublime-workspace
+.idea/
 .idea/**/tasks.xml
 .idea/**/workspace.xml
 .idea/dictionaries
