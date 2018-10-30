@@ -4,7 +4,6 @@
     - stage2-user
   block:
     - import_tasks: lang-python.yml
-    - import_tasks: lang-ruby.yml
     - import_tasks: lang-zsh.yml
     - import_tasks: tool-git.yml
     - import_tasks: tool-micro.yml
@@ -31,6 +30,7 @@
         mode: '0755'
       tags:
         - bin
+        - bindir
         - ansible
         - micro
 

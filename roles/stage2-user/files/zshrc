@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Load a local ZSHRC which may set other defaults before doing anything else.
-[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
-
 #
 # Functions
 #
@@ -203,14 +200,16 @@ function kubectl_info() {
     kubectl_info_msg=""
 
     local CONTEXT COLOUR
-    COLOUR="$fg[white]"
+    COLOUR=""
     CONTEXT="$(kubectl config current-context 2>/dev/null)"
 
     if [[ ! -z "$CONTEXT" ]]; then
         # Set colors based on the environment
-        [[ "$CONTEXT" == "k8s.staging.infosum.io" || "$CONTEXT" == "staging" ]] && COLOUR="$fg[red]"
-        [[ "$CONTEXT" == "k8s.sandbox.infosum.io" || "$CONTEXT" == "sandbox" ]] && COLOUR="$fg[yellow]"
-        [[ "$CONTEXT" == "k8s.infra.infosum.io"   || "$CONTEXT" == "infra"   ]] && COLOUR="$fg[green]"
+        [[ "$CONTEXT" == "sandbox/staging"     ]] && COLOUR="$fg[red]"
+        [[ "$CONTEXT" == "sandbox/integration" ]] && COLOUR="$fg[yellow]"
+        [[ "$CONTEXT" == "infra/engineering"   ]] && COLOUR="$fg[blue]"
+        [[ "$CONTEXT" == "minikube"            ]] && COLOUR="$fg[green]"
+
         kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
@@ -278,22 +277,22 @@ source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 # https://direnv.net/
 #
 
-if [ $commands[direnv] ]; then
-    eval "$(direnv hook zsh)"
-fi
+eval "$(direnv hook zsh)"
 
 #
 # Kubernetes completion
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
 #
 
-if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
-fi
+source <(kubectl completion zsh)
+source <(helm completion zsh)
 
-if [ $commands[helm] ]; then
-  source <(helm completion zsh)
-fi
+#
+# Pipenv completion
+# https://pipenv.readthedocs.io/en/latest/advanced/
+#
+
+eval "$(pipenv --completion)"
 
 #
 # Other plugins.
@@ -304,3 +303,6 @@ source_if_path "/etc/profile.d/vte-2.91.sh"
 
 # Load Desk environment
 source_if_variable "$DESK_ENV"
+
+# Local zsh config
+source_if_path "$HOME/.config/zsh/zshrc"
