@@ -180,13 +180,6 @@ function +vi-git-remote() {
     (( behind )) && hook_com[misc]+=" %{$fg[red]%}↓${behind}%{$reset_color%}"
 }
 
-function desk_info() {
-    desk_info_msg=""
-    if [[ -n "$DESK_NAME" ]]; then
-        desk_info_msg="%{$prompt_status_fg%}desk:%{$prompt_highlight_fg%}$DESK_NAME%{$reset_color%} "
-    fi
-}
-
 # Display the current virtualenv when active
 function virtualenv_info() {
     virtualenv_info_msg=""
@@ -235,15 +228,15 @@ function preexec() {
 #
 #   $ sam@hostname ~
 #   $ ...
-#   $ sam@hostname ~/directory git:master desk:example env:virtualenv knife:production
+#   $ sam@hostname ~/directory git:master env:virtualenv kubectl:production
 #   $ ...
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
 PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
 \${vcs_info_msg_0_}\
-\${kubectl_info_msg}\
 \${virtualenv_info_msg}\
+\${kubectl_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
 
@@ -266,6 +259,12 @@ if [[ -f "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highligh
 fi
 
 #
+# Tilix VTE patch
+# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+#
+source_if_path "/etc/profile.d/vte-2.91.sh"
+
+#
 # z - jump around
 # https://github.com/rupa/z
 #
@@ -279,13 +278,6 @@ source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 
 eval "$(direnv hook zsh)"
 
-#
-# Kubernetes completion
-# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
-#
-
-source <(kubectl completion zsh)
-source <(helm completion zsh)
 
 #
 # Pipenv completion
@@ -295,14 +287,14 @@ source <(helm completion zsh)
 eval "$(pipenv --completion)"
 
 #
-# Other plugins.
+# Kubernetes completion
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
 #
 
-# Tilix VTE patch
-source_if_path "/etc/profile.d/vte-2.91.sh"
+source <(kubectl completion zsh)
+source <(helm completion zsh)
 
-# Load Desk environment
-source_if_variable "$DESK_ENV"
-
+#
 # Local zsh config
+#
 source_if_path "$HOME/.config/zsh/zshrc"
