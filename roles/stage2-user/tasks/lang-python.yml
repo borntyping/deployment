@@ -11,34 +11,20 @@
         src: 'config/pip/pip.conf'
         dest: '{{ ansible_env.HOME }}/.config/pip/pip.conf'
 
-    - name: create virtualenv directory
-      file:
-        name: '{{ ansible_env.HOME }}/.virtualenvs'
-        state: directory
-
-    - name: create virtualenv configuration
-      copy:
-        src: '{{ item }}'
-        dest: '{{ ansible_env.HOME }}/.virtualenvs/{{ item }}'
-        mode: '0755'
-      with_items:
-        - postmkvirtualenv
-
     - name: install python packages
       pip:
-        name: '{{ item }}'
+        name:
+          - ctop
+          - httpie
+          - peru
+          - pip
+          - pipenv
+          - secretstorage
+          - ssh-run
+          - tox
+          - v
+          - watch-fs
+          - wheel
         state: latest
         executable: pip3
         extra_args: --user
-      with_items:
-        - ctop
-        - httpie
-        - peru
-        - pip
-        - pipenv
-        - secretstorage
-        - ssh-run
-        - tox
-        - v
-        - watch-fs
-        - wheel

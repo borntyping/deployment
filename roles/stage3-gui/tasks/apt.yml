@@ -10,7 +10,6 @@
       with_items:
         - '786285426B130F8C8C67CEF87F73D5BEFC1B6133'  # zeal
         - 'B9F8D658297AF3EFC18D5CDFA2F683C52980AECF'  # virtualbox
-        - 'BA300B7755AFCFAE'  # typora
 
     - name: configure apt repositories
       apt_repository:
@@ -19,9 +18,8 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu xenial main'
-        - 'deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu xenial main'
-        - 'deb https://typora.io/linux ./'
+        - 'deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu bionic main'
+        - 'deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu cosmic main'
 
     - name: update apt repositories
       apt:
