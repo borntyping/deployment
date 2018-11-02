@@ -10,25 +10,22 @@
 
     - name: install packages
       apt:
-        pkg: '{{ item }}'
+        pkg:
+          - firefox
+          - gparted
+          - tilix
+          - zeal
         state: latest
       become: 'yes'
-      with_items:
-        - firefox
-        - gparted
-        - tilix
-        - typora
-        - zeal
 
     - name: install UI tools for Git
       apt:
-        pkg: '{{ item }}'
+        pkg:
+          - git-cola
+          - gitg
+          - meld
         state: latest
       become: 'yes'
-      with_items:
-        - git-cola
-        - gitg
-        - meld
 
     - name: configure XDG directories
       template:
