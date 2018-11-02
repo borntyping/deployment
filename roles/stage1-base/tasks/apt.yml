@@ -8,8 +8,7 @@
       register: apt_repositories_key
       become: 'yes'
       with_list:
-        - '0F833EAD'  # asciinema
-        - '58118E89F3A912897C070ADBF76221572C52609D'  # docker
+        - '0EBFCD88'  # docker
         - 'E1DF1F24'  # git
 
     - name: configure apt repositories
@@ -19,10 +18,9 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main'
-        - 'deb http://ppa.launchpad.net/zanchey/asciinema/ubuntu trusty main'
-        - 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
-        - 'deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main'
+        - 'deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu bionic stable'
+        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu cosmic main'
+        - 'deb https://packagecloud.io/github/git-lfs/ubuntu/ bionic main'
 
     - name: update apt repositories
       apt:
