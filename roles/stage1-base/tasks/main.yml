@@ -51,13 +51,12 @@
 
     - name: install docker
       apt:
-        pkg: '{{ item }}'
+        pkg:
+          - docker-engine
+          - apparmor
+          - cgroup-lite
         state: latest
       become: 'yes'
-      with_items:
-        - docker-engine
-        - apparmor
-        - cgroup-lite
 
     - name: create docker group
       group:
