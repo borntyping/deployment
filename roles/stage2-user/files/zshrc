@@ -27,7 +27,8 @@ alias gca='git commit -a'
 alias cola='git-cola &'
 alias gg='gitg &'
 
-# Run ansible and reload ZSH.
+# Specific ansible tasks.
+alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 # I always get this wrong...
