@@ -140,8 +140,8 @@ autoload -U vcs_info                    # Version control information
 autoload -U colors && colors            # Adds variables for printing colors
 setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
-theme=$(cat "$HOME/.config/zsh/theme" 2>/dev/null || echo "magenta")
-prompt_fg="$fg[$theme]"
+prompt_fg="$fg[magenta]"
+prompt_cwd_fg="$fg[blue]"
 prompt_status_fg="$prompt_fg"
 prompt_highlight_fg="$prompt_fg"
 
@@ -194,16 +194,15 @@ function kubectl_info() {
     kubectl_info_msg=""
 
     local CONTEXT COLOUR
-    COLOUR=""
+    COLOUR="$prompt_highlight_fg"
     CONTEXT="$(kubectl config current-context 2>/dev/null)"
 
     if [[ ! -z "$CONTEXT" ]]; then
         # Set colors based on the environment
-        [[ "$CONTEXT" == "sandbox/staging"     ]] && COLOUR="$fg[red]"
-        [[ "$CONTEXT" == "sandbox/integration" ]] && COLOUR="$fg[yellow]"
-        [[ "$CONTEXT" == "infra/engineering"   ]] && COLOUR="$fg[blue]"
-        [[ "$CONTEXT" == "minikube"            ]] && COLOUR="$fg[green]"
-
+        # [[ "$CONTEXT" == "sandbox/staging"     ]] && COLOUR="$fg[red]"
+        # [[ "$CONTEXT" == "sandbox/integration" ]] && COLOUR="$fg[yellow]"
+        # [[ "$CONTEXT" == "infra/engineering"   ]] && COLOUR="$fg[blue]"
+        # [[ "$CONTEXT" == "minikube"            ]] && COLOUR="$fg[green]"
         kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
@@ -234,7 +233,7 @@ function preexec() {
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
-PROMPT="%{$prompt_status_fg%}$ %n@%m %~%{$reset_color%} \
+PROMPT="%{$prompt_status_fg%}$ %n@%m %{$prompt_cwd_fg%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\
 \${virtualenv_info_msg}\
 \${kubectl_info_msg}\

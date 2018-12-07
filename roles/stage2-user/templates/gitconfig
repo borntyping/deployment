@@ -47,13 +47,10 @@
     graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-    sync = !git pull && git push
-    pr = !git push && hub pull-request
+    done = !git pull origin master:master && git checkout master && git cleanup
     hist = log --graph --pretty=graph --date=short --decorate -n 10
     history = log --graph --pretty=graph --date=short --decorate
     ignored = ls-files -o -i --exclude-standard
-    rubocop = !git ls-files -m | xargs rubocop
-    fixup = rebase -i --autosquash
 
 [pager]
     hist = less -FX
@@ -99,3 +96,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[diff "fidelius"]
+    textconv = "gpg --batch --quiet --decrypt"
