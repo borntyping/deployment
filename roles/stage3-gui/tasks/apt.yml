@@ -18,7 +18,6 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb http://ppa.launchpad.net/webupd8team/terminix/ubuntu bionic main'
         - 'deb http://ppa.launchpad.net/zeal-developers/ppa/ubuntu cosmic main'
 
     - name: update apt repositories

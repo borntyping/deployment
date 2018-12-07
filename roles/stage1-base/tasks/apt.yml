@@ -9,7 +9,6 @@
       become: 'yes'
       with_list:
         - '0EBFCD88'  # docker
-        - 'E1DF1F24'  # git
 
     - name: configure apt repositories
       apt_repository:
@@ -20,7 +19,6 @@
       with_items:
         - 'deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu bionic stable'
         - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu cosmic main'
-        - 'deb https://packagecloud.io/github/git-lfs/ubuntu/ bionic main'
 
     - name: update apt repositories
       apt:

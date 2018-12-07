@@ -27,11 +27,6 @@
         state: latest
       become: 'yes'
 
-    - name: configure XDG directories
-      template:
-        dest: '{{ ansible_env.HOME }}/.config/user-dirs.dirs'
-        src: 'user-dirs.dirs'
-
     - name: install fonts
       copy:
         src: 'fonts/'
