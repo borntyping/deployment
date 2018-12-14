@@ -4,7 +4,7 @@
     - git
   block:
     - name: create git configuration
-      template:
+      copy:
         src: 'gitconfig'
         dest: '{{ ansible_env.HOME }}/.gitconfig'
 

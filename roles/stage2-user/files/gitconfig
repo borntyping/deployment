@@ -1,6 +1,6 @@
 [user]
-    name = {{ git_name }}
-    email = {{ git_email }}
+    name = Sam Clements
+    email = sam@borntyping.co.uk
 
 [core]
     editor = micro

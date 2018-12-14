@@ -105,6 +105,9 @@ git module with:
 
 git module zsh-peco-history:
   url: https://github.com/jimeh/zsh-peco-history.git
+  pick:
+    - zsh-peco-history.plugin.zsh
+    - zsh-peco-history.zsh
   rev: b207ec8971d38667719a6f66ef02f8d6b18a1c36
 
 curl module peco:
