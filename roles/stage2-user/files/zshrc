@@ -46,18 +46,21 @@ setopt AUTO_NAME_DIRS                   # Allows 'cd ~borntyping' (see below).
 # History settings
 #
 
-SAVEHIST=10000                          # Lines of history to save to a file
-HISTSIZE=10000                          # Lines of history to keep in memory
-HISTFILE="$HOME/.zhistory"              # Save history in .cache
+SAVEHIST=10000                          # Lines of history to save to a file.
+HISTSIZE=10000                          # Lines of history to keep in memory.
+HISTFILE="$HOME/.zhistory"              # Save history.
 
-setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace
-setopt INC_APPEND_HISTORY               # Append to $HISTFILE while running
-setopt SHARE_HISTORY                    # Share history between ZSH instances
-setopt EXTENDED_HISTORY                 # Record additional information
+setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace.
+setopt INC_APPEND_HISTORY               # Append to $HISTFILE while running.
+setopt SHARE_HISTORY                    # Share history between ZSH instances.
+setopt EXTENDED_HISTORY                 # Record additional information.
 
-setopt HIST_IGNORE_DUPS                 # Ignore adjacent reapeated entries
-setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first
-setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching
+setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first.
+setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching.
+setopt HIST_IGNORE_ALL_DUPS             # Remove old duplicate entries first.
+setopt HIST_IGNORE_DUPS                 # Ignore adjacent reapeated entries.
+setopt HIST_SAVE_NO_DUPS                # Never save duplicate commands.
+
 
 #
 # Named directories
@@ -241,6 +244,16 @@ PROMPT="%{$prompt_status_fg%}$ %n@%m %{$prompt_cwd_fg%}%~%{$reset_color%} \
 %{$prompt_fg%}$%{$reset_color%} "
 
 #
+# ZSH history search plugin.
+# https://github.com/jimeh/zsh-peco-history
+#
+
+if [[ -f "$HOME/.local/share/zsh/plugins/peco-history/zsh-peco-history.zsh" ]]; then
+    ZSH_PECO_HISTORY_DEDUP=1
+    source "$HOME/.local/share/zsh/plugins/peco-history/zsh-peco-history.zsh"
+fi
+
+#
 # ZSH syntax highlighting plugin.
 # https://github.com/zsh-users/zsh-syntax-highlighting
 #
@@ -277,7 +290,6 @@ source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 #
 
 eval "$(direnv hook zsh)"
-
 
 #
 # Pipenv completion
