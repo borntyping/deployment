@@ -12,18 +12,12 @@
       apt:
         pkg:
           - firefox
-          - gparted
-          - tilix
-          - zeal
-        state: latest
-      become: 'yes'
-
-    - name: install UI tools for Git
-      apt:
-        pkg:
           - git-cola
           - gitg
+          - gparted
           - meld
+          - tilix
+          - zeal
         state: latest
       become: 'yes'
 

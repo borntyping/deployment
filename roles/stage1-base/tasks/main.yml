@@ -53,8 +53,6 @@
       apt:
         pkg:
           - docker-engine
-          - apparmor
-          - cgroup-lite
         state: latest
       become: 'yes'
 

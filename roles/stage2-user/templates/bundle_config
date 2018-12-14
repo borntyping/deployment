@@ -1,6 +1,0 @@
----
-BUNDLE_GEM__COC: "true"
-BUNDLE_GEM__TEST: "rspec"
-BUNDLE_PATH: "vendor/bundle"
-BUNDLE_BUILD__NOKOGIRI: "--use-system-libraries --with-xml2-include=/usr/include/libxml2"
-BUNDLE_BUNDLE_DISABLE_SHARED_GEMS: "true"

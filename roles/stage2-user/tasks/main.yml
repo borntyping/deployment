@@ -18,7 +18,6 @@
         - htoprc
         - inputrc
         - multitailrc
-        - nanorc
         - tmux.conf
       tags:
         - dotfiles
