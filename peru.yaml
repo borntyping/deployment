@@ -8,6 +8,7 @@ imports:
   hub|hub-executable: 'roles/stage2-user/files/local/bin'
   jq: 'roles/stage2-user/files/local/bin'
   micro|micro-executable: 'roles/stage2-user/files/local/bin'
+  peco: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
   z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
@@ -91,6 +92,16 @@ curl module micro:
 rule micro-executable:
   pick: micro
   copy: {'micro-1.3.3/micro': 'micro'}
+
+# `peco` filter tool
+
+curl module peco:
+  url: https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz
+  unpack: tar
+  pick: peco
+  copy:
+    peco_linux_amd64/peco: peco
+  sha1: f628f397616f71b20ad60d35909a19e5e2a30701
 
 # `with` script
 
