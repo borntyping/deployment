@@ -1952,6 +1952,7 @@
       <w>debugonce</w>
       <w>decompose</w>
       <w>decrypt_envelope</w>
+      <w>dedup</w>
       <w>default.stringsAsFactors</w>
       <w>defaultDumpName</w>
       <w>defaultPrototype</w>
@@ -3550,6 +3551,7 @@
       <w>pdf</w>
       <w>pdf.options</w>
       <w>pdfFonts</w>
+      <w>peco</w>
       <w>pen.edf</w>
       <w>periodicSpline</w>
       <w>person</w>

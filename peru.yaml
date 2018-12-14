@@ -11,6 +11,7 @@ imports:
   peco: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
   z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
+  zsh-peco-history: 'roles/stage2-user/files/local/share/zsh/plugins/peco-history'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 curl module fantasque:
@@ -93,7 +94,18 @@ rule micro-executable:
   pick: micro
   copy: {'micro-1.3.3/micro': 'micro'}
 
-# `peco` filter tool
+# `with` script
+
+git module with:
+  url: https://github.com/mchav/with.git
+  pick: with
+  rev: 28eb40bbc08d171daabf0210f420477ad75e16d6
+
+# ZSH history plugin
+
+git module zsh-peco-history:
+  url: https://github.com/jimeh/zsh-peco-history.git
+  rev: b207ec8971d38667719a6f66ef02f8d6b18a1c36
 
 curl module peco:
   url: https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz
@@ -102,13 +114,6 @@ curl module peco:
   copy:
     peco_linux_amd64/peco: peco
   sha1: f628f397616f71b20ad60d35909a19e5e2a30701
-
-# `with` script
-
-git module with:
-  url: https://github.com/mchav/with.git
-  pick: with
-  rev: 28eb40bbc08d171daabf0210f420477ad75e16d6
 
 # ZSH syntax highlighting plugin
 
