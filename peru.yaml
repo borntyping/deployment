@@ -20,7 +20,7 @@ imports:
 
 git module desk:
   url: git@github.com:jamesob/desk.git
-  rev: 20369d7e49a5d75413687c50f7d74c6683251f64
+  rev: 775cc4a6e69ffff03399731743d0a1dfa09df1b7
 
 rule desk-completion:
   pick: desk.zsh
@@ -144,7 +144,7 @@ git module with:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: db6cac391bee957c20ff3175b2f03c4817253e60
+  rev: 3dc74b5c2c71583a4523037113d644f780fb4e07
   pick:
     - .revision-hash
     - .version
