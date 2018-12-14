@@ -1,11 +1,8 @@
 ---
 imports:
-  desk|desk-completion: 'roles/stage2-user/files/local/share/zsh/functions'
-  desk|desk-script: 'roles/stage2-user/files/local/bin'
   fantasque17: 'roles/stage3-gui/files/fonts'
   fantasque18: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
-  gdrive: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -15,19 +12,6 @@ imports:
   with: 'roles/stage2-user/files/local/bin'
   z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
-
-# Desk environment switcher.
-
-git module desk:
-  url: git@github.com:jamesob/desk.git
-  rev: 775cc4a6e69ffff03399731743d0a1dfa09df1b7
-
-rule desk-completion:
-  pick: desk.zsh
-  copy: {'shell_plugins/zsh/_desk': 'desk.zsh'}
-
-rule desk-script:
-  pick: desk
 
 # Fantasque Sans Mono font.
 
@@ -76,14 +60,7 @@ curl module fira:
     ttf/FiraCode-Medium.ttf: FiraCode-Medium.ttf
     ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
     ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
-
-# GDrive cli
   sha1: 591b6f9bb9800431355f052baef24bac336afd25
-
-curl module gdrive:
-  url: https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download
-  filename: gdrive
-  sha1: 4fd8391b300cac45963e53da44dcfe68da08d843
 
 # Git repository management tool
 
