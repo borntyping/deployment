@@ -6,8 +6,8 @@
     editor = micro
     autocrlf = input
     pager = less -+FX
-    excludesfile = {{ ansible_env.HOME }}/.config/git/gitignore
-    hooksPath = {{ ansible_env.HOME }}/.config/git/hooks
+    excludesfile = ~/.config/git/gitignore
+    hooksPath = ~/.config/git/hooks
 
 [push]
     default = current

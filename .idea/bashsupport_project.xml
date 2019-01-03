@@ -4,6 +4,8 @@
     <option name="globalVariables">
       <set>
         <option value="DESK_NAME" />
+        <option value="PYPI_PASSWORD" />
+        <option value="PYPI_USERNAME" />
         <option value="TERM" />
         <option value="VIRTUAL_ENV" />
         <option value="argument" />
