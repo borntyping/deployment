@@ -80,7 +80,7 @@ export sandbox="${github}/borntyping-sandbox"
 #
 
 export EDITOR="micro"
-export GOPATH="$HOME/.go"
+export GOPATH="$HOME/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="$HOME/.npm"
 export PIPENV_MAX_DEPTH=5
@@ -134,6 +134,13 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+#
+# Ensure Home/End work as expected
+#
+
+bindkey "\033[1~" beginning-of-line
+bindkey "\033[4~" end-of-line
 
 #
 # Prompt
