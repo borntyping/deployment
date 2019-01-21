@@ -31,8 +31,9 @@ alias gg='gitg &'
 alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
-# I always get this wrong...
+# Miscellaneous aliases.
 alias httpie='http'
+alias k='kubectl'
 
 #
 # ZSH options
@@ -311,7 +312,6 @@ eval "$(pipenv --completion)"
 #
 
 source <(kubectl completion zsh)
-source <(helm completion zsh)
 
 #
 # Local zsh config
