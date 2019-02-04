@@ -52,6 +52,7 @@ curl module fira:
 git module git-get:
   url: https://github.com/pietvanzoen/git-get.git
   pick: git-get
+  rev: 25f26a12571949b7bfbad79d0c6ce2ed4a71da42
 
 # Git repository management tool
 
@@ -129,7 +130,7 @@ curl module peco:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 3dc74b5c2c71583a4523037113d644f780fb4e07
+  rev: d61ebbcbbf7da8fc35040f591e37b89272623036
   pick:
     - .revision-hash
     - .version
