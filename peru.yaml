@@ -2,6 +2,7 @@
 imports:
   fantasque: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
+  git-get: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -45,6 +46,12 @@ curl module fira:
     ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
     ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
   sha1: 591b6f9bb9800431355f052baef24bac336afd25
+
+# Git organisation tool
+
+git module git-get:
+  url: https://github.com/pietvanzoen/git-get.git
+  pick: git-get
 
 # Git repository management tool
 
