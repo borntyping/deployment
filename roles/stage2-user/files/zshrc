@@ -82,6 +82,7 @@ export sandbox="${github}/borntyping-sandbox"
 #
 
 export EDITOR="micro"
+export GIT_PATH="${dev}" # git-get
 export GOPATH="$HOME/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="$HOME/.npm"
