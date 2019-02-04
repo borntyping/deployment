@@ -42,6 +42,7 @@ alias k='kubectl'
 setopt INTERACTIVE_COMMENTS             # Allow comments in interactive mode.
 setopt RM_STAR_WAIT                     # Force the user to wait before 'rm *'.
 setopt AUTO_NAME_DIRS                   # Allows 'cd ~borntyping' (see below).
+setopt COMPLETE_ALIASES                 # Tab complete aliases.
 
 #
 # History settings
