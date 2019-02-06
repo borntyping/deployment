@@ -1,5 +1,5 @@
 ---
-- name: generate ssh config from fragments
+- name: assemble ssh config
   assemble:
     src: '{{ ansible_env.HOME }}/.ssh/config.d/'
     dest: '{{ ansible_env.HOME }}/.ssh/config'
