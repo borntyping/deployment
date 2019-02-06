@@ -98,7 +98,7 @@
 	required = true
 
 [lfs "https://gitlab.infosum.io/"]
-	locksverify = true
+	locksverify = false
 
 [diff "fidelius"]
     textconv = "gpg --batch --quiet --decrypt"

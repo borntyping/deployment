@@ -1,3 +1,4 @@
-inventory.conf
 .peru
+inventory.conf
+roles/stage2-user/files/ssh/config.d/local_*.config
 site.retry
