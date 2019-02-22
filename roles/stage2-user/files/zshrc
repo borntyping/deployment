@@ -212,10 +212,10 @@ function kubectl_info() {
 
     if [[ ! -z "$CONTEXT" ]]; then
         # Set colors based on the environment
-        # [[ "$CONTEXT" == "sandbox/staging"     ]] && COLOUR="$fg[red]"
-        # [[ "$CONTEXT" == "sandbox/integration" ]] && COLOUR="$fg[yellow]"
-        # [[ "$CONTEXT" == "infra/engineering"   ]] && COLOUR="$fg[blue]"
-        # [[ "$CONTEXT" == "minikube"            ]] && COLOUR="$fg[green]"
+        [[ "$CONTEXT" == *"production"*  ]] && COLOUR="$fg[red]"
+        [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
+        [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[green]"
+        [[ "$CONTEXT" == *"engineering"* ]] && COLOUR="$fg[magenta]"
         kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
