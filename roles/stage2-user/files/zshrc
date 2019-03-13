@@ -1,149 +1,94 @@
 #!/bin/bash
 
 #
-# Functions
-#
-
-function source_if_path { [[ -f $1 ]] && source $1; }
-function source_if_variable { [[ -n $1 ]] && source $1; }
-
-#
-# Aliases
-#
-
-# Color basic commands.
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-
-# ls helpers
-alias ll='ls -l'
-alias la='ls -la'
-
-# Short git helpers.
-alias gd='git diff'
-alias gs='git status'
-alias gc='git commit'
-alias gca='git commit -a'
-alias cola='git-cola &'
-alias gg='gitg &'
-
-# Specific ansible tasks.
-alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
-alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
-
-# Miscellaneous aliases.
-alias httpie='http'
-alias k='kubectl'
-
-#
 # ZSH options
 #
 
-setopt INTERACTIVE_COMMENTS             # Allow comments in interactive mode.
-setopt RM_STAR_WAIT                     # Force the user to wait before 'rm *'.
-setopt AUTO_NAME_DIRS                   # Allows 'cd ~borntyping' (see below).
-setopt COMPLETE_ALIASES                 # Tab complete aliases.
+SAVEHIST=10000                      # Lines of history to save to a file.
+HISTSIZE=10000                      # Lines of history to keep in memory.
+HISTFILE="$HOME/.zhistory"          # Save history.
+
+setopt ALWAYS_TO_END                # Move cursor after completion.
+setopt APPEND_HISTORY               # Append to $HISTFILE, not replace.
+setopt AUTO_LIST                    # List choices on ambiguous completion.
+setopt AUTO_MENU                    # Show completion menu on tab press.
+setopt AUTO_NAME_DIRS               # Allows 'cd ~borntyping' (see below).
+setopt AUTO_PARAM_KEYS              # Intelligent handling of characters
+setopt AUTO_PARAM_SLASH             #   after a completion.
+setopt AUTO_REMOVE_SLASH            # Remove trailing slash when needed.
+setopt COMPLETE_ALIASES             # Allow autocompletion for aliases.
+setopt COMPLETE_ALIASES             # Tab complete aliases.
+setopt COMPLETE_IN_WORD             # Allow completion from middle of word
+setopt EXTENDED_GLOB                # File modification glob modifiers.
+setopt EXTENDED_HISTORY             # Record additional information.
+setopt HIST_EXPIRE_DUPS_FIRST       # Remove duplicate entries first.
+setopt HIST_FIND_NO_DUPS            # Never find duplicates when searching.
+setopt HIST_IGNORE_ALL_DUPS         # Remove old duplicate entries first.
+setopt HIST_IGNORE_DUPS             # Ignore adjacent reapeated entries.
+setopt HIST_IGNORE_SPACE            # Skip if the line starts with space.
+setopt HIST_SAVE_NO_DUPS            # Never save duplicate commands.
+setopt HIST_VERIFY                  # Don't immediately run history commands.
+setopt INC_APPEND_HISTORY           # Append to $HISTFILE while running.
+setopt INTERACTIVE_COMMENTS         # Allow comments in interactive mode.
+setopt LIST_PACKED                  # Smallest completion menu.
+setopt RM_STAR_WAIT                 # Force the user to wait before 'rm *'.
+setopt SHARE_HISTORY                # Share history between ZSH instances.
+unsetopt FLOW_CONTROL               # Disable start/stop characters.
+unsetopt MENU_COMPLETE              # Don't autoselect completions.
 
 #
-# History settings
+# Keybindings
 #
 
-SAVEHIST=10000                          # Lines of history to save to a file.
-HISTSIZE=10000                          # Lines of history to keep in memory.
-HISTFILE="$HOME/.zhistory"              # Save history.
+# Shift-Tab to go back in menus.
+bindkey '^[[Z' reverse-menu-complete
 
-setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace.
-setopt INC_APPEND_HISTORY               # Append to $HISTFILE while running.
-setopt SHARE_HISTORY                    # Share history between ZSH instances.
-setopt EXTENDED_HISTORY                 # Record additional information.
+# Edit current line (Ctrl+e).
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
 
-setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first.
-setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching.
-setopt HIST_IGNORE_ALL_DUPS             # Remove old duplicate entries first.
-setopt HIST_IGNORE_DUPS                 # Ignore adjacent reapeated entries.
-setopt HIST_SAVE_NO_DUPS                # Never save duplicate commands.
-
+# Ensure Home/End work as expected.
+zmodload zsh/terminfo
+bindkey "$terminfo[khome]" beginning-of-line
+bindkey "$terminfo[kend]" end-of-line
 
 #
-# Named directories
+# ZSH packages using antigen.
+# https://github.com/zsh-users/antigen
 #
 
-export dev="$HOME/Development"
-export dep="$HOME/Deployment"
-
-export github="${dev}/github.com"
-export gitlab="${dev}/gitlab.com"
-
-export borntyping="${github}/borntyping"
-export sandbox="${github}/borntyping-sandbox"
-
-#
-# Environment variables
-#
-
-export EDITOR="micro"
-export GIT_PATH="${dev}" # git-get
-export GOPATH="$HOME/.local/lib/go"
-export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
-export NPM_CONFIG_PREFIX="$HOME/.npm"
-export PIPENV_MAX_DEPTH=5
-export SSH_RUN_SUDO_KEYRING=1
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-#
-# $PATH
-#
-
-function add_to_path() {
-  if [[ -d $1 ]] && echo $PATH | grep -v $1 >/dev/null; then
-    export PATH="$1:$PATH"
-  fi
-}
-
-add_to_path "${HOME}/.cargo/bin"
-add_to_path "${HOME}/.gem/ruby/2.5.0/bin"
-add_to_path "${HOME}/.go/bin"
-add_to_path "${HOME}/.npm/bin"
-
-add_to_path "${HOME}/.local/bin"
-add_to_path "${HOME}/.bin"
+source "$HOME/.local/share/zsh/antigen.zsh"
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
 #
 # Completion rules
 #
 
 fpath=("$HOME/.local/share/zsh/functions" $fpath)
-
-autoload -Uz compinit && compinit       # Loads completion modules
-setopt AUTO_MENU                        # Show completion menu on tab press
-setopt ALWAYS_TO_END                    # Move cursor after completion
-setopt COMPLETE_ALIASES                 # Allow autocompletion for aliases
-setopt COMPLETE_IN_WORD                 # Allow completion from middle of word
-setopt LIST_PACKED                      # Smallest completion menu
-setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
-setopt AUTO_PARAM_SLASH                 #   after a completion
-setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed
-
-bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus
-
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion::complete:*' use-cache on
+autoload -Uz compinit && compinit   # Loads completion modules
 zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/completion/"
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:*:*:users' ignored-patterns '*'
+zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# Edit current line (Ctrl+e)
-autoload edit-command-line
-zle -N edit-command-line
-bindkey '^e' edit-command-line
-
 #
-# Ensure Home/End work as expected
+# ZSH syntax highlighting plugin (loaded by antigen).
+# https://github.com/zsh-users/zsh-syntax-highlighting
 #
 
-bindkey "\033[1~" beginning-of-line
-bindkey "\033[4~" end-of-line
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
 
 #
 # Prompt
@@ -254,32 +199,90 @@ PROMPT="%{$prompt_status_fg%}$ %n@%m %{$prompt_cwd_fg%}%~%{$reset_color%} \
 %{$prompt_fg%}$%{$reset_color%} "
 
 #
+# Aliases
+#
+
+# Color basic commands.
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# ls helpers
+alias ll='ls -l'
+alias la='ls -la'
+
+# Short git helpers.
+alias gd='git diff'
+alias gs='git status'
+alias gc='git commit'
+alias gca='git commit -a'
+alias cola='git-cola &'
+alias gg='gitg &'
+
+# Specific ansible tasks.
+alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
+alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
+
+# Miscellaneous aliases.
+alias httpie='http'
+alias k='kubectl'
+
+#
+# Named directories
+#
+
+export dev="$HOME/Development"
+export dep="$HOME/Deployment"
+
+export github="${dev}/github.com"
+export gitlab="${dev}/gitlab.com"
+
+export borntyping="${github}/borntyping"
+export sandbox="${github}/borntyping-sandbox"
+
+#
+# Environment variables
+#
+
+export EDITOR="micro"
+export GIT_PATH="${dev}" # git-get
+export GOPATH="$HOME/.local/lib/go"
+export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
+export NPM_CONFIG_PREFIX="$HOME/.npm"
+export PIPENV_MAX_DEPTH=5
+export SSH_RUN_SUDO_KEYRING=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+#
+# $PATH
+#
+
+function add_to_path() {
+  if [[ -d $1 ]] && echo $PATH | grep -v $1 >/dev/null; then
+    export PATH="$1:$PATH"
+  fi
+}
+
+function source_if_path {
+  if [[ -f $1 ]]; then
+    source $1
+  fi
+}
+
+add_to_path "${HOME}/.cargo/bin"
+add_to_path "${HOME}/.gem/ruby/2.5.0/bin"
+add_to_path "${HOME}/.go/bin"
+add_to_path "${HOME}/.npm/bin"
+
+add_to_path "${HOME}/.local/bin"
+add_to_path "${HOME}/.bin"
+
+#
 # ZSH history search plugin.
 # https://github.com/jimeh/zsh-peco-history
 #
 
-if [[ -f "$HOME/.local/share/zsh/plugins/peco-history/zsh-peco-history.zsh" ]]; then
-    ZSH_PECO_HISTORY_DEDUP=1
-    source "$HOME/.local/share/zsh/plugins/peco-history/zsh-peco-history.zsh"
-fi
-
-#
-# ZSH syntax highlighting plugin.
-# https://github.com/zsh-users/zsh-syntax-highlighting
-#
-
-if [[ -f "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-    source "$HOME/.local/share/zsh/plugins/syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-    ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
-    ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-    ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
-    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
-    ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
-    ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
-fi
+source_if_path "$HOME/.local/share/zsh/plugins/peco-history/zsh-peco-history.zsh"
+ZSH_PECO_HISTORY_DEDUP=1
 
 #
 # Tilix VTE patch
