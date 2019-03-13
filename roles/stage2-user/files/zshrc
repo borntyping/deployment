@@ -195,16 +195,16 @@ function +vi-git-remote() {
 }
 
 # Display the current virtualenv when active
-function virtualenv_info() {
-    virtualenv_info_msg=""
+function zsh_virtualenv_info() {
+    zsh_virtualenv_info_msg=""
     if [ -n "$VIRTUAL_ENV" ]; then
-        virtualenv_info_msg="%{$prompt_status_fg%}virtualenv:%{$prompt_highlight_fg%}$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        zsh_virtualenv_info_msg="%{$prompt_status_fg%}virtualenv:%{$prompt_highlight_fg%}$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
 
 # Display the current kubectl context
-function kubectl_info() {
-    kubectl_info_msg=""
+function zsh_kubectl_info() {
+    zsh_kubectl_info_msg=""
 
     local CONTEXT COLOUR
     COLOUR="$prompt_highlight_fg"
@@ -216,7 +216,7 @@ function kubectl_info() {
         [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"engineering"* ]] && COLOUR="$fg[green]"
-        kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+        zsh_kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
 
@@ -225,9 +225,9 @@ function precmd() {
     case "$TERM" in
         xterm*) print -Pn "\e]2;%~\a";;
     esac
-    kubectl_info
+    zsh_kubectl_info
     vcs_info
-    virtualenv_info
+    zsh_virtualenv_info
 }
 
 # Set terminal title before executing a command
@@ -248,8 +248,8 @@ function preexec() {
 # characters when calculating the length
 PROMPT="%{$prompt_status_fg%}$ %n@%m %{$prompt_cwd_fg%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\
-\${virtualenv_info_msg}\
-\${kubectl_info_msg}\
+\${zsh_virtualenv_info_msg}\
+\${zsh_kubectl_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
 
@@ -320,3 +320,12 @@ source <(minikube completion zsh)
 # Local zsh config
 #
 source_if_path "$HOME/.config/zsh/zshrc"
+
+#
+# Personal functions
+#
+
+function kubectl_yaml() {
+    kubectl -o yaml "$@" | bat --language yaml
+}
+compdef kubectl_yaml="kubectl"

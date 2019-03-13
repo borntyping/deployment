@@ -52,7 +52,7 @@ curl module fira:
 git module git-get:
   url: https://github.com/pietvanzoen/git-get.git
   pick: git-get
-  rev: 25f26a12571949b7bfbad79d0c6ce2ed4a71da42
+  rev: 6c6dc492e2a47f183e87a605242367eb4cb6d74f
 
 # Git repository management tool
 
@@ -116,7 +116,7 @@ git module zsh-peco-history:
   pick:
     - zsh-peco-history.plugin.zsh
     - zsh-peco-history.zsh
-  rev: b207ec8971d38667719a6f66ef02f8d6b18a1c36
+  rev: 816f51a468cca78f6280a9e985cedfbf3c6eb635
 
 curl module peco:
   url: https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz

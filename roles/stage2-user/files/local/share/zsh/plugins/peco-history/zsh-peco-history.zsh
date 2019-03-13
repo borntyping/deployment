@@ -1,4 +1,4 @@
-# zsh-peco-history 0.9.1
+# zsh-peco-history 0.10.0
 #
 # Search shell history with peco when pressing ctrl+r.
 # https://github.com/jimeh/zsh-peco-history
@@ -12,6 +12,10 @@
 # Based on: https://github.com/mooz/percol#zsh-history-search
 
 if (( $+commands[peco] )); then
+  if ! (( ${+ZSH_PECO_HISTORY_OPTS} )); then
+    ZSH_PECO_HISTORY_OPTS="--layout=bottom-up"
+  fi
+
   function peco_select_history() {
     local parse_cmd
 
@@ -34,7 +38,7 @@ if (( $+commands[peco] )); then
     fi
 
     BUFFER=$(fc -l -n 1 | eval $parse_cmd | \
-               peco --layout=bottom-up --query "$LBUFFER")
+               peco ${=ZSH_PECO_HISTORY_OPTS} --query "$LBUFFER")
 
     CURSOR=$#BUFFER # move cursor
     zle -R -c       # refresh
