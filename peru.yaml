@@ -1,5 +1,6 @@
 ---
 imports:
+  antigen: 'roles/stage2-user/files/local/share/zsh'
   fantasque: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
   git-get: 'roles/stage2-user/files/local/bin'
@@ -14,6 +15,13 @@ imports:
   z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
   zsh-peco-history: 'roles/stage2-user/files/local/share/zsh/plugins/peco-history'
   zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
+
+git module antigen:
+  url: https://github.com/zsh-users/antigen.git
+  copy:
+    bin/antigen.zsh: antigen.zsh
+  pick:
+    - antigen.zsh
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8-alpha/FantasqueSansMono-Normal.zip
