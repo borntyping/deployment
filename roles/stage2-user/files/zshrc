@@ -68,13 +68,14 @@ antigen apply
 #
 
 fpath=("$HOME/.local/share/zsh/functions" $fpath)
-autoload -Uz compinit && compinit   # Loads completion modules
+autoload -Uz compinit
 zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/completion/"
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:*:*:users' ignored-patterns '*'
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+compinit -C
 
 #
 # ZSH syntax highlighting plugin (loaded by antigen).
@@ -303,13 +304,6 @@ source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 #
 
 eval "$(direnv hook zsh)"
-
-#
-# Pipenv completion
-# https://pipenv.readthedocs.io/en/latest/advanced/
-#
-
-eval "$(pipenv --completion)"
 
 #
 # Kubernetes completion
