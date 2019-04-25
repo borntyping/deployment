@@ -103,13 +103,12 @@ curl module jq:
 # `micro` editor
 
 curl module micro:
-  url: https://github.com/zyedidia/micro/releases/download/v1.3.3/micro-1.3.3-linux64.tar.gz
+  url: https://github.com/zyedidia/micro/releases/download/v1.4.1/micro-1.4.1-linux64.tar.gz
   unpack: tar
-  sha1: 91d4de0a6b93ae3fa1e32597f5e7e4e46f3ce690
 
 rule micro-executable:
   pick: micro
-  copy: {'micro-1.3.3/micro': 'micro'}
+  copy: {'micro-1.4.1/micro': 'micro'}
 
 # `with` script
 
