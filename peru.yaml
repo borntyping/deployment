@@ -22,6 +22,7 @@ git module antigen:
     bin/antigen.zsh: antigen.zsh
   pick:
     - antigen.zsh
+  rev: 74aa89757038e42d472db22cb5b5bc6cbd4edb93
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8-alpha/FantasqueSansMono-Normal.zip
@@ -138,7 +139,7 @@ curl module peco:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: d61ebbcbbf7da8fc35040f591e37b89272623036
+  rev: 82cf2527fc13fefee6e87f99171c1b368f0abdb9
   pick:
     - .revision-hash
     - .version
