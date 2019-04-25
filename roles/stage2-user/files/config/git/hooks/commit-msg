@@ -6,14 +6,17 @@
 BRANCH=$(git symbolic-ref --short -q HEAD)
 
 # Never make changes if the commit message is empty.
-[ ! -s "$1" ] && exit
+[[ ! -s "$1" ]] && exit
+
+# Check that we've not saved an "empty" message.
+head -n 1 "$1" | grep -e "^\s*$" && exit
 
 # Only continue if we are on a feature branch.
 if [[ "$BRANCH" == *"feature/"* ]]; then
   NAME=$(echo "$BRANCH" | grep -Eo '[A-Z]+-[0-9]+')
+
+  # Don't add the ticket if it already is included
+  head -n 1 "$1" | grep "$NAME" >/dev/null && exit
+
+  echo "[$NAME] $(cat "$1")" > "$1"
 fi
-
-# Don't add the ticket if it already is included
-head -n 1 "$1" | grep "$NAME" >/dev/null && exit
-
-echo "[$NAME] $(cat "$1")" > "$1"

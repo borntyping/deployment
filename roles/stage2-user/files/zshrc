@@ -100,19 +100,16 @@ autoload -U colors && colors            # Adds variables for printing colors
 setopt PROMPT_SUBST                     # Allow substitution in PROMPT
 
 prompt_fg="$fg[magenta]"
-prompt_cwd_fg="$fg[blue]"
-prompt_status_fg="$prompt_fg"
-prompt_highlight_fg="$prompt_fg"
+prompt_highlight_fg="$fg[blue]"
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}+%{$reset_color%}"
 zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}+%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$prompt_status_fg%}%s:%{$prompt_highlight_fg%}%b%{$reset_color%}%c%u%m "
-zstyle ':vcs_info:*' actionformats "%{$prompt_status_fg%}%s:%{$prompt_highlight_fg%}%b%{$reset_color%}%c%u%m|%a "
+zstyle ':vcs_info:*' formats "%{$prompt_fg%}%s:%{$prompt_fg%}%b%{$reset_color%}%c%u%m "
+zstyle ':vcs_info:*' actionformats "%{$prompt_fg%}%s:%{$prompt_fg%}%b%{$reset_color%}%c%u%m|%a "
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
-
 
 function +vi-git-clean(){
     if [[ $(git status --porcelain | wc -c) -eq 0 ]]; then
@@ -141,10 +138,12 @@ function +vi-git-remote() {
 }
 
 # Display the current virtualenv when active
-function zsh_virtualenv_info() {
-    zsh_virtualenv_info_msg=""
-    if [ -n "$VIRTUAL_ENV" ]; then
-        zsh_virtualenv_info_msg="%{$prompt_status_fg%}virtualenv:%{$prompt_highlight_fg%}$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+function zsh_python_info() {
+    zsh_python_info_msg=""
+    if [ -n "$PIPENV_ACTIVE" ]; then
+        zsh_python_info_msg="%{$prompt_fg%}pipenv%{$reset_color%} "
+    elif [ -n "$VIRTUAL_ENV" ]; then
+        zsh_python_info_msg="%{$prompt_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
 
@@ -153,7 +152,7 @@ function zsh_kubectl_info() {
     zsh_kubectl_info_msg=""
 
     local CONTEXT COLOUR
-    COLOUR="$prompt_highlight_fg"
+    COLOUR="$prompt_fg"
     CONTEXT="$(kubectl config current-context 2>/dev/null)"
 
     if [[ ! -z "$CONTEXT" ]]; then
@@ -162,7 +161,7 @@ function zsh_kubectl_info() {
         [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"engineering"* ]] && COLOUR="$fg[green]"
-        zsh_kubectl_info_msg="%{$prompt_status_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+        zsh_kubectl_info_msg="%{$prompt_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
 
@@ -173,7 +172,7 @@ function precmd() {
     esac
     zsh_kubectl_info
     vcs_info
-    zsh_virtualenv_info
+    zsh_python_info
 }
 
 # Set terminal title before executing a command
@@ -192,10 +191,10 @@ function preexec() {
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
-PROMPT="%{$prompt_status_fg%}$ %n@%m %{$prompt_cwd_fg%}%~%{$reset_color%} \
+PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\
-\${zsh_virtualenv_info_msg}\
 \${zsh_kubectl_info_msg}\
+\${zsh_python_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
 
