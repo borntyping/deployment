@@ -17,8 +17,8 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu bionic stable'
-        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu cosmic main'
+        - 'deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu disco stable'
+        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu disco main'
 
     - name: update apt repositories
       apt:
