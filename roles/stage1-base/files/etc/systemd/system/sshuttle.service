@@ -1,0 +1,11 @@
+[Unit]
+Description=Run a sshuttle connection in the background
+After=network-online.target
+ConditionPathExists=/home/sam/.bin/sshuttle.sh
+
+[Service]
+ExecStart=/home/sam/.bin/sshuttle.sh
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
