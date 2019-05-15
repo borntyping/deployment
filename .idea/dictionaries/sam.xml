@@ -4336,6 +4336,7 @@
       <w>srcfilealias</w>
       <w>srcfilecopy</w>
       <w>srcref</w>
+      <w>sshuttle</w>
       <w>ssl_cert_locations</w>
       <w>stack</w>
       <w>stackloss</w>
@@ -4488,6 +4489,7 @@
       <w>system2</w>
       <w>system_check</w>
       <w>system_output</w>
+      <w>systemd</w>
       <w>t</w>
       <w>t.data.frame</w>
       <w>t.default</w>
