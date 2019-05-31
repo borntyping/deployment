@@ -1154,6 +1154,7 @@
       <w>acme</w>
       <w>acos</w>
       <w>acosh</w>
+      <w>actionformats</w>
       <w>add</w>
       <w>add.scope</w>
       <w>add1</w>
@@ -1441,6 +1442,7 @@
       <w>autocompletion</w>
       <w>autoload</w>
       <w>autoloader</w>
+      <w>autoselect</w>
       <w>available.packages</w>
       <w>ave</w>
       <w>axTicks</w>
@@ -1499,6 +1501,7 @@
       <w>bignum_mod_inv</w>
       <w>bindingIsActive</w>
       <w>bindingIsLocked</w>
+      <w>bindkey</w>
       <w>bindtextdomain</w>
       <w>binom.test</w>
       <w>binomial</w>
@@ -1771,12 +1774,14 @@
       <w>compareFits</w>
       <w>comparePred</w>
       <w>compareVersion</w>
+      <w>compdef</w>
       <w>compile</w>
       <w>compileAttributes</w>
       <w>compilePKGS</w>
       <w>compile_dll</w>
       <w>compiler</w>
       <w>compiler_flags</w>
+      <w>compinit</w>
       <w>complete.cases</w>
       <w>completeClassDefinition</w>
       <w>completeExtends</w>
@@ -2115,6 +2120,7 @@
       <w>duplicated.default</w>
       <w>duplicated.matrix</w>
       <w>duplicated.numeric_version</w>
+      <w>dups</w>
       <w>dweibull</w>
       <w>dwilcox</w>
       <w>dyn.load</w>
@@ -2133,6 +2139,7 @@
       <w>eigen</w>
       <w>el</w>
       <w>elNamed</w>
+      <w>elif</w>
       <w>ellipsoidPoints</w>
       <w>ellipsoidhull</w>
       <w>emacs</w>
@@ -2508,6 +2515,7 @@
       <w>glob2rx</w>
       <w>globalVariables</w>
       <w>globalenv</w>
+      <w>globbing</w>
       <w>gls</w>
       <w>glsApVar</w>
       <w>glsControl</w>
@@ -2901,8 +2909,10 @@
       <w>kappa.lm</w>
       <w>kappa.qr</w>
       <w>kde2d</w>
+      <w>kend</w>
       <w>kernapply</w>
       <w>kernel</w>
+      <w>khome</w>
       <w>kidney</w>
       <w>kmeans</w>
       <w>knn</w>
@@ -2913,6 +2923,7 @@
       <w>kruskal.test</w>
       <w>ks.test</w>
       <w>ksmooth</w>
+      <w>kube</w>
       <w>kubectl</w>
       <w>kyphosis</w>
       <w>l10n_info</w>
@@ -4179,6 +4190,7 @@
       <w>set_path</w>
       <w>setdiff</w>
       <w>setequal</w>
+      <w>setopt</w>
       <w>setup</w>
       <w>setup_rtools</w>
       <w>setwd</w>
@@ -4341,6 +4353,7 @@
       <w>stack</w>
       <w>stackloss</w>
       <w>stagec</w>
+      <w>stagedstr</w>
       <w>standard.theme</w>
       <w>standardGeneric</w>
       <w>stanford2</w>
@@ -4545,6 +4558,7 @@
       <w>terminalRunning</w>
       <w>terminalSend</w>
       <w>terminalVisible</w>
+      <w>terminfo</w>
       <w>termplot</w>
       <w>terms</w>
       <w>terms.formula</w>
@@ -4569,6 +4583,7 @@
       <w>theta.mm</w>
       <w>ti</w>
       <w>tiff</w>
+      <w>tilix</w>
       <w>tilt.boot</w>
       <w>time</w>
       <w>timeout</w>
@@ -4914,8 +4929,11 @@
       <w>unpack</w>
       <w>unserialize</w>
       <w>unserializeJSON</w>
+      <w>unsetopt</w>
       <w>unsplit</w>
       <w>unstack</w>
+      <w>unstaged</w>
+      <w>unstagedstr</w>
       <w>untangle.specials</w>
       <w>untar</w>
       <w>untrace</w>
@@ -5158,7 +5176,9 @@
       <w>ziP</w>
       <w>zip</w>
       <w>ziplss</w>
+      <w>zmodload</w>
       <w>zshrc</w>
+      <w>zstyle</w>
     </words>
   </dictionary>
 </component>
