@@ -49,7 +49,7 @@
 [alias]
     create-mr = push -o merge_request.create
     done = !git pull origin master:master && git checkout master && git cleanup
-    force-update = !git commit -a --amend --no-edit && git push --force-with-lease
+    force-amend-and-push = !git commit --all --amend --no-edit && git push --force-with-lease
     hist = log --graph --pretty=graph --date=short --decorate -n 10
     history = log --graph --pretty=graph --date=short --decorate
     ignored = ls-files -o -i --exclude-standard
@@ -88,10 +88,12 @@
 
 [gui]
     historybrowser = gitg
+    editor = pycharm-professional
 
 [cola]
     tabwidth = 4
-    fontdiff = DejaVu Sans Mono,9,-1,5,50,0,0,0,0,0
+    fontdiff = Fantasque Sans Mono,11,-1,5,50,0,0,0,0,0
+    spellcheck = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

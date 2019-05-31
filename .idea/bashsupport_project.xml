@@ -4,6 +4,7 @@
     <option name="globalVariables">
       <set>
         <option value="DESK_NAME" />
+        <option value="PIPENV_ACTIVE" />
         <option value="PYPI_PASSWORD" />
         <option value="PYPI_USERNAME" />
         <option value="TERM" />
@@ -21,6 +22,7 @@
         <option value="quoted" />
         <option value="reset_color" />
         <option value="single" />
+        <option value="terminfo" />
         <option value="token" />
         <option value="unknown" />
       </set>

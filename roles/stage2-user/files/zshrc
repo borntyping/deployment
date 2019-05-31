@@ -24,7 +24,7 @@ setopt EXTENDED_HISTORY             # Record additional information.
 setopt HIST_EXPIRE_DUPS_FIRST       # Remove duplicate entries first.
 setopt HIST_FIND_NO_DUPS            # Never find duplicates when searching.
 setopt HIST_IGNORE_ALL_DUPS         # Remove old duplicate entries first.
-setopt HIST_IGNORE_DUPS             # Ignore adjacent reapeated entries.
+setopt HIST_IGNORE_DUPS             # Ignore adjacent repeated entries.
 setopt HIST_IGNORE_SPACE            # Skip if the line starts with space.
 setopt HIST_SAVE_NO_DUPS            # Never save duplicate commands.
 setopt HIST_VERIFY                  # Don't immediately run history commands.
@@ -107,8 +107,8 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}+%{$reset_color%}"
 zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}+%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$prompt_fg%}%s:%{$prompt_fg%}%b%{$reset_color%}%c%u%m "
-zstyle ':vcs_info:*' actionformats "%{$prompt_fg%}%s:%{$prompt_fg%}%b%{$reset_color%}%c%u%m|%a "
+zstyle ':vcs_info:*' formats "%{$prompt_fg%}%b%{$reset_color%}%c%u%m "
+zstyle ':vcs_info:*' actionformats "%{$prompt_fg%}%b%{$reset_color%}%c%u%m|%a "
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
 
 function +vi-git-clean(){
@@ -140,9 +140,9 @@ function +vi-git-remote() {
 # Display the current virtualenv when active
 function zsh_python_info() {
     zsh_python_info_msg=""
-    if [ -n "$PIPENV_ACTIVE" ]; then
+    if [[ -n "$PIPENV_ACTIVE" ]]; then
         zsh_python_info_msg="%{$prompt_fg%}pipenv%{$reset_color%} "
-    elif [ -n "$VIRTUAL_ENV" ]; then
+    elif [[ -n "$VIRTUAL_ENV" ]]; then
         zsh_python_info_msg="%{$prompt_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
@@ -161,7 +161,7 @@ function zsh_kubectl_info() {
         [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"engineering"* ]] && COLOUR="$fg[green]"
-        zsh_kubectl_info_msg="%{$prompt_fg%}kubectl:%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+        zsh_kubectl_info_msg="%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
 
@@ -186,15 +186,15 @@ function preexec() {
 #
 #   $ sam@hostname ~
 #   $ ...
-#   $ sam@hostname ~/directory git:master env:virtualenv kubectl:production
+#   $ sam@hostname ~/directory master production
 #   $ ...
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
 PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\
-\${zsh_kubectl_info_msg}\
 \${zsh_python_info_msg}\
+\${zsh_kubectl_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
 
@@ -225,6 +225,7 @@ alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 # Miscellaneous aliases.
 alias httpie='http'
 alias k='kubectl'
+alias kube='kubectl'
 
 #
 # Named directories
@@ -318,10 +319,17 @@ source <(minikube completion zsh)
 source_if_path "$HOME/.config/zsh/zshrc"
 
 #
-# Personal functions
+# Kubernetes helpers
 #
 
-function kubectl_yaml() {
+function ky() {
     kubectl -o yaml "$@" | bat --language yaml
 }
-compdef kubectl_yaml="kubectl"
+function kq() {
+    kubectl -o json "$@" | jq .
+}
+
+compdef k="kubectl"
+compdef kq="kubectl"
+compdef kube="kubectl"
+compdef ky="kubectl"
