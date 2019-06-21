@@ -2,6 +2,6 @@
 
 set -e
 
-rm -rf dist
+rm dist/*
 python setup.py sdist bdist_wheel
-twine upload dist/* --username "$PYPI_USERNAME" --password "$PYPI_PASSWORD"
+twine upload --username "borntyping" dist/*
