@@ -47,12 +47,14 @@
     graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-    create-mr = push -o merge_request.create
-    done = !git pull origin master:master && git checkout master && git cleanup
-    force-amend-and-push = !git commit --all --amend --no-edit && git push --force-with-lease
     hist = log --graph --pretty=graph --date=short --decorate -n 10
     history = log --graph --pretty=graph --date=short --decorate
     ignored = ls-files -o -i --exclude-standard
+
+    create-merge-request = push -o merge_request.create
+    finish-merge-request = !git pull origin master:master && git checkout master && git cleanup
+    force-amend-and-push = !git commit --all --amend --no-edit && git push --force-with-lease
+    rebase-onto-master = !git fetch origin master:master && git rebase master && git push -f
 
 [pager]
     hist = less -FX
