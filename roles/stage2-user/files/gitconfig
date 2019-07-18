@@ -17,7 +17,7 @@
 
 [rebase]
     autostash = true
-    autosqaush = true
+    autosquash = true
 
 [merge]
     tool = meld
