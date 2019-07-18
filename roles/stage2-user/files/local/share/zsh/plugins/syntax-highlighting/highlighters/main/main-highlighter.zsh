@@ -1045,9 +1045,10 @@ _zsh_highlight_main_highlighter_highlight_argument()
         highlights+=($reply)
         ;;
       '$')
-        path_eligible=0
+        if [[ $arg[i+1] != "'" ]]; then
+          path_eligible=0
+        fi
         if [[ $arg[i+1] == "'" ]]; then
-          path_eligible=1
           _zsh_highlight_main_highlighter_highlight_dollar_quote $i
           (( i = REPLY ))
           highlights+=($reply)
@@ -1237,7 +1238,7 @@ _zsh_highlight_main_highlighter_highlight_double_quote()
   saved_reply=($reply)
   reply=()
   for 1 2 in $breaks; do
-    reply+=($1 $2 $style)
+    (( $1 != $2 )) && reply+=($1 $2 $style)
   done
   reply+=($saved_reply)
   REPLY=$i
