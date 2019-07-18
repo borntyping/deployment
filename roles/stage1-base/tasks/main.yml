@@ -40,7 +40,6 @@
       become: 'yes'
       tags:
         - bin
-        - git
         - util
 
     - name: configure inotify
