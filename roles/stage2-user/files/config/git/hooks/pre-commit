@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-if [ "$(git config --get --bool hooks.rubocop)" != "false" ]; then
-  if [[ "$(find -name '*.rb' | wc -l)" -gt 0 ]]; then
-    rubocop --format=clang
-  fi
-fi
