@@ -17,6 +17,7 @@
 
 [rebase]
     autostash = true
+    autosqaush = true
 
 [merge]
     tool = meld
@@ -51,9 +52,9 @@
     history = log --graph --pretty=graph --date=short --decorate
     ignored = ls-files -o -i --exclude-standard
 
+    amend-and-force-push = !git commit --all --amend --no-edit && git push --force-with-lease
     create-merge-request = push -o merge_request.create
     finish-merge-request = !git pull origin master:master && git checkout master && git cleanup
-    force-amend-and-push = !git commit --all --amend --no-edit && git push --force-with-lease
     rebase-onto-master = !git fetch origin master:master && git rebase master && git push -f
 
 [pager]
