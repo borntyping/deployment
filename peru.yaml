@@ -61,7 +61,7 @@ curl module fira:
 git module git-get:
   url: https://github.com/pietvanzoen/git-get.git
   pick: git-get
-  rev: 6c6dc492e2a47f183e87a605242367eb4cb6d74f
+  rev: cd6a4d3a864546c42b59fcb1d187ecb151bea4a2
 
 # Git repository management tool
 
@@ -105,6 +105,7 @@ curl module jq:
 curl module micro:
   url: https://github.com/zyedidia/micro/releases/download/v1.4.1/micro-1.4.1-linux64.tar.gz
   unpack: tar
+  sha1: e7b01ee96f36fc0df3c6305a5178e4aa0dc0bc31
 
 rule micro-executable:
   pick: micro
@@ -138,7 +139,7 @@ curl module peco:
 
 git module zsh-syntax-highlighting:
   url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 82cf2527fc13fefee6e87f99171c1b368f0abdb9
+  rev: 83249e1b230c8bcf29107d3827d97e03ae25a86f
   pick:
     - .revision-hash
     - .version
