@@ -1,6 +1,7 @@
 ---
 imports:
   antigen: 'roles/stage2-user/files/local/share/zsh'
+  aws-vault: 'roles/stage2-user/files/local/bin'
   fantasque: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
   git-get: 'roles/stage2-user/files/local/bin'
@@ -23,6 +24,10 @@ git module antigen:
   pick:
     - antigen.zsh
   rev: 74aa89757038e42d472db22cb5b5bc6cbd4edb93
+
+curl module aws-vault:
+  url: https://github.com/99designs/aws-vault/releases/download/v4.6.2/aws-vault-linux-amd64
+  filename: aws-vault
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8-alpha/FantasqueSansMono-Normal.zip
