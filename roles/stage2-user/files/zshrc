@@ -249,6 +249,7 @@ export GIT_PATH="${dev}" # git-get
 export GOPATH="$HOME/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="$HOME/.npm"
+export PIPENV_IGNORE_VIRTUALENVS=1
 export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
