@@ -3,10 +3,10 @@
   block:
     - name: create micro configuration directory
       file:
-        name: '{{ ansible_env.HOME }}/.config/micro'
+        name: '{{ lookup("env", "HOME") }}/.config/micro'
         state: directory
 
     - name: create micro configuration
       copy:
         src: 'config/micro/settings.json'
-        dest: '{{ ansible_env.HOME }}/.config/micro/settings.json'
+        dest: '{{ lookup("env", "HOME") }}/.config/micro/settings.json'

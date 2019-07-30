@@ -3,13 +3,13 @@
   block:
     - name: create pip configuration directory
       file:
-        name: '{{ ansible_env.HOME }}/.config/pip/'
+        name: '{{ lookup("env", "HOME") }}/.config/pip/'
         state: directory
 
     - name: create pip configuration
       copy:
         src: 'config/pip/pip.conf'
-        dest: '{{ ansible_env.HOME }}/.config/pip/pip.conf'
+        dest: '{{ lookup("env", "HOME") }}/.config/pip/pip.conf'
 
     - name: install python packages
       pip:

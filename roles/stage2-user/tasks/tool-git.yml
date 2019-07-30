@@ -6,10 +6,10 @@
     - name: create git configuration
       template:
         src: 'gitconfig.j2'
-        dest: '{{ ansible_env.HOME }}/.gitconfig'
+        dest: '{{ lookup("env", "HOME") }}/.gitconfig'
 
     - name: create additional git configuration
       copy:
         src: 'config/git/'
-        dest: '{{ ansible_env.HOME }}/.config/git/'
+        dest: '{{ lookup("env", "HOME") }}/.config/git/'
         mode: '755'
