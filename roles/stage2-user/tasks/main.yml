@@ -12,7 +12,7 @@
     - name: configure dotfiles
       copy:
         src: '{{ item }}'
-        dest: '{{ ansible_env.HOME }}/.{{ item }}'
+        dest: '{{ lookup("env", "HOME") }}/.{{ item }}'
       with_items:
         - ackrc
         - htoprc
@@ -25,7 +25,7 @@
     - name: install executables and scripts
       copy:
         src: 'local/bin/'
-        dest: '{{ ansible_env.HOME }}/.local/bin'
+        dest: '{{ lookup("env", "HOME") }}/.local/bin'
         mode: '0755'
       tags:
         - bin
@@ -35,7 +35,7 @@
 
     - name: create development directories
       file:
-        name: '{{ ansible_env.HOME }}/{{ item }}'
+        name: '{{ lookup("env", "HOME") }}/{{ item }}'
         state: directory
       with_items:
         - 'Development'

@@ -8,15 +8,15 @@
     - name: copy zsh libraries
       copy:
         src: 'local/share/zsh/'
-        dest: '{{ ansible_env.HOME }}/.local/share/zsh/'
+        dest: '{{ lookup("env", "HOME") }}/.local/share/zsh/'
 
     - name: copy zsh config
       copy:
         src: 'zshrc'
-        dest: '{{ ansible_env.HOME }}/.zshrc'
+        dest: '{{ lookup("env", "HOME") }}/.zshrc'
 
     - name: set shell to zsh
       user:
-        name: '{{ ansible_env.USER }}'
+        name: '{{ lookup("env", "USER") }}'
         shell: '/bin/zsh'
       become: 'yes'

@@ -1,7 +1,7 @@
 ---
 - name: assemble ssh config
   assemble:
-    src: '{{ ansible_env.HOME }}/.ssh/config.d/'
-    dest: '{{ ansible_env.HOME }}/.ssh/config'
+    src: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
+    dest: '{{ lookup("env", "HOME") }}/.ssh/config'
   listen: ssh
   tags: ssh
