@@ -165,22 +165,20 @@ function zsh_kubectl_info() {
     fi
 }
 
-# Set terminal title and collect information before showing the prompt
-function precmd() {
+function zsh_precmd_title() {
     case "$TERM" in
         xterm*) print -Pn "\e]2;%~\a";;
     esac
-    zsh_kubectl_info
-    vcs_info
-    zsh_python_info
 }
 
-# Set terminal title before executing a command
-function preexec() {
+function zsh_preexec_title() {
     case "$TERM" in
         xterm*) print -Pn "\e]2;%~ $ $2\a";;
     esac
 }
+
+precmd_functions=(zsh_precmd_title,vcs_info)
+preexec_functions=(zsh_preexec_title)
 
 # Assemble the prompt
 #
@@ -305,6 +303,11 @@ source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 #
 
 eval "$(direnv hook zsh)"
+
+# We configure our precmd_functions that depend on environment variables after
+# direnv so that environment variables set by direnv are available.
+precmd_functions+=zsh_kubectl_info;
+precmd_functions+=zsh_python_info;
 
 #
 # Kubernetes completion
