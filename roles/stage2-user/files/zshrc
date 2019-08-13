@@ -177,7 +177,7 @@ function zsh_preexec_title() {
     esac
 }
 
-precmd_functions=(zsh_precmd_title,vcs_info)
+precmd_functions=(zsh_precmd_title vcs_info)
 preexec_functions=(zsh_preexec_title)
 
 # Assemble the prompt
