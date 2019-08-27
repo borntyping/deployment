@@ -200,37 +200,27 @@ PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \
 # Aliases
 #
 
-# Color basic commands.
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-
-# ls helpers
-alias ll='ls -l'
-alias la='ls -la'
-
-# Short git helpers.
-alias gd='git diff'
-alias gs='git status'
+alias cola='git-cola &'
 alias gc='git commit'
 alias gca='git commit -a'
-alias cola='git-cola &'
-alias gg='gitg &'
-
-# Specific ansible tasks.
-alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
-alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
-
-# Miscellaneous aliases.
+alias gd='git diff'
+alias grep='grep --color=auto'
+alias gs='git status'
 alias httpie='http'
 alias k='kubectl'
 alias kube='kubectl'
+alias la='ls -la'
+alias ll='ls -l'
+alias ls='ls --color=auto'
+alias please='sudo'
+alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
+alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 #
 # Named directories
 #
 
 export dev="$HOME/Development"
-export dep="$HOME/Deployment"
 
 export github="${dev}/github.com"
 export gitlab="${dev}/gitlab.com"

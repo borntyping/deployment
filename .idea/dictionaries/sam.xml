@@ -2690,6 +2690,7 @@
       <w>http_error</w>
       <w>http_status</w>
       <w>http_type</w>
+      <w>httpie</w>
       <w>httr</w>
       <w>httr_dr</w>
       <w>httr_options</w>
