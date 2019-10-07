@@ -155,8 +155,8 @@ function zsh_kubectl_info() {
     COLOUR="$prompt_fg"
     CONTEXT="$(kubectl config current-context 2>/dev/null)"
 
-    if [[ ! -z "$CONTEXT" ]]; then
-        # Set colors based on the environment
+    if [[ -n "$CONTEXT" ]]; then
+        # Set foreground based on the environment.
         [[ "$CONTEXT" == *"production"*  ]] && COLOUR="$fg[red]"
         [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
