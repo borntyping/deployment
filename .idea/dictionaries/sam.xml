@@ -3736,6 +3736,7 @@
       <w>printSpMatrix</w>
       <w>printSpMatrix2</w>
       <w>printcp</w>
+      <w>printf</w>
       <w>prmat</w>
       <w>prmatrix</w>
       <w>proc.time</w>

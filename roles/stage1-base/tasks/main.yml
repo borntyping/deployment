@@ -16,6 +16,7 @@
           - colordiff
           - curl
           - direnv
+          - fish
           - git
           - git-lfs
           - golang

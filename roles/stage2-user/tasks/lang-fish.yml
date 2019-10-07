@@ -1,0 +1,17 @@
+---
+- tags:
+    - dotfiles
+    - shell
+    - fish
+  block:
+    - name: create fish configuration
+      copy:
+        src: 'config/fish/'
+        dest: '{{ lookup("env", "HOME") }}/.config/fish/'
+        mode: '755'
+
+    - name: set shell to fish
+      user:
+        name: '{{ lookup("env", "USER") }}'
+        shell: '/bin/fish'
+      become: 'yes'
