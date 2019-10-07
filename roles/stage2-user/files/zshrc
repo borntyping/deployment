@@ -160,7 +160,7 @@ function zsh_kubectl_info() {
         [[ "$CONTEXT" == *"production"*  ]] && COLOUR="$fg[red]"
         [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
-        [[ "$CONTEXT" == *"engineering"* ]] && COLOUR="$fg[green]"
+        [[ "$CONTEXT" == *"infra"*       ]] && COLOUR="$fg[red]"
         zsh_kubectl_info_msg="%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
