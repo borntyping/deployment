@@ -13,5 +13,5 @@
     - name: set shell to fish
       user:
         name: '{{ lookup("env", "USER") }}'
-        shell: '/bin/fish'
+        shell: '/usr/bin/fish'
       become: 'yes'
