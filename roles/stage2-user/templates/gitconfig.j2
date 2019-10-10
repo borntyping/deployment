@@ -1,111 +1,96 @@
 [user]
-    name = Sam Clements
-    email = {{ git_user_email }}
+name = Sam Clements
+email = {{ git_user_email }}
 
 [core]
-    editor = micro
-    autocrlf = input
-    pager = less -+FX
-    excludesfile = ~/.config/git/gitignore
-    hooksPath = ~/.config/git/hooks
+editor = micro
+autocrlf = input
+pager = less -+FX
+excludesfile = ~/.config/git/gitignore
+hooksPath = ~/.config/git/hooks
 
 [push]
-    default = current
+default = current
 
 [branch]
-    autosetuprebase = always
+autosetuprebase = always
 
 [rebase]
-    autostash = true
-    autosquash = true
+autostash = true
+autosquash = true
 
 [merge]
-    tool = meld
-    conflictstyle = diff3
+tool = meld
+conflictstyle = diff3
 
 [credential]
-    helper = store
+helper = store
 
 [rerere]
-    enabled = true
-
-#
-# Check object integrity
-#
+enabled = true
 
 [transfer]
-    fsckobjects = true
-[fetch]
-    fsckobjects = true
-[receive]
-    fsckobjects = true
+fsckobjects = true
 
-#
-# Aliases
-#
+[fetch]
+fsckobjects = true
+
+[receive]
+fsckobjects = true
 
 [pretty]
-    graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
+graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-    hist = log --graph --pretty=graph --date=short --decorate -n 10
-    history = log --graph --pretty=graph --date=short --decorate
-    ignored = ls-files -o -i --exclude-standard
+hist = log --graph --pretty=graph --date=short --decorate -n 10
+history = log --graph --pretty=graph --date=short --decorate
+ignored = ls-files -o -i --exclude-standard
 
-    amend-and-force-push = !git commit --all --amend --no-edit && git push --force-with-lease
-    create-merge-request = push -o merge_request.create
-    finish-merge-request = !git pull origin master:master && git checkout master && git cleanup
-    rebase-onto-master = !git fetch origin master:master && git rebase master && git push -f
+amend-and-force-push = !git commit --all --amend --no-edit && git push --force-with-lease
+create-merge-request = !git push -o merge_request.create
+finish-merge-request = !git pull origin master:master && git checkout master && git cleanup
+rebase-onto-master = !git fetch origin master:master && git rebase master && git push --force-with-lease
 
 [pager]
-    hist = less -FX
-
-#
-# UI
-#
+hist = less -FX
 
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    ui = auto
-    interactive = auto
-    pager = true
+diff = auto
+status = auto
+branch = auto
+ui = auto
+interactive = auto
+pager = true
 
 [color "status"]
-    added = green
-    changed = yellow
-    untracked = red
+added = green
+changed = yellow
+untracked = red
 
 [diff]
-    compactionHeuristic = true                  # Try and break diffs at blank lines.
-    noprefix = true                             # Don't show a/ and b/ prefixes in diffs.
+compactionHeuristic = true                  # Try and break diffs at blank lines.
+noprefix = true                             # Don't show a/ and b/ prefixes in diffs.
 
 [commit]
-    # Always show verbose commits
-    verbose = true
-
-#
-# Utilities
-#
+verbose = true                              # Always show verbose commits
 
 [gui]
-    historybrowser = gitg
-    editor = pycharm-professional
+historybrowser = gitg
+editor = pycharm-professional
 
 [cola]
-    tabwidth = 4
-    fontdiff = Fantasque Sans Mono,11,-1,5,50,0,0,0,0,0
-    spellcheck = true
+tabwidth = 4
+fontdiff = Fantasque Sans Mono,11,-1,5,50,0,0,0,0,0
+spellcheck = true
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
 
 [lfs "https://gitlab.infosum.io/"]
-	locksverify = false
+locksverify = false
 
 [diff "fidelius"]
-    textconv = "gpg --batch --quiet --decrypt"
+textconv = "gpg --batch --quiet --decrypt"
