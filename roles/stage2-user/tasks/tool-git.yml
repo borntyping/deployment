@@ -3,13 +3,13 @@
     - dotfiles
     - git
   block:
-    - name: create git configuration
-      template:
-        src: 'gitconfig.j2'
-        dest: '{{ lookup("env", "HOME") }}/.gitconfig'
-
-    - name: create additional git configuration
+    - name: copy git config directory
       copy:
         src: 'config/git/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/'
         mode: '755'
+
+    - name: create git config file
+      template:
+        src: 'config/git/config.j2'
+        dest: '{{ lookup("env", "HOME") }}/.config/git/config'
