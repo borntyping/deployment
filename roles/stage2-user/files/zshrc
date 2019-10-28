@@ -41,6 +41,9 @@ unsetopt MENU_COMPLETE              # Don't autoselect completions.
 #
 
 # Shift-Tab to go back in menus.
+# Ensure Home/End work as expected.
+bindkey '^[[H' beginning-of-line    # Home key returns to the start of the line.
+bindkey '^[[F' end-of-line
 bindkey '^[[Z' reverse-menu-complete
 
 # Edit current line (Ctrl+e).
@@ -48,19 +51,27 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Ensure Home/End work as expected.
-zmodload zsh/terminfo
-bindkey "$terminfo[khome]" beginning-of-line
-bindkey "$terminfo[kend]" end-of-line
+#
+# Personal "libaries" deployed by Ansible.
+#
+
+# shellcheck source=local/share/zsh/prompt.zsh
+source "$HOME/.local/share/zsh/prompt.zsh"
 
 #
 # ZSH packages using antigen.
 # https://github.com/zsh-users/antigen
 #
 
+# shellcheck source=local/share/zsh/antigen.zsh
 source "$HOME/.local/share/zsh/antigen.zsh"
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundles <<EOBUNDLES
+  ael-code/zsh-colored-man-pages
+  agkozak/zsh-z
+  jimeh/zsh-peco-history
+  zsh-users/zsh-completions
+  zsh-users/zsh-syntax-highlighting
+EOBUNDLES
 antigen apply
 
 #
@@ -82,119 +93,14 @@ compinit -C
 # https://github.com/zsh-users/zsh-syntax-highlighting
 #
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
-
-#
-# Prompt
-#
-
-autoload -U vcs_info                    # Version control information
-autoload -U colors && colors            # Adds variables for printing colors
-setopt PROMPT_SUBST                     # Allow substitution in PROMPT
-
-prompt_fg="$fg[magenta]"
-prompt_highlight_fg="$fg[blue]"
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' check-for-staged-changes true
-zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}+%{$reset_color%}"
-zstyle ':vcs_info:*' unstagedstr "%{$fg[yellow]%}+%{$reset_color%}"
-zstyle ':vcs_info:*' formats "%{$prompt_fg%}%b%{$reset_color%}%c%u%m "
-zstyle ':vcs_info:*' actionformats "%{$prompt_fg%}%b%{$reset_color%}%c%u%m|%a "
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-remote
-
-function +vi-git-clean(){
-    if [[ $(git status --porcelain | wc -c) -eq 0 ]]; then
-        backend_misc[clean]+="%{$fg[red]%}CLEAN%{$reset_color%}"
-    else
-        backend_misc[clean]+="%{$fg[red]%}NOT CLEAN%{$reset_color%}"
-    fi
-}
-
-# Add a marker to %u for untracked files
-function +vi-git-untracked(){
-    if git status --porcelain | fgrep '??' &> /dev/null; then
-        hook_com[unstaged]+="%{$fg[red]%}+%{$reset_color%}"
-    fi
-}
-
-# Show +N/-N when a local branch is ahead-of or behind remote HEAD.
-function +vi-git-remote() {
-    local ahead behind
-
-    ahead=$(git rev-list "${hook_com[branch]}@{upstream}..HEAD" 2>/dev/null | wc -l)
-    (( ahead )) && hook_com[misc]+=" %{$fg[green]%}↑${ahead}%{$reset_color%}"
-
-    behind=$(git rev-list "HEAD..${hook_com[branch]}@{upstream}" 2>/dev/null | wc -l)
-    (( behind )) && hook_com[misc]+=" %{$fg[red]%}↓${behind}%{$reset_color%}"
-}
-
-# Display the current virtualenv when active
-function zsh_python_info() {
-    zsh_python_info_msg=""
-    if [[ -n "$PIPENV_ACTIVE" ]]; then
-        zsh_python_info_msg="%{$prompt_fg%}pipenv%{$reset_color%} "
-    elif [[ -n "$VIRTUAL_ENV" ]]; then
-        zsh_python_info_msg="%{$prompt_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
-    fi
-}
-
-# Display the current kubectl context
-function zsh_kubectl_info() {
-    zsh_kubectl_info_msg=""
-
-    local CONTEXT COLOUR
-    COLOUR="$prompt_fg"
-    CONTEXT="$(kubectl config current-context 2>/dev/null)"
-
-    if [[ -n "$CONTEXT" ]]; then
-        # Set foreground based on the environment.
-        [[ "$CONTEXT" == *"production"*  ]] && COLOUR="$fg[red]"
-        [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
-        [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
-        [[ "$CONTEXT" == *"infra"*       ]] && COLOUR="$fg[red]"
-        zsh_kubectl_info_msg="%{$COLOUR%}${CONTEXT}%{$reset_color%} "
-    fi
-}
-
-function zsh_precmd_title() {
-    case "$TERM" in
-        xterm*) print -Pn "\e]2;%~\a";;
-    esac
-}
-
-function zsh_preexec_title() {
-    case "$TERM" in
-        xterm*) print -Pn "\e]2;%~ $ $2\a";;
-    esac
-}
-
-precmd_functions=(zsh_precmd_title vcs_info)
-preexec_functions=(zsh_preexec_title)
-
-# Assemble the prompt
-#
-#   $ sam@hostname ~
-#   $ ...
-#   $ sam@hostname ~/directory master production
-#   $ ...
-#
-# The %{ and %} characters are used to stop the prompt from counting invisible
-# characters when calculating the length
-PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \
-\${vcs_info_msg_0_}\
-\${zsh_python_info_msg}\
-\${zsh_kubectl_info_msg}\
-
-%{$prompt_fg%}$%{$reset_color%} "
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
+export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+export ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+export ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
+export ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
+export ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
+export ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
 
 #
 # Aliases
@@ -237,55 +143,26 @@ export GIT_PATH="${dev}" # git-get
 export GOPATH="$HOME/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="$HOME/.npm"
+export PATH="${HOME}/.bin:${PATH}:${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.npm/bin:${PATH}"
 export PIPENV_IGNORE_VIRTUALENVS=1
 export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-#
-# $PATH
-#
-
-function add_to_path() {
-  if [[ -d $1 ]] && echo $PATH | grep -v $1 >/dev/null; then
-    export PATH="$1:$PATH"
-  fi
-}
-
-function source_if_path {
-  if [[ -f $1 ]]; then
-    source $1
-  fi
-}
-
-add_to_path "${HOME}/.cargo/bin"
-add_to_path "${HOME}/.gem/ruby/2.5.0/bin"
-add_to_path "${HOME}/.go/bin"
-add_to_path "${HOME}/.npm/bin"
-
-add_to_path "${HOME}/.local/bin"
-add_to_path "${HOME}/.bin"
-
-#
-# ZSH history search plugin.
-# https://github.com/jimeh/zsh-peco-history
-#
-
-source_if_path "$HOME/.local/share/zsh/plugins/peco-history/zsh-peco-history.zsh"
-ZSH_PECO_HISTORY_DEDUP=1
+export ZSH_PECO_HISTORY_DEDUP=1
 
 #
 # Tilix VTE patch
 # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
 #
-source_if_path "/etc/profile.d/vte-2.91.sh"
+
+[[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
 
 #
-# z - jump around
-# https://github.com/rupa/z
+# Local zsh config
 #
 
-source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
+[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
 
 #
 # direnv - directory specific environment configuration
@@ -294,11 +171,6 @@ source_if_path "$HOME/.local/share/zsh/plugins/z/z.sh"
 
 eval "$(direnv hook zsh)"
 
-# We configure our precmd_functions that depend on environment variables after
-# direnv so that environment variables set by direnv are available.
-precmd_functions+=zsh_kubectl_info;
-precmd_functions+=zsh_python_info;
-
 #
 # Kubernetes completion
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
@@ -306,11 +178,6 @@ precmd_functions+=zsh_python_info;
 
 source <(kubectl completion zsh)
 source <(minikube completion zsh)
-
-#
-# Local zsh config
-#
-source_if_path "$HOME/.config/zsh/zshrc"
 
 #
 # Kubernetes helpers

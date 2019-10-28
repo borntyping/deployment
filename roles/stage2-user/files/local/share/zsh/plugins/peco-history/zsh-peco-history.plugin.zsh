@@ -1,1 +1,0 @@
-zsh-peco-history.zsh
