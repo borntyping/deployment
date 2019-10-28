@@ -13,9 +13,6 @@ imports:
   micro|micro-executable: 'roles/stage2-user/files/local/bin'
   peco: 'roles/stage2-user/files/local/bin'
   with: 'roles/stage2-user/files/local/bin'
-  z: 'roles/stage2-user/files/local/share/zsh/plugins/z'
-  zsh-peco-history: 'roles/stage2-user/files/local/share/zsh/plugins/peco-history'
-  zsh-syntax-highlighting: 'roles/stage2-user/files/local/share/zsh/plugins/syntax-highlighting'
 
 git module antigen:
   url: https://github.com/zsh-users/antigen.git
@@ -125,13 +122,6 @@ git module with:
 
 # ZSH history plugin
 
-git module zsh-peco-history:
-  url: https://github.com/jimeh/zsh-peco-history.git
-  pick:
-    - zsh-peco-history.plugin.zsh
-    - zsh-peco-history.zsh
-  rev: 816f51a468cca78f6280a9e985cedfbf3c6eb635
-
 curl module peco:
   url: https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz
   unpack: tar
@@ -139,25 +129,3 @@ curl module peco:
   copy:
     peco_linux_amd64/peco: peco
   sha1: f628f397616f71b20ad60d35909a19e5e2a30701
-
-# ZSH syntax highlighting plugin
-
-git module zsh-syntax-highlighting:
-  url: https://github.com/zsh-users/zsh-syntax-highlighting.git
-  rev: 83249e1b230c8bcf29107d3827d97e03ae25a86f
-  pick:
-    - .revision-hash
-    - .version
-    - highlighters/brackets/brackets-highlighter.zsh
-    - highlighters/cursor/cursor-highlighter.zsh
-    - highlighters/line/line-highlighter.zsh
-    - highlighters/main/main-highlighter.zsh
-    - highlighters/pattern/pattern-highlighter.zsh
-    - highlighters/root/root-highlighter.zsh
-    - zsh-syntax-highlighting.zsh
-
-git module z:
-  url: https://github.com/rupa/z.git
-  pick:
-    - z.sh
-  rev: 9d5a3fe0407101e2443499e4b95bca33f7a9a9ca
