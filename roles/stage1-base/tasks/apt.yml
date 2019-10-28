@@ -17,8 +17,8 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu disco stable'
-        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu disco main'
+        - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable'
+        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu eoan main'
 
     - name: update apt repositories
       apt:
