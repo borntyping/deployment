@@ -68,7 +68,6 @@ source "$HOME/.local/share/zsh/antigen.zsh"
 antigen bundles <<EOBUNDLES
   ael-code/zsh-colored-man-pages
   agkozak/zsh-z
-  jimeh/zsh-peco-history
   zsh-users/zsh-completions
   zsh-users/zsh-syntax-highlighting
 EOBUNDLES
@@ -139,6 +138,7 @@ export sandbox="${github}/borntyping-sandbox"
 #
 
 export EDITOR="micro"
+export FZF_DEFAULT_OPTS=""
 export GIT_PATH="${dev}" # git-get
 export GOPATH="$HOME/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
@@ -157,6 +157,14 @@ export ZSH_PECO_HISTORY_DEDUP=1
 #
 
 [[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
+
+
+#
+# fzf keybindings
+# https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
+#
+
+[[ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]] && source "/usr/share/doc/fzf/examples/key-bindings.zsh"
 
 #
 # Local zsh config
