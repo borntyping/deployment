@@ -138,7 +138,8 @@ export sandbox="${github}/borntyping-sandbox"
 #
 
 export EDITOR="micro"
-export FZF_DEFAULT_OPTS=""
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_DEFAULT_OPTS="--no-height --no-reverse"
 export GIT_PATH="${dev}" # git-get
 export GOPATH="$HOME/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
@@ -165,6 +166,7 @@ export ZSH_PECO_HISTORY_DEDUP=1
 #
 
 [[ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]] && source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+[[ -f "/usr/share/doc/fzf/examples/completion.zsh" ]] && source "/usr/share/doc/fzf/examples/completion.zsh"
 
 #
 # Local zsh config
