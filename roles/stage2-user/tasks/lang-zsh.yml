@@ -8,6 +8,8 @@
       copy:
         src: 'local/share/zsh/'
         dest: '{{ lookup("env", "HOME") }}/.local/share/zsh/'
+      tags:
+        - zshrc
 
     - name: copy zsh config
       copy:

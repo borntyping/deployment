@@ -82,8 +82,8 @@ function zsh_preexec_title() {
     esac
 }
 
-precmd_functions=(zsh_precmd_title vcs_info _direnv_hook zsh_kubectl_info zsh_python_info)
-preexec_functions=(zsh_preexec_title)
+export precmd_functions=(zsh_precmd_title vcs_info zsh_kubectl_info zsh_python_info _direnv_hook)
+export preexec_functions=(zsh_preexec_title)
 
 
 # Assemble the prompt
