@@ -53,6 +53,14 @@ function zsh_python_info() {
 }
 
 # Display the current kubectl context
+function zsh_telepresence_info() {
+    zsh_telepresence_info_msg=""
+    if [[ -n "$TELEPRESENCE_POD" ]]; then
+        zsh_python_info_msg="%{$prompt_fg%}telepresence%{$reset_color%} "
+    fi
+}
+
+# Display the current kubectl context
 function zsh_kubectl_info() {
     zsh_kubectl_info_msg=""
 
@@ -82,7 +90,7 @@ function zsh_preexec_title() {
     esac
 }
 
-export precmd_functions=(zsh_precmd_title vcs_info zsh_kubectl_info zsh_python_info _direnv_hook)
+export precmd_functions=(zsh_precmd_title vcs_info zsh_kubectl_info zsh_python_info zsh_telepresence_info _direnv_hook)
 export preexec_functions=(zsh_preexec_title)
 
 
@@ -98,6 +106,7 @@ export preexec_functions=(zsh_preexec_title)
 PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\
 \${zsh_python_info_msg}\
+\${zsh_telepresence_info_msg}\
 \${zsh_kubectl_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
