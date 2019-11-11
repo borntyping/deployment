@@ -45,8 +45,8 @@ fsckobjects = true
 graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-hist = log --graph --pretty=graph --date=short --decorate -n 10
-history = log --graph --pretty=graph --date=short --decorate
+hist = log --all --graph --pretty=graph --date=short --decorate -n 10
+history = log --all --graph --pretty=graph --date=short --decorate
 ignored = ls-files -o -i --exclude-standard
 
 amend-and-force-push = !git commit --all --amend --no-edit && git push --force-with-lease
