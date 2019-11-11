@@ -50,9 +50,10 @@ history = log --all --graph --pretty=graph --date=short --decorate
 ignored = ls-files -o -i --exclude-standard
 
 amend-and-force-push = !git commit --all --amend --no-edit && git push --force-with-lease
-create-merge-request = !git push -o merge_request.create
-finish-merge-request = !git pull origin master:master && git checkout master && git cleanup
-rebase-onto-master = !git fetch origin master:master && git rebase master && git push --force-with-lease
+create-merge-request = push -o merge_request.create
+finish-merge-request = !git reset-master-branch && git checkout master && git cleanup
+rebase-onto-master = !git reset-master-branch && git rebase master && git push --force-with-lease
+reset-master-branch = fetch origin master:master --force
 
 [pager]
 hist = less -FX
