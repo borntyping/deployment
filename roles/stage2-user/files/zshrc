@@ -151,6 +151,8 @@ export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ZSH_PECO_HISTORY_DEDUP=1
+export PAGER="bat"
+export BAT_PAGER="less --quit-if-one-screen"
 
 #
 # Tilix VTE patch
