@@ -5,6 +5,7 @@ imports:
   fantasque: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
   git-get: 'roles/stage2-user/files/local/bin'
+  git-workspace: 'roles/stage2-user/files/local/bin'
   gws|gws-completion: 'roles/stage2-user/files/local/share/zsh/functions'
   gws|gws-executable: 'roles/stage2-user/files/local/bin'
   hub|hub-completion: 'roles/stage2-user/files/local/share/zsh/functions'
@@ -64,6 +65,13 @@ git module git-get:
   url: https://github.com/pietvanzoen/git-get.git
   pick: git-get
   rev: cd6a4d3a864546c42b59fcb1d187ecb151bea4a2
+
+# Git organisation tool
+
+curl module git-workspace:
+  url: https://github.com/orf/git-workspace/releases/download/v0.4.1/git-workspace-Linux-x86_64.tar.gz
+  unpack: tar
+  pick: git-workspace
 
 # Git repository management tool
 

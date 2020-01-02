@@ -1,0 +1,5 @@
+git-workspace add github "borntyping" --path "$HOME/Development/github.com"
+git-workspace add gitlab "borntyping" --path "$HOME/Development/gitlab.com"
+git-workspace add gitlab "infosum" --path "$HOME/Development/gitlab.infosum.io" --url "https://gitlab.infosum.io" --env-name "INFOSUM_GITLAB_TOKEN"
+git-workspace add gitlab "infrastructure" --path "$HOME/Development/gitlab.infosum.io" --url "https://gitlab.infosum.io" --env-name "INFOSUM_GITLAB_TOKEN"
+git-workspace add gitlab "sam.clements" --path "$HOME/Development/gitlab.infosum.io" --url "https://gitlab.infosum.io" --env-name "INFOSUM_GITLAB_TOKEN"
