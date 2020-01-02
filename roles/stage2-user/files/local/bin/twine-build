@@ -2,6 +2,6 @@
 
 set -e
 
-rm dist/*
-python setup.py sdist bdist_wheel
+[[ -d dist ]] && rm dist/*
+python3 setup.py sdist bdist_wheel
 twine upload --username "borntyping" dist/*
