@@ -52,11 +52,56 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 #
-# Personal "libaries" deployed by Ansible.
+# Aliases
 #
 
-# shellcheck source=local/share/zsh/prompt.zsh
-source "$HOME/.local/share/zsh/prompt.zsh"
+alias cola='git-cola &'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gd='git diff'
+alias grep='grep --color=auto'
+alias gs='git status'
+alias httpie='http'
+alias k='kubectl'
+alias kube='kubectl'
+alias la='ls -la'
+alias ll='ls -l'
+alias ls='ls --color=auto'
+alias please='sudo'
+alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
+alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
+
+#
+# Named directories
+#
+
+export github="$HOME/Development/github.com"
+export gitlab="$HOME/Development/gitlab.com"
+
+export borntyping="${github}/borntyping"
+export sandbox="${github}/borntyping-sandbox"
+
+#
+# Environment variables
+#
+
+export EDITOR="micro"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_DEFAULT_OPTS="--no-height --no-reverse"
+export GIT_PATH="${dev}" # git-get
+export GIT_WORKSPACE="$HOME/Development"
+export GOPATH="$HOME/.local/lib/go"
+export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
+export NPM_CONFIG_PREFIX="$HOME/.npm"
+export PAGER="bat"
+export PATH="${HOME}/.bin:${PATH}:${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.npm/bin:${PATH}"
+export PATH="${HOME}/.krew/bin:$PATH"
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_MAX_DEPTH=5
+export SSH_RUN_SUDO_KEYRING=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+export ZSH_PECO_HISTORY_DEDUP=1
 
 #
 # ZSH packages using antigen.
@@ -102,58 +147,6 @@ export ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
 export ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
 
 #
-# Aliases
-#
-
-alias cola='git-cola &'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gd='git diff'
-alias grep='grep --color=auto'
-alias gs='git status'
-alias httpie='http'
-alias k='kubectl'
-alias kube='kubectl'
-alias la='ls -la'
-alias ll='ls -l'
-alias ls='ls --color=auto'
-alias please='sudo'
-alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
-alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
-
-#
-# Named directories
-#
-
-export github="$HOME/Development/github.com"
-export gitlab="$HOME/Development/gitlab.com"
-
-export borntyping="${github}/borntyping"
-export sandbox="${github}/borntyping-sandbox"
-
-#
-# Environment variables
-#
-
-export BAT_PAGER="less --quit-if-one-screen"
-export EDITOR="micro"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_DEFAULT_OPTS="--no-height --no-reverse"
-export GIT_PATH="${dev}" # git-get
-export GIT_WORKSPACE="$HOME/Development"
-export GOPATH="$HOME/.local/lib/go"
-export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
-export NPM_CONFIG_PREFIX="$HOME/.npm"
-export PAGER="bat"
-export PATH="${HOME}/.bin:${PATH}:${HOME}/.local/bin:${PATH}"
-export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.npm/bin:${PATH}"
-export PIPENV_IGNORE_VIRTUALENVS=1
-export PIPENV_MAX_DEPTH=5
-export SSH_RUN_SUDO_KEYRING=1
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-export ZSH_PECO_HISTORY_DEDUP=1
-
-#
 # Tilix VTE patch
 # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
 #
@@ -168,12 +161,6 @@ export ZSH_PECO_HISTORY_DEDUP=1
 
 [[ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]] && source "/usr/share/doc/fzf/examples/key-bindings.zsh"
 [[ -f "/usr/share/doc/fzf/examples/completion.zsh" ]] && source "/usr/share/doc/fzf/examples/completion.zsh"
-
-#
-# Local zsh config
-#
-
-[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
 
 #
 # direnv - directory specific environment configuration
@@ -205,3 +192,15 @@ compdef k="kubectl"
 compdef kq="kubectl"
 compdef kube="kubectl"
 compdef ky="kubectl"
+
+#
+# Personal "libaries" deployed by Ansible.
+#
+
+# ZSH prompt
+# shellcheck source=local/share/zsh/prompt.zsh
+source "$HOME/.local/share/zsh/prompt.zsh"
+
+# Local zsh config
+# shellcheck source=/home/sam/.local/share/zsh/prompt.zsh
+[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
