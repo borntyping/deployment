@@ -90,7 +90,7 @@ function zsh_preexec_title() {
     esac
 }
 
-export precmd_functions=(zsh_precmd_title vcs_info zsh_kubectl_info zsh_python_info zsh_telepresence_info _direnv_hook)
+export precmd_functions=(zsh_precmd_title vcs_info _direnv_hook zsh_kubectl_info zsh_python_info zsh_telepresence_info)
 export preexec_functions=(zsh_preexec_title)
 
 
