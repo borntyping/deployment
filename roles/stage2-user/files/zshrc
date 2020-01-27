@@ -99,6 +99,7 @@ export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.npm/bin:${PATH}"
 export PATH="${HOME}/.krew/bin:$PATH"
 export PIPENV_IGNORE_VIRTUALENVS=1
 export PIPENV_MAX_DEPTH=5
+export PYTHONDEVMODE=1
 export SSH_RUN_SUDO_KEYRING=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ZSH_PECO_HISTORY_DEDUP=1
