@@ -21,11 +21,12 @@ git module antigen:
     bin/antigen.zsh: antigen.zsh
   pick:
     - antigen.zsh
-  rev: 74aa89757038e42d472db22cb5b5bc6cbd4edb93
+  rev: 8846aa902047992e86816cbd941acc86646bd83b
 
 curl module aws-vault:
   url: https://github.com/99designs/aws-vault/releases/download/v4.6.2/aws-vault-linux-amd64
   filename: aws-vault
+  sha1: 2220d76218f123fd3ceea1e8fb6ae8b986313aa0
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8-alpha/FantasqueSansMono-Normal.zip
@@ -72,6 +73,7 @@ curl module git-workspace:
   url: https://github.com/orf/git-workspace/releases/download/v0.5.0/git-workspace-Linux-x86_64.tar.gz
   unpack: tar
   pick: git-workspace
+  sha1: 188d31fcc4da899ec44a63afa8b50c5eec902d7f
 
 # Git repository management tool
 
