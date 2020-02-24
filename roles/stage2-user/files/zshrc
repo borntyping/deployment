@@ -4,37 +4,37 @@
 # ZSH options
 #
 
-SAVEHIST=10000                      # Lines of history to save to a file.
-HISTSIZE=10000                      # Lines of history to keep in memory.
-HISTFILE="$HOME/.zhistory"          # Save history.
+SAVEHIST=10000                   # Lines of history to save to a file.
+HISTSIZE=10000                   # Lines of history to keep in memory.
+HISTFILE="$HOME/.zhistory"       # Save history.
 
-setopt ALWAYS_TO_END                # Move cursor after completion.
-setopt APPEND_HISTORY               # Append to $HISTFILE, not replace.
-setopt AUTO_LIST                    # List choices on ambiguous completion.
-setopt AUTO_MENU                    # Show completion menu on tab press.
-setopt AUTO_NAME_DIRS               # Allows 'cd ~borntyping' (see below).
-setopt AUTO_PARAM_KEYS              # Intelligent handling of characters
-setopt AUTO_PARAM_SLASH             #   after a completion.
-setopt AUTO_REMOVE_SLASH            # Remove trailing slash when needed.
-setopt COMPLETE_ALIASES             # Allow autocompletion for aliases.
-setopt COMPLETE_ALIASES             # Tab complete aliases.
-setopt COMPLETE_IN_WORD             # Allow completion from middle of word
-setopt EXTENDED_GLOB                # File modification glob modifiers.
-setopt EXTENDED_HISTORY             # Record additional information.
-setopt HIST_EXPIRE_DUPS_FIRST       # Remove duplicate entries first.
-setopt HIST_FIND_NO_DUPS            # Never find duplicates when searching.
-setopt HIST_IGNORE_ALL_DUPS         # Remove old duplicate entries first.
-setopt HIST_IGNORE_DUPS             # Ignore adjacent repeated entries.
-setopt HIST_IGNORE_SPACE            # Skip if the line starts with space.
-setopt HIST_SAVE_NO_DUPS            # Never save duplicate commands.
-setopt HIST_VERIFY                  # Don't immediately run history commands.
-setopt INC_APPEND_HISTORY           # Append to $HISTFILE while running.
-setopt INTERACTIVE_COMMENTS         # Allow comments in interactive mode.
-setopt LIST_PACKED                  # Smallest completion menu.
-setopt RM_STAR_WAIT                 # Force the user to wait before 'rm *'.
-setopt SHARE_HISTORY                # Share history between ZSH instances.
-unsetopt FLOW_CONTROL               # Disable start/stop characters.
-unsetopt MENU_COMPLETE              # Don't autoselect completions.
+setopt ALWAYS_TO_END             # Move cursor after completion.
+setopt APPEND_HISTORY            # Append to $HISTFILE, not replace.
+setopt AUTO_LIST                 # List choices on ambiguous completion.
+setopt AUTO_MENU                 # Show completion menu on tab press.
+setopt AUTO_NAME_DIRS            # Allows 'cd ~borntyping' (see below).
+setopt AUTO_PARAM_KEYS           # Intelligent handling of characters
+setopt AUTO_PARAM_SLASH          #   after a completion.
+setopt AUTO_REMOVE_SLASH         # Remove trailing slash when needed.
+setopt COMPLETE_ALIASES          # Allow autocompletion for aliases.
+setopt COMPLETE_ALIASES          # Tab complete aliases.
+setopt COMPLETE_IN_WORD          # Allow completion from middle of word
+setopt EXTENDED_GLOB             # File modification glob modifiers.
+setopt EXTENDED_HISTORY          # Record additional information.
+setopt HIST_EXPIRE_DUPS_FIRST    # Remove duplicate entries first.
+setopt HIST_FIND_NO_DUPS         # Never find duplicates when searching.
+setopt HIST_IGNORE_ALL_DUPS      # Remove old duplicate entries first.
+setopt HIST_IGNORE_DUPS          # Ignore adjacent repeated entries.
+setopt HIST_IGNORE_SPACE         # Skip if the line starts with space.
+setopt HIST_SAVE_NO_DUPS         # Never save duplicate commands.
+setopt HIST_VERIFY               # Don't immediately run history commands.
+setopt INC_APPEND_HISTORY        # Append to $HISTFILE while running.
+setopt INTERACTIVE_COMMENTS      # Allow comments in interactive mode.
+setopt LIST_PACKED               # Smallest completion menu.
+setopt RM_STAR_WAIT              # Force the user to wait before 'rm *'.
+setopt SHARE_HISTORY             # Share history between ZSH instances.
+unsetopt FLOW_CONTROL            # Disable start/stop characters.
+unsetopt MENU_COMPLETE           # Don't autoselect completions.
 
 #
 # Keybindings
@@ -42,7 +42,7 @@ unsetopt MENU_COMPLETE              # Don't autoselect completions.
 
 # Shift-Tab to go back in menus.
 # Ensure Home/End work as expected.
-bindkey '^[[H' beginning-of-line    # Home key returns to the start of the line.
+bindkey '^[[H' beginning-of-line # Home key returns to the start of the line.
 bindkey '^[[F' end-of-line
 bindkey '^[[Z' reverse-menu-complete
 
@@ -138,21 +138,13 @@ compinit -C
 #
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-export ZSH_HIGHLIGHT_STYLES[comment]='fg=green'
-export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-export ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
-export ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=blue'
-export ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=blue'
-export ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=yellow'
-export ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=yellow'
-
-#
-# Tilix VTE patch
-# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
-#
-
-[[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
-
+export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
+export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
+export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
+export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
+export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
+export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
+export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 
 #
 # fzf keybindings
@@ -182,10 +174,10 @@ source <(minikube completion zsh)
 #
 
 function ky() {
-    kubectl -o yaml "$@" | bat --language yaml
+  kubectl -o yaml "$@" | bat --language yaml
 }
 function kq() {
-    kubectl -o json "$@" | jq .
+  kubectl -o json "$@" | jq .
 }
 
 compdef k="kubectl"
@@ -204,3 +196,10 @@ source "$HOME/.local/share/zsh/prompt.zsh"
 # Local zsh config
 # shellcheck source=/home/sam/.local/share/zsh/prompt.zsh
 [[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
+
+#
+# Tilix VTE patch
+# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+#
+
+[[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
