@@ -43,26 +43,26 @@ function +vi-git-remote() {
 }
 
 # Display the current virtualenv when active
-function zsh_python_info() {
-    zsh_python_info_msg=""
+function prompt_python_info() {
+    prompt_python_info_msg=""
     if [[ -n "$PIPENV_ACTIVE" ]]; then
-        zsh_python_info_msg="%{$prompt_fg%}pipenv%{$reset_color%} "
+        prompt_python_info_msg="%{$prompt_fg%}pipenv%{$reset_color%} "
     elif [[ -n "$VIRTUAL_ENV" ]]; then
-        zsh_python_info_msg="%{$prompt_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
+        prompt_python_info_msg="%{$prompt_fg%}virtualenv:$(basename "$VIRTUAL_ENV")%{$reset_color%} "
     fi
 }
 
 # Display the current kubectl context
-function zsh_telepresence_info() {
-    zsh_telepresence_info_msg=""
+function prompt_telepresence_info() {
+    prompt_telepresence_info_msg=""
     if [[ -n "$TELEPRESENCE_POD" ]]; then
-        zsh_python_info_msg="%{$prompt_fg%}telepresence%{$reset_color%} "
+        prompt_python_info_msg="%{$prompt_fg%}telepresence%{$reset_color%} "
     fi
 }
 
 # Display the current kubectl context
-function zsh_kubectl_info() {
-    zsh_kubectl_info_msg=""
+function prompt_kubectl_info() {
+    prompt_kubectl_info_msg=""
 
     local CONTEXT COLOUR
     COLOUR="$prompt_fg"
@@ -74,25 +74,24 @@ function zsh_kubectl_info() {
         [[ "$CONTEXT" == *"staging"*     ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"integration"* ]] && COLOUR="$fg[yellow]"
         [[ "$CONTEXT" == *"infra"*       ]] && COLOUR="$fg[red]"
-        zsh_kubectl_info_msg="%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+        prompt_kubectl_info_msg="%{$COLOUR%}${CONTEXT}%{$reset_color%} "
     fi
 }
 
-function zsh_precmd_title() {
+function prompt_precmd_title() {
     case "$TERM" in
         xterm*) print -Pn "\e]2;%~\a";;
     esac
 }
 
-function zsh_preexec_title() {
+function prompt_preexec_title() {
     case "$TERM" in
         xterm*) print -Pn "\e]2;%~ $ $2\a";;
     esac
 }
 
-export precmd_functions=(zsh_precmd_title vcs_info _direnv_hook zsh_kubectl_info zsh_python_info zsh_telepresence_info)
-export preexec_functions=(zsh_preexec_title)
-
+export precmd_functions=($precmd_functions prompt_precmd_title vcs_info prompt_kubectl_info prompt_python_info prompt_telepresence_info)
+export preexec_functions=($preexec_functions prompt_preexec_title)
 
 # Assemble the prompt
 #
@@ -105,8 +104,8 @@ export preexec_functions=(zsh_preexec_title)
 # characters when calculating the length
 PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \
 \${vcs_info_msg_0_}\
-\${zsh_python_info_msg}\
-\${zsh_telepresence_info_msg}\
-\${zsh_kubectl_info_msg}\
+\${prompt_python_info_msg}\
+\${prompt_telepresence_info_msg}\
+\${prompt_kubectl_info_msg}\
 
 %{$prompt_fg%}$%{$reset_color%} "
