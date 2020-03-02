@@ -1,0 +1,7 @@
+---
+- tags:
+    - cargo
+    - rust
+  block:
+    - name: 'install cargo packages'
+      command: 'cargo install ripgrep exa fd bat sd'
