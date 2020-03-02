@@ -46,6 +46,9 @@ bindkey '^[[H' beginning-of-line # Home key returns to the start of the line.
 bindkey '^[[F' end-of-line
 bindkey '^[[Z' reverse-menu-complete
 
+# Disable `ctrl-v` so it doesn't mix with `ctrl-shift-v`.
+bindkey -r "^V"
+
 # Edit current line (Ctrl+e).
 autoload edit-command-line
 zle -N edit-command-line
