@@ -16,6 +16,7 @@
           - colordiff
           - curl
           - direnv
+          - fd-find
           - git
           - git-lfs
           - golang
