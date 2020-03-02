@@ -87,6 +87,7 @@ export sandbox="${github}/borntyping-sandbox"
 # Environment variables
 #
 
+export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
