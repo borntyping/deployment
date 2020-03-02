@@ -63,13 +63,23 @@ alias grep='grep --color=auto'
 alias gs='git status'
 alias httpie='http'
 alias k='kubectl'
-alias kube='kubectl'
 alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls --color=auto'
 alias please='sudo'
 alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
+
+#
+# Oreutils
+# https://github.com/Manishearth/oreutils
+#
+
+[[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
+[[ -x "$(command -v exa)" ]] && alias ls='exa'
+[[ -x "$(command -v fd)" ]] && alias find='fd'
+[[ -x "$(command -v bat)" ]] && alias cat='bat'
+[[ -x "$(command -v sd)" ]] && alias sed='sd'
 
 #
 # Named directories
@@ -182,7 +192,6 @@ function kq() {
 
 compdef k="kubectl"
 compdef kq="kubectl"
-compdef kube="kubectl"
 compdef ky="kubectl"
 
 #
