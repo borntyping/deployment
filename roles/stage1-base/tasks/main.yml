@@ -39,14 +39,6 @@
         - bin
         - util
 
-    - name: use zsh
-      user:
-        name: sam
-        shell: /bin/zsh
-      tags:
-        - zsh
-        - user
-
     - name: configure inotify
       copy:
         src: 60-inotify.conf

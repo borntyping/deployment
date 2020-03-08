@@ -8,5 +8,5 @@
 
     - name: create micro configuration
       copy:
-        src: 'config/micro/settings.json'
+        src: '.config/micro/settings.json'
         dest: '{{ lookup("env", "HOME") }}/.config/micro/settings.json'
