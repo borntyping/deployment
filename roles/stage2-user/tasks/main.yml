@@ -3,11 +3,21 @@
     - stage2
     - stage2-user
   block:
-    - import_tasks: lang-python.yml
     - import_tasks: lang-zsh.yml
     - import_tasks: tool-git.yml
     - import_tasks: tool-micro.yml
     - import_tasks: tool-ssh.yml
+
+    - name: install python packages
+      pip:
+        name:
+          - httpie
+          - peru
+          - pip
+          - pipenv
+        state: latest
+        executable: pip3
+        extra_args: --user
 
     - name: configure dotfiles
       copy:

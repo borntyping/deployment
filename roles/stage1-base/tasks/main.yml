@@ -39,6 +39,14 @@
         - bin
         - util
 
+    - name: use zsh
+      user:
+        name: sam
+        shell: /bin/zsh
+      tags:
+        - zsh
+        - user
+
     - name: configure inotify
       copy:
         src: 60-inotify.conf
@@ -49,7 +57,9 @@
     - name: install docker
       apt:
         pkg:
-          - docker-engine
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
         state: latest
       become: 'yes'
 
@@ -65,14 +75,5 @@
         groups: docker
         append: true
       become: 'yes'
-
-    - name: install custom services
-      copy:
-        src: 'etc/systemd/system/'
-        dest: '/etc/systemd/system'
-        mode: '0755'
-      become: 'yes'
-      tags:
-        - systemd
 
     - meta: flush_handlers

@@ -1,5 +1,9 @@
 #!/bin/bash
-export ANSIBLE_REPO="$(readlink -f $(dirname "${BASH_SOURCE[0]}"))"
-export ANSIBLE_CONFIG="${ANSIBLE_REPO}/ansible.cfg"
-export ANSIBLE_INVENTORY="${ANSIBLE_REPO}/inventory.conf"
-exec ansible-playbook --diff "${ANSIBLE_REPO}/playbook.yml" "$@"
+pushd "$(readlink -f $(dirname "${BASH_SOURCE[0]}"))" >/dev/null
+export ANSIBLE_RETRY_FILES_ENABLED="false"
+export ANSIBLE_NOCOWS="true"
+exec ansible-playbook \
+  --diff \
+  --inventory="localhost," \
+  --extra-vars="ansible_connection=local" \
+  "playbook.yml" "$@"
