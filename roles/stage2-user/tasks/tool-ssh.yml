@@ -1,5 +1,6 @@
 ---
-- tags: ssh
+- tags:
+    - ssh
   block:
     - name: create ssh directory
       file:
@@ -20,5 +21,15 @@
         src: 'ssh/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
       notify: ssh
+
+    - name: generate ssh key for github
+      openssh_keypair:
+        type: ed25519
+        path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_github'
+
+    - name: generate ssh key for gitlab
+      openssh_keypair:
+        type: ed25519
+        path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_gitlab'
 
     - meta: flush_handlers
