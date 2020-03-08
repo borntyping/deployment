@@ -6,18 +6,14 @@
     - stage3
     - stage3-gui
   block:
-    - import_tasks: apt.yml
-
     - name: install packages
       apt:
         pkg:
           - firefox
           - git-cola
           - gitg
-          - gparted
           - meld
           - tilix
-          - zeal
         state: latest
       become: 'yes'
 

@@ -18,7 +18,7 @@
 
     - name: create ssh fragments
       copy:
-        src: 'ssh/config.d/'
+        src: '.ssh/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
       notify: ssh
 

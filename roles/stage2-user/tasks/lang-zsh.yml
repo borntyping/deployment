@@ -6,7 +6,7 @@
   block:
     - name: copy zsh libraries
       copy:
-        src: 'local/share/zsh/'
+        src: '.local/share/zsh/'
         dest: '{{ lookup("env", "HOME") }}/.local/share/zsh/'
       tags:
         - zshrc
