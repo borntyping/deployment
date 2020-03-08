@@ -3,11 +3,6 @@
     - stage2
     - stage2-user
   block:
-    - import_tasks: lang-zsh.yml
-    - import_tasks: tool-git.yml
-    - import_tasks: tool-micro.yml
-    - import_tasks: tool-ssh.yml
-
     - name: install python packages
       pip:
         name:
@@ -43,13 +38,9 @@
         - ansible
         - micro
 
-    - name: create development directories
-      file:
-        name: '{{ lookup("env", "HOME") }}/{{ item }}'
-        state: directory
-      with_items:
-        - 'Development'
-        - 'Development/github.com'
-        - 'Development/gitlab.com'
+    - import_tasks: lang-zsh.yml
+    - import_tasks: tool-git.yml
+    - import_tasks: tool-micro.yml
+    - import_tasks: tool-ssh.yml
 
     - meta: flush_handlers

@@ -13,3 +13,32 @@
       template:
         src: '.config/git/config.j2'
         dest: '{{ lookup("env", "HOME") }}/.config/git/config'
+
+    - name: create development directories
+      file:
+        name: '{{ lookup("env", "HOME") }}/{{ item }}'
+        state: directory
+      with_items:
+        - 'Development'
+        - 'Development/github.com'
+        - 'Development/gitlab.com'
+      tags:
+        - git
+        - git-workspace
+
+    - name: configure git-workspace
+      copy:
+        src: 'Development/'
+        dest: '{{ lookup("env", "HOME") }}/Development'
+        mode: '0644'
+      tags:
+        - git
+        - git-workspace
+
+    - name: git-workspace update
+      command: git-workspace update
+      args:
+        creates: '{{ lookup("env", "HOME") }}/Development/github.com/borntyping/deployment'
+      tags:
+        - git
+        - git-workspace
