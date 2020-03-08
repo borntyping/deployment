@@ -8,7 +8,7 @@
       register: apt_repositories_key
       become: 'yes'
       with_list:
-        - '0EBFCD88'  # docker
+        - '0EBFCD88'  # https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
     - name: configure apt repositories
       apt_repository:
@@ -17,8 +17,8 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu disco stable'
-        - 'deb http://ppa.launchpad.net/git-core/ppa/ubuntu eoan main'
+        - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu eoan stable'
+        - 'ppa:git-core/ppa'
 
     - name: update apt repositories
       apt:

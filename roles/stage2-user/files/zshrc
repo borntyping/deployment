@@ -169,8 +169,21 @@ eval "$(direnv hook zsh)"
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
 #
 
-source <(kubectl completion zsh)
-source <(minikube completion zsh)
+if [[ -x "$(command -v kubectl)" ]]; then
+  source <(kubectl completion zsh)
+  source <(minikube completion zsh)
+
+  function ky() {
+    kubectl -o yaml "$@" | bat --language yaml
+  }
+  function kq() {
+    kubectl -o json "$@" | jq .
+  }
+
+  compdef k="kubectl"
+  compdef kq="kubectl"
+  compdef ky="kubectl"
+fi
 
 #
 # Oreutils - must come after $PATH is set.
@@ -181,21 +194,6 @@ source <(minikube completion zsh)
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v fd)" ]] && alias find='fd'
 [[ -x "$(command -v bat)" ]] && alias cat='bat'
-
-#
-# Kubernetes helpers
-#
-
-function ky() {
-  kubectl -o yaml "$@" | bat --language yaml
-}
-function kq() {
-  kubectl -o json "$@" | jq .
-}
-
-compdef k="kubectl"
-compdef kq="kubectl"
-compdef ky="kubectl"
 
 #
 # Personal "libaries" deployed by Ansible.
