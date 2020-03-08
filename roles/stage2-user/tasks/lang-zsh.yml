@@ -18,6 +18,17 @@
       tags:
         - zshrc
 
+    - name: create zsh local configuration directory
+      file:
+        name: '{{ lookup("env", "HOME") }}/.config/zsh'
+        state: directory
+
+    - name: touch zsh local configuration directory
+      copy:
+        src: '/dev/null'
+        dest: '{{ lookup("env", "HOME") }}/.config/zsh/zshrc'
+        force: false
+
     - name: set shell to zsh
       user:
         name: '{{ lookup("env", "USER") }}'
