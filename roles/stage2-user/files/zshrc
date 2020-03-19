@@ -174,10 +174,10 @@ if [[ -x "$(command -v kubectl)" ]]; then
   source <(minikube completion zsh)
 
   function ky() {
-    kubectl -o yaml "$@" | bat --language yaml
+    kubectl --output="yaml" "$@" | bat --language="yaml" --style="full"
   }
   function kq() {
-    kubectl -o json "$@" | jq .
+    kubectl --output="json" "$@" | jq .
   }
 
   compdef k="kubectl"
