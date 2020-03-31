@@ -13,3 +13,4 @@ gem_graph.png
 gradle/
 gradlew
 gradlew.bat
+telepresence.log
