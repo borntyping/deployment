@@ -174,7 +174,7 @@ if [[ -x "$(command -v kubectl)" ]]; then
   source <(minikube completion zsh)
 
   function ky() {
-    kubectl --output="yaml" "$@" | bat --language="yaml" --style="full"
+    kubectl --output="yaml" "$@" | bat --language="yaml"
   }
   function kq() {
     kubectl --output="json" "$@" | jq .
