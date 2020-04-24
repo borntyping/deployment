@@ -59,6 +59,7 @@ bindkey '^e' edit-command-line
 #
 
 alias cola='git-cola &'
+alias d='docker run --rm -it $(docker build -q .)'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'
