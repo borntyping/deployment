@@ -28,7 +28,7 @@
 
     - name: configure git-workspace
       copy:
-        src: 'Development/'
+        src: 'localhost/Development/'
         dest: '{{ lookup("env", "HOME") }}/Development'
         mode: '0644'
       tags:
