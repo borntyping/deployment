@@ -177,7 +177,7 @@ if [[ -x "$(command -v kubectl)" ]]; then
   function ky() {
     kubectl --output="yaml" "$@" | bat --language="yaml"
   }
-  function jq() {
+  function kj() {
     kubectl --output="json" "$@"
   }
 
