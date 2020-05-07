@@ -4,17 +4,13 @@ imports:
   aws-vault: 'roles/stage2-user/files/.local/bin'
   fantasque: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
-  git-get: 'roles/stage2-user/files/.local/bin'
   git-workspace: 'roles/stage2-user/files/.local/bin'
-  gws|gws-completion: 'roles/stage2-user/files/.local/share/zsh/functions'
-  gws|gws-executable: 'roles/stage2-user/files/.local/bin'
   hub|hub-completion: 'roles/stage2-user/files/.local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/.local/bin'
   jq: 'roles/stage2-user/files/.local/bin'
   k9s: 'roles/stage2-user/files/.local/bin'
   micro|micro-executable: 'roles/stage2-user/files/.local/bin'
   peco: 'roles/stage2-user/files/.local/bin'
-  with: 'roles/stage2-user/files/.local/bin'
 
 git module antigen:
   url: https://github.com/zsh-users/antigen.git
@@ -76,21 +72,6 @@ curl module git-workspace:
   pick: git-workspace
   sha1: 188d31fcc4da899ec44a63afa8b50c5eec902d7f
 
-# Git repository management tool
-
-git module gws:
-  url: https://github.com/StreakyCobra/gws.git
-  submodules: false
-  rev: 8f4be111867bf658171feece523a1e5cdec59c3e
-
-rule gws-completion:
-  pick: gws.zsh
-  copy: {'completions/zsh': 'gws.zsh'}
-
-rule gws-executable:
-  pick: gws
-  copy: {'src/gws': 'gws'}
-
 # Github command line tool
 
 curl module hub:
@@ -118,7 +99,7 @@ curl module jq:
 curl module k9s:
   url: https://github.com/derailed/k9s/releases/download/v0.19.4/k9s_Linux_x86_64.tar.gz
   unpack: tar
-  filename: k9s
+  pick: k9s
   sha1: 1ce122880787479308aa9aa2e5b78c64e2163608
 
 # `micro` editor
@@ -132,12 +113,6 @@ rule micro-executable:
   pick: micro
   copy: {'micro-1.4.1/micro': 'micro'}
 
-# `with` script
-
-git module with:
-  url: https://github.com/mchav/with.git
-  pick: with
-  rev: 28eb40bbc08d171daabf0210f420477ad75e16d6
 
 # ZSH history plugin
 
