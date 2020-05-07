@@ -6,13 +6,21 @@
     - name: install python packages
       pip:
         name:
+          - black
+          - flake8
           - httpie
+          - mypy
           - peru
           - pip
           - pipenv
+          - poetry
+          - pytest
         state: latest
         executable: pip3
         extra_args: --user
+      tags:
+        - python
+        - bin
 
     - name: configure dotfiles
       copy:
