@@ -1,4 +1,5 @@
 #!/bin/zsh
+# shellcheck disable=SC2034 disable=SC2206
 
 #
 # ZSH options
@@ -78,8 +79,8 @@ alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 # Named directories
 #
 
-export github="$HOME/Development/github.com"
-export gitlab="$HOME/Development/gitlab.com"
+export github="${HOME}/Development/github.com"
+export gitlab="${HOME}/Development/gitlab.com"
 
 export borntyping="${github}/borntyping"
 export sandbox="${github}/borntyping-sandbox"
@@ -92,11 +93,11 @@ export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
-export GIT_PATH="${dev}" # git-get
-export GIT_WORKSPACE="$HOME/Development"
-export GOPATH="$HOME/.local/lib/go"
+export GIT_PATH="${HOME}/Development" # git-get
+export GIT_WORKSPACE="${HOME}/Development" # git-workspace
+export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
-export NPM_CONFIG_PREFIX="$HOME/.npm"
+export NPM_CONFIG_PREFIX="${HOME}/.npm"
 export PAGER="bat"
 export PATH="${HOME}/.bin:${PATH}:${HOME}/.local/bin:/snap/bin:${PATH}"
 export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"
@@ -106,6 +107,8 @@ export SSH_RUN_SUDO_KEYRING=1
 export TERM="xterm-256color"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export ZSH_PECO_HISTORY_DEDUP=1
+export ZSHZ_DATA="${HOME}/.cache/zsh/z"
+export ZSHZ_NO_RESOLVE_SYMLINKS=1
 
 #
 # ZSH packages using antigen.
@@ -171,6 +174,7 @@ eval "$(direnv hook zsh)"
 #
 
 if [[ -x "$(command -v kubectl)" ]]; then
+  # shellcheck source=/dev/null
   source <(kubectl completion zsh)
 
   function ky() {
@@ -185,11 +189,8 @@ if [[ -x "$(command -v kubectl)" ]]; then
   compdef ky="kubectl"
 fi
 
-#
 # Oreutils - must come after $PATH is set.
 # https://github.com/Manishearth/oreutils
-#
-
 [[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v fd)" ]] && alias find='fd'
@@ -207,9 +208,6 @@ source "$HOME/.local/share/zsh/prompt.zsh"
 # shellcheck source=/home/sam/.local/share/zsh/prompt.zsh
 [[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
 
-#
 # Tilix VTE patch
 # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
-#
-
 [[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
