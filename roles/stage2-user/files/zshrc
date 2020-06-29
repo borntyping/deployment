@@ -194,7 +194,6 @@ fi
 [[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v fd)" ]] && alias find='fd'
-[[ -x "$(command -v bat)" ]] && alias cat='bat'
 
 #
 # Personal "libaries" deployed by Ansible.
