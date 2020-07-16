@@ -97,10 +97,9 @@ curl module jq:
 # Kubernetes TUI.
 
 curl module k9s:
-  url: https://github.com/derailed/k9s/releases/download/v0.19.4/k9s_Linux_x86_64.tar.gz
+  url: https://github.com/derailed/k9s/releases/download/v0.21.2/k9s_Linux_x86_64.tar.gz
   unpack: tar
   pick: k9s
-  sha1: 1ce122880787479308aa9aa2e5b78c64e2163608
 
 # `micro` editor
 
