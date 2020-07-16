@@ -67,16 +67,26 @@ function prompt_telepresence_info() {
 function prompt_kubectl_info() {
   prompt_kubectl=""
 
-  local CONTEXT COLOUR
-  COLOUR="$prompt_fg"
+  local CONTEXT CONTEXT_COLOUR NAMESPACE NAMESPACE_COLOUR
   CONTEXT="$(kubectl config current-context 2>/dev/null)"
+  CONTEXT_COLOUR="$prompt_fg"
+  NAMESPACE="$(kubens --current)"
+  NAMESPACE_COLOUR="$prompt_fg"
 
   if [[ -n "$CONTEXT" ]]; then
     # Set foreground based on the environment.
-    [[ "$CONTEXT" == *"devops"* ]] && COLOUR="${fg[green]}"
-    [[ "$CONTEXT" == *"infra"* ]] && COLOUR="${fg[yellow]}"
-    [[ "$CONTEXT" == *"production"* ]] && COLOUR="${fg[red]}"
-    prompt_kubectl="%{$COLOUR%}${CONTEXT}%{$reset_color%} "
+    [[ "$CONTEXT" == *"engineering"* ]] && CONTEXT_COLOUR="${fg[cyan]}"
+    [[ "$CONTEXT" == *"sandbox"* ]] && CONTEXT_COLOUR="${fg[yellow]}"
+    [[ "$CONTEXT" == *"production"* ]] && CONTEXT_COLOUR="${fg[red]}"
+    prompt_kubectl="%{$CONTEXT_COLOUR%}${CONTEXT}%{$reset_color%} "
+  fi
+
+  if [[ -n "$NAMESPACE" ]]; then
+    # Set foreground based on the environment.
+    [[ "$NAMESPACE" == "integration" ]] && NAMESPACE_COLOUR="${fg[green]}"
+    [[ "$NAMESPACE" == "staging" ]] && NAMESPACE_COLOUR="${fg[yellow]}"
+    [[ "$NAMESPACE" == "production" ]] && NAMESPACE_COLOUR="${fg[red]}"
+    prompt_kubectl="$prompt_kubectl%{$NAMESPACE_COLOUR%}${NAMESPACE}%{$reset_color%} "
   fi
 }
 
