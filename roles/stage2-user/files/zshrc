@@ -20,7 +20,6 @@ setopt AUTO_REMOVE_SLASH         # Remove trailing slash when needed.
 setopt COMPLETE_ALIASES          # Allow autocompletion for aliases.
 setopt COMPLETE_ALIASES          # Tab complete aliases.
 setopt COMPLETE_IN_WORD          # Allow completion from middle of word
-setopt EXTENDED_GLOB             # File modification glob modifiers.
 setopt EXTENDED_HISTORY          # Record additional information.
 setopt HIST_EXPIRE_DUPS_FIRST    # Remove duplicate entries first.
 setopt HIST_FIND_NO_DUPS         # Never find duplicates when searching.
