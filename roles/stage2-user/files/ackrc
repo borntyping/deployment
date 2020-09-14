@@ -1,2 +1,5 @@
+--ignore-dir=.archive/
 --ignore-dir=.idea/
 --ignore-dir=.kitchen/
+--ignore-dir=.tox/
+--ignore-dir=vendor/
