@@ -104,14 +104,13 @@ curl module k9s:
 # `micro` editor
 
 curl module micro:
-  url: https://github.com/zyedidia/micro/releases/download/v1.4.1/micro-1.4.1-linux64.tar.gz
+  url: https://github.com/zyedidia/micro/releases/download/v2.0.8/micro-2.0.8-linux64-static.tar.gz
   unpack: tar
-  sha1: e7b01ee96f36fc0df3c6305a5178e4aa0dc0bc31
+  sha1: fa31d303f6f5cfab899e098ac5e81013b5667d4b
 
 rule micro-executable:
   pick: micro
-  copy: {'micro-1.4.1/micro': 'micro'}
-
+  copy: {'micro-2.0.8/micro': 'micro'}
 
 # ZSH history plugin
 
