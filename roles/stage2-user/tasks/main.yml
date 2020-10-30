@@ -15,6 +15,7 @@
           - pipenv
           - poetry
           - pytest
+          - semgrep
         state: latest
         executable: pip3
         extra_args: --user
