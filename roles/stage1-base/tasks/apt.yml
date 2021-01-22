@@ -17,7 +17,7 @@
       register: apt_repositories
       become: 'yes'
       with_items:
-        - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu eoan stable'
+        - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu groovy stable'
         - 'ppa:git-core/ppa'
 
     - name: update apt repositories
