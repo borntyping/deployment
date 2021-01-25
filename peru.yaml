@@ -7,6 +7,7 @@ imports:
   git-workspace: 'roles/stage2-user/files/.local/bin'
   hub|hub-completion: 'roles/stage2-user/files/.local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/.local/bin'
+  ijq: 'roles/stage2-user/files/.local/bin'
   jq: 'roles/stage2-user/files/.local/bin'
   k9s: 'roles/stage2-user/files/.local/bin'
   micro|micro-executable: 'roles/stage2-user/files/.local/bin'
@@ -62,7 +63,7 @@ curl module fira:
 git module git-get:
   url: https://github.com/pietvanzoen/git-get.git
   pick: git-get
-  rev: cd6a4d3a864546c42b59fcb1d187ecb151bea4a2
+  rev: dd3ee8781ce1a7333887a79c6f8a6231f49ed548
 
 # Git organisation tool
 
@@ -87,6 +88,17 @@ rule hub-executable:
   pick: hub
   copy: {'hub-linux-amd64-2.2.1/hub': 'hub'}
 
+# Interactive JSON transformation tool.
+
+curl module ijq:
+  url: https://git.sr.ht/~gpanders/ijq/refs/v0.2.3/ijq-0.2.3-linux-x86_64.tar.gz
+  unpack: tar
+  copy:
+    ijq-0.2.3/ijq: ijq
+  pick:
+    - ijq
+  sha1: 7c06d6e826134674f1fd12e471f2da26de0b3dc7
+
 # JSON transformation tool.
 
 curl module jq:
@@ -100,6 +112,7 @@ curl module k9s:
   url: https://github.com/derailed/k9s/releases/download/v0.21.2/k9s_Linux_x86_64.tar.gz
   unpack: tar
   pick: k9s
+  sha1: 7d12f60c3aae8daea5d2e96e77099d4f83c6e058
 
 # `micro` editor
 
