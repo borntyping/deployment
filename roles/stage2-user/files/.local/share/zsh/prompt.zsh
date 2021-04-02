@@ -67,6 +67,14 @@ function prompt_telepresence_info() {
 function prompt_kubectl_info() {
   prompt_kubectl=""
 
+  if ! command -v kubectl > /dev/null 2>&1; then
+    return
+  fi
+
+  if ! command -v kubens > /dev/null 2>&1; then
+    return
+  fi
+
   local CONTEXT CONTEXT_COLOUR NAMESPACE NAMESPACE_COLOUR
   CONTEXT="$(kubectl config current-context 2>/dev/null)"
   CONTEXT_COLOUR="$prompt_fg"
