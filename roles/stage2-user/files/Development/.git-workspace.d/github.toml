@@ -1,0 +1,6 @@
+[[provider]]
+provider = "github"
+name = "borntyping"
+path = "/home/sam/Development/github.com"
+env_var = "GITHUB_TOKEN"
+skip_forks = false
