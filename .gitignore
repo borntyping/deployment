@@ -1,5 +1,6 @@
-.peru
-inventory.conf
-roles/stage2-user/files/localhost/
+.idea/
+.peru/
+.vscode/
+roles/stage2-user/files/Development/.git-workspace.d/local_*.toml
 roles/stage2-user/files/ssh/config.d/local_*.config
 site.retry
