@@ -32,7 +32,6 @@
         - htoprc
         - inputrc
         - multitailrc
-        - tmux.conf
       tags:
         - dotfiles
 
