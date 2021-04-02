@@ -7,10 +7,7 @@ imports:
   git-workspace: 'roles/stage2-user/files/.local/bin'
   hub|hub-completion: 'roles/stage2-user/files/.local/share/zsh/functions'
   hub|hub-executable: 'roles/stage2-user/files/.local/bin'
-  ijq: 'roles/stage2-user/files/.local/bin'
   jq: 'roles/stage2-user/files/.local/bin'
-  k9s: 'roles/stage2-user/files/.local/bin'
-  micro|micro-executable: 'roles/stage2-user/files/.local/bin'
   peco: 'roles/stage2-user/files/.local/bin'
 
 git module antigen:
@@ -22,12 +19,12 @@ git module antigen:
   rev: 8846aa902047992e86816cbd941acc86646bd83b
 
 curl module aws-vault:
-  url: https://github.com/99designs/aws-vault/releases/download/v4.6.2/aws-vault-linux-amd64
+  url: https://github.com/99designs/aws-vault/releases/download/v6.3.1/aws-vault-linux-amd64
   filename: aws-vault
-  sha1: 2220d76218f123fd3ceea1e8fb6ae8b986313aa0
+  sha1: 24ebfbaa3ac9aa5863b5da9a6be8ee0c3b7926a7
 
 curl module fantasque:
-  url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8-alpha/FantasqueSansMono-Normal.zip
+  url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
   unpack: zip
   pick:
     - FantasqueSansMono-Bold.ttf
@@ -39,10 +36,10 @@ curl module fantasque:
     TTF/FantasqueSansMono-BoldItalic.ttf: FantasqueSansMono-BoldItalic.ttf
     TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-Italic.ttf
     TTF/FantasqueSansMono-Regular.ttf: FantasqueSansMono-Regular.ttf
-  sha1: d7633c7ece4622a85146f2860cd45eda31735adb
+  sha1: 54cf092de3ad5785f80bc198809837096f16966b
 
 curl module fira:
-  url: https://github.com/tonsky/FiraCode/releases/download/1.204/FiraCode_1.204.zip
+  url: https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
   unpack: zip
   pick:
     - FiraCode-Bold.ttf
@@ -56,74 +53,29 @@ curl module fira:
     ttf/FiraCode-Medium.ttf: FiraCode-Medium.ttf
     ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
     ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
-  sha1: 591b6f9bb9800431355f052baef24bac336afd25
 
 # Git organisation tool
+  sha1: eeebfda13725e682cba35ee26a4fd7899ab2d5dc
 
 curl module git-workspace:
-  url: https://github.com/orf/git-workspace/releases/download/v0.5.0/git-workspace-Linux-x86_64.tar.gz
+  url: https://github.com/orf/git-workspace/releases/download/v0.8.0/git-workspace-Linux-x86_64.tar.gz
   unpack: tar
   pick: git-workspace
-  sha1: 188d31fcc4da899ec44a63afa8b50c5eec902d7f
-
-# Github command line tool
-
-curl module hub:
-  url: https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz
-  unpack: tar
-  sha1: 198d0bdda7302531c306198fe45944bcffdf5d51
-
-rule hub-completion:
-  pick: hub.zsh
-  copy: {'hub-linux-amd64-2.2.1/etc/hub.zsh_completion': 'hub.zsh'}
-
-rule hub-executable:
-  pick: hub
-  copy: {'hub-linux-amd64-2.2.1/hub': 'hub'}
-
-# Interactive JSON transformation tool.
-
-curl module ijq:
-  url: https://git.sr.ht/~gpanders/ijq/refs/v0.2.3/ijq-0.2.3-linux-x86_64.tar.gz
-  unpack: tar
-  copy:
-    ijq-0.2.3/ijq: ijq
-  pick:
-    - ijq
-  sha1: 7c06d6e826134674f1fd12e471f2da26de0b3dc7
+  sha1: cca492e2b8281900c4c6560a3961812aa4db635d
 
 # JSON transformation tool.
 
 curl module jq:
-  url: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+  url: https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
   filename: jq
-  sha1: d8e36831c3c94bb58be34dd544f44a6c6cb88568
-
-# Kubernetes TUI.
-
-curl module k9s:
-  url: https://github.com/derailed/k9s/releases/download/v0.21.2/k9s_Linux_x86_64.tar.gz
-  unpack: tar
-  pick: k9s
-  sha1: 7d12f60c3aae8daea5d2e96e77099d4f83c6e058
-
-# `micro` editor
-
-curl module micro:
-  url: https://github.com/zyedidia/micro/releases/download/v2.0.8/micro-2.0.8-linux64-static.tar.gz
-  unpack: tar
-  sha1: fa31d303f6f5cfab899e098ac5e81013b5667d4b
-
-rule micro-executable:
-  pick: micro
-  copy: {'micro-2.0.8/micro': 'micro'}
+  sha1: 056ba5d6bbc617c29d37158ce11fd5a443093949
 
 # ZSH history plugin
 
 curl module peco:
-  url: https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz
+  url: https://github.com/peco/peco/releases/download/v0.5.8/peco_linux_amd64.tar.gz
   unpack: tar
   pick: peco
   copy:
     peco_linux_amd64/peco: peco
-  sha1: f628f397616f71b20ad60d35909a19e5e2a30701
+  sha1: 9b321cfb05671026982dc7292dcd6ed8378c9988
