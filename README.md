@@ -6,11 +6,17 @@ Deploys dotfiles, configuration and packages to my machines using Ansible.
 Usage
 -----
 
-Install Ansible first (and some other immediately useful packages).
+Install git, ansible, and the `keyring` Python module.
 
 ```bash
 sudo apt update
-sudo apt install ansible git tilix curl
+sudo apt install ansible git
+```
+
+Add the password Ansible will use for `sudo` to the keyring:
+
+```
+keyring set ansible_sudo_pass $USER
 ```
 
 Clone this repository, then create an inventory file and run the
@@ -19,7 +25,6 @@ Clone this repository, then create an inventory file and run the
 ```bash
 git clone https://github.com/borntyping/deployment.git
 cd deployment
-echo "ansible_sudo_pass=<password>" > "host_vars/localhost.yml"
 ./reconfigure
 ```
 
