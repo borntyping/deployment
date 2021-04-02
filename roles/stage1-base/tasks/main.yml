@@ -39,13 +39,6 @@
         - bin
         - util
 
-    - name: configure inotify
-      copy:
-        src: 60-inotify.conf
-        dest: /etc/sysctl.d/60-inotify.conf
-      notify: sysctl
-      become: 'yes'
-
     - name: install docker
       apt:
         pkg:
