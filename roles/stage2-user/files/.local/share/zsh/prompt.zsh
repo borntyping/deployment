@@ -56,14 +56,6 @@ function prompt_python_info() {
 }
 
 # Display the current kubectl context
-function prompt_telepresence_info() {
-  prompt_telepresence=""
-  if [[ -n "$TELEPRESENCE_POD" ]]; then
-    prompt_telepresence="%{${fg[red]}%}telepresence%{${reset_color}%} "
-  fi
-}
-
-# Display the current kubectl context
 function prompt_kubectl_info() {
   prompt_kubectl=""
 
@@ -110,7 +102,7 @@ function prompt_preexec_title() {
   esac
 }
 
-export precmd_functions=($precmd_functions prompt_precmd_title vcs_info prompt_kubectl_info prompt_python_info prompt_telepresence_info)
+export precmd_functions=($precmd_functions prompt_precmd_title vcs_info prompt_kubectl_info prompt_python_info)
 export preexec_functions=($preexec_functions prompt_preexec_title)
 
 # Assemble the prompt
