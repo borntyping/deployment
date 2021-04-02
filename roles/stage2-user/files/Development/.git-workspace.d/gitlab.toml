@@ -1,6 +1,6 @@
-[[provider]]
-provider = "gitlab"
-name = "borntyping"
-url = "https://gitlab.com"
-path = "/home/sam/Development/gitlab.com"
-env_var = "GITLAB_TOKEN"
+#[[provider]]
+#provider = "gitlab"
+#name = "borntyping"
+#url = "https://gitlab.com"
+#path = "/home/sam/Development/gitlab.com"
+#env_var = "GITLAB_TOKEN"
