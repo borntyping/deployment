@@ -26,19 +26,17 @@
         - git
         - git-workspace
 
-    - name: configure git-workspace
+    - name: create git-workspace fragments
       copy:
-        src: 'localhost/Development/'
-        dest: '{{ lookup("env", "HOME") }}/Development'
+        src: 'Development/.git-workspace.d/'
+        dest: '{{ lookup("env", "HOME") }}/Development/.git-workspace.d/'
         mode: '0644'
       tags:
-        - git
         - git-workspace
 
-    - name: git-workspace update
-      command: git-workspace update
-      args:
-        creates: '{{ lookup("env", "HOME") }}/Development/github.com/borntyping/deployment'
+    - name: assemble git-workspace config
+      assemble:
+        src: '{{ lookup("env", "HOME") }}/Development/.git-workspace.d/'
+        dest: '{{ lookup("env", "HOME") }}/Development/workspace.toml'
       tags:
-        - git
         - git-workspace
