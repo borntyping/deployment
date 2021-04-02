@@ -199,11 +199,9 @@ fi
 #
 
 # ZSH prompt
-# shellcheck source=local/share/zsh/prompt.zsh
 source "$HOME/.local/share/zsh/prompt.zsh"
 
 # Local zsh config
-# shellcheck source=/home/sam/.local/share/zsh/prompt.zsh
 [[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
 
 # Tilix VTE patch
