@@ -60,13 +60,6 @@ curl module fira:
 
 # Git organisation tool
 
-git module git-get:
-  url: https://github.com/pietvanzoen/git-get.git
-  pick: git-get
-  rev: dd3ee8781ce1a7333887a79c6f8a6231f49ed548
-
-# Git organisation tool
-
 curl module git-workspace:
   url: https://github.com/orf/git-workspace/releases/download/v0.5.0/git-workspace-Linux-x86_64.tar.gz
   unpack: tar
