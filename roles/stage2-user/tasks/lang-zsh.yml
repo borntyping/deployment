@@ -18,10 +18,13 @@
       tags:
         - zshrc
 
-    - name: create zsh local configuration directory
+    - name: create zsh directories
       file:
-        name: '{{ lookup("env", "HOME") }}/.config/zsh'
+        name: '{{ lookup("env", "HOME") }}/{{ item }}'
         state: directory
+      loop:
+        - .cache/zsh
+        - .config/zsh
 
     - name: touch zsh local configuration directory
       copy:
