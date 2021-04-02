@@ -92,8 +92,8 @@ export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
-export GIT_PATH="${HOME}/Development" # git-get
 export GIT_WORKSPACE="${HOME}/Development" # git-workspace
+export GITGET_ROOT="${HOME}/Development" # grdl/git-get
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"

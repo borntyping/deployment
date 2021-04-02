@@ -63,3 +63,12 @@
       become: 'yes'
 
     - meta: flush_handlers
+
+    - name: install git-get
+      ansible.builtin.apt:
+        deb: https://github.com/grdl/git-get/releases/download/v0.4.0/git-get_0.4.0_linux_amd64.deb
+        state: present
+      become: yes
+      tags:
+       - git
+       - git-get
