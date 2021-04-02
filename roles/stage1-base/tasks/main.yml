@@ -26,6 +26,7 @@
           - libxml2-dev
           - libxslt1-dev
           - libyaml-dev
+          - micro
           - nano
           - plantuml
           - python3
