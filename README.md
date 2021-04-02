@@ -6,22 +6,15 @@ Deploys dotfiles, configuration and packages to my machines using Ansible.
 Usage
 -----
 
-Download the repository, create an inventory file, and run the `./reconfigure`
-script.
-
-### Installing ansible
-
-Install the latest ansible release with:
+Install Ansible first (and some other immediately useful packages).
 
 ```bash
-sudo apt-add-repository --yes ppa:ansible/ansible
 sudo apt update
 sudo apt install ansible git tilix curl
 ```
 
-### Run playbook
-
-Clone this repository:
+Clone this repository, then create an inventory file and run the
+`./reconfigure` script.
 
 ```bash
 git clone https://github.com/borntyping/deployment.git
@@ -30,7 +23,7 @@ echo "ansible_sudo_pass=<password>" > "host_vars/localhost.yml"
 ./reconfigure
 ```
 
-### Add missing keys
+You may need to add some missing gpg keys.
 
 ```bash
 curl -L https://packagecloud.io/github/git-lfs/gpgkey | sudo apt-key add -
