@@ -21,6 +21,7 @@
           - git-lfs
           - golang
           - htop
+          - hub
           - letsencrypt
           - libgit2-dev
           - libxml2-dev
