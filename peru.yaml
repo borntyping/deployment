@@ -5,8 +5,6 @@ imports:
   fantasque: 'roles/stage3-gui/files/fonts'
   fira: 'roles/stage3-gui/files/fonts'
   git-workspace: 'roles/stage2-user/files/.local/bin'
-  hub|hub-completion: 'roles/stage2-user/files/.local/share/zsh/functions'
-  hub|hub-executable: 'roles/stage2-user/files/.local/bin'
   jq: 'roles/stage2-user/files/.local/bin'
   peco: 'roles/stage2-user/files/.local/bin'
 
