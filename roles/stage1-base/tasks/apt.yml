@@ -2,26 +2,23 @@
 - tags: apt
   block:
     - name: configure apt repository keys
-      apt_key:
+      ansible.builtin.apt_key:
         id: '{{ item }}'
         keyserver: 'hkp://keyserver.ubuntu.com:80'
       register: apt_repositories_key
-      become: 'yes'
       with_list:
         - '0EBFCD88'  # https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
     - name: configure apt repositories
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: '{{ item }}'
         state: present
       register: apt_repositories
-      become: 'yes'
       with_items:
         - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu groovy stable'
         - 'ppa:git-core/ppa'
 
     - name: update apt repositories
-      apt:
+      ansible.builtin.apt:
         update_cache: 'yes'
       when: apt_repositories.changed or apt_repositories_key.changed
-      become: 'yes'
