@@ -32,4 +32,9 @@
         type: ed25519
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_gitlab'
 
+    - name: generate ssh key for generic ssh access
+      openssh_keypair:
+        type: ed25519
+        path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_generic'
+
     - meta: flush_handlers
