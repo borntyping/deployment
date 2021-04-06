@@ -1,5 +1,6 @@
 ---
-- tags:
+- become: true
+  tags:
     - stage1
     - stage1-base
   block:
@@ -7,7 +8,7 @@
       tags: apt
 
     - name: install packages
-      apt:
+      ansible.builtin.apt:
         state: latest
         pkg:
           - ack
@@ -36,34 +37,28 @@
           - shellcheck
           - tree
           - zsh
-      become: 'yes'
       tags:
         - bin
         - util
 
     - name: install docker
-      apt:
+      ansible.builtin.apt:
         pkg:
           - docker-ce
           - docker-ce-cli
           - containerd.io
         state: latest
-      become: 'yes'
 
     - name: create docker group
-      group:
+      ansible.builtin.group:
         name: docker
         state: present
-      become: 'yes'
 
     - name: add current user to docker group
-      user:
+      ansible.builtin.user:
         name: '{{ lookup("env", "USER") }}'
         groups: docker
         append: true
-      become: 'yes'
-
-    - meta: flush_handlers
 
     - name: install git-get
       ansible.builtin.apt:
