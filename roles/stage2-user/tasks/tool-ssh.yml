@@ -42,3 +42,4 @@
       ansible.builtin.assemble:
         src: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.ssh/config'
+        delimiter: '\n'
