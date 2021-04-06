@@ -38,4 +38,7 @@
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_{{ item }}'
       with_items: '{{ ssh_key_names }}'
 
-    - meta: flush_handlers
+    - name: assemble ssh config
+      ansible.builtin.assemble:
+        src: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
+        dest: '{{ lookup("env", "HOME") }}/.ssh/config'

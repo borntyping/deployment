@@ -71,7 +71,6 @@ alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls --color=auto'
 alias please='sudo'
-alias reconfigure-ssh='reconfigure -t ssh --force-handlers'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 #
