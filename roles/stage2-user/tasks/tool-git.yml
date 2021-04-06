@@ -35,7 +35,7 @@
         - git-workspace
 
     - name: assemble git-workspace config
-      assemble:
+      ansible.builtin.assemble:
         src: '{{ lookup("env", "HOME") }}/Development/.git-workspace.d/'
         dest: '{{ lookup("env", "HOME") }}/Development/workspace.toml'
       tags:
