@@ -41,6 +41,15 @@
         - bin
         - util
 
+    - name: install php
+      ansible.builtin.apt:
+        pkg:
+          - php-cli
+          - php-xsl
+          - php-mbstring
+          - php-curl
+        state: latest
+
     - name: install docker
       ansible.builtin.apt:
         pkg:
