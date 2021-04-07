@@ -80,6 +80,7 @@ alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 export GIT_WORKSPACE="${HOME}/Development/git-workspace" # orf/git-workspace
 export GITGET_ROOT="${HOME}/Development/git-get" # grdl/git-get
 
+export source="${GITGET_ROOT}"
 export github="${GIT_WORKSPACE}/github.com"
 export gitlab="${GIT_WORKSPACE}/gitlab.com"
 
