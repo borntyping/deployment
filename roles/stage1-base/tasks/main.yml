@@ -14,6 +14,7 @@
           - ack
           - ansible
           - asciinema
+          - bat
           - cargo
           - colordiff
           - curl
