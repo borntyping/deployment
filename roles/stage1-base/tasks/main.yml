@@ -26,6 +26,7 @@
           - hub
           - letsencrypt
           - libgit2-dev
+          - libssl-dev
           - libxml2-dev
           - libxslt1-dev
           - libyaml-dev
@@ -41,6 +42,7 @@
           - zsh
       tags:
         - bin
+        - lib
         - python
         - rust
         - util
