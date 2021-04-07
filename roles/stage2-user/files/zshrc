@@ -77,11 +77,13 @@ alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 # Named directories
 #
 
-export github="${HOME}/Development/github.com"
-export gitlab="${HOME}/Development/gitlab.com"
+export GIT_WORKSPACE="${HOME}/Development/git-workspace" # orf/git-workspace
+export GITGET_ROOT="${HOME}/Development/git-get" # grdl/git-get
+
+export github="${GIT_WORKSPACE}/github.com"
+export gitlab="${GIT_WORKSPACE}/gitlab.com"
 
 export borntyping="${github}/borntyping"
-export sandbox="${github}/borntyping-sandbox"
 
 #
 # Environment variables
@@ -91,8 +93,6 @@ export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
-export GIT_WORKSPACE="${HOME}/Development" # git-workspace
-export GITGET_ROOT="${HOME}/Development" # grdl/git-get
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
