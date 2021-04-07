@@ -44,11 +44,14 @@
     - name: install php
       ansible.builtin.apt:
         pkg:
+          - composer
           - php-cli
           - php-xsl
           - php-mbstring
           - php-curl
         state: latest
+      tags:
+        - php
 
     - name: install docker
       ansible.builtin.apt:
