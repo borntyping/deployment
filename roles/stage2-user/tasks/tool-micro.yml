@@ -1,12 +1,12 @@
 ---
-- tags: micro
+- tags: 'micro'
   block:
-    - name: create micro configuration directory
-      file:
+    - name: 'create micro configuration directory'
+      ansible.builtin.file:
         name: '{{ lookup("env", "HOME") }}/.config/micro'
-        state: directory
+        state: 'directory'
 
-    - name: create micro configuration
-      copy:
+    - name: 'create micro configuration'
+      ansible.builtin.copy:
         src: '.config/micro/settings.json'
         dest: '{{ lookup("env", "HOME") }}/.config/micro/settings.json'

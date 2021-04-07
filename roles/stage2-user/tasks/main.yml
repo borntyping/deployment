@@ -1,54 +1,42 @@
 ---
 - tags:
-    - stage2
-    - stage2-user
+    - 'stage2'
+    - 'stage2-user'
   block:
-    - name: install python packages
+    - name: 'install python packages'
       pip:
         name:
-          - black
-          - flake8
-          - httpie
-          - mypy
-          - peru
-          - pip
-          - pipenv
-          - poetry
-          - pytest
-          - semgrep
-        state: latest
-        executable: pip3
-        extra_args: --user
+          - 'peru'
+        state: 'latest'
+        executable: 'pip3'
+        extra_args: '--user'
       tags:
-        - python
-        - bin
+        - 'python'
+        - 'bin'
 
-    - name: configure dotfiles
+    - name: 'copy dotfiles'
       copy:
         src: '{{ item }}'
         dest: '{{ lookup("env", "HOME") }}/.{{ item }}'
       with_items:
-        - ackrc
-        - htoprc
-        - inputrc
-        - multitailrc
+        - 'ackrc'
+        - 'htoprc'
+        - 'inputrc'
+        - 'multitailrc'
       tags:
-        - dotfiles
+        - 'dotfiles'
 
-    - name: install executables and scripts
+    - name: 'install executables'
       copy:
         src: '.local/bin/'
         dest: '{{ lookup("env", "HOME") }}/.local/bin'
         mode: '0755'
       tags:
-        - bin
-        - bindir
-        - ansible
-        - micro
+        - 'bin'
+        - 'ansible'
+        - 'micro'
 
-    - import_tasks: lang-zsh.yml
-    - import_tasks: tool-git.yml
-    - import_tasks: tool-micro.yml
-    - import_tasks: tool-ssh.yml
-
-    - meta: flush_handlers
+    - import_tasks: 'lang-zsh.yml'
+    - import_tasks: 'tool-git.yml'
+    - import_tasks: 'tool-micro.yml'
+    - import_tasks: 'tool-ssh.yml'

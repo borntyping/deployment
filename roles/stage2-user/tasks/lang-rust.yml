@@ -1,7 +1,7 @@
 ---
 - tags:
-    - cargo
-    - rust
+    - 'cargo'
+    - 'rust'
   block:
     - name: 'install cargo packages'
-      command: 'cargo install --force ripgrep exa bat sd'
+      ansible.builtin.command: 'cargo install --force ripgrep exa bat sd'

@@ -9,8 +9,7 @@ Usage
 Install git, ansible, and the `keyring` Python module.
 
 ```bash
-sudo apt update
-sudo apt install ansible git
+sudo dnf install ansible git python-keyring tilix
 ```
 
 Add the password Ansible will use for `sudo` to the keyring:

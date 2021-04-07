@@ -1,25 +1,22 @@
 ---
-#
-# Install software only useful on a stage3-gui or non-headless machine.
-#
 - tags:
-    - stage3
-    - stage3-gui
+    - 'stage3'
+    - 'stage3-gui'
   block:
-    - name: install packages
-      apt:
-        pkg:
-          - firefox
-          - git-cola
-          - gitg
-          - meld
-          - tilix
-        state: latest
+    - name: 'install packages'
+      ansible.builtin.dnf:
+        name:
+          - 'firefox'
+          - 'git-cola'
+          - 'gitg'
+          - 'meld'
+          - 'tilix'
+        state: 'latest'
       become: 'yes'
 
-    - name: install fonts
+    - name: 'install fonts'
       copy:
         src: 'fonts/'
         dest: '{{ lookup("env", "HOME") }}/.fonts'
       tags:
-        - fonts
+        - 'fonts'

@@ -1,47 +1,47 @@
 ---
 - tags:
-    - git
+    - 'git'
   block:
-    - name: copy git config directory
-      copy:
+    - name: 'copy git config directory'
+      ansible.builtin.copy:
         src: '.config/git/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/'
         mode: '755'
       tags:
-        - gitconfig
-        - dotfiles
+        - 'gitconfig'
+        - 'dotfiles'
 
-    - name: create git config file
-      template:
+    - name: 'create git config file'
+      ansible.builtin.template:
         src: '.config/git/config.j2'
         dest: '{{ lookup("env", "HOME") }}/.config/git/config'
       tags:
-        - gitconfig
-        - dotfiles
+        - 'gitconfig'
+        - 'dotfiles'
 
-    - name: create git source code directories
-      file:
+    - name: 'create git source code directories'
+      ansible.builtin.file:
         name: '{{ lookup("env", "HOME") }}/{{ item }}'
-        state: directory
+        state: 'directory'
       with_items:
         - 'Development/git-get'
         - 'Development/git-workspace'
       tags:
-        - git-get
-        - git-workspace
+        - 'git-get'
+        - 'git-workspace'
 
-    - name: create git-workspace fragments
-      copy:
+    - name: 'create git-workspace fragments'
+      ansible.builtin.copy:
         src: '.git-workspace.d/'
         dest: '{{ lookup("env", "HOME") }}/Development/git-workspace/.git-workspace.d/'
         mode: '0644'
       tags:
-        - git-workspace
+        - 'git-workspace'
 
-    - name: assemble git-workspace config
+    - name: 'assemble git-workspace config'
       ansible.builtin.assemble:
         src: '{{ lookup("env", "HOME") }}/Development/git-workspace/.git-workspace.d/'
         dest: '{{ lookup("env", "HOME") }}/Development/git-workspace/workspace.toml'
         delimiter: '\n'
       tags:
-        - git-workspace
+        - 'git-workspace'

@@ -1,39 +1,39 @@
 ---
 - tags:
-    - dotfiles
-    - shell
-    - zsh
+    - 'dotfiles'
+    - 'shell'
+    - 'zsh'
   block:
-    - name: copy zsh libraries
-      copy:
+    - name: 'copy zsh libraries'
+      ansible.builtin.copy:
         src: '.local/share/zsh/'
         dest: '{{ lookup("env", "HOME") }}/.local/share/zsh/'
       tags:
-        - zshrc
+        - 'zshrc'
 
-    - name: copy zsh config
-      copy:
+    - name: 'copy zsh config'
+      ansible.builtin.copy:
         src: 'zshrc'
         dest: '{{ lookup("env", "HOME") }}/.zshrc'
       tags:
-        - zshrc
+        - 'zshrc'
 
-    - name: create zsh directories
-      file:
+    - name: 'create zsh directories'
+      ansible.builtin.file:
         name: '{{ lookup("env", "HOME") }}/{{ item }}'
-        state: directory
+        state: 'directory'
       loop:
-        - .cache/zsh
-        - .config/zsh
+        - '.cache/zsh'
+        - '.config/zsh'
 
-    - name: touch zsh local configuration directory
-      copy:
+    - name: 'touch zsh local configuration directory'
+      ansible.builtin.copy:
         src: '/dev/null'
         dest: '{{ lookup("env", "HOME") }}/.config/zsh/zshrc'
         force: false
 
-    - name: set shell to zsh
-      user:
+    - name: 'set shell to zsh'
+      ansible.builtin.user:
         name: '{{ lookup("env", "USER") }}'
         shell: '/bin/zsh'
       become: 'yes'

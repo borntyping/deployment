@@ -1,44 +1,43 @@
 ---
 - tags:
-    - ssh
+    - 'ssh'
   block:
-    - name: create ssh directory
-      file:
+    - name: 'create ssh directory'
+      ansible.builtin.file:
         name: '{{ lookup("env", "HOME") }}/.ssh'
-        state: directory
+        state: 'directory'
 
-    - name: create ssh sub-directories
-      file:
+    - name: 'create ssh sub-directories'
+      ansible.builtin.file:
         name: '{{ lookup("env", "HOME") }}/.ssh/{{ item }}'
-        state: directory
+        state: 'directory'
       with_items:
-        - config.d
-        - hosts
-        - keys
+        - 'config.d'
+        - 'hosts'
+        - 'keys'
 
-    - name: create ssh fragments
-      copy:
+    - name: 'create ssh fragments'
+      ansible.builtin.copy:
         src: '.ssh/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
-      notify: ssh
 
-    - name: generate ssh key for github
-      openssh_keypair:
-        type: ed25519
+    - name: 'generate ssh key for github'
+      ansible.builtin.openssh_keypair:
+        type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_github'
 
-    - name: generate ssh key for gitlab
-      openssh_keypair:
-        type: ed25519
+    - name: 'generate ssh key for gitlab'
+      ansible.builtin.openssh_keypair:
+        type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_gitlab'
 
-    - name: generate ssh key for others
-      openssh_keypair:
-        type: ed25519
+    - name: 'generate ssh key for others'
+      ansible.builtin.openssh_keypair:
+        type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_{{ item }}'
       with_items: '{{ ssh_key_names }}'
 
-    - name: assemble ssh config
+    - name: 'assemble ssh config'
       ansible.builtin.assemble:
         src: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.ssh/config'
