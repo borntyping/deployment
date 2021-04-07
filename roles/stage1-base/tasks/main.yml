@@ -18,6 +18,7 @@
           - 'curl'
           - 'direnv'
           - 'fd-find'
+          - 'fzf'
           - 'git'
           - 'git-lfs'
           - 'golang'
