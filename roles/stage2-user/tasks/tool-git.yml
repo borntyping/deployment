@@ -1,6 +1,5 @@
 ---
 - tags:
-    - dotfiles
     - git
   block:
     - name: copy git config directory
@@ -8,11 +7,17 @@
         src: '.config/git/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/'
         mode: '755'
+      tags:
+        - gitconfig
+        - dotfiles
 
     - name: create git config file
       template:
         src: '.config/git/config.j2'
         dest: '{{ lookup("env", "HOME") }}/.config/git/config'
+      tags:
+        - gitconfig
+        - dotfiles
 
     - name: create git source code directories
       file:
