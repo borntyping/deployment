@@ -58,6 +58,7 @@ bindkey '^e' edit-command-line
 # Aliases
 #
 
+alias bat='batcat'
 alias cola='git-cola &'
 alias d='docker run --rm -it $(docker build -q .)'
 alias gc='git commit'
@@ -97,7 +98,7 @@ export FZF_DEFAULT_OPTS="--no-height --no-reverse"
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
-export PAGER="bat"
+export PAGER="batcat"
 export PATH="${HOME}/.bin:${HOME}/.local/bin:${PATH}"
 export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"
 export PIPENV_IGNORE_VIRTUALENVS=1
