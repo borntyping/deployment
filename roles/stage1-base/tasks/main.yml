@@ -1,91 +1,64 @@
 ---
 - become: true
   tags:
-    - stage1
-    - stage1-base
+    - 'stage1'
+    - 'stage1-base'
   block:
-    - import_tasks: apt.yml
-      tags: apt
-
-    - name: install packages
-      ansible.builtin.apt:
-        state: latest
+    - name: 'install packages'
+      ansible.builtin.dnf:
+        state: 'latest'
         pkg:
-          - ack
-          - ansible
-          - asciinema
-          - bat
-          - cargo
-          - colordiff
-          - curl
-          - direnv
-          - fd-find
-          - git
-          - git-flow
-          - git-lfs
-          - golang
-          - htop
-          - hub
-          - letsencrypt
-          - libgit2-dev
-          - libssl-dev
-          - libxml2-dev
-          - libxslt1-dev
-          - libyaml-dev
-          - micro
-          - nano
-          - plantuml
-          - python3
-          - python3-dev
-          - python3-pip
-          - rustc
-          - shellcheck
-          - tree
-          - zsh
+          - 'ack'
+          - 'ansible'
+          - 'asciinema'
+          - 'bat'
+          - 'cargo'
+          - 'colordiff'
+          - 'composer'
+          - 'curl'
+          - 'direnv'
+          - 'fd-find'
+          - 'git'
+          - 'git-lfs'
+          - 'golang'
+          - 'htop'
+          - 'httpie'
+          - 'hub'
+          - 'micro'
+          - 'nano'
+          - 'openssl-devel'
+          - 'php-cli'
+          - 'php-curl'
+          - 'php-mbstring'
+          - 'php-xsl'
+          - 'pipenv'
+          - 'plantuml'
+          - 'podman-docker'
+          - 'python3'
+          - 'python3-black'
+          - 'python3-devel'
+          - 'python3-flake8'
+          - 'python3-mypy'
+          - 'python3-pip'
+          - 'python3-poetry'
+          - 'python3-pytest'
+          - 'rustc'
+          - 'tree'
+          - 'zsh'
       tags:
-        - bin
-        - git
-        - lib
-        - python
-        - rust
-        - util
+        - 'bin'
+        - 'git'
+        - 'lib'
+        - 'php'
+        - 'python'
+        - 'rust'
+        - 'docker'
 
-    - name: install php
-      ansible.builtin.apt:
-        pkg:
-          - composer
-          - php-cli
-          - php-xsl
-          - php-mbstring
-          - php-curl
-        state: latest
+    - name: 'install git-get'
+      ansible.builtin.dnf:
+        disable_gpg_check: true
+        name: 'https://github.com/grdl/git-get/releases/download/v0.4.0/git-get_0.4.0_linux_amd64.rpm'
+        state: 'present'
       tags:
-        - php
-
-    - name: install docker
-      ansible.builtin.apt:
-        pkg:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-        state: latest
-
-    - name: create docker group
-      ansible.builtin.group:
-        name: docker
-        state: present
-
-    - name: add current user to docker group
-      ansible.builtin.user:
-        name: '{{ lookup("env", "USER") }}'
-        groups: docker
-        append: true
-
-    - name: install git-get
-      ansible.builtin.apt:
-        deb: https://github.com/grdl/git-get/releases/download/v0.4.0/git-get_0.4.0_linux_amd64.deb
-        state: present
-      become: yes
-      tags:
-       - git
-       - git-get
+       - 'git'
+       - 'git-get'
