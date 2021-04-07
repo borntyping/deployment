@@ -41,10 +41,14 @@ unsetopt MENU_COMPLETE           # Don't autoselect completions.
 #
 
 # Shift-Tab to go back in menus.
-# Ensure Home/End work as expected.
-bindkey '^[[H' beginning-of-line # Home key returns to the start of the line.
-bindkey '^[[F' end-of-line
 bindkey '^[[Z' reverse-menu-complete
+
+# Ensure Home/End work as expected.
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
+# Ensure Delete works as expected.
+bindkey "^[[3" delete-char
 
 # Disable `ctrl-v` so it doesn't mix with `ctrl-shift-v`.
 bindkey -r "^V"

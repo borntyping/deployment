@@ -20,3 +20,9 @@
         dest: '{{ lookup("env", "HOME") }}/.fonts'
       tags:
         - 'fonts'
+
+#    - name: 'configure gnome alt-tab'
+#      community.general.dconf:
+#        key: '/org/gnome/shell/app-switcher/current-workspace-only'
+#        value: 'true'
+#        state: 'present'
