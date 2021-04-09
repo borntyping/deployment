@@ -128,7 +128,7 @@ export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v fd)" ]] && alias find='fd'
 [[ -x "$(command -v kubectl)" ]] && "$HOME/.local/share/zsh/kubectl.zsh"
-[[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
+[[ -x "$(command -v rg)" ]] && alias grep='rg'
 
 # Load custom prompt
 source "$HOME/.local/share/zsh/prompt.zsh"
