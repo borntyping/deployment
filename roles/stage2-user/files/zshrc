@@ -1,66 +1,46 @@
 #!/bin/zsh
 # shellcheck disable=SC2034 disable=SC2206
 
-#
-# ZSH options
-#
+HISTFILE="$HOME/.zhistory"              # Save history.
+HISTSIZE=7500                           # Lines of history to keep in memory.
+SAVEHIST=5000                           # Lines of history to save to a file.
 
-SAVEHIST=5000                    # Lines of history to save to a file.
-HISTSIZE=7500                    # Lines of history to keep in memory.
-HISTFILE="$HOME/.zhistory"       # Save history.
+setopt ALWAYS_TO_END                    # Move cursor after completion.
+setopt APPEND_HISTORY                   # Append to $HISTFILE, not replace.
+setopt AUTO_LIST                        # List choices on ambiguous completion.
+setopt AUTO_MENU                        # Show completion menu on tab press.
+setopt AUTO_NAME_DIRS                   # Allows 'cd ~borntyping' (see below).
+setopt AUTO_PARAM_KEYS                  # Intelligent handling of characters
+setopt AUTO_PARAM_SLASH                 #   after a completion.
+setopt AUTO_REMOVE_SLASH                # Remove trailing slash when needed.
+setopt COMPLETE_ALIASES                 # Allow autocompletion for aliases.
+setopt COMPLETE_ALIASES                 # Tab complete aliases.
+setopt COMPLETE_IN_WORD                 # Allow completion from middle of word
+setopt EXTENDED_HISTORY                 # Record additional information.
+setopt HIST_EXPIRE_DUPS_FIRST           # Remove duplicate entries first.
+setopt HIST_FIND_NO_DUPS                # Never find duplicates when searching.
+setopt HIST_IGNORE_ALL_DUPS             # Remove old duplicate entries first.
+setopt HIST_IGNORE_DUPS                 # Ignore adjacent repeated entries.
+setopt HIST_IGNORE_SPACE                # Skip if the line starts with space.
+setopt HIST_SAVE_NO_DUPS                # Never save duplicate commands.
+setopt HIST_VERIFY                      # Don't immediately run history commands.
+setopt INC_APPEND_HISTORY               # Append to $HISTFILE while running.
+setopt INTERACTIVE_COMMENTS             # Allow comments in interactive mode.
+setopt LIST_PACKED                      # Smallest completion menu.
+setopt RM_STAR_WAIT                     # Force the user to wait before 'rm *'.
+setopt SHARE_HISTORY                    # Share history between ZSH instances.
+unsetopt FLOW_CONTROL                   # Disable start/stop characters.
+unsetopt MENU_COMPLETE                  # Don't autoselect completions.
 
-setopt ALWAYS_TO_END             # Move cursor after completion.
-setopt APPEND_HISTORY            # Append to $HISTFILE, not replace.
-setopt AUTO_LIST                 # List choices on ambiguous completion.
-setopt AUTO_MENU                 # Show completion menu on tab press.
-setopt AUTO_NAME_DIRS            # Allows 'cd ~borntyping' (see below).
-setopt AUTO_PARAM_KEYS           # Intelligent handling of characters
-setopt AUTO_PARAM_SLASH          #   after a completion.
-setopt AUTO_REMOVE_SLASH         # Remove trailing slash when needed.
-setopt COMPLETE_ALIASES          # Allow autocompletion for aliases.
-setopt COMPLETE_ALIASES          # Tab complete aliases.
-setopt COMPLETE_IN_WORD          # Allow completion from middle of word
-setopt EXTENDED_HISTORY          # Record additional information.
-setopt HIST_EXPIRE_DUPS_FIRST    # Remove duplicate entries first.
-setopt HIST_FIND_NO_DUPS         # Never find duplicates when searching.
-setopt HIST_IGNORE_ALL_DUPS      # Remove old duplicate entries first.
-setopt HIST_IGNORE_DUPS          # Ignore adjacent repeated entries.
-setopt HIST_IGNORE_SPACE         # Skip if the line starts with space.
-setopt HIST_SAVE_NO_DUPS         # Never save duplicate commands.
-setopt HIST_VERIFY               # Don't immediately run history commands.
-setopt INC_APPEND_HISTORY        # Append to $HISTFILE while running.
-setopt INTERACTIVE_COMMENTS      # Allow comments in interactive mode.
-setopt LIST_PACKED               # Smallest completion menu.
-setopt RM_STAR_WAIT              # Force the user to wait before 'rm *'.
-setopt SHARE_HISTORY             # Share history between ZSH instances.
-unsetopt FLOW_CONTROL            # Disable start/stop characters.
-unsetopt MENU_COMPLETE           # Don't autoselect completions.
-
-#
-# Keybindings
-#
-
-# Shift-Tab to go back in menus.
-bindkey '^[[Z' reverse-menu-complete
-
-# Ensure Home/End work as expected.
-bindkey '^[[H' beginning-of-line
-bindkey '^[[F' end-of-line
-
-# Ensure Delete works as expected.
-bindkey "\e[3~" delete-char
-
-# Disable `ctrl-v` so it doesn't mix with `ctrl-shift-v`.
-bindkey -r "^V"
-
-# Edit current line (Ctrl+e).
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^e' edit-command-line
 
-#
-# Aliases
-#
+bindkey "\e[3~" delete-char             # Ensure Delete works as expected.
+bindkey '^[[F' end-of-line              # Ensure End works as expected.
+bindkey '^[[H' beginning-of-line        # Ensure Home works as expected.
+bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus.
+bindkey '^e' edit-command-line          # Edit current line (Ctrl+e).
+bindkey -r "^V"                         # Disable `ctrl-v` so it doesn't mix with `ctrl-shift-v`.
 
 alias cola='git-cola &'
 alias d='docker run --rm -it $(docker build -q .)'
@@ -70,34 +50,17 @@ alias gd='git diff'
 alias grep='grep --color=auto'
 alias gs='git status'
 alias httpie='http'
-alias k='kubectl'
 alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls --color=auto'
-alias please='sudo'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
-
-#
-# Named directories
-#
-
-export GIT_WORKSPACE="${HOME}/Development/git-workspace" # orf/git-workspace
-export GITGET_ROOT="${HOME}/Development/git-get" # grdl/git-get
-
-export source="${GITGET_ROOT}"
-export github="${GIT_WORKSPACE}/github.com"
-export gitlab="${GIT_WORKSPACE}/gitlab.com"
-
-export borntyping="${github}/borntyping"
-
-#
-# Environment variables
-#
 
 export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
+export GIT_WORKSPACE="${HOME}/Development/git-workspace" # orf/git-workspace
+export GITGET_ROOT="${HOME}/Development/git-get" # grdl/git-get
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
@@ -113,12 +76,15 @@ export ZSH_PECO_HISTORY_DEDUP=1
 export ZSHZ_DATA="${HOME}/.cache/zsh/z"
 export ZSHZ_NO_RESOLVE_SYMLINKS=1
 
-#
+# 2.5.7: Named directories
+# http://zsh.sourceforge.net/Guide/zshguide02.html
+export borntyping="${GIT_WORKSPACE}/github.com/borntyping"
+export github="${GIT_WORKSPACE}/github.com"
+export gitlab="${GIT_WORKSPACE}/gitlab.com"
+export source="${GITGET_ROOT}"
+
 # ZSH packages using antigen.
 # https://github.com/zsh-users/antigen
-#
-
-# shellcheck source=local/share/zsh/antigen.zsh
 source "$HOME/.local/share/zsh/antigen.zsh"
 antigen bundles <<EOBUNDLES
   ael-code/zsh-colored-man-pages
@@ -128,11 +94,12 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 antigen apply
 
-#
-# Completion rules
-#
+# Direnv
+# https://direnv.net/
+eval "$(direnv hook zsh)"
 
-fpath=("$HOME/.local/share/zsh/functions" $fpath)
+# Completion rules
+# http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 autoload -Uz compinit
 zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/completion/"
 zstyle ':completion::complete:*' use-cache on
@@ -142,11 +109,8 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 compinit -C
 
-#
-# ZSH syntax highlighting plugin (loaded by antigen).
+# ZSH syntax highlighting plugin (loaded by antigen)
 # https://github.com/zsh-users/zsh-syntax-highlighting
-#
-
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
 export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
@@ -156,60 +120,15 @@ export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
 export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
 export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 
-#
-# fzf keybindings
-# https://github.com/junegunn/fzf
-#
-
-[[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
-
-#
-# direnv - directory specific environment configuration
-# https://direnv.net/
-#
-
-eval "$(direnv hook zsh)"
-
-#
-# Kubernetes completion
-# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
-#
-
-if [[ -x "$(command -v kubectl)" ]]; then
-  # shellcheck source=/dev/null
-  source <(kubectl completion zsh)
-
-  function ky() {
-    kubectl --output="yaml" "$@" | bat --language="yaml"
-  }
-  function kj() {
-    kubectl --output="json" "$@"
-  }
-
-  compdef k="kubectl"
-  compdef kj="kubectl"
-  compdef ky="kubectl"
-fi
-
-# https://github.com/burntsushi/ripgrep
-[[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
-# https://the.exa.website/
-[[ -x "$(command -v exa)" ]] && alias ls='exa'
-# https://github.com/sharkdp/fd
-[[ -x "$(command -v fd)" ]] && alias find='fd'
-# https://github.com/sharkdp/bat
-[[ -x "$(command -v bat)" ]] && alias cat='bat'
-
-#
-# Personal "libaries" deployed by Ansible.
-#
-
-# ZSH prompt
-source "$HOME/.local/share/zsh/prompt.zsh"
-
-# Local zsh config
+# Support various utilities if available
 [[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
-
-# Tilix VTE patch
-# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
 [[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
+[[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
+[[ -x "$(command -v bat)" ]] && alias cat='bat'
+[[ -x "$(command -v exa)" ]] && alias ls='exa'
+[[ -x "$(command -v fd)" ]] && alias find='fd'
+[[ -x "$(command -v kubectl)" ]] && "$HOME/.local/share/zsh/kubectl.zsh"
+[[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
+
+# Load custom prompt
+source "$HOME/.local/share/zsh/prompt.zsh"
