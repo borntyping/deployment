@@ -62,7 +62,6 @@ bindkey '^e' edit-command-line
 # Aliases
 #
 
-alias bat='batcat'
 alias cola='git-cola &'
 alias d='docker run --rm -it $(docker build -q .)'
 alias gc='git commit'
@@ -102,7 +101,7 @@ export FZF_DEFAULT_OPTS="--no-height --no-reverse"
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
-#export PAGER="batcat"
+export PAGER="bat"
 export PATH="${HOME}/.bin:${HOME}/.local/bin:${PATH}"
 export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"
 export PIPENV_IGNORE_VIRTUALENVS=1
@@ -159,11 +158,10 @@ export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 
 #
 # fzf keybindings
-# https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
+# https://github.com/junegunn/fzf
 #
 
-[[ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]] && source "/usr/share/doc/fzf/examples/key-bindings.zsh"
-[[ -f "/usr/share/doc/fzf/examples/completion.zsh" ]] && source "/usr/share/doc/fzf/examples/completion.zsh"
+[[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
 
 #
 # direnv - directory specific environment configuration
@@ -193,11 +191,14 @@ if [[ -x "$(command -v kubectl)" ]]; then
   compdef ky="kubectl"
 fi
 
-# Oreutils - must come after $PATH is set.
-# https://github.com/Manishearth/oreutils
+# https://github.com/burntsushi/ripgrep
 [[ -x "$(command -v ripgrep)" ]] && alias grep='ripgrep'
+# https://the.exa.website/
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
+# https://github.com/sharkdp/fd
 [[ -x "$(command -v fd)" ]] && alias find='fd'
+# https://github.com/sharkdp/bat
+[[ -x "$(command -v bat)" ]] && alias cat='bat'
 
 #
 # Personal "libaries" deployed by Ansible.
