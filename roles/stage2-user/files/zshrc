@@ -48,7 +48,7 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
 # Ensure Delete works as expected.
-bindkey "^[[3" delete-char
+bindkey "\e[3~" delete-char
 
 # Disable `ctrl-v` so it doesn't mix with `ctrl-shift-v`.
 bindkey -r "^V"
