@@ -55,6 +55,7 @@ alias ll='ls -l'
 alias ls='ls --color=auto'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
+export BAT_PAGER="less --quit-if-one-screen"
 export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
