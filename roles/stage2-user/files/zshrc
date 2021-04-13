@@ -35,12 +35,12 @@ unsetopt MENU_COMPLETE                  # Don't autoselect completions.
 autoload edit-command-line
 zle -N edit-command-line
 
-bindkey "\e[3~" delete-char             # Ensure Delete works as expected.
+bindkey '\e[3~' delete-char             # Ensure Delete works as expected.
 bindkey '^[[F' end-of-line              # Ensure End works as expected.
 bindkey '^[[H' beginning-of-line        # Ensure Home works as expected.
 bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus.
 bindkey '^e' edit-command-line          # Edit current line (Ctrl+e).
-bindkey -r "^V"                         # Disable `ctrl-v` so it doesn't mix with `ctrl-shift-v`.
+bindkey -r "^V"                         # Disable `ctrl-v` so it does not mix with `ctrl-shift-v`.
 
 alias cola='git-cola &'
 alias d='docker run --rm -it $(docker build -q .)'
@@ -55,7 +55,7 @@ alias ll='ls -l'
 alias ls='ls --color=auto'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
-export BAT_PAGER="less --quit-if-one-screen"
+export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS --no-init"
 export BAT_STYLE="plain"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
@@ -127,7 +127,6 @@ export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 [[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
 [[ -x "$(command -v bat)" ]] && alias cat='bat'
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
-[[ -x "$(command -v fd)" ]] && alias find='fd'
 [[ -x "$(command -v kubectl)" ]] && "$HOME/.local/share/zsh/kubectl.zsh"
 [[ -x "$(command -v rg)" ]] && alias grep='rg'
 
