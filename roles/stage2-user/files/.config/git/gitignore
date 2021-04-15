@@ -8,6 +8,7 @@
 .idea/dictionaries
 .kitchen/
 .vagrant/
+.vscode/
 .yardoc/
 gem_graph.png
 gradle/

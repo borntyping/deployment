@@ -48,13 +48,12 @@ fsckobjects = true
 graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-hist = log --all --graph --pretty=graph --date=short --decorate -n 10
-history = log --all --graph --pretty=graph --date=short --decorate
-
 amend-all-and-force-push = !git commit --all --amend --no-edit && git force-push
 create-merge-request = push -o merge_request.create
 finish-merge-request = !git reset-master-branch && git checkout master && git cleanup
 force-push = push --force-with-lease
+hist = log --all --graph --pretty=graph --date=short --decorate -n 10
+history = log --all --graph --pretty=graph --date=short --decorate
 ignored-files = ls-files -o -i --exclude-standard
 rebase-onto-master = !git reset-master-branch && git rebase master && git push --force-with-lease
 recent-branches = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
@@ -77,11 +76,11 @@ changed = yellow
 untracked = red
 
 [diff]
-compactionHeuristic = true                  # Try and break diffs at blank lines.
-noprefix = true                             # Don't show a/ and b/ prefixes in diffs.
+compactionHeuristic = true
+noprefix = true
 
 [commit]
-verbose = true                              # Always show verbose commits
+verbose = true
 
 [gui]
 historybrowser = gitg
@@ -98,17 +97,5 @@ smudge = git-lfs smudge -- %f
 process = git-lfs filter-process
 required = true
 
-[lfs "https://gitlab.infosum.io/"]
-locksverify = false
-
-[diff "fidelius"]
-textconv = "gpg --batch --quiet --decrypt"
-
 [url "git@gitlab.com:"]
 insteadOf = https://gitlab.com/
-
-[url "git@cl.githost.io:"]
-insteadOf = https://cl.githost.io/
-
-[url "git@gitlab.infosum.io:"]
-insteadOf = https://gitlab.infosum.io/
