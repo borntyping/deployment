@@ -7,10 +7,15 @@
 .idea/**/workspace.xml
 .idea/dictionaries
 .kitchen/
+.mypy_cache/
+.pytest_cache/
 .tox/
 .vagrant/
 .vscode/
 .yardoc/
+build/
+cov_html/
+dist/
 gem_graph.png
 gradle/
 gradlew
