@@ -52,6 +52,7 @@
           - 'ripgrep'
           - 'rustc'
           - 'tree'
+          - 'wl-clipboard'
           - 'zsh'
       tags:
         - 'bin'
