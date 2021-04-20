@@ -51,7 +51,12 @@ function prompt_python_info() {
   if [[ -n "$PIPENV_ACTIVE" ]]; then
     prompt_python="%{${prompt_fg}%}pipenv%{${reset_color}%} "
   elif [[ -n "$VIRTUAL_ENV" ]]; then
-    prompt_python="%{${prompt_fg}%}virtualenv:$(basename "$VIRTUAL_ENV")%{${reset_color}%} "
+    if [[ "$VIRTUAL_ENV" =~ "/venv$" ]]; then
+      virtualenv_name="$(basename "$(dirname "$VIRTUAL_ENV")")"
+    else
+      virtualenv_name="$(basename "$VIRTUAL_ENV")"
+    fi
+    prompt_python="%{${prompt_fg}%}virtualenv:${virtualenv_name}%{${reset_color}%} "
   fi
 }
 
