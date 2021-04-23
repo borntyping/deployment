@@ -14,15 +14,19 @@
         state: 'latest'
       become: 'yes'
 
-    - name: 'install fonts'
+    - name: 'install .fonts/'
       copy:
-        src: 'fonts/'
+        src: '.fonts/'
         dest: '{{ lookup("env", "HOME") }}/.fonts'
       tags:
+        - 'config'
         - 'fonts'
 
-#    - name: 'configure gnome alt-tab'
-#      community.general.dconf:
-#        key: '/org/gnome/shell/app-switcher/current-workspace-only'
-#        value: 'true'
-#        state: 'present'
+    - name: 'install .config/tilix/'
+      copy:
+        src: '.config/tilix/'
+        dest: '{{ lookup("env", "HOME") }}/.config/tilix'
+      tags:
+        - 'config'
+        - 'tilix'
+

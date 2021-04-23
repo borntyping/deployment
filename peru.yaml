@@ -3,8 +3,9 @@ imports:
   antigen: 'roles/stage2-user/files/.local/share/zsh'
   aws-vault: 'roles/stage2-user/files/.local/bin'
   deployer: 'roles/stage2-user/files/.local/bin'
-  fantasque: 'roles/stage3-gui/files/fonts'
-  fira: 'roles/stage3-gui/files/fonts'
+  dracula: 'roles/stage2-user/files/.config/tilix/schemes'
+  fantasque: 'roles/stage3-gui/files/.fonts'
+  fira: 'roles/stage3-gui/files/.fonts'
   git-workspace: 'roles/stage2-user/files/.local/bin'
   jq: 'roles/stage2-user/files/.local/bin'
   peco: 'roles/stage2-user/files/.local/bin'
@@ -26,6 +27,14 @@ curl module deployer:
   url: https://deployer.org/deployer.phar
   move:
     deployer.phar: dep
+
+curl module dracula:
+  url: https://github.com/dracula/tilix/archive/master.zip
+  unpack: zip
+  pick:
+    - Dracula.json
+  move:
+    tilix-master/Dracula.json: Dracula.json
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
