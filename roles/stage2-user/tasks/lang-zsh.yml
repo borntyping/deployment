@@ -8,6 +8,7 @@
       ansible.builtin.copy:
         src: '.local/share/zsh/'
         dest: '{{ lookup("env", "HOME") }}/.local/share/zsh/'
+        mode: 'u=rw,g=r,o=r'
       tags:
         - 'zshrc'
 
@@ -23,8 +24,10 @@
         name: '{{ lookup("env", "HOME") }}/{{ item }}'
         state: 'directory'
       loop:
-        - '.cache/zsh'
-        - '.config/zsh'
+        - '.cache/zsh/'
+        - '.cache/zsh/completion/'
+        - '.cache/zsh/functions/'
+        - '.config/zsh/'
 
     - name: 'touch zsh local configuration directory'
       ansible.builtin.copy:
@@ -37,3 +40,13 @@
         name: '{{ lookup("env", "USER") }}'
         shell: '/bin/zsh'
       become: 'yes'
+
+    - name: 'generate kubectl completion files'
+      ansible.builtin.shell:
+        cmd: 'kubectl completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
+        creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
+
+    - name: 'generate oc completion files'
+      ansible.builtin.shell:
+        cmd: 'oc completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
+#        creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
