@@ -1,5 +1,5 @@
 #!/bin/zsh
-# shellcheck disable=SC2034 disable=SC2206
+# shellcheck disable=SC1090 disable=SC2034 disable=SC2206
 
 HISTFILE="$HOME/.zhistory"              # Save history.
 HISTSIZE=7500                           # Lines of history to keep in memory.
@@ -101,13 +101,12 @@ eval "$(direnv hook zsh)"
 
 # Completion rules
 # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
+fpath+=("${HOME}/.cache/zsh/functions")
 autoload -Uz compinit
-zstyle ':completion::complete:*' cache-path "$HOME/.cache/zsh/completion/"
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*:*:*:users' ignored-patterns '*'
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
+#zstyle ':completion:*:*:*:users' ignored-patterns '*'
+#zstyle ':completion:*' list-colors ''
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 compinit -C
 
 # ZSH syntax highlighting plugin (loaded by antigen)
@@ -121,14 +120,18 @@ export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
 export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
 export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 
-# Support various utilities if available
-[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
-[[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"
-[[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
+# Replace various coreutils executables with oreutils alternatives.
 [[ -x "$(command -v bat)" ]] && alias cat='bat'
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
-[[ -x "$(command -v kubectl)" ]] && "$HOME/.local/share/zsh/kubectl.zsh"
 [[ -x "$(command -v rg)" ]] && alias grep='rg'
+
+# Support various utilities if available
+[[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"    # Fix for Tilix.
+[[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
+[[ -x "$(command -v oc)" ]] && source "$HOME/.cache/zsh/functions/_oc"          # The oc completion doesn't work with fpath.
+
+# Machine-local configuration.
+[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
 
 # Load custom prompt
 source "$HOME/.local/share/zsh/prompt.zsh"
