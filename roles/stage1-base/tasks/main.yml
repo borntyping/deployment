@@ -51,6 +51,7 @@
           - 'python3.9'
           - 'ripgrep'
           - 'rustc'
+          - 'ShellCheck'
           - 'tree'
           - 'wl-clipboard'
           - 'zsh'
