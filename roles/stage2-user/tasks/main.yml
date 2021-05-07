@@ -25,6 +25,7 @@
         - 'multitailrc'
       tags:
         - 'dotfiles'
+        - 'multitailrc'
 
     - name: 'install executables'
       copy:
