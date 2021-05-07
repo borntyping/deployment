@@ -1,2 +1,14 @@
-default_linewrap:l
-dsblwm:no
+# default_linewrap:l
+# dsblwm:no
+
+colorscheme:python
+cs_re_s:blue:^\w+\:([^\:]+)\:
+cs_re:white:[0-9.]+\ .+\ \[.+\]
+cs_re:red,,bold:FATAL
+cs_re:red:ERROR
+cs_re:red:([5][0-9][0-9]\ )
+cs_re:red:Server Error\: INTERNAL SERVER ERROR
+cs_re:yellow:WARNING
+cs_re:green:INFO
+cs_re:blue,,bold:DEBUG
+scheme:python:flask\.log
