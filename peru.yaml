@@ -27,6 +27,7 @@ curl module deployer:
   url: https://deployer.org/deployer.phar
   move:
     deployer.phar: dep
+  sha1: 18270e46dd02bcac871cf0babee82702457a26b0
 
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
@@ -35,6 +36,7 @@ curl module dracula:
     - Dracula.json
   move:
     tilix-master/Dracula.json: Dracula.json
+  sha1: 65c77167ba9376b0f16d996c6fae5c6b7f13cdb5
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
