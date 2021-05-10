@@ -27,6 +27,7 @@
           - 'htop'
           - 'httpie'
           - 'hub'
+          - 'jq'
           - 'micro'
           - 'nano'
           - 'openssl-devel'
