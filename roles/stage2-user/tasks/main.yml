@@ -37,6 +37,16 @@
         - 'ansible'
         - 'micro'
 
+    - name: 'install personal scripts'
+      ansible.builtin.copy:
+        src: '.local/share/src/'
+        dest: '{{ lookup("env", "HOME") }}/.local/share/src/'
+        mode: '0755'
+      tags:
+        - 'bin'
+        - 'git'
+        - 'src'
+
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
     - import_tasks: 'tool-micro.yml'
