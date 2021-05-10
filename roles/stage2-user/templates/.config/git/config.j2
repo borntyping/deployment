@@ -52,7 +52,7 @@ amend-all-and-force-push = !git commit --all --amend --no-edit && git force-push
 create-merge-request = push -o merge_request.create
 finish-merge-request = !git reset-master-branch && git checkout master && git cleanup
 force-push = push --force-with-lease
-hist = log --graph --pretty=graph --date=short --decorate -n 15
+hist = log --graph --pretty=graph --date=short --decorate -n 10
 history = log --all --graph --pretty=graph --date=short --decorate
 ignored-files = ls-files -o -i --exclude-standard
 rebase-onto-master = !git reset-master-branch && git rebase master && git push --force-with-lease
