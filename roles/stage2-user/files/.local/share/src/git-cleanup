@@ -3,7 +3,6 @@
 set -euo pipefail
 
 BRANCH="${1:-main}"
-REMOTE="${2:-origin}"
 
 # Remove branches merged into the named branch.
 # The 'master' branch is never merged.
@@ -12,4 +11,4 @@ git branch --merged "$BRANCH" | \
     xargs --no-run-if-empty --max-args=1 -- git branch -d
 
 # Prune remote branches.
-git remote prune "$REMOTE"
+git remote | xargs --no-run-if-empty --max-args=1 -- git remote prune
