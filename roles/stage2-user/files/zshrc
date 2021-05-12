@@ -84,6 +84,7 @@ export borntyping="${GIT_WORKSPACE}/github.com/borntyping"
 export github="${GIT_WORKSPACE}/github.com"
 export gitlab="${GIT_WORKSPACE}/gitlab.com"
 export source="${GITGET_ROOT}"
+export scratch="${HOME}/Development/scratch"
 
 # ZSH packages using antigen.
 # https://github.com/zsh-users/antigen

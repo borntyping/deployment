@@ -26,9 +26,11 @@
       with_items:
         - 'Development/git-get'
         - 'Development/git-workspace'
+        - 'Development/scratch'
       tags:
         - 'git-get'
         - 'git-workspace'
+        - 'scratch'
 
     - name: 'create git-workspace fragments'
       ansible.builtin.copy:
