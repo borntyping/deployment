@@ -48,9 +48,7 @@ fsckobjects = true
 graph=%C(red)%h%C(reset) %s%C(cyan)%d%C(reset) %C(bold green)(%ar, %an)%C(reset)
 
 [alias]
-amend-and-force-push = !git commit --all --amend --no-edit && push --force-with-lease
-create-merge-request = push -o merge_request.create
-finish-merge-request = switch -
+amend-and-force-push = !git commit --all --amend --no-edit && git push --force-with-lease
 hist = log --graph --pretty=graph --date=short --decorate -n 10
 history = log --all --graph --pretty=graph --date=short --decorate
 ignored-files = ls-files -o -i --exclude-standard
