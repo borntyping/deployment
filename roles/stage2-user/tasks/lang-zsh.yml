@@ -50,3 +50,10 @@
       ansible.builtin.shell:
         cmd: 'oc completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
 #        creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
+
+    - name: 'copy atuin configuration directory'
+      ansible.builtin.copy:
+        src: '.config/atuin/'
+        dest: '{{ lookup("env", "HOME") }}/.config/atuin/'
+      tags:
+        - atuin
