@@ -3,7 +3,7 @@ imports:
   antigen: 'roles/stage2-user/files/.local/share/zsh'
   aws-vault: 'roles/stage2-user/files/.local/bin'
   deployer: 'roles/stage2-user/files/.local/bin'
-  dracula: 'roles/stage2-user/files/.config/tilix/schemes'
+  dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
   fira: 'roles/stage3-gui/files/.fonts'
   git-workspace: 'roles/stage2-user/files/.local/bin'
