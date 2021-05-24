@@ -131,7 +131,12 @@ export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 [[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"    # Fix for Tilix.
 [[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
 [[ -x "$(command -v oc)" ]] && source "$HOME/.cache/zsh/functions/_oc"          # The oc completion doesn't work with fpath.
-[[ -x "$(command -v atuin)" ]] && eval "$(atuin init zsh)"
+
+# https://github.com/ellie/atuin/blob/main/docs/key-binding.md
+if [[ -x "$(command -v atuin)" ]]; then
+  eval "$(ATUIN_NOBIND='true' atuin init zsh)"
+  bindkey '^r' _atuin_search_widget
+fi
 
 # Machine-local configuration.
 [[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
