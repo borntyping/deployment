@@ -62,36 +62,20 @@ function prompt_python_info() {
 
 # Display the current kubectl context
 function prompt_kubectl_info() {
+  local CONTEXT NAMESPACE
+
   prompt_kubectl=""
 
-  if ! command -v kubectl > /dev/null 2>&1; then
-    return
+  if command -v kubectl > /dev/null 2>&1; then
+    CONTEXT="$(kubectl config current-context 2>/dev/null)"
   fi
 
-  if ! command -v kubens > /dev/null 2>&1; then
-    return
+  if command -v kubens > /dev/null 2>&1; then
+    NAMESPACE="/$(kubens --current)"
   fi
-
-  local CONTEXT CONTEXT_COLOUR NAMESPACE NAMESPACE_COLOUR
-  CONTEXT="$(kubectl config current-context 2>/dev/null)"
-  CONTEXT_COLOUR="$prompt_fg"
-  NAMESPACE="$(kubens --current)"
-  NAMESPACE_COLOUR="$prompt_fg"
 
   if [[ -n "$CONTEXT" ]]; then
-    # Set foreground based on the environment.
-    [[ "$CONTEXT" == *"engineering"* ]] && CONTEXT_COLOUR="${fg[cyan]}"
-    [[ "$CONTEXT" == *"sandbox"* ]] && CONTEXT_COLOUR="${fg[yellow]}"
-    [[ "$CONTEXT" == *"production"* ]] && CONTEXT_COLOUR="${fg[red]}"
-    prompt_kubectl="%{$CONTEXT_COLOUR%}${CONTEXT}%{$reset_color%} "
-  fi
-
-  if [[ -n "$NAMESPACE" ]]; then
-    # Set foreground based on the environment.
-    [[ "$NAMESPACE" == "integration" ]] && NAMESPACE_COLOUR="${fg[green]}"
-    [[ "$NAMESPACE" == "staging" ]] && NAMESPACE_COLOUR="${fg[yellow]}"
-    [[ "$NAMESPACE" == "production" ]] && NAMESPACE_COLOUR="${fg[red]}"
-    prompt_kubectl="$prompt_kubectl%{$NAMESPACE_COLOUR%}${NAMESPACE}%{$reset_color%} "
+    prompt_kubectl="%{$prompt_highlight_fg%}${CONTEXT}${NAMESPACE}%{$reset_color%} "
   fi
 }
 
