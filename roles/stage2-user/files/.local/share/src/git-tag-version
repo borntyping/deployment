@@ -36,8 +36,8 @@ if [ -z "$1" ]; then
 fi
 
 if ask "Has the package's version number been modified?" Y; then
-    echo "Tagging version $1 (git tag -a \"$1\" -m \"Version $1\" ${2:-HEAD})"
-    git tag -a "$1" -m "Version $1" "${2:-HEAD}"
+    echo "Tagging version $1 (git tag -a \"v$1\" -m \"Version $1\" ${2:-HEAD})"
+    git tag -a "v$1" -m "Version $1" "${2:-HEAD}"
 
     if ask "Should the new commits and tags be pushed?" Y; then
         echo "Pushing commits and tags (git push --follow-tags)"
