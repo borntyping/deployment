@@ -62,20 +62,25 @@ function prompt_python_info() {
 
 # Display the current kubectl context
 function prompt_kubectl_info() {
-  local CONTEXT NAMESPACE
+  local config context namespace
 
+  config="${KUBECONFIG:-$HOME/.kube/config}"
   prompt_kubectl=""
 
+  if [[ ! -f "$config" ]]; then
+    return
+  fi
+
   if command -v kubectl > /dev/null 2>&1; then
-    CONTEXT="$(kubectl config current-context 2>/dev/null)"
+    context="$(kubectl config current-context 2>/dev/null)"
   fi
 
   if command -v kubens > /dev/null 2>&1; then
-    NAMESPACE="/$(kubens --current)"
+    namespace="/$(kubens --current)"
   fi
 
-  if [[ -n "$CONTEXT" ]]; then
-    prompt_kubectl="%{$prompt_highlight_fg%}${CONTEXT}${NAMESPACE}%{$reset_color%} "
+  if [[ -n "$context" ]]; then
+    prompt_kubectl="%{$prompt_highlight_fg%}${context}${namespace}%{$reset_color%} "
   fi
 }
 
