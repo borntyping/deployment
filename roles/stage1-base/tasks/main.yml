@@ -17,6 +17,7 @@
           - 'composer'
           - 'curl'
           - 'direnv'
+          - 'docker-compose'
           - 'exa'
           - 'fd-find'
           - 'fd-find'
