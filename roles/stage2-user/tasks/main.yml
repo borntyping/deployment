@@ -45,6 +45,9 @@
       tags:
         - 'bin'
         - 'git'
+        - 'git-tag-version'
+        - 'git-tidy'
+        - 'reconfigure'
         - 'src'
 
     - import_tasks: 'lang-zsh.yml'
