@@ -2,11 +2,13 @@
 *.rakeTasks
 *.sublime-project
 *.sublime-workspace
+.envrc
 .idea/
 .idea/**/tasks.xml
 .idea/**/workspace.xml
 .idea/dictionaries
 .kitchen/
+.local/
 .mypy_cache/
 .pytest_cache/
 .tox/
