@@ -58,6 +58,7 @@ alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS --no-init"
 export BAT_STYLE="plain"
+export DOCKER_HOST="unix:///run/user/1000/podman/podman.sock"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"

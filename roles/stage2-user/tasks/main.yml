@@ -50,6 +50,16 @@
         - 'reconfigure'
         - 'src'
 
+    - name: 'enable user podman socket'
+      ansible.builtin.systemd:
+        name: 'podman.socket'
+        state: 'started'
+        scope: user
+      tags:
+        - 'podman'
+        - 'socket'
+        - 'systemd'
+
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
     - import_tasks: 'tool-micro.yml'
