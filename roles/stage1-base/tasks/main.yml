@@ -75,3 +75,12 @@
       tags:
        - 'git'
        - 'git-get'
+
+    - name: 'configure sudo'
+      ansible.builtin.copy:
+        src: 'etc/sudoers.d/sam'
+        dest: '/etc/sudoers.d/sam'
+      tags:
+        - docker
+        - sudo
+        - sudoers
