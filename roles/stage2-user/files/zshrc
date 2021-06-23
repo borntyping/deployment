@@ -93,6 +93,7 @@ source "$HOME/.local/share/zsh/antigen.zsh"
 antigen bundles <<EOBUNDLES
   ael-code/zsh-colored-man-pages
   agkozak/zsh-z
+  Aloxaf/fzf-tab
   zsh-users/zsh-completions
   zsh-users/zsh-syntax-highlighting
 EOBUNDLES
@@ -103,13 +104,15 @@ antigen apply
 eval "$(direnv hook zsh)"
 
 # Completion rules
-# http://zsh.sourceforge.net/Doc/Release/Completion-System.html
+# https://zsh.sourceforge.net/Doc/Release/Completion-System.html
+# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
 fpath+=("${HOME}/.cache/zsh/functions")
 autoload -Uz compinit
 zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
-#zstyle ':completion:*:*:*:users' ignored-patterns '*'
-#zstyle ':completion:*' list-colors ''
-#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                           # Set list-colors to enable filename colorizing.
+zstyle ':completion:*:descriptions' format '[%d]'                               # Set descriptions format to enable group support.
+zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'   # Preview directory's content with exa when completing cd.
 compinit -C
 
 # ZSH syntax highlighting plugin (loaded by antigen)
