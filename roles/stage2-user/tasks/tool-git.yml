@@ -13,8 +13,8 @@
 
     - name: 'create git user config'
       ansible.builtin.template:
-        src: '.config/git/config.d/user.j2'
-        dest: '{{ lookup("env", "HOME") }}/.config/git/config.d/user.config'
+        src: '.config/git/config.d/01-user.j2'
+        dest: '{{ lookup("env", "HOME") }}/.config/git/config.d/01-user.config'
       tags:
         - 'gitconfig'
         - 'dotfiles'
