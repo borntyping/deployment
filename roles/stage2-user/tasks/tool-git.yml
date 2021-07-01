@@ -6,15 +6,24 @@
       ansible.builtin.copy:
         src: '.config/git/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/'
-        mode: '755'
+        mode: '644'
       tags:
         - 'gitconfig'
         - 'dotfiles'
 
-    - name: 'create git config file'
+    - name: 'create git user config'
       ansible.builtin.template:
-        src: '.config/git/config.j2'
+        src: '.config/git/config.d/user.j2'
+        dest: '{{ lookup("env", "HOME") }}/.config/git/config.d/user.config'
+      tags:
+        - 'gitconfig'
+        - 'dotfiles'
+
+    - name: 'assemble git config'
+      ansible.builtin.assemble:
+        src: '{{ lookup("env", "HOME") }}/.config/git/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/config'
+        delimiter: '\n'
       tags:
         - 'gitconfig'
         - 'dotfiles'

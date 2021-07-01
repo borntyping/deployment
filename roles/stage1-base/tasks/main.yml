@@ -60,12 +60,13 @@
           - 'zsh'
       tags:
         - 'bin'
+        - 'dnf'
+        - 'docker'
         - 'git'
         - 'lib'
         - 'php'
         - 'python'
         - 'rust'
-        - 'docker'
 
     - name: 'install git-get'
       ansible.builtin.dnf:
