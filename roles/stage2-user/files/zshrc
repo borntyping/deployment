@@ -93,7 +93,6 @@ source "$HOME/.local/share/zsh/antigen.zsh"
 antigen bundles <<EOBUNDLES
   ael-code/zsh-colored-man-pages
   agkozak/zsh-z
-  Aloxaf/fzf-tab
   zsh-users/zsh-completions
   zsh-users/zsh-syntax-highlighting
 EOBUNDLES
@@ -109,10 +108,9 @@ eval "$(direnv hook zsh)"
 fpath+=("${HOME}/.cache/zsh/functions")
 autoload -Uz compinit
 zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                           # Set list-colors to enable filename colorizing.
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                         # Set list-colors to enable filename colorizing.
 zstyle ':completion:*:descriptions' format '[%d]'                               # Set descriptions format to enable group support.
 zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'   # Preview directory's content with exa when completing cd.
 zstyle -e ':completion:*:hosts' hosts 'reply=()'
 compinit -C
 
