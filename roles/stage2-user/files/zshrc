@@ -62,8 +62,6 @@ export DOCKER_HOST="unix:///run/user/1000/podman/podman.sock"
 export EDITOR="micro"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
-export GIT_WORKSPACE="${HOME}/Development/git-workspace" # orf/git-workspace
-export GITGET_ROOT="${HOME}/Development/git-get" # grdl/git-get
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
@@ -81,11 +79,11 @@ export ZSHZ_NO_RESOLVE_SYMLINKS=1
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
-export borntyping="${GIT_WORKSPACE}/github.com/borntyping"
-export github="${GIT_WORKSPACE}/github.com"
-export gitlab="${GIT_WORKSPACE}/gitlab.com"
-export source="${GITGET_ROOT}"
-export scratch="${HOME}/Development/scratch"
+export source="${HOME}/Development"
+export borntyping="${source}/github.com/borntyping"
+export github="${source}/github.com"
+export gitlab="${source}/gitlab.com"
+export scratch="${source}/scratch"
 
 # ZSH packages using antigen.
 # https://github.com/zsh-users/antigen
