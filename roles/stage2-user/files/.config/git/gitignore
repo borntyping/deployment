@@ -23,3 +23,5 @@ gradle/
 gradlew
 gradlew.bat
 telepresence.log
+vendor/
+venv/
