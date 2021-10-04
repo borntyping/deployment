@@ -6,7 +6,6 @@ imports:
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
   fira: 'roles/stage3-gui/files/.fonts'
-  git-workspace: 'roles/stage2-user/files/.local/bin'
   peco: 'roles/stage2-user/files/.local/bin'
 
 git module antigen:
@@ -68,12 +67,6 @@ curl module fira:
     ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
     ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
   sha1: eeebfda13725e682cba35ee26a4fd7899ab2d5dc
-
-curl module git-workspace:
-  url: https://github.com/orf/git-workspace/releases/download/v0.8.0/git-workspace-Linux-x86_64.tar.gz
-  unpack: tar
-  pick: git-workspace
-  sha1: cca492e2b8281900c4c6560a3961812aa4db635d
 
 curl module peco:
   url: https://github.com/peco/peco/releases/download/v0.5.8/peco_linux_amd64.tar.gz
