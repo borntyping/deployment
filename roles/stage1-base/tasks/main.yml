@@ -68,15 +68,6 @@
         - 'python'
         - 'rust'
 
-    - name: 'install git-get'
-      ansible.builtin.dnf:
-        disable_gpg_check: true
-        name: 'https://github.com/grdl/git-get/releases/download/v0.4.0/git-get_0.4.0_linux_amd64.rpm'
-        state: 'present'
-      tags:
-       - 'git'
-       - 'git-get'
-
     - name: 'configure sudo'
       ansible.builtin.copy:
         src: 'etc/sudoers.d/sam'

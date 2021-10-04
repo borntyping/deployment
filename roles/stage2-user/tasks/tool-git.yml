@@ -11,14 +11,6 @@
         - 'gitconfig'
         - 'dotfiles'
 
-    - name: 'create git user config'
-      ansible.builtin.template:
-        src: '.config/git/config.d/01-user.j2'
-        dest: '{{ lookup("env", "HOME") }}/.config/git/config.d/01-user.config'
-      tags:
-        - 'gitconfig'
-        - 'dotfiles'
-
     - name: 'assemble git config'
       ansible.builtin.assemble:
         src: '{{ lookup("env", "HOME") }}/.config/git/config.d/'
@@ -33,26 +25,10 @@
         name: '{{ lookup("env", "HOME") }}/{{ item }}'
         state: 'directory'
       with_items:
-        - 'Development/git-get'
-        - 'Development/git-workspace'
+        - 'Development/github.com'
+        - 'Development/github.com/borntyping'
+        - 'Development/gitlab.com'
+        - 'Development/gitlab.com/borntyping'
         - 'Development/scratch'
       tags:
-        - 'git-get'
-        - 'git-workspace'
         - 'scratch'
-
-    - name: 'create git-workspace fragments'
-      ansible.builtin.copy:
-        src: '.git-workspace.d/'
-        dest: '{{ lookup("env", "HOME") }}/Development/git-workspace/.git-workspace.d/'
-        mode: '0644'
-      tags:
-        - 'git-workspace'
-
-    - name: 'assemble git-workspace config'
-      ansible.builtin.assemble:
-        src: '{{ lookup("env", "HOME") }}/Development/git-workspace/.git-workspace.d/'
-        dest: '{{ lookup("env", "HOME") }}/Development/git-workspace/workspace.toml'
-        delimiter: '\n'
-      tags:
-        - 'git-workspace'

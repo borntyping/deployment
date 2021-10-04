@@ -1,6 +1,0 @@
-#[[provider]]
-#provider = "gitlab"
-#name = "borntyping"
-#url = "https://gitlab.com"
-#path = "/home/sam/Development/git-workspace/gitlab.com"
-#env_var = "GITLAB_TOKEN"
