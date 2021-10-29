@@ -15,6 +15,7 @@
         - 'config.d'
         - 'hosts'
         - 'keys'
+        - 'controlmasters'
 
     - name: 'create ssh fragments'
       ansible.builtin.copy:
