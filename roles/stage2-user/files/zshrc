@@ -42,18 +42,19 @@ bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus.
 bindkey '^e' edit-command-line          # Edit current line (Ctrl+e).
 bindkey -r "^V"                         # Disable `ctrl-v` so it does not mix with `ctrl-shift-v`.
 
-alias cola='git-cola &'
-alias d='docker run --rm -it $(docker build -q .)'
+alias cola='git-cola 2>/dev/null &'
+alias db='docker run --rm --interactive --tty $(docker build --quiet --tag=db .)'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'
-alias gitg='gitg &'
+alias gitg='gitg 2>/dev/null &'
 alias grep='grep --color=auto'
 alias gs='git status'
-alias httpie='http'
 alias la='ls -la'
 alias ll='ls -l'
 alias ls='ls --color=auto'
+alias reconfigure-git='reconfigure -t git'
+alias reconfigure-ssh='reconfigure -t ssh'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS --no-init"
