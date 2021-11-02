@@ -7,6 +7,6 @@ function kj() { kubectl --output="json" "$@"; }
 function ky() { kubectl --output="yaml" "$@" | bat --language="yaml"; }
 
 alias k=kubectl
-#compdef k=kubectl
-#compdef kj=kubectl
-#compdef ky=kubectl
+compdef k=kubectl
+compdef kj=kubectl
+compdef ky=kubectl

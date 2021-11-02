@@ -132,6 +132,7 @@ export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
 # Support various utilities if available
 [[ -f "/etc/profile.d/vte-2.91.sh" ]] && source "/etc/profile.d/vte-2.91.sh"    # Fix for Tilix.
 [[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
+[[ -x "$(command -v kubectl)" ]] && source "$HOME/.local/share/zsh/kubectl.zsh" # Completion for kubectl aliases.
 [[ -x "$(command -v oc)" ]] && source "$HOME/.cache/zsh/functions/_oc"          # The oc completion doesn't work with fpath.
 
 # Machine-local configuration.
