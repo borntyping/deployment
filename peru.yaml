@@ -5,6 +5,8 @@ imports:
   fantasque: 'roles/stage3-gui/files/.fonts'
   fira: 'roles/stage3-gui/files/.fonts'
   peco: 'roles/stage2-user/files/.local/bin'
+  fixup|fixup-executable: 'roles/stage2-user/files/.local/bin/'
+  fixup|fixup-completion: 'roles/stage2-user/files/.local/share/zsh/'
 
 git module antigen:
   url: https://github.com/zsh-users/antigen.git
@@ -54,6 +56,20 @@ curl module fira:
     ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
     ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
   sha1: eeebfda13725e682cba35ee26a4fd7899ab2d5dc
+
+git module fixup:
+  url: https://github.com/keis/git-fixup.git
+  rev: 23df4aacb9a53753610ee004f7e77fda00e97376
+
+rule fixup-executable:
+  pick:
+    - git-fixup
+
+rule fixup-completion:
+  copy:
+    completion.zsh: fixup.zsh
+  pick:
+    - fixup.zsh
 
 curl module peco:
   url: https://github.com/peco/peco/releases/download/v0.5.8/peco_linux_amd64.tar.gz
