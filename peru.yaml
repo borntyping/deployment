@@ -1,8 +1,6 @@
 ---
 imports:
   antigen: 'roles/stage2-user/files/.local/share/zsh'
-  aws-vault: 'roles/stage2-user/files/.local/bin'
-  deployer: 'roles/stage2-user/files/.local/bin'
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
   fira: 'roles/stage3-gui/files/.fonts'
@@ -15,17 +13,6 @@ git module antigen:
   pick:
     - antigen.zsh
   rev: 8846aa902047992e86816cbd941acc86646bd83b
-
-curl module aws-vault:
-  url: https://github.com/99designs/aws-vault/releases/download/v6.3.1/aws-vault-linux-amd64
-  filename: aws-vault
-  sha1: 24ebfbaa3ac9aa5863b5da9a6be8ee0c3b7926a7
-
-curl module deployer:
-  url: https://deployer.org/deployer.phar
-  move:
-    deployer.phar: dep
-  sha1: 18270e46dd02bcac871cf0babee82702457a26b0
 
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
