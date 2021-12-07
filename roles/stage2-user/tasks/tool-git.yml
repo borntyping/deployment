@@ -9,6 +9,7 @@
         mode: '644'
       tags:
         - 'gitconfig'
+        - 'gitignore'
         - 'dotfiles'
 
     - name: 'assemble git config'
@@ -18,6 +19,7 @@
         delimiter: '\n'
       tags:
         - 'gitconfig'
+        - 'gitignore'
         - 'dotfiles'
 
     - name: 'create git source code directories'
