@@ -58,6 +58,8 @@
           - 'tree'
           - 'wl-clipboard'
           - 'zsh'
+          - 'zsh-autosuggestions'
+          - 'zsh-html'
           - 'zsh-syntax-highlighting'
       tags:
         - 'bin'
