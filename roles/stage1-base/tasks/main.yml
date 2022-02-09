@@ -58,6 +58,7 @@
           - 'tree'
           - 'wl-clipboard'
           - 'zsh'
+          - 'zsh-syntax-highlighting'
       tags:
         - 'bin'
         - 'dnf'
@@ -67,6 +68,7 @@
         - 'php'
         - 'python'
         - 'rust'
+        - 'zsh'
 
     - name: 'configure sudo'
       ansible.builtin.copy:

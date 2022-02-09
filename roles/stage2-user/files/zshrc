@@ -90,11 +90,14 @@ export scratch="${source}/scratch"
 # ZSH plugins using miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
 source "$HOME/.local/share/zsh/miniplug.zsh"
+miniplug plugin "ael-code/zsh-colored-man-pages"
+miniplug plugin "agkozak/zsh-z"
+miniplug plugin "zsh-users/zsh-completions"
+miniplug load
 
 # Completion rules
 # https://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
-miniplug plugin "zsh-users/zsh-completions"
 fpath+=("${HOME}/.cache/zsh/functions")
 autoload -Uz compinit
 zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
@@ -103,24 +106,6 @@ zstyle ':completion:*:descriptions' format '[%d]'                               
 zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
 zstyle -e ':completion:*:hosts' hosts 'reply=()'
 compinit -C
-
-# ZSH syntax highlighting plugin (loaded by antigen)
-# https://github.com/zsh-users/zsh-syntax-highlighting
-if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
-  miniplug plugin "zsh-users/zsh-syntax-highlighting"
-  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-  export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
-  export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
-  export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
-  export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
-  export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
-  export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
-  export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
-fi
-
-miniplug plugin "agkozak/zsh-z"
-miniplug plugin "ael-code/zsh-colored-man-pages"
-miniplug load
 
 # Direnv
 # https://direnv.net/
@@ -143,3 +128,17 @@ eval "$(direnv hook zsh)"
 
 # Load custom prompt
 source "$HOME/.local/share/zsh/prompt.zsh"
+
+# ZSH syntax highlighting plugin (should be loaded last)
+# https://github.com/zsh-users/zsh-syntax-highlighting
+if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+  export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
+  export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
+  export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
+  export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
+  export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
+  export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
+  export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
+fi
