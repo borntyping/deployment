@@ -89,12 +89,12 @@ export scratch="${source}/scratch"
 # ZSH packages using antigen.
 # https://github.com/zsh-users/antigen
 source "$HOME/.local/share/zsh/antigen.zsh"
-antigen bundles <<EOBUNDLES
-  ael-code/zsh-colored-man-pages
-  agkozak/zsh-z
-  zsh-users/zsh-completions
-  zsh-users/zsh-syntax-highlighting
-EOBUNDLES
+antigen bundle "agkozak/zsh-z"
+antigen bundle "zsh-users/zsh-completions"
+if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+  antigen bundle "ael-code/zsh-colored-man-pages"
+  antigen bundle "zsh-users/zsh-syntax-highlighting"
+fi
 antigen apply
 
 # Direnv
