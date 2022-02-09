@@ -23,7 +23,7 @@ curl module dracula:
     - Dracula.json
   move:
     tilix-master/Dracula.json: Dracula.json
-  sha1: 65c77167ba9376b0f16d996c6fae5c6b7f13cdb5
+  sha1: b5de62bcc605e1464fe4b0d53fec92b8db35204a
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
@@ -59,7 +59,7 @@ curl module fira:
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
-  rev: 23df4aacb9a53753610ee004f7e77fda00e97376
+  rev: 46e043b4e2fb2986b73aeae8efddb7f1a4e08e33
 
 rule fixup-executable:
   pick:
