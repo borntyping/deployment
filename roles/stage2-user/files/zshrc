@@ -65,6 +65,7 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_DEFAULT_OPTS="--no-height --no-reverse"
 export GOPATH="${HOME}/.local/lib/go"
 export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
+export MINIPLUG_HOME="$HOME/.cache/zsh/plugins"
 export NPM_CONFIG_PREFIX="${HOME}/.npm"
 export PAGER="bat"
 export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src/:${PATH}"
@@ -86,24 +87,14 @@ export github="${source}/github.com"
 export gitlab="${source}/gitlab.com"
 export scratch="${source}/scratch"
 
-# ZSH packages using antigen.
-# https://github.com/zsh-users/antigen
-source "$HOME/.local/share/zsh/antigen.zsh"
-antigen bundle "agkozak/zsh-z"
-antigen bundle "zsh-users/zsh-completions"
-if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
-  antigen bundle "ael-code/zsh-colored-man-pages"
-  antigen bundle "zsh-users/zsh-syntax-highlighting"
-fi
-antigen apply
-
-# Direnv
-# https://direnv.net/
-eval "$(direnv hook zsh)"
+# ZSH plugins using miniplug
+# https://git.sr.ht/~yerinalexey/miniplug
+source "$HOME/.local/share/zsh/miniplug.zsh"
 
 # Completion rules
 # https://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
+miniplug plugin "zsh-users/zsh-completions"
 fpath+=("${HOME}/.cache/zsh/functions")
 autoload -Uz compinit
 zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
@@ -115,16 +106,28 @@ compinit -C
 
 # ZSH syntax highlighting plugin (loaded by antigen)
 # https://github.com/zsh-users/zsh-syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
-export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
-export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
-export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
-export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
-export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
-export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
+if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+  miniplug plugin "zsh-users/zsh-syntax-highlighting"
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+  export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
+  export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
+  export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
+  export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
+  export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
+  export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
+  export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
+fi
+
+miniplug plugin "agkozak/zsh-z"
+miniplug plugin "ael-code/zsh-colored-man-pages"
+miniplug load
+
+# Direnv
+# https://direnv.net/
+eval "$(direnv hook zsh)"
 
 # Replace various coreutils executables with oreutils alternatives.
+# https://github.com/Manishearth/oreutils
 [[ -x "$(command -v bat)" ]] && alias cat='bat'
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v rg)" ]] && alias grep='rg'

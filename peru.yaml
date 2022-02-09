@@ -1,20 +1,15 @@
 ---
 imports:
-  antigen: 'roles/stage2-user/files/.local/share/zsh'
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
   fira: 'roles/stage3-gui/files/.fonts'
   peco: 'roles/stage2-user/files/.local/bin'
   fixup|fixup-executable: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-completion: 'roles/stage2-user/files/.local/share/zsh/'
+  miniplug: 'roles/stage2-user/files/.local/share/zsh'
 
-git module antigen:
-  url: https://github.com/zsh-users/antigen.git
-  copy:
-    bin/antigen.zsh: antigen.zsh
-  pick:
-    - antigen.zsh
-  rev: 8846aa902047992e86816cbd941acc86646bd83b
+curl module miniplug:
+  url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
 
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
