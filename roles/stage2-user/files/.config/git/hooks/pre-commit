@@ -10,10 +10,11 @@ function git_hook_enabled() {
     fi
 }
 
-if git_hook_enabled 'phpunit' && [[ -f 'phpunit.xml.dist' ]]; then
-    phpunit
-fi
+function git_hook_php() {
+    if git_hook_enabled "$1" && [[ -f "vendor/bin/$1" ]]; then
+        "vendor/bin/$1"
+    fi
+}
 
-if git_hook_enabled 'phpstan' && [[ -f 'phpstan.neon' ]]; then
-    vendor/bin/phpstan analyse
-fi
+git_hook_php 'phpunit'
+git_hook_php 'phpstan'
