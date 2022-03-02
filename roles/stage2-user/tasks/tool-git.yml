@@ -6,11 +6,12 @@
       ansible.builtin.copy:
         src: '.config/git/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/'
-        mode: '644'
+        mode: 'preserve'
       tags:
-        - 'gitconfig'
-        - 'gitignore'
         - 'dotfiles'
+        - 'gitconfig'
+        - 'githooks'
+        - 'gitignore'
 
     - name: 'assemble git config'
       ansible.builtin.assemble:
