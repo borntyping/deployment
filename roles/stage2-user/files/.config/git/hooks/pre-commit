@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+set -e
+
+function git_hook_enabled() {
+    if [[ "$(git config --get --bool "hooks.$1")" != "false" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if git_hook_enabled 'phpunit' && [[ -f 'phpunit.xml.dist' ]]; then
+    phpunit
+fi
+
+if git_hook_enabled 'phpstan' && [[ -f 'phpstan.neon' ]]; then
+    vendor/bin/phpstan analyse
+fi
