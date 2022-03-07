@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -e
+set -euo pipefail
 
 function git_hook_enabled() {
     if [[ "$(git config --get --bool "hooks.$1")" != "false" ]]; then
@@ -16,5 +16,15 @@ function git_hook_php() {
     fi
 }
 
+function git_hook_exclude() {
+    if git commit --verbose --dry-run | grep "$1" >/dev/null 2>&1; then
+      echo "Commit diff includes '$1', stopping."
+      exit 1
+    else
+      exit 0
+    fi
+}
+
+git_hook_exclude '!nocommit'
 git_hook_php 'phpunit'
 git_hook_php 'phpstan'
