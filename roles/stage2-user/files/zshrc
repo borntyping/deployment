@@ -129,10 +129,11 @@ eval "$(direnv hook zsh)"
 # Load custom prompt
 source "$HOME/.local/share/zsh/prompt.zsh"
 
-# ZSH automatic completion
+# ZSH automatic completion ('^ ' is Ctrl+Space)
 # https://github.com/zsh-users/zsh-autosuggestions
 source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+bindkey '^ ' autosuggest-accept
 
 # ZSH syntax highlighting plugin (should be loaded last)
 # https://github.com/zsh-users/zsh-syntax-highlighting
