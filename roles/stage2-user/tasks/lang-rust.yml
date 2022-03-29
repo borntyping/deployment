@@ -4,4 +4,10 @@
     - 'rust'
   block:
     - name: 'install cargo packages'
-      ansible.builtin.command: 'cargo install --force ripgrep exa bat sd'
+      ansible.builtin.command: >-
+        cargo install --force
+        bat
+        difftastic
+        exa
+        ripgrep
+        sd

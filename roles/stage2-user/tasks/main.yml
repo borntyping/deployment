@@ -60,6 +60,7 @@
         - 'socket'
         - 'systemd'
 
+    - import_tasks: 'lang-rust.yml'
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
     - import_tasks: 'tool-micro.yml'
