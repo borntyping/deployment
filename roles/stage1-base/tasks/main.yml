@@ -9,7 +9,7 @@
         state: 'latest'
         pkg:
           - 'ack'
-          - 'ansible'
+          - 'ansible-core'
           - 'asciinema'
           - 'bat'
           - 'cargo'
