@@ -23,17 +23,17 @@
         dest: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
 
     - name: 'generate ssh key for github'
-      ansible.builtin.openssh_keypair:
+      community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_github'
 
     - name: 'generate ssh key for gitlab'
-      ansible.builtin.openssh_keypair:
+      community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_gitlab'
 
     - name: 'generate ssh key for others'
-      ansible.builtin.openssh_keypair:
+      community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_{{ item }}'
       with_items: '{{ ssh_key_names }}'
