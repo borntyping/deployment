@@ -61,26 +61,25 @@ function prompt_python_info() {
 }
 
 # Display the current kubectl context
+# Run 'kubectx -u' to unset the current context
 function prompt_kubectl_info() {
   local config context namespace
 
   config="${KUBECONFIG:-$HOME/.kube/config}"
   prompt_kubectl=""
 
-  if [[ ! -f "$config" ]]; then
-    return
-  fi
+  if [[ -f "$config" ]]; then
+    if (( $+commands[kubectl] )); then
+      context="$(kubectl config current-context 2>/dev/null)"
+    fi
 
-  if command -v kubectl > /dev/null 2>&1; then
-    context="$(kubectl config current-context 2>/dev/null)"
-  fi
+    if (( $+commands[kubens] )) && [[ -n "$context" ]]; then
+      namespace=":$(kubens --current)"
+    fi
 
-  if command -v kubens > /dev/null 2>&1; then
-    namespace="/$(kubens --current)"
-  fi
-
-  if [[ -n "$context" ]]; then
-    prompt_kubectl="%{$prompt_highlight_fg%}${context}${namespace}%{$reset_color%} "
+    if [[ -n "$context" ]]; then
+      prompt_kubectl="%{$prompt_highlight_fg%}${context}${namespace}%{$reset_color%} "
+    fi
   fi
 }
 
