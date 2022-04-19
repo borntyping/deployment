@@ -19,7 +19,7 @@
 .yardoc/
 build/
 cov_html/
-dist/
+#dist/
 gem_graph.png
 gradle/
 gradlew
