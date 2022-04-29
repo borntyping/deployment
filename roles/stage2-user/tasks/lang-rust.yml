@@ -6,8 +6,4 @@
     - name: 'install cargo packages'
       ansible.builtin.command: >-
         cargo install --force
-        bat
         difftastic
-        exa
-        ripgrep
-        sd
