@@ -27,19 +27,13 @@ cd deployment
 ./reconfigure
 ```
 
-You may need to add some missing gpg keys.
-
-```bash
-curl -L https://packagecloud.io/github/git-lfs/gpgkey | sudo apt-key add -
-```
-
 Development
 -----------
 
 Some dependencies are managed using [Peru], which is installed by the
 `stage2-user` role. Once the development machine is bootstrapped you can run
-`peru reup` to update those files, which will fetch the lastest versions of the
-dependecies and copy them into this repository. Tasks that install these files
+`peru reup` to update those files, which will fetch the latest versions of the
+dependencies and copy them into this repository. Tasks that install these files
 are tagged with `peru`, so updating the deployed versions of those files can be
 done with `./reconfigure -t peru`.
 
@@ -48,7 +42,7 @@ Licence
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2020 Sam Clements
+Copyright (c) 2014-2022 Sam Clements
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
