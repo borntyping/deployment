@@ -55,6 +55,7 @@
           - 'python3.10'
           - 'ripgrep'
           - 'rustc'
+          - 'sd'
           - 'ShellCheck'
           - 'tree'
           - 'wl-clipboard'
