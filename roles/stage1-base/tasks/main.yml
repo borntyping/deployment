@@ -59,6 +59,7 @@
           - 'ShellCheck'
           - 'tree'
           - 'wl-clipboard'
+          - 'zoxide'
           - 'zsh'
           - 'zsh-autosuggestions'
           - 'zsh-html'

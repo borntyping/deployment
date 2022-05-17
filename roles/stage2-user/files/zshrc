@@ -75,9 +75,6 @@ export PIPENV_MAX_DEPTH=5
 export SSH_RUN_SUDO_KEYRING=1
 export TERM="xterm-256color"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export ZSH_PECO_HISTORY_DEDUP=1
-export ZSHZ_DATA="${HOME}/.cache/zsh/z"
-export ZSHZ_NO_RESOLVE_SYMLINKS=1
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
@@ -86,14 +83,6 @@ export borntyping="${source}/github.com/borntyping"
 export github="${source}/github.com"
 export gitlab="${source}/gitlab.com"
 export scratch="${source}/scratch"
-
-# ZSH plugins using miniplug
-# https://git.sr.ht/~yerinalexey/miniplug
-source "$HOME/.local/share/zsh/miniplug.zsh"
-miniplug plugin "ael-code/zsh-colored-man-pages"
-miniplug plugin "agkozak/zsh-z"
-miniplug plugin "zsh-users/zsh-completions"
-miniplug load
 
 # Completion rules
 # https://zsh.sourceforge.net/Doc/Release/Completion-System.html
@@ -106,6 +95,13 @@ zstyle ':completion:*:descriptions' format '[%d]'                               
 zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
 zstyle -e ':completion:*:hosts' hosts 'reply=()'
 compinit -C
+
+# ZSH plugins using miniplug
+# https://git.sr.ht/~yerinalexey/miniplug
+source "$HOME/.local/share/zsh/miniplug.zsh"
+miniplug plugin 'ajeetdsouza/zoxide'
+miniplug plugin 'zsh-users/zsh-completions'
+miniplug load
 
 # Direnv
 # https://direnv.net/

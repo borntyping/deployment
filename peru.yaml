@@ -3,7 +3,6 @@ imports:
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
   fira: 'roles/stage3-gui/files/.fonts'
-  peco: 'roles/stage2-user/files/.local/bin'
   fixup|fixup-executable: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-completion: 'roles/stage2-user/files/.local/share/zsh/'
   miniplug: 'roles/stage2-user/files/.local/share/zsh'
@@ -65,11 +64,3 @@ rule fixup-completion:
     completion.zsh: fixup.zsh
   pick:
     - fixup.zsh
-
-curl module peco:
-  url: https://github.com/peco/peco/releases/download/v0.5.8/peco_linux_amd64.tar.gz
-  unpack: tar
-  pick: peco
-  copy:
-    peco_linux_amd64/peco: peco
-  sha1: 9b321cfb05671026982dc7292dcd6ed8378c9988
