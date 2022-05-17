@@ -10,21 +10,28 @@ function git_hook_enabled() {
     fi
 }
 
-function git_hook_php() {
-    if git_hook_enabled "$1" && [[ -f "vendor/bin/$1" ]]; then
-        "vendor/bin/$1"
+function git_hook_grep() {
+    STATUS=0
+    if git_hook_enabled "$1"; then
+        for PATTERN in "${@:2}"
+        do
+            if git commit --verbose --dry-run | grep "$PATTERN" >/dev/null 2>&1; then
+              echo "Commit diff includes '$PATTERN'."
+              STATUS=1
+            fi
+        done
+    fi
+    return $STATUS
+}
+
+function git_hook_exec() {
+    if git_hook_enabled "$1" && [[ -f "$2" ]]; then
+        "${@:3}"
     fi
 }
 
-function git_hook_exclude() {
-    if git commit --verbose --dry-run | grep "$1" >/dev/null 2>&1; then
-      echo "Commit diff includes '$1', stopping."
-      return 1
-    else
-      return 0
-    fi
-}
 
-git_hook_exclude '!nocommit'
-git_hook_php 'phpunit'
-git_hook_php 'phpstan'
+git_hook_grep 'exclude' -- '!nocommit'
+git_hook_exec 'mkdocs' 'mkdocs.yml' -- mkdocs build --strict
+git_hook_exec 'phpunit' 'vendor/bin/phpunit' -- vendor/bin/phpunit
+git_hook_exec 'phpstan' 'vendor/bin/phpstan' -- vendor/bin/phpstan
