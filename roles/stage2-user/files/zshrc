@@ -52,29 +52,24 @@ alias grep='grep --color=auto'
 alias gs='git status'
 alias la='ls -la'
 alias ll='ls -l'
-alias ls='ls --color=auto'
 alias reconfigure-git='reconfigure -t git'
 alias reconfigure-ssh='reconfigure -t ssh'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
-export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS --no-init"
-export BAT_STYLE="plain"
-export DOCKER_HOST="unix:///run/user/1000/podman/podman.sock"
-export EDITOR="micro"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_DEFAULT_OPTS="--no-height --no-reverse"
-export GOPATH="${HOME}/.local/lib/go"
-export LS_COLORS="rs=0:di=01;33:ln=target:or=41:ex=32"
-export MINIPLUG_HOME="$HOME/.cache/zsh/plugins"
-export NPM_CONFIG_PREFIX="${HOME}/.npm"
-export PAGER="bat"
+export EDITOR="micro"                                                           # https://micro-editor.github.io/
+export PAGER="bat"                                                              # https://github.com/sharkdp/bat
+
+export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
+export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
+export DOCKER_HOST="unix:///run/user/${UID}/podman/podman.sock"                 # Make docker-compose work with rootless podman.
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window wrap"              # Show preview window and wrap text. Useful for long commands.
+export NPM_CONFIG_PREFIX="${HOME}/.npm"                                         # https://docs.npmjs.com/cli/v7/configuring-npm/folders#prefix-configuration
+export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
+
+export PATH="${HOME}/.cargo/bin:${PATH}"
+export PATH="${HOME}/.npm/bin:${PATH}"
+export PATH="${HOME}/.krew/bin:${PATH}"
 export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src/:${PATH}"
-export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"
-export PIPENV_IGNORE_VIRTUALENVS=1
-export PIPENV_MAX_DEPTH=5
-export SSH_RUN_SUDO_KEYRING=1
-export TERM="xterm-256color"
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
@@ -96,6 +91,15 @@ zstyle ':completion:*:git-checkout:*' sort false                                
 zstyle -e ':completion:*:hosts' hosts 'reply=()'
 compinit -C
 
+# Completion for kubectl aliases.
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
+function k()  { kubectl "$@"; }
+function kj() { kubectl --output="json" "$@"; }
+function ky() { kubectl --output="yaml" "$@" | bat --language="yaml"; }
+compdef k=kubectl
+compdef kj=kubectl
+compdef ky=kubectl
+
 # ZSH plugins using miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
 source "$HOME/.local/share/zsh/miniplug.zsh"
@@ -113,16 +117,18 @@ eval "$(direnv hook zsh)"
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v rg)" ]] && alias grep='rg'
 
-# Support various utilities if available
-[[ -f "/usr/share/fzf/shell/key-bindings.zsh" ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
-[[ -x "$(command -v kubectl)" ]] && source "$HOME/.local/share/zsh/kubectl.zsh" # Completion for kubectl aliases.
-[[ -x "$(command -v oc)" ]] && source "$HOME/.cache/zsh/functions/_oc"          # The oc completion doesn't work with fpath.
-
-# Machine-local configuration.
-[[ -f "$HOME/.config/zsh/zshrc" ]] && source "$HOME/.config/zsh/zshrc"
-
-# Load custom prompt
+# Load personal prompt configuration and machine-local configuration.
 source "$HOME/.local/share/zsh/prompt.zsh"
+source "$HOME/.config/zsh/zshrc"
+
+if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+  echo "Not loading full profile, running inside a JetBrains IDE."
+  return
+fi
+
+# Command-line fuzzy finder
+# https://github.com/junegunn/fzf
+source "/usr/share/fzf/shell/key-bindings.zsh"
 
 # ZSH automatic completion ('^ ' is Ctrl+Space)
 # https://github.com/zsh-users/zsh-autosuggestions
@@ -132,14 +138,12 @@ bindkey '^ ' autosuggest-accept
 
 # ZSH syntax highlighting plugin (should be loaded last)
 # https://github.com/zsh-users/zsh-syntax-highlighting
-if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-  export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
-  export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
-  export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
-  export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
-  export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
-  export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
-  export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
-fi
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
+export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
+export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
+export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
+export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
+export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
+export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'

@@ -3,7 +3,6 @@
     - 'cargo'
     - 'rust'
   block:
-    - name: 'install cargo packages'
-      ansible.builtin.command: >-
-        cargo install --force
-        difftastic
+    - name: 'install difftastic'
+      ansible.builtin.command: 'cargo install difftastic'
+      creates: '{{ lookup("env", "HOME") }}/.cargo/bin/difft'
