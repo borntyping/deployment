@@ -5,4 +5,5 @@
   block:
     - name: 'install difftastic'
       ansible.builtin.command: 'cargo install difftastic'
-      creates: '{{ lookup("env", "HOME") }}/.cargo/bin/difft'
+      args:
+        creates: '{{ lookup("env", "HOME") }}/.cargo/bin/difft'
