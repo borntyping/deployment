@@ -13,7 +13,7 @@ function git_hook_enabled() {
 function git_hook_grep() {
     STATUS=0
     if git_hook_enabled "$1"; then
-        for PATTERN in "${@:2}"
+        for PATTERN in "${@:3}"
         do
             if git commit --verbose --dry-run | grep "$PATTERN" >/dev/null 2>&1; then
               echo "Commit diff includes '$PATTERN'."
@@ -26,7 +26,7 @@ function git_hook_grep() {
 
 function git_hook_exec() {
     if git_hook_enabled "$1" && [[ -f "$2" ]]; then
-        "${@:3}"
+        "${@:4}"
     fi
 }
 
