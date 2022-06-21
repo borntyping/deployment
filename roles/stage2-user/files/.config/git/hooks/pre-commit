@@ -1,37 +1,44 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env python3.9
 
-set -euo pipefail
-
-function git_hook_enabled() {
-    if [[ "$(git config --get --bool "hooks.$1")" != "false" ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-function git_hook_grep() {
-    STATUS=0
-    if git_hook_enabled "$1"; then
-        for PATTERN in "${@:3}"
-        do
-            if git commit --verbose --dry-run | grep "$PATTERN" >/dev/null 2>&1; then
-              echo "Commit diff includes '$PATTERN'."
-              STATUS=1
-            fi
-        done
-    fi
-    return $STATUS
-}
-
-function git_hook_exec() {
-    if git_hook_enabled "$1" && [[ -f "$2" ]]; then
-        "${@:4}"
-    fi
-}
+import pathlib
+import subprocess
 
 
-git_hook_grep 'exclude' -- '!nocommit'
-git_hook_exec 'mkdocs' 'mkdocs.yml' -- mkdocs build --strict
-git_hook_exec 'phpunit' 'vendor/bin/phpunit' -- vendor/bin/phpunit
-git_hook_exec 'phpstan' 'vendor/bin/phpstan' -- vendor/bin/phpstan
+def exists(filename: str) -> bool:
+    return pathlib.Path(filename).exists()
+
+
+def git_hook_enabled(name: str) -> bool:
+    command = ('git', 'config', '--get', '--bool', f"hooks.{name}")
+    result = subprocess.run(command, check=True, capture_output=True, encoding='utf-8')
+    return result.stdout.strip() != 'false'
+
+
+def git_hook_exclude(pattern: str) -> None:
+    command = ('git', 'commit', '--verbose', '--dry-run')
+    result = subprocess.run(command, check=True, capture_output=True, encoding='utf-8')
+
+    if pattern in result.stdout:
+        print(f"Commit diff includes {pattern!r}")
+        raise SystemExit(1)
+
+
+def git_hook_exec(command: list[str]) -> None:
+    result = subprocess.run(command, check=False, capture_output=False, encoding='utf-8')
+
+    if result.returncode:
+        raise SystemExit(result.returncode)
+
+
+if __name__ == '__main__':
+    if git_hook_enabled('exclude'):
+        git_hook_exclude('!nocommit')
+
+    if git_hook_enabled('mkdocs') and exists('mkdocs.yml'):
+        git_hook_exec(['mkdocs', 'build', '--strict'])
+
+    if git_hook_enabled('phpunit') and exists('vendor/bin/phpunit'):
+        git_hook_exec(['vendor/bin/phpunit'])
+
+    if git_hook_enabled('phpstan') and exists('vendor/bin/phpstan'):
+        git_hook_exec(['vendor/bin/phpstan'])
