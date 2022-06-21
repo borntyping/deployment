@@ -37,6 +37,15 @@ if __name__ == '__main__':
     if git_hook_enabled('mkdocs') and exists('mkdocs.yml'):
         git_hook_exec(['mkdocs', 'build', '--strict'])
 
+    if git_hook_enabled('black') and exists('pyproject.toml'):
+        git_hook_exec(['poetry', 'run', 'black', '--check', '--diff', '.'])
+
+    if git_hook_enabled('mypy') and exists('pyproject.toml'):
+        git_hook_exec(['poetry', 'run', 'mypy', '.'])
+
+    if git_hook_enabled('pytest') and exists('pyproject.toml'):
+        git_hook_exec(['poetry', 'run', 'pytest'])
+
     if git_hook_enabled('phpunit') and exists('vendor/bin/phpunit'):
         git_hook_exec(['vendor/bin/phpunit'])
 
