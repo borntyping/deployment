@@ -9,14 +9,14 @@ def exists(filename: str) -> bool:
 
 
 def git_hook_enabled(name: str) -> bool:
-    command = ('git', 'config', '--get', '--bool', f"hooks.{name}")
-    result = subprocess.run(command, check=True, capture_output=True, encoding='utf-8')
-    return result.stdout.strip() != 'false'
+    command = ("git", "config", "--get", "--type", "bool", f"hooks.{name}")
+    result = subprocess.run(command, capture_output=True, encoding="utf-8")
+    return result.returncode == 1 or result.stdout.strip() == "true"
 
 
 def git_hook_exclude(pattern: str) -> None:
-    command = ('git', 'commit', '--verbose', '--dry-run')
-    result = subprocess.run(command, check=True, capture_output=True, encoding='utf-8')
+    command = ("git", "commit", "--verbose", "--dry-run")
+    result = subprocess.run(command, check=True, capture_output=True, encoding="utf-8")
 
     if pattern in result.stdout:
         print(f"Commit diff includes {pattern!r}")
@@ -24,30 +24,30 @@ def git_hook_exclude(pattern: str) -> None:
 
 
 def git_hook_exec(command: list[str]) -> None:
-    result = subprocess.run(command, check=False, capture_output=False, encoding='utf-8')
+    result = subprocess.run(command, encoding="utf-8")
 
     if result.returncode:
         raise SystemExit(result.returncode)
 
 
-if __name__ == '__main__':
-    if git_hook_enabled('exclude'):
-        git_hook_exclude('!nocommit')
+if __name__ == "__main__":
+    if git_hook_enabled("exclude"):
+        git_hook_exclude("!nocommit")
 
-    if git_hook_enabled('mkdocs') and exists('mkdocs.yml'):
-        git_hook_exec(['mkdocs', 'build', '--strict'])
+    if git_hook_enabled("mkdocs") and exists("mkdocs.yml"):
+        git_hook_exec(["mkdocs", "build", "--strict"])
 
-    if git_hook_enabled('black') and exists('pyproject.toml'):
-        git_hook_exec(['poetry', 'run', 'black', '--check', '--diff', '.'])
+    if git_hook_enabled("black") and exists("pyproject.toml"):
+        git_hook_exec(["poetry", "run", "black", "--check", "--diff", "."])
 
-    if git_hook_enabled('mypy') and exists('pyproject.toml'):
-        git_hook_exec(['poetry', 'run', 'mypy', '.'])
+    if git_hook_enabled("mypy") and exists("pyproject.toml"):
+        git_hook_exec(["poetry", "run", "mypy", "."])
 
-    if git_hook_enabled('pytest') and exists('pyproject.toml'):
-        git_hook_exec(['poetry', 'run', 'pytest'])
+    if git_hook_enabled("pytest") and exists("pyproject.toml"):
+        git_hook_exec(["poetry", "run", "pytest"])
 
-    if git_hook_enabled('phpunit') and exists('vendor/bin/phpunit'):
-        git_hook_exec(['vendor/bin/phpunit'])
+    if git_hook_enabled("phpunit") and exists("vendor/bin/phpunit"):
+        git_hook_exec(["vendor/bin/phpunit"])
 
-    if git_hook_enabled('phpstan') and exists('vendor/bin/phpstan'):
-        git_hook_exec(['vendor/bin/phpstan'])
+    if git_hook_enabled("phpstan") and exists("vendor/bin/phpstan"):
+        git_hook_exec(["vendor/bin/phpstan"])
