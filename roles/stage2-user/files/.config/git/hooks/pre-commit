@@ -16,7 +16,10 @@ def git_hook_enabled(name: str) -> bool:
 
 def git_hook_exclude(pattern: str) -> None:
     command = ("git", "commit", "--verbose", "--dry-run")
-    result = subprocess.run(command, check=True, capture_output=True, encoding="utf-8")
+    result = subprocess.run(command, capture_output=True, encoding="utf-8")
+
+    if result.returncode != 0:
+        return
 
     if pattern in result.stdout:
         print(f"Commit diff includes {pattern!r}")
