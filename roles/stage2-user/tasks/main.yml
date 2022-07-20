@@ -6,11 +6,14 @@
     - name: 'install python packages'
       pip:
         name:
+          - 'ansible'
+          - 'ansible-lint'
           - 'peru'
         state: 'latest'
         executable: 'pip3'
         extra_args: '--user'
       tags:
+        - 'ansible'
         - 'python'
         - 'bin'
 
@@ -55,7 +58,9 @@
         name: 'podman.socket'
         state: 'started'
         scope: user
+      when: 'ansible_distribution == "Fedora"'
       tags:
+        - 'fedora'
         - 'podman'
         - 'socket'
         - 'systemd'

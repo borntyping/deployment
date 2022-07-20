@@ -9,7 +9,8 @@ Usage
 Install essential dependencies:
 
 ```bash
-sudo apt install ansible git
+sudo apt install git pip
+pip install --user ansible ansible-lint
 ```
 
 Clone this repository:

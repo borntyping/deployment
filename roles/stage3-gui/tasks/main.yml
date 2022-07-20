@@ -4,6 +4,7 @@
     - 'stage3-gui'
   block:
     - name: 'install packages'
+      when: stage3_enabled
       ansible.builtin.dnf:
         name:
           - 'firefox'
