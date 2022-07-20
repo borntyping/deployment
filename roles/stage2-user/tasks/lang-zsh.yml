@@ -41,15 +41,15 @@
         shell: '/bin/zsh'
       become: 'yes'
 
-    - name: 'generate kubectl completion files'
-      ansible.builtin.shell:
-        cmd: 'kubectl completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
-        creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
+#     - name: 'generate kubectl completion files'
+#       ansible.builtin.shell:
+#         cmd: 'kubectl completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
+#         creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
 
-    - name: 'generate oc completion files'
-      ansible.builtin.shell:
-        cmd: 'oc completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
-#        creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
+#     - name: 'generate oc completion files'
+#       ansible.builtin.shell:
+#         cmd: 'oc completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
+#         creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
 
     - name: 'copy atuin configuration directory'
       ansible.builtin.copy:

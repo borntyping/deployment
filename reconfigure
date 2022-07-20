@@ -2,7 +2,7 @@
 pushd "$(readlink -f $(dirname "${BASH_SOURCE[0]}"))" >/dev/null
 export ANSIBLE_RETRY_FILES_ENABLED="false"
 export ANSIBLE_NOCOWS="true"
-exec ansible-playbook \
+exec "$HOME/.local/bin/ansible-playbook" \
   --diff \
   --inventory="localhost," \
   --extra-vars="ansible_connection=local" \
