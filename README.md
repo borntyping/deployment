@@ -6,24 +6,35 @@ Deploys dotfiles, configuration and packages to my machines using Ansible.
 Usage
 -----
 
-Install git, ansible, and the `keyring` Python module.
+Install essential dependencies:
 
 ```bash
-sudo dnf install ansible git python-keyring tilix
+sudo apt install ansible git
 ```
 
-Add the password Ansible will use for `sudo` to the keyring:
-
-```
-keyring set ansible_sudo_pass $USER
-```
-
-Clone this repository, then create an inventory file and run the
-`./reconfigure` script.
+Clone this repository:
 
 ```bash
 git clone https://github.com/borntyping/deployment.git
-cd deployment
+```
+
+Create the local machine's inventory:
+
+```bash
+touch host_vars/localhost.yaml
+```
+
+If you run into line ending issues as you cloned the repo with GitHub Desktop and are using it inside a WSL distribution:
+
+```bash
+git config --global core.eol lf
+git config --global core.autocrlf input
+git reset --hard
+```
+
+Run the playbook:
+
+```bash
 ./reconfigure
 ```
 
