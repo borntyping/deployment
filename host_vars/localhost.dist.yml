@@ -1,0 +1,4 @@
+---
+ansible_sudo_pass: "{{ undef }}"
+ssh_key_names:
+  - "{{ undef }}"

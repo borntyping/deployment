@@ -9,14 +9,22 @@ Usage
 Install essential dependencies:
 
 ```bash
-sudo apt install ansible-core git pip
-ansible-galaxy collection install ansible.posix community.crypto
+sudo apt install ansible-core git git-lfs pip
 ```
 
 Clone this repository:
 
 ```bash
 git clone https://github.com/borntyping/deployment.git
+cd deployment
+git lfs install
+git lfs fetch
+```
+
+Install Ansible collections:
+
+```bash
+ansible-galaxy collection install --requirements-file collections/requirements.yml
 ```
 
 Create the local machine's inventory:
@@ -34,6 +42,12 @@ Run the playbook:
 
 ```bash
 ./reconfigure
+```
+
+Open `tilix`, and install ZSH plugins:
+
+```zsh
+miniplug install
 ```
 
 If you run into line ending issues as you cloned the repo with GitHub Desktop and are using it inside a WSL distribution:
