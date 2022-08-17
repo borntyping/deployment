@@ -9,8 +9,8 @@ Usage
 Install essential dependencies:
 
 ```bash
-sudo apt install git pip
-pip install --user ansible ansible-lint
+sudo apt install ansible-core git pip
+ansible-galaxy collection install ansible.posix community.crypto
 ```
 
 Clone this repository:
@@ -22,7 +22,18 @@ git clone https://github.com/borntyping/deployment.git
 Create the local machine's inventory:
 
 ```bash
-touch host_vars/localhost.yaml
+nano host_vars/localhost.yaml
+```
+
+```yaml
+---
+ansible_sudo_pass: "..."
+```
+
+Run the playbook:
+
+```bash
+./reconfigure
 ```
 
 If you run into line ending issues as you cloned the repo with GitHub Desktop and are using it inside a WSL distribution:
@@ -31,12 +42,6 @@ If you run into line ending issues as you cloned the repo with GitHub Desktop an
 git config --global core.eol lf
 git config --global core.autocrlf input
 git reset --hard
-```
-
-Run the playbook:
-
-```bash
-./reconfigure
 ```
 
 Development
