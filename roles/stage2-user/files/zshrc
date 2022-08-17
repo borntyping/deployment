@@ -96,14 +96,17 @@ compinit -C
 function k()  { kubectl "$@"; }
 function kj() { kubectl --output="json" "$@"; }
 function ky() { kubectl --output="yaml" "$@" | bat --language="yaml"; }
-compdef k=kubectl
-compdef kj=kubectl
-compdef ky=kubectl
+if [[ -x "$(command -v bat)" ]]; then
+  compdef k=kubectl
+  compdef kj=kubectl
+  compdef ky=kubectl
+fi
 
 # ZSH plugins using miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
 source "$HOME/.local/share/zsh/miniplug.zsh"
 miniplug plugin 'ajeetdsouza/zoxide'
+miniplug plugin 'ellie/atuin'
 miniplug plugin 'zsh-users/zsh-completions'
 miniplug load
 
@@ -126,9 +129,9 @@ if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   return
 fi
 
-# Command-line fuzzy finder
-# https://github.com/junegunn/fzf
-source "/usr/share/fzf/shell/key-bindings.zsh"
+# # Command-line fuzzy finder
+# # https://github.com/junegunn/fzf
+# source "/usr/share/fzf/shell/key-bindings.zsh"
 
 # ZSH automatic completion ('^ ' is Ctrl+Space)
 # https://github.com/zsh-users/zsh-autosuggestions
