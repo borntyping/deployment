@@ -42,7 +42,8 @@ bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus.
 bindkey '^e' edit-command-line          # Edit current line (Ctrl+e).
 bindkey -r "^V"                         # Disable `ctrl-v` so it does not mix with `ctrl-shift-v`.
 
-alias cola='git-cola 2>/dev/null &'
+alias bat='batcat'                      # Ubuntu's executable is 'batcat' instead of 'bat'.
+alias cola='git-cola 2>/dev/null &'     # The 'git-cola' executable often prints QT warnings.
 alias db='docker run --rm --interactive --tty $(docker build --quiet --tag=db .)'
 alias gc='git commit'
 alias gca='git commit -a'
