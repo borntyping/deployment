@@ -30,6 +30,7 @@
           - 'hub'
           - 'jq'
           - 'micro'
+          - 'mlocate'
           - 'mypy'
           - 'nano'
           - 'php-cli'
