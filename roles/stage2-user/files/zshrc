@@ -106,9 +106,16 @@ fi
 # https://git.sr.ht/~yerinalexey/miniplug
 source "$HOME/.local/share/zsh/miniplug.zsh"
 miniplug plugin 'ajeetdsouza/zoxide'
-miniplug plugin 'ellie/atuin'
 miniplug plugin 'zsh-users/zsh-completions'
 miniplug load
+
+# Atuin
+# https://github.com/ellie/atuin/blob/main/docs/key-binding.md
+if [[ "$+commands[atuin]" -eq 1 ]]; then
+  export ATUIN_NOBIND="true"
+  eval "$(atuin init zsh)"
+  bindkey '^r' _atuin_search_widget
+fi
 
 # Direnv
 # https://direnv.net/
