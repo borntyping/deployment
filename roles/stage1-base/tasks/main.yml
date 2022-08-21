@@ -48,6 +48,7 @@
           - 'python3'
           - 'ripgrep'
           - 'rustc'
+          - 'rust-src'
           - 'shellcheck'
           - 'tree'
           - 'wl-clipboard'
