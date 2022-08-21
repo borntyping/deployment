@@ -67,12 +67,6 @@
         - 'rust'
         - 'zsh'
 
-    - name: 'install snap packages'
-      tags: ['git', 'snap']
-      community.general.snap:
-        name:
-          - difftastic
-
     - name: 'install snap packages with --classic'
       tags: ['python', 'snap']
       community.general.snap:

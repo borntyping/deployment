@@ -9,4 +9,7 @@
         creates: '{{ lookup("env", "HOME") }}/.cargo/bin/{{ item.bin|default(item.package) }}'
       loop:
         - package: atuin
-          
+        - package: difftastic
+          bin: difft
+      loop_control:
+        label: '{{ item.package }}'
