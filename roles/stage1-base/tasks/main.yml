@@ -88,3 +88,11 @@
         - docker
         - sudo
         - sudoers
+
+    - name: 'configure varmilo keyboard'
+      ansible.builtin.copy:
+        src: 'etc/modprobe.d/hid_apple.conf'
+        dest: '/etc/modprobe.d/hid_apple.conf'
+      tags:
+        - never
+        - hardware
