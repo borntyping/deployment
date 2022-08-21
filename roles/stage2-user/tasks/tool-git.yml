@@ -35,3 +35,9 @@
         - 'Development/scratch'
       tags:
         - 'scratch'
+
+    - name: 'create git-river config directory'
+      tags: ['git', 'git-river']
+      ansible.builtin.file:
+        name: '{{ lookup("env", "HOME") }}/.config/git-river'
+        state: 'directory'
