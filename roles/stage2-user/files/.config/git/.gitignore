@@ -1,0 +1,3 @@
+config.d/9*.config
+hosts.d/github.com/*.local.config
+!hosts.d/github.com/borntyping.config
