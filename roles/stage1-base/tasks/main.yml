@@ -29,6 +29,7 @@
           - 'httpie'
           - 'hub'
           - 'jq'
+          - 'libpam-u2f'
           - 'micro'
           - 'mlocate'
           - 'mypy'
