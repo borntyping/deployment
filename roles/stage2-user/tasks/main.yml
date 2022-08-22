@@ -63,8 +63,22 @@
         - 'socket'
         - 'systemd'
 
+    - name: 'copy .config directories'
+      ansible.builtin.copy:
+        src: '.config/{{ item }}/'
+        dest: '{{ lookup("env", "HOME") }}/.config/{{ item }}/'
+      loop:
+        - atuin
+        - micro
+        - pypoetry
+      tags:
+        - atuin
+        - config
+        - micro
+        - python
+        - poetry
+
     - import_tasks: 'lang-rust.yml'
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
-    - import_tasks: 'tool-micro.yml'
     - import_tasks: 'tool-ssh.yml'
