@@ -147,6 +147,10 @@ source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
 
+# Tilix VTE fix
+# https://gnunn1.github.io/tilix-web/manual/vteconfig/
+[[ -f '/etc/profile.d/vte-2.91.sh' ]] && source '/etc/profile.d/vte-2.91.sh'
+
 # ZSH syntax highlighting plugin (should be loaded last)
 # https://github.com/zsh-users/zsh-syntax-highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
