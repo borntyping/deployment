@@ -6,7 +6,13 @@
     - name: 'install python packages'
       pip:
         name:
+          - 'black'
+          - 'httpie'
           - 'peru'
+          - 'pipenv'
+          - 'pipx'
+          - 'poetry'
+          - 'wheel'
         state: 'latest'
         executable: 'pip3'
         extra_args: '--user'
