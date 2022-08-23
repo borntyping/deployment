@@ -22,7 +22,6 @@
           - 'git-lfs'                   # git large file support
           - 'git'                       # git
           - 'htop'
-          - 'hub'
           - 'jq'
           - 'libpam-u2f'
           - 'micro'
