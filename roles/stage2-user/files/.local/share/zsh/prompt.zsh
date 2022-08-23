@@ -83,6 +83,14 @@ function prompt_kubectl_info() {
   fi
 }
 
+# Zoxide sets `$_zoxide_result`, which interferes with `AUTO_NAME_DIRS`. Only
+# needs to run in `precmd_functions` before which is executed before the
+# prompt is shown, but should be before any functions that display the current
+# working directory.
+function _src_unset_zoxide_result() {
+  unset _zoxide_result
+}
+
 function prompt_precmd_title() {
   case "$TERM" in
   xterm*) print -Pn "\e]2;%~\a" ;;
@@ -95,7 +103,7 @@ function prompt_preexec_title() {
   esac
 }
 
-export precmd_functions=($precmd_functions prompt_precmd_title vcs_info prompt_kubectl_info prompt_python_info)
+export precmd_functions=($precmd_functions _src_unset_zoxide_result prompt_precmd_title vcs_info prompt_kubectl_info prompt_python_info)
 export preexec_functions=($preexec_functions prompt_preexec_title)
 
 # Assemble the prompt
