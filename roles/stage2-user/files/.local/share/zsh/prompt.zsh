@@ -46,7 +46,7 @@ function +vi-git-remote() {
 }
 
 # Display the current virtualenv when active
-function prompt_python_info() {
+function _src_python_info() {
   prompt_python=""
   if [[ -n "$PIPENV_ACTIVE" ]]; then
     prompt_python="%{${prompt_fg}%}pipenv%{${reset_color}%} "
@@ -62,7 +62,7 @@ function prompt_python_info() {
 
 # Display the current kubectl context
 # Run 'kubectx -u' to unset the current context
-function prompt_kubectl_info() {
+function _src_kubectl_info() {
   local config context namespace
 
   config="${KUBECONFIG:-$HOME/.kube/config}"
@@ -91,20 +91,22 @@ function _src_unset_zoxide_result() {
   unset _zoxide_result
 }
 
-function prompt_precmd_title() {
+# Sets the window title to the current working directory.
+function _src_precmd_title() {
   case "$TERM" in
   xterm*) print -Pn "\e]2;%~\a" ;;
   esac
 }
 
-function prompt_preexec_title() {
+# Sets the window title to the current working directory and executing command.
+function _src_preexec_title() {
   case "$TERM" in
   xterm*) print -Pn "\e]2;%~ $ $2\a" ;;
   esac
 }
 
-export precmd_functions=($precmd_functions _src_unset_zoxide_result prompt_precmd_title vcs_info prompt_kubectl_info prompt_python_info)
-export preexec_functions=($preexec_functions prompt_preexec_title)
+export precmd_functions=($precmd_functions _src_unset_zoxide_result _src_precmd_title vcs_info _src_kubectl_info _src_python_info)
+export preexec_functions=($preexec_functions _src_preexec_title)
 
 # Assemble the prompt
 #
