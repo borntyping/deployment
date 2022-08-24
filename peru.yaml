@@ -1,8 +1,10 @@
 ---
 imports:
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
+  dog|bin: 'roles/stage2-user/files/.local/bin/'
+  dog|zsh: 'roles/stage2-user/files/.local/share/zsh/'
+  dog|man: 'roles/stage2-user/files/.local/share/man/'
   fantasque: 'roles/stage3-gui/files/.fonts'
-  fira: 'roles/stage3-gui/files/.fonts'
   fixup|fixup-executable: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-completion: 'roles/stage2-user/files/.local/share/zsh/'
   miniplug: 'roles/stage2-user/files/.local/share/zsh'
@@ -20,6 +22,33 @@ curl module dracula:
     tilix-master/Dracula.json: Dracula.json
   sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
 
+curl module dog:
+  url: https://github.com/ogham/dog/releases/download/v0.1.0/dog-v0.1.0-x86_64-unknown-linux-gnu.zip
+  unpack: zip
+  pick:
+    - bin/dog
+    - completions/dog.zsh
+    - man/dog.1
+  sha1: cc6429c92da8caf16d4bfb85bdbe9f3510c05ddc
+
+rule bin:
+  copy:
+    bin/dog: dog
+  pick:
+    - dog
+
+rule zsh:
+  copy:
+    completions/dog.zsh: dog.zsh
+  pick:
+    - dog.zsh
+
+rule man:
+  copy:
+    man/dog.1: dog.1
+  pick:
+    - dog.1
+
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
   unpack: zip
@@ -31,26 +60,9 @@ curl module fantasque:
   move:
     TTF/FantasqueSansMono-Bold.ttf: FantasqueSansMono-Bold.ttf
     TTF/FantasqueSansMono-BoldItalic.ttf: FantasqueSansMono-BoldItalic.ttf
-    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-Italic.dog
+    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-Italic.ttf
     TTF/FantasqueSansMono-Regular.ttf: FantasqueSansMono-Regular.ttf
   sha1: 54cf092de3ad5785f80bc198809837096f16966b
-
-curl module fira:
-  url: https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
-  unpack: zip
-  pick:
-    - FiraCode-Bold.ttf
-    - FiraCode-Light.ttf
-    - FiraCode-Medium.ttf
-    - FiraCode-Regular.ttf
-    - FiraCode-Retina.ttf
-  move:
-    ttf/FiraCode-Bold.ttf: FiraCode-Bold.ttf
-    ttf/FiraCode-Light.ttf: FiraCode-Light.ttf
-    ttf/FiraCode-Medium.ttf: FiraCode-Medium.ttf
-    ttf/FiraCode-Regular.ttf: FiraCode-Regular.ttf
-    ttf/FiraCode-Retina.ttf: FiraCode-Retina.ttf
-  sha1: eeebfda13725e682cba35ee26a4fd7899ab2d5dc
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git

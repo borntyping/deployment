@@ -44,7 +44,7 @@
         - 'ansible'
         - 'micro'
 
-    - name: 'install personal scripts'
+    - name: 'install scripts'
       ansible.builtin.copy:
         src: '.local/share/src/'
         dest: '{{ lookup("env", "HOME") }}/.local/share/src/'
@@ -56,6 +56,14 @@
         - 'git-tidy'
         - 'reconfigure'
         - 'src'
+
+    - name: 'install man pages'
+      ansible.builtin.copy:
+        src: '.local/share/man/'
+        dest: '{{ lookup("env", "HOME") }}/.local/share/man/'
+        mode: '0755'
+      tags:
+        - 'man'
 
     - name: 'enable user podman socket'
       ansible.builtin.systemd:
