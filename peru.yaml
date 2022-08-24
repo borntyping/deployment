@@ -1,9 +1,6 @@
 ---
 imports:
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
-  dog|bin: 'roles/stage2-user/files/.local/bin/'
-  dog|zsh: 'roles/stage2-user/files/.local/share/zsh/'
-  dog|man: 'roles/stage2-user/files/.local/share/man/'
   fantasque: 'roles/stage3-gui/files/.fonts'
   fixup|fixup-executable: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-completion: 'roles/stage2-user/files/.local/share/zsh/'
@@ -21,33 +18,6 @@ curl module dracula:
   move:
     tilix-master/Dracula.json: Dracula.json
   sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
-
-curl module dog:
-  url: https://github.com/ogham/dog/releases/download/v0.1.0/dog-v0.1.0-x86_64-unknown-linux-gnu.zip
-  unpack: zip
-  pick:
-    - bin/dog
-    - completions/dog.zsh
-    - man/dog.1
-  sha1: cc6429c92da8caf16d4bfb85bdbe9f3510c05ddc
-
-rule bin:
-  copy:
-    bin/dog: dog
-  pick:
-    - dog
-
-rule zsh:
-  copy:
-    completions/dog.zsh: dog.zsh
-  pick:
-    - dog.zsh
-
-rule man:
-  copy:
-    man/dog.1: dog.1
-  pick:
-    - dog.1
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
