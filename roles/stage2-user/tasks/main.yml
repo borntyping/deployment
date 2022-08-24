@@ -84,10 +84,12 @@
         dest: '{{ lookup("env", "HOME") }}/.config/{{ item }}/'
       loop:
         - atuin
+        - direnv
         - micro
         - pypoetry
       tags:
         - atuin
+        - direnv
         - config
         - micro
         - python
