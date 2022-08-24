@@ -12,6 +12,7 @@
           - 'pipenv'
           - 'pipx'
           - 'poetry'
+          - 'pre-commit'
           - 'wheel'
         state: 'latest'
         executable: 'pip3'
