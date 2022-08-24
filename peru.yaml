@@ -9,6 +9,7 @@ imports:
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
+  sha1: cc87eb8d24214df257d2809823869786b78d779d
 
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
@@ -17,7 +18,7 @@ curl module dracula:
     - Dracula.json
   move:
     tilix-master/Dracula.json: Dracula.json
-  sha1: b5de62bcc605e1464fe4b0d53fec92b8db35204a
+  sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
@@ -30,7 +31,7 @@ curl module fantasque:
   move:
     TTF/FantasqueSansMono-Bold.ttf: FantasqueSansMono-Bold.ttf
     TTF/FantasqueSansMono-BoldItalic.ttf: FantasqueSansMono-BoldItalic.ttf
-    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-Italic.ttf
+    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-Italic.dog
     TTF/FantasqueSansMono-Regular.ttf: FantasqueSansMono-Regular.ttf
   sha1: 54cf092de3ad5785f80bc198809837096f16966b
 
@@ -53,7 +54,7 @@ curl module fira:
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
-  rev: 46e043b4e2fb2986b73aeae8efddb7f1a4e08e33
+  rev: 1e75d21017af0542c9bb7dca80d40b7e1e22bb08
 
 rule fixup-executable:
   pick:
