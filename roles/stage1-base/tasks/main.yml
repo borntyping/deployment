@@ -45,15 +45,7 @@
           - 'zsh-syntax-highlighting'
           - 'zsh'
       tags:
-        - 'bin'
         - 'apt'
-        - 'docker'
-        - 'git'
-        - 'lib'
-        - 'php'
-        - 'python'
-        - 'rust'
-        - 'zsh'
 
     - name: 'remove apt packages'
       ansible.builtin.apt:
@@ -70,7 +62,6 @@
           - 'hub'                       # Switched to 'gh'.
       tags:
         - 'apt'
-        - 'python'
 
     - name: 'install snap packages with --classic'
       tags: ['python', 'snap']
@@ -79,6 +70,8 @@
         classic: true
       loop:
         - 'pycharm-professional'
+      tags:
+        - 'snap'
 
     - name: 'configure sudo'
       ansible.builtin.copy:

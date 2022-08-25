@@ -1,6 +1,13 @@
-!.local/
-*.local.config
-.idea/
+# Ignore Peru cache files
 .peru/
+
+# Ignore editor and local configuraton
+.local/
+.idea/
 .vscode/
+
+# Ignore Ansible retry files.
 site.retry
+
+# Ignore host vars for the local machine.
+host_vars/localhost.yml

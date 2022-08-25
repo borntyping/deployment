@@ -3,37 +3,38 @@
     - 'dotfiles'
     - 'shell'
     - 'zsh'
+    - 'zshrc'
   block:
     - name: 'copy zsh libraries'
       ansible.builtin.copy:
         src: '.local/share/zsh/'
-        dest: '{{ lookup("env", "HOME") }}/.local/share/zsh/'
+        dest: '{{ home }}/.local/share/zsh/'
         mode: 'u=rw,g=r,o=r'
-      tags:
-        - 'zshrc'
 
     - name: 'copy zsh config'
       ansible.builtin.copy:
         src: 'zshrc'
-        dest: '{{ lookup("env", "HOME") }}/.zshrc'
-      tags:
-        - 'zshrc'
+        dest: '{{ home }}/.zshrc'
 
     - name: 'create zsh directories'
       ansible.builtin.file:
-        name: '{{ lookup("env", "HOME") }}/{{ item }}'
+        name: '{{ home }}/{{ item }}'
         state: 'directory'
       loop:
         - '.cache/zsh/'
         - '.cache/zsh/completion/'
         - '.cache/zsh/functions/'
         - '.config/zsh/'
+        - '.config/zsh/zshrc.d/'
 
-    - name: 'touch zsh local configuration directory'
+    - name: 'create zsh local configuration'
       ansible.builtin.copy:
-        src: '/dev/null'
-        dest: '{{ lookup("env", "HOME") }}/.config/zsh/zshrc'
-        force: false
+        content: "{{ item.value }}"
+        dest: '{{ home }}/.config/zsh/zshrc.d/{{ item.key }}'
+        mode: 'preserve'
+      loop: '{{ zsh_zshrc|combine(zsh_zshrc_local)|dict2items }}'
+      loop_control:
+        label: '{{ item.key }}'
 
     - name: 'set shell to zsh'
       ansible.builtin.user:
