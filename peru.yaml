@@ -5,7 +5,7 @@ imports:
   fixup|fixup-bin: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-zsh: 'roles/stage2-user/files/.local/share/zsh/'
   just|just-bin: 'roles/stage2-user/files/.local/bin/'
-  just|just-man: 'roles/stage2-user/files/.local/share/man/'
+  just|just-man: 'roles/stage2-user/files/.local/share/man/man1/'
   miniplug: 'roles/stage2-user/files/.local/share/zsh/'
 
 curl module miniplug:
