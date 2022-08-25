@@ -64,7 +64,6 @@
         - 'apt'
 
     - name: 'install snap packages with --classic'
-      tags: ['python', 'snap']
       community.general.snap:
         name: '{{ item }}'
         classic: true
