@@ -2,9 +2,11 @@
 imports:
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
-  fixup|fixup-executable: 'roles/stage2-user/files/.local/bin/'
-  fixup|fixup-completion: 'roles/stage2-user/files/.local/share/zsh/'
-  miniplug: 'roles/stage2-user/files/.local/share/zsh'
+  fixup|fixup-bin: 'roles/stage2-user/files/.local/bin/'
+  fixup|fixup-zsh: 'roles/stage2-user/files/.local/share/zsh/'
+  just|just-bin: 'roles/stage2-user/files/.local/bin/'
+  just|just-man: 'roles/stage2-user/files/.local/share/man/'
+  miniplug: 'roles/stage2-user/files/.local/share/zsh/'
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
@@ -38,12 +40,25 @@ git module fixup:
   url: https://github.com/keis/git-fixup.git
   rev: 1e75d21017af0542c9bb7dca80d40b7e1e22bb08
 
-rule fixup-executable:
+rule fixup-bin:
   pick:
     - git-fixup
 
-rule fixup-completion:
+rule fixup-zsh:
   copy:
     completion.zsh: fixup.zsh
   pick:
     - fixup.zsh
+
+curl module just:
+  url: https://github.com/casey/just/releases/download/1.4.0/just-1.4.0-x86_64-unknown-linux-musl.tar.gz
+  unpack: tar
+  sha1: ab323d0d1617c74d79427f1d596f25e7cb3c28b9
+
+rule just-bin:
+  pick:
+    - just
+
+rule just-man:
+  pick:
+    - just.1
