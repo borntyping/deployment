@@ -57,7 +57,7 @@ alias reconfigure-ssh='reconfigure -t ssh'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
-export PAGER="bat"                                                              # https://github.com/sharkdp/bat
+export PAGER="batcat"                                                           # https://github.com/sharkdp/bat
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
