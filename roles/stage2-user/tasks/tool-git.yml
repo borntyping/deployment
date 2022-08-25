@@ -1,5 +1,6 @@
 ---
 - tags:
+    - 'dotfiles'
     - 'git'
   block:
     - name: 'copy git config directory'
@@ -7,21 +8,30 @@
         src: '.config/git/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/'
         mode: 'preserve'
-      tags:
-        - 'dotfiles'
-        - 'gitconfig'
-        - 'githooks'
-        - 'gitignore'
+
+    - name: 'create git config files'
+      ansible.builtin.copy:
+        content: '{{ item.value }}'
+        dest: '{{ lookup("env", "HOME") }}/.config/git/config.d/{{ item.key }}'
+        mode: 'preserve'
+      loop: '{{ git_config|combine(git_config_local)|dict2items }}'
+      loop_control:
+        label: '{{ item.key }}'
+
+    - name: 'create git host config files'
+      ansible.builtin.copy:
+        content: '{{ item.value }}'
+        dest: '{{ lookup("env", "HOME") }}/.config/git/hosts.d/{{ item.key }}'
+        mode: 'preserve'
+      loop: '{{ git_hosts|combine(git_hosts_local)|dict2items }}'
+      loop_control:
+        label: '{{ item.key }}'
 
     - name: 'assemble git config'
       ansible.builtin.assemble:
         src: '{{ lookup("env", "HOME") }}/.config/git/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.config/git/config'
         delimiter: '\n'
-      tags:
-        - 'gitconfig'
-        - 'gitignore'
-        - 'dotfiles'
 
     - name: 'create git source code directories'
       ansible.builtin.file:
@@ -33,8 +43,6 @@
         - 'Development/gitlab.com'
         - 'Development/gitlab.com/borntyping'
         - 'Development/scratch'
-      tags:
-        - 'scratch'
 
     - name: 'create git-river config directory'
       tags: ['git', 'git-river']

@@ -1,4 +1,8 @@
 ---
-git_user_email: "sam@borntyping.co.uk"
-kubectl: "oc"
+git_config_local: {}
+git_config: {}
+git_hosts_local: {}
+git_hosts: {}
 ssh_key_names: []
+zsh_zshrc_local: {}
+zsh_zshrc: {}

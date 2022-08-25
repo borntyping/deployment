@@ -130,9 +130,13 @@ eval "$(direnv hook zsh)"
 [[ -x "$(command -v exa)" ]] && alias ls='exa'
 [[ -x "$(command -v rg)" ]] && alias grep='rg'
 
-# Load personal prompt configuration and machine-local configuration.
+# Load personal prompt configuration
 source "$HOME/.local/share/zsh/prompt.zsh"
-source "$HOME/.config/zsh/zshrc"
+
+# Load machine-local configuration.
+for conf in "$HOME/.config/zsh/zshrc.d/"*.zsh; do
+  source "${conf}"
+done
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."

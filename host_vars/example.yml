@@ -1,0 +1,17 @@
+---
+ansible_sudo_pass: '{{ undef }}'
+ssh_key_names:
+  - 'corporate'
+zsh_zshrc_local:
+  50-kaluza.zsh: |
+    #!/usr/bin/env zsh
+    export corporate="${github}/corporate"
+git_config_local:
+  50-corporate.config: |
+    [includeIf "gitdir:~/Development/github.com/corporate/**"]
+    path = hosts.d/github.com/corporate.local.config
+git_hosts_local:
+  github.com/corporate.local.config: |
+    [user]
+    name = Sam Clements
+    email = sam.clements@corporate.invalid
