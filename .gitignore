@@ -1,8 +1,7 @@
 # Ignore Peru cache files
 .peru/
 
-# Ignore editor and local configuraton
-.local/
+# Ignore editor configuraton
 .idea/
 .vscode/
 
