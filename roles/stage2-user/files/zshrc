@@ -55,6 +55,7 @@ alias ll='ls -l'
 alias reconfigure-git='reconfigure -t git'
 alias reconfigure-ssh='reconfigure -t ssh'
 alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
+alias src-pre-commit='~borntyping/deployment/roles/stage2-user/files/.config/git/hooks/pre-commit'
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
 export PAGER="batcat"                                                           # https://github.com/sharkdp/bat

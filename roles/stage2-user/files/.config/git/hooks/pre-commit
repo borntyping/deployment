@@ -1,7 +1,13 @@
 #!/usr/bin/env python3.10
 
+import dataclasses
 import pathlib
 import subprocess
+import typing
+
+
+def bg_red(text: str) -> str:
+    return f"\033[0;37;41m{text}\033[0m"
 
 
 def bg_magenta(text: str) -> str:
@@ -12,69 +18,119 @@ def bold(text: str) -> str:
     return f"\033[0;1;37;45m{text}\033[0;37;45m"
 
 
-def exists(filename: str) -> bool:
+def file_exists(filename: str) -> bool:
     return pathlib.Path(filename).exists()
 
 
-def git_hook_enabled(name: str) -> bool:
-    command = ("git", "config", "--get", "--type", "bool", f"hooks.{name}")
-    result = subprocess.run(command, capture_output=True, encoding="utf-8")
-    return result.returncode == 1 or result.stdout.strip() == "true"
+@dataclasses.dataclass()
+class Hook:
+    name: str
+
+    def __call__(self) -> bool:
+        print(self.git_hook_description(self.name))
+
+        result = self.run()
+        if not result:
+            print(bg_red(f" ! Hook {self.name} failed. "))
+
+        return result
+
+    @staticmethod
+    def git_hook_description(name: str) -> str:
+        command = f"git config --type=bool hooks.{name} false"
+        return bg_magenta(f" ➔ Running {bold(name)}. Run '{command}' to disable. ")
+
+    @staticmethod
+    def git_hook_enabled(name: str) -> bool:
+        command = ("git", "config", "--get", "--type", "bool", f"hooks.{name}")
+        result = subprocess.run(command, capture_output=True, encoding="utf-8")
+        return result.returncode == 1 or result.stdout.strip() == "true"
+
+    def enabled(self) -> bool:
+        ...
+
+    def run(self) -> bool:
+        ...
 
 
-def git_hook_description(name: str):
-    command = f"git config --type=bool hooks.{name} false"
-    print(bg_magenta(f" ➔ Running {bold(name)}. Run '{command}' to disable. "))
+@dataclasses.dataclass()
+class ExcludeHook(Hook):
+    pattern: str
+
+    def enabled(self) -> bool:
+        return self.git_hook_enabled(self.name)
+
+    def run(self) -> bool:
+        command = ("git", "commit", "--verbose", "--dry-run")
+        result = subprocess.run(command, capture_output=True, encoding="utf-8")
+
+        if result.returncode != 0:
+            return True
+
+        if self.pattern in result.stdout:
+            print(f"Commit diff includes {self.pattern!r}")
+            return False
+
+        return True
 
 
-def git_hook_exclude(pattern: str) -> None:
-    command = ("git", "commit", "--verbose", "--dry-run")
-    result = subprocess.run(command, capture_output=True, encoding="utf-8")
+@dataclasses.dataclass()
+class CommandHook(Hook):
+    command: typing.Sequence[str]
+    files: typing.Sequence[str]
 
-    if result.returncode != 0:
-        return
+    def enabled(self) -> bool:
+        enabled = self.git_hook_enabled(self.name)
+        configured = all(pathlib.Path(filename).exists() for filename in self.files)
+        return enabled and configured
 
-    if pattern in result.stdout:
-        print(f"Commit diff includes {pattern!r}")
-        raise SystemExit(1)
-
-
-def git_hook_exec(command: list[str]) -> None:
-    result = subprocess.run(command, encoding="utf-8")
-
-    if result.returncode:
-        raise SystemExit(result.returncode)
+    def run(self) -> bool:
+        result = subprocess.run(self.command, encoding="utf-8")
+        return result.returncode == 0
 
 
 if __name__ == "__main__":
-    if git_hook_enabled("exclude"):
-        git_hook_description("exclude")
-        git_hook_exclude("!nocommit")
+    hooks = [
+        ExcludeHook(
+            "exclude",
+            pattern="!ncommit",
+        ),
+        CommandHook(
+            "mkdocs",
+            command=["mkdocs", "build", "--strict"],
+            files=["mkdocs.yml"],
+        ),
+        CommandHook(
+            "black",
+            command=["poetry", "run", "black", "--check", "--diff", "."],
+            files=["pyproject.toml"],
+        ),
+        CommandHook(
+            "mypy",
+            command=["poetry", "run", "mypy", "."],
+            files=["pyproject.toml"],
+        ),
+        CommandHook(
+            "pytest",
+            command=["poetry", "run", "pytest"],
+            files=["pyproject.toml"],
+        ),
+        CommandHook(
+            "phpunit",
+            command=["vendor/bin/phpunit"],
+            files=["vendor/bin/phpunit"],
+        ),
+        CommandHook(
+            "phpstan",
+            command=["vendor/bin/phpstan"],
+            files=["vendor/bin/phpstan"],
+        ),
+        CommandHook(
+            "pre-commit",
+            command=["pre-commmit", "run", "-a"],
+            files=[".pre-commit-config.yaml"],
+        ),
+    ]
 
-    if git_hook_enabled("mkdocs") and exists("mkdocs.yml"):
-        git_hook_description("mkdocs")
-        git_hook_exec(["mkdocs", "build", "--strict"])
-
-    if git_hook_enabled("black") and exists("pyproject.toml"):
-        git_hook_description("black")
-        git_hook_exec(["poetry", "run", "black", "--check", "--diff", "."])
-
-    if git_hook_enabled("mypy") and exists("pyproject.toml"):
-        git_hook_description("mypy")
-        git_hook_exec(["poetry", "run", "mypy", "."])
-
-    if git_hook_enabled("pytest") and exists("pyproject.toml"):
-        git_hook_description("pytest")
-        git_hook_exec(["poetry", "run", "pytest"])
-
-    if git_hook_enabled("phpunit") and exists("vendor/bin/phpunit"):
-        git_hook_description("phpunit")
-        git_hook_exec(["vendor/bin/phpunit"])
-
-    if git_hook_enabled("phpstan") and exists("vendor/bin/phpstan"):
-        git_hook_description("phpstan")
-        git_hook_exec(["vendor/bin/phpstan"])
-
-    if git_hook_enabled("pre-commit") and exists(".pre-commit-config.yaml"):
-        git_hook_description("pre-commit")
-        git_hook_exec(["pre-commmit", "run", "-a"])
+    if not all(hook() for hook in hooks if hook.enabled()):
+        raise SystemExit(1)
