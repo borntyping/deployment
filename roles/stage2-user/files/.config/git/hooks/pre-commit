@@ -53,4 +53,8 @@ if __name__ == "__main__":
         git_hook_exec(["vendor/bin/phpunit"])
 
     if git_hook_enabled("phpstan") and exists("vendor/bin/phpstan"):
+        git_hook_description("phpstan")
         git_hook_exec(["vendor/bin/phpstan"])
+
+    if git_hook_enabled("pre-commit") and exists(".pre-commit-config.yaml"):
+        git_hook_exec(["pre-commmit", "run", "-a"])
