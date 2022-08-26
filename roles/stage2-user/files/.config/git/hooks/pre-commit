@@ -3,42 +3,47 @@
 import dataclasses
 import pathlib
 import subprocess
+from sys import intern
+import textwrap
 import typing
 
 
-def bg_red(text: str) -> str:
-    return f"\033[0;39;41m{text}\033[0m"
-
-
-def bg_magenta(text: str) -> str:
-    return f"\033[0;39;45m{text}\033[0m"
+def alert(text: str, *, fg: int, bg: int, symbol: str, width: int = 88) -> None:
+    return f"\033[0;{bg};{fg}m {symbol} {text:{width}}\033[0m"
 
 
 def bold(text: str) -> str:
-    return f"\033[0;1;39;45m{text}\033[0;39;45m"
+    return f"\033[1m{text}\033[22m"
 
 
-def file_exists(filename: str) -> bool:
-    return pathlib.Path(filename).exists()
+def start(text: str) -> str:
+    return alert(text, bg=45, fg=39, symbol="➔")
+
+
+def failure(text: str) -> str:
+    return alert(text, bg=41, fg=38, symbol="!")
+
+
+def success(text: str) -> str:
+    return alert(text, bg=42, fg=39, symbol="➔")
 
 
 @dataclasses.dataclass()
 class Hook:
     name: str
 
+    def __str__(self) -> str:
+        return self.name
+
     def __call__(self) -> bool:
-        print(self.git_hook_description(self.name))
+        command = f"git config --type=bool hooks.{self.name} false"
+        print(start(f"Running {bold(self)}. Run '{command}' to disable. "))
 
-        result = self.run()
-        if not result:
-            print(bg_red(f" ! Hook {self.name} failed. "))
+        error = self.run()
+        if error:
+            print(failure(f"Hook {bold(self)} failed: {error}."))
 
-        return result
-
-    @staticmethod
-    def git_hook_description(name: str) -> str:
-        command = f"git config --type=bool hooks.{name} false"
-        return bg_magenta(f" ➔ Running {bold(name)}. Run '{command}' to disable. ")
+        return error == None
 
     @staticmethod
     def git_hook_enabled(name: str) -> bool:
@@ -49,7 +54,7 @@ class Hook:
     def enabled(self) -> bool:
         ...
 
-    def run(self) -> bool:
+    def run(self) -> typing.Optional[str]:
         ...
 
 
@@ -60,18 +65,17 @@ class ExcludeHook(Hook):
     def enabled(self) -> bool:
         return self.git_hook_enabled(self.name)
 
-    def run(self) -> bool:
-        command = ("git", "commit", "--verbose", "--dry-run")
-        result = subprocess.run(command, capture_output=True, encoding="utf-8")
+    def run(self) -> typing.Optional[str]:
+        command = ("git", "diff")
+        result = subprocess.run(command, capture_output=True, encoding="utf-8", env={})
 
         if result.returncode != 0:
-            return True
+            return None
 
         if self.pattern in result.stdout:
-            print(f"Commit diff includes {self.pattern!r}")
-            return False
+            return f"commit diff includes {self.pattern!r}"
 
-        return True
+        return None
 
 
 @dataclasses.dataclass()
@@ -84,16 +88,17 @@ class CommandHook(Hook):
         configured = all(pathlib.Path(filename).exists() for filename in self.files)
         return enabled and configured
 
-    def run(self) -> bool:
+    def run(self) -> typing.Optional[str]:
         result = subprocess.run(self.command, encoding="utf-8")
-        return result.returncode == 0
+        if result.returncode != 0:
+            return f"return code was {result.returncode}"
 
 
 if __name__ == "__main__":
     hooks = [
         ExcludeHook(
             "exclude",
-            pattern="!ncommit",
+            pattern="!nocommit",
         ),
         CommandHook(
             "mkdocs",
@@ -132,5 +137,11 @@ if __name__ == "__main__":
         ),
     ]
 
-    if not all([hook() for hook in hooks if hook.enabled()]):
+    results = [(hook, hook()) for hook in hooks if hook.enabled()]
+    failed = [hook for hook, result in results if not result]
+
+    if failed:
+        print(failure(f"Failed to run {bold(len(failed))} hooks."))
         raise SystemExit(1)
+
+    print(success(f"Successfully ran {bold(len(results))} pre-commit hooks."))
