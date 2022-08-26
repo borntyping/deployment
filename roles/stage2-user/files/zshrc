@@ -69,10 +69,9 @@ export PIPENV_IGNORE_VIRTUALENVS=1                                              
 export PIPENV_VENV_IN_PROJECT=1                                                 # Place Pipenv virtualenvs in '.venv' directories.
 export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
 
-export PATH="${HOME}/.cargo/bin:${PATH}"
-export PATH="${HOME}/.npm/bin:${PATH}"
-export PATH="${HOME}/.krew/bin:${PATH}"
-export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src/:${PATH}"
+export PATH="${HOME}/.local/share/JetBrains/Toolbox/scripts:${PATH}"            # Jetbrains toolbox shell scripts.
+export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"     # Language package managers.
+export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src/:${PATH}" # The '.bin' directory should take precedence over '.local/bin'.
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
