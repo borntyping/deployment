@@ -17,15 +17,15 @@ def bold(text: str) -> str:
 
 
 def start(text: str) -> str:
-    return alert(text, bg=45, fg=39, symbol="➔")
+    return alert(text, bg=47, fg=38, symbol="➔")
 
 
 def failure(text: str) -> str:
-    return alert(text, bg=41, fg=38, symbol="!")
+    return alert(text, bg=47, fg=31, symbol="!")
 
 
 def success(text: str) -> str:
-    return alert(text, bg=42, fg=39, symbol="➔")
+    return alert(text, bg=47, fg=32, symbol="➔")
 
 
 @dataclasses.dataclass()
