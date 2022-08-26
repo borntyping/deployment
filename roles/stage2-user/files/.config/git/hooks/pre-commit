@@ -4,6 +4,14 @@ import pathlib
 import subprocess
 
 
+def bg_magenta(text: str) -> str:
+    return f"\033[0;37;45m{text}\033[0m"
+
+
+def bold(text: str) -> str:
+    return f"\033[0;1;37;45m{text}\033[0;37;45m"
+
+
 def exists(filename: str) -> bool:
     return pathlib.Path(filename).exists()
 
@@ -12,6 +20,11 @@ def git_hook_enabled(name: str) -> bool:
     command = ("git", "config", "--get", "--type", "bool", f"hooks.{name}")
     result = subprocess.run(command, capture_output=True, encoding="utf-8")
     return result.returncode == 1 or result.stdout.strip() == "true"
+
+
+def git_hook_description(name: str):
+    command = f"git config --type=bool hooks.{name} false"
+    print(bg_magenta(f" ➔ Running {bold(name)}. Run '{command}' to disable. "))
 
 
 def git_hook_exclude(pattern: str) -> None:
@@ -35,21 +48,27 @@ def git_hook_exec(command: list[str]) -> None:
 
 if __name__ == "__main__":
     if git_hook_enabled("exclude"):
+        git_hook_description("exclude")
         git_hook_exclude("!nocommit")
 
     if git_hook_enabled("mkdocs") and exists("mkdocs.yml"):
+        git_hook_description("mkdocs")
         git_hook_exec(["mkdocs", "build", "--strict"])
 
     if git_hook_enabled("black") and exists("pyproject.toml"):
+        git_hook_description("black")
         git_hook_exec(["poetry", "run", "black", "--check", "--diff", "."])
 
     if git_hook_enabled("mypy") and exists("pyproject.toml"):
+        git_hook_description("mypy")
         git_hook_exec(["poetry", "run", "mypy", "."])
 
     if git_hook_enabled("pytest") and exists("pyproject.toml"):
+        git_hook_description("pytest")
         git_hook_exec(["poetry", "run", "pytest"])
 
     if git_hook_enabled("phpunit") and exists("vendor/bin/phpunit"):
+        git_hook_description("phpunit")
         git_hook_exec(["vendor/bin/phpunit"])
 
     if git_hook_enabled("phpstan") and exists("vendor/bin/phpstan"):
@@ -57,4 +76,5 @@ if __name__ == "__main__":
         git_hook_exec(["vendor/bin/phpstan"])
 
     if git_hook_enabled("pre-commit") and exists(".pre-commit-config.yaml"):
+        git_hook_description("pre-commit")
         git_hook_exec(["pre-commmit", "run", "-a"])
