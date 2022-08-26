@@ -7,15 +7,15 @@ import typing
 
 
 def bg_red(text: str) -> str:
-    return f"\033[0;37;41m{text}\033[0m"
+    return f"\033[0;39;41m{text}\033[0m"
 
 
 def bg_magenta(text: str) -> str:
-    return f"\033[0;37;45m{text}\033[0m"
+    return f"\033[0;39;45m{text}\033[0m"
 
 
 def bold(text: str) -> str:
-    return f"\033[0;1;37;45m{text}\033[0;37;45m"
+    return f"\033[0;1;39;45m{text}\033[0;39;45m"
 
 
 def file_exists(filename: str) -> bool:
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         ),
         CommandHook(
             "pre-commit",
-            command=["pre-commmit", "run", "-a"],
+            command=["pre-commit", "run", "-a"],
             files=[".pre-commit-config.yaml"],
         ),
     ]
