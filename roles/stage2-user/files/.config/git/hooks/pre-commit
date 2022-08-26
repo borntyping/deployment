@@ -132,5 +132,5 @@ if __name__ == "__main__":
         ),
     ]
 
-    if not all(hook() for hook in hooks if hook.enabled()):
+    if not all([hook() for hook in hooks if hook.enabled()]):
         raise SystemExit(1)
