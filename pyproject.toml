@@ -1,0 +1,5 @@
+[tool.black]
+include = 'roles/stage2-user/files/.config/git/hooks/pre-commit'
+
+[tool.mypy]
+files = 'roles/stage2-user/files/.config/git/hooks/pre-commit'
