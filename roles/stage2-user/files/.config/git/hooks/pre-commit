@@ -8,7 +8,7 @@ import sys
 import typing
 
 
-def alert(text: str, *, fg: int, symbol: str, width: int = 100) -> None:
+def print_alert(text: str, *, fg: int, symbol: str, width: int = 100) -> None:
     if sys.stdout.isatty():
         text = f"%(start)s {symbol} {text:{width-4}} %(end)s"
         text = text % {
@@ -23,19 +23,17 @@ def alert(text: str, *, fg: int, symbol: str, width: int = 100) -> None:
 
     print(text)
 
-    "!nocommit"
-
 
 def print_start(text: str) -> None:
-    alert(text, fg=30, symbol="➔")
+    print_alert(text, fg=30, symbol="➔")
 
 
 def print_failure(text: str) -> None:
-    alert(text, fg=31, symbol="!")
+    print_alert(text, fg=31, symbol="!")
 
 
 def print_success(text: str) -> None:
-    alert(text, fg=32, symbol="➔")
+    print_alert(text, fg=32, symbol="➔")
 
 
 @dataclasses.dataclass()
@@ -84,16 +82,21 @@ class ExcludeHook(Hook):
         return self.git_hook_enabled(self.name) is not False
 
     def run(self) -> typing.Optional[str]:
-        command = ("git", "diff")
-        result = subprocess.run(
-            command, capture_output=True, encoding="utf-8", env={"PAGER": "cat"}
-        )
+        """This needs to check both staged and unstaged changes, I think."""
+        for options in ((), ("--staged")):
+            command = ("git", "diff", *options)
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                encoding="utf-8",
+                env={"PAGER": "cat"},
+            )
 
-        if result.returncode != 0:
-            return None
+            if result.returncode != 0:
+                return None
 
-        if self.pattern in result.stdout:
-            return f"commit diff includes {self.pattern!r}"
+            if self.pattern in result.stdout:
+                return f"commit diff includes {self.pattern!r}"
 
         return None
 
