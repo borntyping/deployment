@@ -105,9 +105,9 @@ class CommandHook(Hook):
 hooks = [
     ExcludeHook("exclude", "!nocommit"),
     # Python
-    CommandHook("black", [".venv/bin/black", "--check", "."], ["pyproject.toml"]),
-    CommandHook("mypy", [".venv/bin/mypy", "."], ["pyproject.toml"]),
-    CommandHook("pytest", [".venv/bin/pytest"], ["pyproject.toml"]),
+    CommandHook("black", ["python", "-m", "black", "--check", "."], ["pyproject.toml"]),
+    CommandHook("mypy", ["python", "-m", "mypy", "."], ["pyproject.toml"]),
+    CommandHook("pytest", ["python", "-m", "pytest"], ["pyproject.toml"]),
     CommandHook("tox", ["tox"], ["tox.ini"]),
     # PHP
     CommandHook("phpunit", ["vendor/bin/phpunit"], ["vendor/bin/phpunit"]),
