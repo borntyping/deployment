@@ -8,26 +8,34 @@ import sys
 import typing
 
 
-def alert(text: str, *, fg: int, bg: int, symbol: str, width: int = 100) -> None:
+def alert(text: str, *, fg: int, symbol: str, width: int = 100) -> None:
     if sys.stdout.isatty():
-        text = f"\033[0;{bg};{fg}m {symbol} {text:{width}}\033[0m"
-        text = text % {"b": "\033[1m", "n": "\033[22m"}
+        text = f"%(start)s {symbol} {text:{width-4}} %(end)s"
+        text = text % {
+            "b": "\033[1m",  # bold
+            "n": "\033[22m",  # normal
+            "start": "\033[0;47;{}m".format(fg),
+            "end": "\033[0m",
+        }
     else:
+        text = f"{symbol} {text}"
         text = text % {"b": "", "n": ""}
 
     print(text)
 
+    "!nocommit"
+
 
 def print_start(text: str) -> None:
-    alert(text, bg=47, fg=30, symbol="➔")
+    alert(text, fg=30, symbol="➔")
 
 
 def print_failure(text: str) -> None:
-    alert(text, bg=47, fg=31, symbol="!")
+    alert(text, fg=31, symbol="!")
 
 
 def print_success(text: str) -> None:
-    alert(text, bg=47, fg=32, symbol="➔")
+    alert(text, fg=32, symbol="➔")
 
 
 @dataclasses.dataclass()
