@@ -102,49 +102,22 @@ class CommandHook(Hook):
             return f"return code was {result.returncode}"
 
 
-if __name__ == "__main__":
-    hooks = [
-        ExcludeHook(
-            "exclude",
-            pattern="!nocommit",
-        ),
-        CommandHook(
-            "mkdocs",
-            command=["mkdocs", "build", "--strict"],
-            files=["mkdocs.yml"],
-        ),
-        CommandHook(
-            "black",
-            command=["poetry", "run", "black", "--check", "--diff", "."],
-            files=["pyproject.toml"],
-        ),
-        CommandHook(
-            "mypy",
-            command=["poetry", "run", "mypy", "."],
-            files=["pyproject.toml"],
-        ),
-        CommandHook(
-            "pytest",
-            command=["poetry", "run", "pytest"],
-            files=["pyproject.toml"],
-        ),
-        CommandHook(
-            "phpunit",
-            command=["vendor/bin/phpunit"],
-            files=["vendor/bin/phpunit"],
-        ),
-        CommandHook(
-            "phpstan",
-            command=["vendor/bin/phpstan"],
-            files=["vendor/bin/phpstan"],
-        ),
-        CommandHook(
-            "pre-commit",
-            command=["pre-commit", "run", "-a"],
-            files=[".pre-commit-config.yaml"],
-        ),
-    ]
+hooks = [
+    ExcludeHook("exclude", "!nocommit"),
+    # Python
+    CommandHook("black", [".venv/bin/black", "--check", "."], ["pyproject.toml"]),
+    CommandHook("mypy", [".venv/bin/mypy", "."], ["pyproject.toml"]),
+    CommandHook("pytest", [".venv/bin/pytest"], ["pyproject.toml"]),
+    CommandHook("tox", ["tox"], ["tox.ini"]),
+    # PHP
+    CommandHook("phpunit", ["vendor/bin/phpunit"], ["vendor/bin/phpunit"]),
+    CommandHook("phpstan", ["vendor/bin/phpstan"], ["vendor/bin/phpstan"]),
+    # Others
+    CommandHook("mkdocs", ["mkdocs", "build", "--strict"], ["mkdocs.yml"]),
+    CommandHook("pre-commit", ["pre-commit", "run", "-a"], [".pre-commit-config.yaml"]),
+]
 
+if __name__ == "__main__":
     results = [(hook, hook()) for hook in hooks if hook.enabled()]
     failed = [hook for hook, result in results if not result]
 
