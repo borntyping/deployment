@@ -8,7 +8,7 @@ import textwrap
 import typing
 
 
-def alert(text: str, *, fg: int, bg: int, symbol: str, width: int = 88) -> None:
+def alert(text: str, *, fg: int, bg: int, symbol: str, width: int = 100) -> None:
     return f"\033[0;{bg};{fg}m {symbol} {text:{width}}\033[0m"
 
 
@@ -49,7 +49,15 @@ class Hook:
     def git_hook_enabled(name: str) -> bool:
         command = ("git", "config", "--get", "--type", "bool", f"hooks.{name}")
         result = subprocess.run(command, capture_output=True, encoding="utf-8")
-        return result.returncode == 1 or result.stdout.strip() == "true"
+
+        if result.returncode == 0 and result.stdout.strip() == "true":
+            return True
+        elif result.returncode == 0 and result.stdout.strip() == "false":
+            return False
+        elif result.returncode == 1:
+            return None
+
+        raise Exception(f"Unexpected result from 'git config' ({result}).")
 
     def enabled(self) -> bool:
         ...
@@ -86,7 +94,7 @@ class CommandHook(Hook):
     def enabled(self) -> bool:
         enabled = self.git_hook_enabled(self.name)
         configured = all(pathlib.Path(filename).exists() for filename in self.files)
-        return enabled and configured
+        return (enabled is True) or (enabled is None and configured)
 
     def run(self) -> typing.Optional[str]:
         result = subprocess.run(self.command, encoding="utf-8")
