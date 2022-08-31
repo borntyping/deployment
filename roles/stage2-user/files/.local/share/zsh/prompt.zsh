@@ -83,6 +83,14 @@ function _src_kubectl_info() {
   fi
 }
 
+# Display the current AWS profile when active
+function _src_aws_info() {
+  prompt_aws=""
+  if [[ -n "${AWS_PROFILE}" ]]; then
+    prompt_aws="%{${fg[red]}%}aws:${AWS_PROFILE}%{${reset_color}%} "
+  fi
+}
+
 # Zoxide sets `$_zoxide_result`, which interferes with `AUTO_NAME_DIRS`. Only
 # needs to run in `precmd_functions` before which is executed before the
 # prompt is shown, but should be before any functions that display the current
@@ -105,7 +113,7 @@ function _src_preexec_title() {
   esac
 }
 
-export precmd_functions=($precmd_functions _src_unset_zoxide_result _src_precmd_title vcs_info _src_kubectl_info _src_python_info)
+export precmd_functions=($precmd_functions _src_unset_zoxide_result _src_precmd_title vcs_info _src_python_info _src_kubectl_info _src_aws_info)
 export preexec_functions=($preexec_functions _src_preexec_title)
 
 # Assemble the prompt
@@ -117,5 +125,5 @@ export preexec_functions=($preexec_functions _src_preexec_title)
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
-PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \${vcs_info_msg_0_}\${prompt_python}\${prompt_telepresence}\${prompt_kubectl}
+PROMPT="%{$prompt_fg%}$ %n@%m %{$prompt_highlight_fg%}%~%{$reset_color%} \${vcs_info_msg_0_}\${prompt_python}\${prompt_kubectl}\${prompt_aws}
 %{$prompt_fg%}$%{$reset_color%} "
