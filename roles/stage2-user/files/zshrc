@@ -71,7 +71,6 @@ export PIPENV_IGNORE_VIRTUALENVS=1                                              
 export PIPENV_VENV_IN_PROJECT=1                                                 # Place Pipenv virtualenvs in '.venv' directories.
 export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
 
-export PATH="${HOME}/.local/share/JetBrains/Toolbox/scripts:${PATH}"            # Jetbrains toolbox shell scripts.
 export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"     # Language package managers.
 export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src/:${PATH}" # The '.bin' directory should take precedence over '.local/bin'.
 
@@ -86,7 +85,7 @@ export scratch="${source}/scratch"
 # Completion rules
 # https://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
-fpath+=("${HOME}/.cache/zsh/functions")
+fpath+=("${HOME}/.cache/zsh/functions" "${HOME}/.asdf/completions")
 autoload -Uz compinit
 zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                         # Set list-colors to enable filename colorizing.
@@ -121,6 +120,10 @@ if [[ "$+commands[atuin]" -eq 1 ]]; then
   bindkey '^r' _atuin_search_widget
 fi
 
+# ASDF
+# https://asdf-vm.com/
+[[ -f "${HOME}/.asdf/asdf.sh" ]] && source "${HOME}/.asdf/asdf.sh"
+
 # Direnv
 # https://direnv.net/
 eval "$(direnv hook zsh)"
@@ -143,10 +146,6 @@ if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."
   return
 fi
-
-# # Command-line fuzzy finder
-# # https://github.com/junegunn/fzf
-# source "/usr/share/fzf/shell/key-bindings.zsh"
 
 # ZSH automatic completion ('^ ' is Ctrl+Space)
 # https://github.com/zsh-users/zsh-autosuggestions
