@@ -66,6 +66,7 @@ export BAT_STYLE="plain"                                                        
 export DOCKER_HOST="unix:///run/user/${UID}/podman/podman.sock"                 # Make docker-compose work with rootless podman.
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window wrap"              # Show preview window and wrap text. Useful for long commands.
 export NPM_CONFIG_PREFIX="${HOME}/.npm"                                         # https://docs.npmjs.com/cli/v7/configuring-npm/folders#prefix-configuration
+export PIP_REQUIRE_VIRTUALENV=1                                                 # Require that Pip is run inside a virtualenv.
 export PIPENV_DONT_LOAD_ENV=1                                                   # Direnv manages our '.env', tell Pipenv not to load it.
 export PIPENV_IGNORE_VIRTUALENVS=1                                              # Don't try and detect running in an existing Python virtualenv.
 export PIPENV_VENV_IN_PROJECT=1                                                 # Place Pipenv virtualenvs in '.venv' directories.
