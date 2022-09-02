@@ -72,7 +72,7 @@ export PIPENV_VENV_IN_PROJECT=1                                                 
 export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
 
 export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"     # Language package managers.
-export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src/:${PATH}" # The '.bin' directory should take precedence over '.local/bin'.
+export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src:${PATH}"  # The '.bin' directory should take precedence over '.local/bin'.
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html

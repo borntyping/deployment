@@ -1,14 +1,13 @@
 #!/usr/bin/env python3.10
 
 import dataclasses
-import os
 import pathlib
 import subprocess
 import sys
 import typing
 
 
-def print_alert(text: str, *, fg: int, symbol: str, width: int = 100) -> None:
+def print_alert(text: str, *, fg: str, symbol: str, width: int = 80 + 9) -> None:
     if sys.stdout.isatty():
         text = f"%(start)s {symbol} {text:{width-4}} %(end)s"
         text = text % {
@@ -25,33 +24,32 @@ def print_alert(text: str, *, fg: int, symbol: str, width: int = 100) -> None:
 
 
 def print_start(text: str) -> None:
-    print_alert(text, fg=30, symbol="➔")
+    print_alert(text, fg="30", symbol="➔")
 
 
 def print_failure(text: str) -> None:
-    print_alert(text, fg=31, symbol="!")
+    print_alert(text, fg="31", symbol="!")
+
+
+def print_failure_note(text: str) -> None:
+    print_alert(text, fg="39", symbol=" ")
 
 
 def print_success(text: str) -> None:
-    print_alert(text, fg=32, symbol="➔")
+    print_alert(text, fg="32", symbol="➔")
 
 
 @dataclasses.dataclass()
 class Hook:
+    group: str
     name: str
 
     def __str__(self) -> str:
         return self.name
 
-    def __call__(self) -> bool:
-        command = f"git config --type=bool hooks.{self.name} false"
-        print_start(f"Running %(b)s{self}%(n)s. Run '{command}' to disable. ")
-
-        error = self.run()
-        if error:
-            print_failure(f"Hook %(b)s{self}%(n)s failed: {error}.")
-
-        return error == None
+    def __call__(self) -> str | None:
+        print_start(f"Running %(b)s{self}%(n)s.")
+        return self.run()
 
     @staticmethod
     def git_hook_enabled(name: str) -> bool | None:
@@ -70,7 +68,7 @@ class Hook:
     def enabled(self) -> bool:
         ...
 
-    def run(self) -> typing.Optional[str]:
+    def run(self) -> str | None:
         ...
 
 
@@ -81,7 +79,7 @@ class ExcludeHook(Hook):
     def enabled(self) -> bool:
         return self.git_hook_enabled(self.name) is not False
 
-    def run(self) -> typing.Optional[str]:
+    def run(self) -> str | None:
         """
         * 'git diff HEAD' to include staged and unstaged changes.
         * 'git diff --unified=0' so we don't look at unchanged lines.
@@ -105,14 +103,18 @@ class ExcludeHook(Hook):
 @dataclasses.dataclass()
 class CommandHook(Hook):
     command: typing.Sequence[str]
-    files: typing.Sequence[str]
+    present: typing.Sequence[str] = ()
+    absent: typing.Sequence[str] = ()
 
     def enabled(self) -> bool:
         enabled = self.git_hook_enabled(self.name)
-        configured = all(pathlib.Path(filename).exists() for filename in self.files)
-        return (enabled is True) or (enabled is None and configured)
+        present = (pathlib.Path(filename).exists() for filename in self.present)
+        absent = (pathlib.Path(filename).exists() for filename in self.absent)
+        return (enabled is True) or (
+            enabled is None and all(present) and not any(absent)
+        )
 
-    def run(self) -> typing.Optional[str]:
+    def run(self) -> str | None:
         try:
             subprocess.run(self.command, check=True, encoding="utf-8")
         except subprocess.CalledProcessError as error:
@@ -123,27 +125,56 @@ class CommandHook(Hook):
 
 
 hooks = [
-    ExcludeHook("exclude", "!nocommit"),
-    # Python
-    CommandHook("black", [".venv/bin/black", "--check", "."], ["pyproject.toml"]),
-    CommandHook("flake8", [".venv/bin/flake8", "."], [".flake8"]),
-    CommandHook("mypy", [".venv/bin/mypy"], ["pyproject.toml"]),
-    CommandHook("pytest", [".venv/bin/pytest"], ["pyproject.toml"]),
-    CommandHook("tox", ["tox"], ["tox.ini"]),
-    # PHP
-    CommandHook("phpunit", ["vendor/bin/phpunit"], ["vendor/bin/phpunit"]),
-    CommandHook("phpstan", ["vendor/bin/phpstan"], ["vendor/bin/phpstan"]),
-    # Others
-    CommandHook("mkdocs", ["mkdocs", "build", "--strict"], ["mkdocs.yml"]),
-    CommandHook("pre-commit", ["pre-commit", "run", "-a"], [".pre-commit-config.yaml"]),
+    ExcludeHook("diff", "exclude", "!nocommit"),
+    CommandHook(
+        "python",
+        "black",
+        [".venv/bin/black", "--check", "."],
+        ["pyproject.toml"],
+        [".pre-commit-config.yaml"],
+    ),
+    CommandHook(
+        "python",
+        "flake8",
+        [".venv/bin/flake8", "."],
+        [".flake8"],
+        [".pre-commit-config.yaml"],
+    ),
+    CommandHook(
+        "python",
+        "mypy",
+        [".venv/bin/mypy"],
+        ["pyproject.toml"],
+        [".pre-commit-config.yaml"],
+    ),
+    CommandHook(
+        "python",
+        "pytest",
+        [".venv/bin/pytest"],
+        ["pyproject.toml"],
+        [".pre-commit-config.yaml"],
+    ),
+    CommandHook("python", "tox", ["tox"], ["tox.ini"]),
+    CommandHook("php", "phpunit", ["vendor/bin/phpunit"], ["vendor/bin/phpunit"]),
+    CommandHook("php", "phpstan", ["vendor/bin/phpstan"], ["vendor/bin/phpstan"]),
+    CommandHook("docs", "mkdocs", ["mkdocs", "build", "--strict"], ["mkdocs.yml"]),
+    CommandHook(
+        "pre-commit",
+        "pre-commit",
+        ["pre-commit", "run", "-a"],
+        [".pre-commit-config.yaml"],
+    ),
 ]
 
 if __name__ == "__main__":
     results = [(hook, hook()) for hook in hooks if hook.enabled()]
-    failed = [hook for hook, result in results if not result]
+    failed = [(hook, error) for hook, error in results if error]
 
     if failed:
-        print_failure(f"Failed to run %(b)s{len(failed)}%(n)s hooks.")
+        for hook, error in failed:
+            print_failure(f"Hook %(b)s{hook}%(n)s failed: {error}.")
+            command = f"git config --type=bool hooks.{hook.name} false"
+            print_failure_note(f"Run '{command}' to disable.%(b)s%(n)s")
         raise SystemExit(1)
 
     print_success(f"Successfully ran %(b)s{len(results)}%(n)s pre-commit hooks.")
