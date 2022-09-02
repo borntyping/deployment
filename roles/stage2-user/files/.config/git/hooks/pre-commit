@@ -82,21 +82,22 @@ class ExcludeHook(Hook):
         return self.git_hook_enabled(self.name) is not False
 
     def run(self) -> typing.Optional[str]:
-        """This needs to check both staged and unstaged changes, I think."""
-        for options in ((), ("--staged")):
-            command = ("git", "diff", *options)
-            result = subprocess.run(
-                command,
-                capture_output=True,
-                encoding="utf-8",
-                env={"PAGER": "cat"},
-            )
+        """
+        * 'git diff HEAD' to include staged and unstaged changes.
+        * 'git diff --unified=0' so we don't look at unchanged lines.
+        """
+        result = subprocess.run(
+            ("git", "diff", "HEAD", "--unified=0"),
+            capture_output=True,
+            encoding="utf-8",
+            env={"PAGER": "cat"},
+        )
 
-            if result.returncode != 0:
-                return None
+        if result.returncode != 0:
+            return None
 
-            if self.pattern in result.stdout:
-                return f"commit diff includes {self.pattern!r}"
+        if self.pattern in result.stdout:
+            return f"commit diff includes {self.pattern!r}"
 
         return None
 
@@ -112,19 +113,22 @@ class CommandHook(Hook):
         return (enabled is True) or (enabled is None and configured)
 
     def run(self) -> typing.Optional[str]:
-        result = subprocess.run(self.command, encoding="utf-8")
-        if result.returncode == 0:
-            return None
-        return f"return code was {result.returncode}"
+        try:
+            subprocess.run(self.command, check=True, encoding="utf-8")
+        except subprocess.CalledProcessError as error:
+            return f"return code was {error.returncode}"
+        except FileNotFoundError as error:
+            return f"{error}"
+        return None
 
 
 hooks = [
     ExcludeHook("exclude", "!nocommit"),
     # Python
-    CommandHook("black", ["python", "-m", "black", "--check", "."], ["pyproject.toml"]),
-    CommandHook("flake8", ["python", "-m", "flake8", "."], [".flake8"]),
-    CommandHook("mypy", ["python", "-m", "mypy"], ["pyproject.toml"]),
-    CommandHook("pytest", ["python", "-m", "pytest"], ["pyproject.toml"]),
+    CommandHook("black", [".venv/bin/black", "--check", "."], ["pyproject.toml"]),
+    CommandHook("flake8", [".venv/bin/flake8", "."], [".flake8"]),
+    CommandHook("mypy", [".venv/bin/mypy"], ["pyproject.toml"]),
+    CommandHook("pytest", [".venv/bin/pytest"], ["pyproject.toml"]),
     CommandHook("tox", ["tox"], ["tox.ini"]),
     # PHP
     CommandHook("phpunit", ["vendor/bin/phpunit"], ["vendor/bin/phpunit"]),
