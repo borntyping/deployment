@@ -88,6 +88,8 @@ function _src_precmd_aws() {
   _src_prompt_aws=""
   if [[ -n "${AWS_PROFILE}" ]]; then
     _src_prompt_aws="%{${_src_prompt_fg_danger}%}${AWS_PROFILE}%{${reset_color}%} "
+  elif [[ -n "${AWS_ACCESS_KEY_ID}" ]]; then
+    _src_prompt_aws="%{${_src_prompt_fg_danger}%}${AWS_ACCESS_KEY_ID}%{${reset_color}%} "
   fi
 }
 
