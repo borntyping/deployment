@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-dotenv_if_exists '.env'
-dotenv_if_exists '.local/env'
+source_env_if_exists '.local/envrc'
+
+[[ ! -f '.env' ]] || dotenv '.env'
+[[ ! -f '.local/env' ]] || dotenv '.local/env'
