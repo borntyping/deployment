@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-dotenv '.local/env'
+dotenv_if_exists '.env'
+dotenv_if_exists '.local/env'
