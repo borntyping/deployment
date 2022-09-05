@@ -2,6 +2,7 @@
 pushd "$(readlink -f $(dirname "${BASH_SOURCE[0]}"))" >/dev/null
 export ANSIBLE_RETRY_FILES_ENABLED="false"
 export ANSIBLE_NOCOWS="true"
+export PIP_REQUIRE_VIRTUALENV="0"
 exec "ansible-playbook" \
   --diff \
   --inventory="localhost," \
