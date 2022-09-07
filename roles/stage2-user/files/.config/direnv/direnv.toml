@@ -1,2 +1,9 @@
 [global]
 load_dotenv = true
+strict_env = true
+
+[whitelist]
+prefix = [
+    "/home/samclements/Development/github.com/borntyping",
+    "/home/samclements/Development/gitlab.com/borntyping",
+]
