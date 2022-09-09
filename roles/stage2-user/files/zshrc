@@ -97,7 +97,7 @@ compinit -C
 
 # Completion for kubectl aliases.
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
-if [[ "$+commands[kubectl]" -eq 1 ]]; then
+if [[ -v 'commands[kubectl]' ]]; then
   source "$HOME/.local/share/zsh/kubectl.zsh"
 fi
 
@@ -110,7 +110,7 @@ miniplug load
 
 # Atuin
 # https://github.com/ellie/atuin/blob/main/docs/key-binding.md
-if [[ "$+commands[atuin]" -eq 1 ]]; then
+if [[ -v 'commands[atuin]' ]]; then
   export ATUIN_NOBIND="true"
   eval "$(atuin init zsh)"
   bindkey '^r' _atuin_search_widget

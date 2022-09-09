@@ -50,11 +50,11 @@ function +vi-git-remote() {
 function _src_precmd_venv() {
   local virtualenv
   _src_prompt_venv=""
-  if [[ -n "$VIRTUAL_ENV" ]]; then
-    if [[ "$VIRTUAL_ENV" =~ /venv$ || "$VIRTUAL_ENV" =~ /.venv$ ]]; then
-      virtualenv="$(basename "$(dirname "$VIRTUAL_ENV")")"
+  if [[ -v 'VIRTUAL_ENV' ]]; then
+    if [[ "${VIRTUAL_ENV}" =~ /venv$ || "${VIRTUAL_ENV}" =~ /.venv$ ]]; then
+      virtualenv="$(basename "$(dirname "${VIRTUAL_ENV}")")"
     else
-      virtualenv="$(basename "$VIRTUAL_ENV")"
+      virtualenv="$(basename "${VIRTUAL_ENV}")"
     fi
     _src_prompt_venv="%{${_src_prompt_fg}%}venv:${virtualenv}%{${reset_color}%} "
   fi
@@ -69,27 +69,33 @@ function _src_precmd_kubectl() {
   _src_prompt_kubectl=""
 
   if [[ -f "$config" ]]; then
-    if (( $+commands[kubectl] )); then
+    if [[ -v 'commands[kubectl]' ]]; then
       context="$(kubectl config current-context 2>/dev/null)"
     fi
 
-    if (( $+commands[kubens] )) && [[ -n "$context" ]]; then
+    if [[ -v 'commands[kubens]' ]] && [[ -n "$context" ]]; then
       namespace=":$(kubens --current)"
     fi
 
-    if [[ -n "$context" ]]; then
-      _src_prompt_kubectl="%{$_src_prompt_fg_highlight%}${context}${namespace}%{$reset_color%} "
+    if [[ -v 'context' ]]; then
+      _src_prompt_kubectl="%{$_src_prompt_fg_highlight%}kube:${context}${namespace}%{$reset_color%} "
     fi
   fi
 }
 
 # Display the current AWS profile when active
 function _src_precmd_aws() {
+  local context
   _src_prompt_aws=""
-  if [[ -n "${AWS_PROFILE}" ]]; then
-    _src_prompt_aws="%{${_src_prompt_fg_danger}%}${AWS_PROFILE}%{${reset_color}%} "
-  elif [[ -n "${AWS_ACCESS_KEY_ID}" ]]; then
-    _src_prompt_aws="%{${_src_prompt_fg_danger}%}${AWS_ACCESS_KEY_ID}%{${reset_color}%} "
+
+  if [[ -v 'AWS_PROFILE' ]]; then
+    context="${AWS_PROFILE}"
+  elif [[ -v 'AWS_ACCESS_KEY_ID' ]]; then
+    context="${AWS_ACCESS_KEY_ID}"
+  fi
+
+  if [[ -v 'context' ]]; then
+    _src_prompt_aws="%{${_src_prompt_fg_danger}%}aws:${context}%{${reset_color}%} "
   fi
 }
 
