@@ -56,46 +56,26 @@ function _src_precmd_venv() {
     else
       virtualenv="$(basename "${VIRTUAL_ENV}")"
     fi
-    _src_prompt_venv="%{${_src_prompt_fg}%}venv:${virtualenv}%{${reset_color}%} "
+    _src_prompt_venv="%{${_src_prompt_fg_highlight}%}venv:${virtualenv}%{${reset_color}%} "
   fi
 }
 
 # Display the current kubectl context
 # Run 'kubectx -u' to unset the current context
 function _src_precmd_kubectl() {
-  local config context namespace
-
-  config="${KUBECONFIG:-$HOME/.kube/config}"
   _src_prompt_kubectl=""
-
-  if [[ -f "$config" ]]; then
-    if [[ -v 'commands[kubectl]' ]]; then
-      context="$(kubectl config current-context 2>/dev/null)"
-    fi
-
-    if [[ -v 'commands[kubens]' ]] && [[ -n "$context" ]]; then
-      namespace=":$(kubens --current)"
-    fi
-
-    if [[ -v 'context' ]]; then
-      _src_prompt_kubectl="%{$_src_prompt_fg_highlight%}kube:${context}${namespace}%{$reset_color%} "
-    fi
+  if [[ -f "${KUBECONFIG:-$HOME/.kube/config}" ]] && [[ -v 'commands[kubectl]' ]] && [[ -v 'commands[kubens]' ]]; then
+    _src_prompt_kubectl="%{${_src_prompt_fg_highlight}%}kube:$(kubectl config current-context 2>/dev/null):$(kubens --current)${namespace}%{${reset_color}%} "
   fi
 }
 
 # Display the current AWS profile when active
 function _src_precmd_aws() {
-  local context
   _src_prompt_aws=""
-
   if [[ -v 'AWS_PROFILE' ]]; then
-    context="${AWS_PROFILE}"
+    _src_prompt_aws="%{${_src_prompt_fg_danger}%}aws:${AWS_PROFILE}%{${reset_color}%} "
   elif [[ -v 'AWS_ACCESS_KEY_ID' ]]; then
-    context="${AWS_ACCESS_KEY_ID}"
-  fi
-
-  if [[ -v 'context' ]]; then
-    _src_prompt_aws="%{${_src_prompt_fg_danger}%}aws:${context}%{${reset_color}%} "
+    _src_prompt_aws="%{${_src_prompt_fg_danger}%}aws:${AWS_ACCESS_KEY_ID}%{${reset_color}%} "
   fi
 }
 
