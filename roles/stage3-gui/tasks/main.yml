@@ -4,8 +4,7 @@
     - 'stage3-gui'
   block:
     - name: 'install packages'
-      when: stage3_enabled
-      ansible.builtin.apt:
+      ansible.builtin.dnf:
         name:
           - 'firefox'
           - 'git-cola'

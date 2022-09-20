@@ -17,6 +17,8 @@
       loop: '{{ git_config|combine(git_config_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
+      tags:
+        - 'local'
 
     - name: 'create git host config files'
       ansible.builtin.copy:
@@ -26,6 +28,8 @@
       loop: '{{ git_hosts|combine(git_hosts_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
+      tags:
+        - 'local'
 
     - name: 'assemble git config'
       ansible.builtin.assemble:

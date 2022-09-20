@@ -41,7 +41,6 @@ bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus.
 bindkey '^e' edit-command-line          # Edit current line (Ctrl+e).
 bindkey -r "^V"                         # Disable `ctrl-v` so it does not mix with `ctrl-shift-v`.
 
-alias bat='batcat'                      # Ubuntu's executable is 'batcat' instead of 'bat'.
 alias cola='git-cola 2>/dev/null &'     # The 'git-cola' executable often prints QT warnings.
 alias db='docker run --rm --interactive --tty $(docker build --quiet --tag=db .)'
 alias gc='git commit'
@@ -59,7 +58,7 @@ alias src-pre-commit='~borntyping/deployment/roles/stage2-user/files/.config/git
 alias src-just='just --justfile=.local/justfile'
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
-export PAGER="batcat"                                                           # https://github.com/sharkdp/bat
+export PAGER="bat"                                                              # https://github.com/sharkdp/bat
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
@@ -126,9 +125,9 @@ eval "$(direnv hook zsh)"
 
 # Replace various coreutils executables with oreutils alternatives.
 # https://github.com/Manishearth/oreutils
-[[ -x "$(command -v bat)" ]] && alias cat='bat'
-[[ -x "$(command -v exa)" ]] && alias ls='exa'
-[[ -x "$(command -v rg)" ]] && alias grep='rg'
+[[ -v "commands[bat]" ]] && alias cat='bat'
+[[ -v "commands[exa]" ]] && alias ls='exa'
+[[ -v "commands[rg]" ]] && alias grep='rg'
 
 # Load personal prompt configuration
 source "$HOME/.local/share/zsh/prompt.zsh"
@@ -148,10 +147,6 @@ fi
 source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
-
-# Tilix VTE fix
-# https://gnunn1.github.io/tilix-web/manual/vteconfig/
-[[ -f '/etc/profile.d/vte-2.91.sh' ]] && source '/etc/profile.d/vte-2.91.sh'
 
 # ZSH syntax highlighting plugin (should be loaded last)
 # https://github.com/zsh-users/zsh-syntax-highlighting
