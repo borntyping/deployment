@@ -35,6 +35,8 @@
       loop: '{{ zsh_zshrc|combine(zsh_zshrc_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
+      tags:
+        - 'local'
 
     - name: 'set shell to zsh'
       ansible.builtin.user:

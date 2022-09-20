@@ -9,14 +9,16 @@ Usage
 Install essential dependencies:
 
 ```bash
-sudo apt install ansible-core git git-lfs pip
+sudo dnf install ansible-core git git-lfs micro
 ```
 
 Clone this repository:
 
 ```bash
-git clone https://github.com/borntyping/deployment.git
-cd deployment
+mkdir -p "~/Development/github.com/borntyping"
+cd "~/Development/github.com/borntyping"
+git clone 'https://github.com/borntyping/deployment.git'
+cd "deployment"
 git lfs install
 git lfs fetch
 ```
@@ -24,18 +26,14 @@ git lfs fetch
 Install Ansible collections:
 
 ```bash
-ansible-galaxy collection install --requirements-file collections/requirements.yml
+ansible-galaxy collection install --requirements-file 'collections/requirements.yml'
 ```
 
 Create the local machine's inventory:
 
 ```bash
-nano host_vars/localhost.yaml
-```
-
-```yaml
----
-ansible_sudo_pass: "..."
+cp 'host_vars/example.yaml' 'host_vars/localhost.yml'
+micro 'host_vars/localhost.yml'
 ```
 
 Run the playbook:

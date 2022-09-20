@@ -10,3 +10,4 @@ site.retry
 
 # Ignore host vars for the local machine.
 host_vars/localhost.yml
+host_vars/localhost.yaml
