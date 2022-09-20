@@ -23,6 +23,7 @@
           - 'fd-find'                   # find replacement
           - 'fzf'                       # shell menu
           - 'gcc-c++'                   # needed for cargo install task
+          - 'gh'                        # github cli
           - 'git'
           - 'git-lfs'                   # git large file support
           - 'google-chrome-stable'
