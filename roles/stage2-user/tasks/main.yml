@@ -26,6 +26,24 @@
         - 'ansible'
         - 'micro'
 
+    - name: 'create .bin directory'
+      ansible.builtin.file:
+        name: '{{ lookup("env", "HOME") }}/.bin'
+        state: 'directory'
+      tags:
+        - local
+
+    - name: 'install local scripts'
+      ansible.builtin.copy:
+        content: '{{ item.value }}'
+        dest: '{{ lookup("env", "HOME") }}/.bin/{{ item.key }}'
+        mode: '0755'
+      loop: '{{ bin_scripts|combine(bin_scripts_local)|dict2items }}'
+      loop_control:
+        label: '{{ item.key }}'
+      tags:
+        - 'local'
+
     - name: 'install scripts'
       ansible.builtin.copy:
         src: '.local/share/src/'

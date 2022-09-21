@@ -2,6 +2,10 @@
 ansible_sudo_pass: '{{ undef }}'
 ssh_key_names:
   - 'corporate'
+bin_scripts_local:
+  src-corporate-example: |
+    #!/usr/bin/env zsh
+    echo "hello world"
 zsh_zshrc_local:
   50-kaluza.zsh: |
     #!/usr/bin/env zsh
