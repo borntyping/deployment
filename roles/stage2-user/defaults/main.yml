@@ -1,8 +1,10 @@
 ---
-git_config_local: {}
+bin_scripts: {}
+bin_scripts_local:
 git_config: {}
-git_hosts_local: {}
+git_config_local: {}
 git_hosts: {}
+git_hosts_local: {}
 ssh_key_names: []
-zsh_zshrc_local: {}
 zsh_zshrc: {}
+zsh_zshrc_local: {}
