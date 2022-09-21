@@ -33,6 +33,7 @@
           - 'nano'
           - 'plantuml'
           - 'podman'
+          - 'poetry'
           - 'pre-commit'
           - 'python3'
           - 'python3-black'

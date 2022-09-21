@@ -41,6 +41,15 @@ bindkey '^[[Z' reverse-menu-complete    # Shift-Tab to go back in menus.
 bindkey '^e' edit-command-line          # Edit current line (Ctrl+e).
 bindkey -r "^V"                         # Disable `ctrl-v` so it does not mix with `ctrl-shift-v`.
 
+bindkey '\e[1~'   beginning-of-line     #
+bindkey '\e[H'    beginning-of-line     #
+bindkey '\eOH'    beginning-of-line     #
+bindkey '\e[2~'   overwrite-mode        # Ensure home and End work as expected.
+bindkey '\e[3~'   delete-char           # https://unix.stackexchange.com/a/110846
+bindkey '\e[4~'   end-of-line           #
+bindkey '\e[F'    end-of-line           #
+bindkey '\eOF'    end-of-line           #
+
 alias cola='git-cola 2>/dev/null &'     # The 'git-cola' executable often prints QT warnings.
 alias db='docker run --rm --interactive --tty $(docker build --quiet --tag=db .)'
 alias gc='git commit'
