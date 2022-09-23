@@ -9,10 +9,14 @@
           - 'firefox'
           - 'git-cola'
           - 'gitg'
+          - 'gnome-shell-extension-dash-to-dock'
+          - 'gnome-tweaks'
           - 'meld'
           - 'tilix'
         state: 'latest'
       become: 'yes'
+      tags:
+        - 'dnf'
 
     - name: 'install .fonts/'
       copy:

@@ -39,6 +39,7 @@
           - 'python3-black'
           - 'python3-devel'
           - 'python3-flake8'
+          - 'pre-commit'
           - 'python3-mypy'
           - 'python3-pip'
           - 'python3-poetry'
@@ -52,6 +53,7 @@
           - 'rustc'
           - 'rustfmt'
           - 'snapd'
+          - 'sqlite'
           - 'tree'
           - 'wl-clipboard'              # optional dependency of micro
           - 'zoxide'                    # provides z
