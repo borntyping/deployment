@@ -1,0 +1,20 @@
+---
+- tags:
+    - awscli
+  block:
+    - ansible.builtin.get_url:
+        url: '{{ awscli_url }}'
+        dest: '{{ awscli_zip }}'
+        mode: '0440'
+
+    - ansible.builtin.file:
+        path: '{{ awscli_tmp }}'
+        state: directory
+
+    - ansible.builtin.unarchive:
+        src: '{{ awscli_zip }}'
+        dest: '{{ awscli_tmp }}'
+
+    - ansible.builtin.shell:
+        cmd: './aws/install --update --install-dir {{ awscli_install_dir }} --bin-dir {{ awscli_bin_dir }}'
+        chdir: '{{ awscli_tmp }}'
