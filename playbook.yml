@@ -2,3 +2,4 @@
 - hosts: localhost
   roles:
     - role: stage3-gui
+    - role: misc-awscli
