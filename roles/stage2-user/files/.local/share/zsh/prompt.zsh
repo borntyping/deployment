@@ -106,12 +106,14 @@ export preexec_functions=($preexec_functions _src_preexec_title)
 
 # Assemble the prompt
 #
-#   $ sam@hostname ~
+#   $ ~ll /
 #   $ ...
-#   $ sam@hostname ~/directory master production
+#   $ ~/directory main
+#   $ ...
+#   $ ~/directory main venv:example kube:example aws:example
 #   $ ...
 #
 # The %{ and %} characters are used to stop the prompt from counting invisible
 # characters when calculating the length
-PROMPT="%{$_src_prompt_fg%}$ %n@%m %{$_src_prompt_fg_highlight%}%~%{$reset_color%} \${vcs_info_msg_0_}\${_src_prompt_venv}\${_src_prompt_kubectl}\${_src_prompt_aws}
+PROMPT="%{$_src_prompt_fg%}$ %{$_src_prompt_fg_highlight%}%~%{$reset_color%} \${vcs_info_msg_0_}\${_src_prompt_venv}\${_src_prompt_kubectl}\${_src_prompt_aws}
 %{$_src_prompt_fg%}$%{$reset_color%} "
