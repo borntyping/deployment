@@ -5,7 +5,7 @@
     - ansible.builtin.get_url:
         url: '{{ awscli_url }}'
         dest: '{{ awscli_zip }}'
-        mode: '0544'
+        mode: '0774'
 
     - ansible.builtin.file:
         path: '{{ awscli_tmp }}'

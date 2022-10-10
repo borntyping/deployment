@@ -86,6 +86,7 @@
         - direnv
         - micro
         - pypoetry
+        - starship.toml
       tags:
         - atuin
         - direnv

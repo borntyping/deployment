@@ -138,13 +138,17 @@ eval "$(direnv hook zsh)"
 [[ -v "commands[exa]" ]] && alias ls='exa'
 [[ -v "commands[rg]" ]] && alias grep='rg'
 
-# Load personal prompt configuration
-source "$HOME/.local/share/zsh/prompt.zsh"
+# # Load personal prompt configuration
+# source "$HOME/.local/share/zsh/prompt.zsh"
 
 # Load machine-local configuration.
 for conf in "$HOME/.config/zsh/zshrc.d/"*.zsh; do
   source "${conf}"
 done
+
+# Starship prompt
+# https://starship.rs
+eval "$(starship init zsh)"
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."
