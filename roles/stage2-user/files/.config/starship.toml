@@ -74,22 +74,27 @@ style = ""
 
 [package]
 symbol = "pkg "
+style = ""
 
 [golang]
 symbol = "golang "
+style = "#29BEB0"
 
 [helm]
 symbol = "helm "
-style = "#326ce5"
+style = "#326CE5"
 
 [java]
 symbol = "java "
+style = "#F89820"
 
 [nodejs]
 symbol = "nodejs "
+style = "#66CC33"
 
 [php]
 symbol = "php "
+style = "#777BB3"
 
 [python]
 detect_files = ["__init__.py", "pyproject.toml", "setup.py"]
@@ -101,12 +106,15 @@ version_format = "$raw"
 
 [ruby]
 symbol = "ruby "
+style = "#CC0000"
 
 [rust]
 symbol = "rust "
+style = "#F74C00"
 
 [scala]
 symbol = "scala "
+style = "#DE3423"
 
 [terraform]
 format = "via [$symbol]($style) "
