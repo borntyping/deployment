@@ -66,10 +66,10 @@ diverged = "[⇅](red)"
 up_to_date = ""
 untracked = "[-$count](red)"
 stashed = "[\\$$count](cyan)"
-modified = "[+$count](yellow)"
+modified = "[+$count](#FFE873)"
 staged = "[+$count](green)"
-renamed = "[»$count](yellow)"
-deleted = "[-$count](yellow)"
+renamed = "[»$count](#FFE873)"
+deleted = "[-$count](#FFE873)"
 style = ""
 
 [package]

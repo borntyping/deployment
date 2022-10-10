@@ -86,7 +86,6 @@
         - direnv
         - micro
         - pypoetry
-        - starship.toml
       tags:
         - atuin
         - direnv
@@ -94,6 +93,16 @@
         - micro
         - python
         - poetry
+
+    - name: 'copy .config files'
+      ansible.builtin.copy:
+        src: '.config/{{ item }}'
+        dest: '{{ lookup("env", "HOME") }}/.config/{{ item }}'
+      loop:
+        - starship.toml
+      tags:
+        - starship
+        - zsh
 
     - name: 'install cargo packages'
       ansible.builtin.command: 'cargo install {{ item.package }}'
