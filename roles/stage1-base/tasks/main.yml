@@ -38,7 +38,6 @@
           - 'python3-black'
           - 'python3-devel'
           - 'python3-flake8'
-          - 'pre-commit'
           - 'python3-mypy'
           - 'python3-pip'
           - 'python3-pytest'
@@ -67,8 +66,17 @@
         state: 'absent'
         pkg:
           - 'python3-poetry'
+          - 'starship'
       tags:
         - 'dnf'
+
+    - name: 'install 1Password'
+      ansible.builtin.dnf:
+        state: 'latest'
+        pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
+      tags:
+        - 'dnf'
+        - '1p'
 
     # https://snapcraft.io/docs/installing-snap-on-fedora
     - name: 'configure snap'
@@ -78,14 +86,6 @@
         state: 'link'
       tags:
         - 'snap'
-
-    - name: 'install 1Password'
-      ansible.builtin.dnf:
-        state: 'latest'
-        pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
-      tags:
-        - 'dnf'
-        - '1p'
 
     - name: 'install snap packages'
       community.general.snap:

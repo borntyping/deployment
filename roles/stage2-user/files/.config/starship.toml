@@ -1,0 +1,119 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+format = "$character$all$character"
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold red)"
+
+[git_commit]
+tag_symbol = " tag "
+
+[git_status]
+ahead = "↑"
+behind = "↓"
+diverged = "⇅"
+renamed = "+"
+deleted = "-"
+
+[aws]
+symbol = "aws "
+
+[bun]
+symbol = "bun "
+
+[daml]
+symbol = "daml "
+
+[dart]
+symbol = "dart "
+
+[deno]
+symbol = "deno "
+
+[directory]
+style = "blue"
+read_only = " ro"
+truncation_length = 99
+truncate_to_repo = false
+
+[directory.substitutions]
+"~/Development/github.com/borntyping" = "~borntyping"
+"~/Development/github.com/ovotech" = "~ovotech"
+"~/Development/github.com" = "~github"
+"~/Development/gitlab.com" = "~gitlab"
+"~/Development/scratch" = "~scratch"
+"~/Development" = "~source"
+
+[docker_context]
+symbol = "docker "
+
+[elixir]
+symbol = "elixir "
+
+[elm]
+symbol = "elm "
+
+[git_branch]
+symbol = "git "
+
+[golang]
+symbol = "go "
+
+[hg_branch]
+symbol = "hg "
+
+[java]
+symbol = "java "
+
+[julia]
+symbol = "julia "
+
+[kotlin]
+symbol = "kotlin "
+
+[lua]
+symbol = "lua "
+
+[nodejs]
+symbol = "nodejs "
+
+[memory_usage]
+symbol = "memory "
+
+[nim]
+symbol = "nim "
+
+[nix_shell]
+symbol = "nix "
+
+[package]
+symbol = "pkg "
+
+[php]
+symbol = "php "
+
+[python]
+symbol = "python "
+
+[ruby]
+symbol = "ruby "
+
+[rust]
+symbol = "rust "
+
+[scala]
+symbol = "scala "
+
+[sudo]
+symbol = "sudo "
+
+[swift]
+symbol = "swift "
+
+[terraform]
+symbol = "terraform "
+
+[zig]
+symbol = "zig "

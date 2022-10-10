@@ -8,6 +8,7 @@ imports:
   just|just-bin: 'roles/stage2-user/files/.local/bin/'
   just|just-man: 'roles/stage2-user/files/.local/share/man/man1/'
   miniplug: 'roles/stage2-user/files/.local/share/zsh/'
+  starship: 'roles/stage2-user/files/.local/bin/'
 
 curl module aws-vault:
   url: https://github.com/99designs/aws-vault/releases/download/v6.6.0/aws-vault-linux-amd64
@@ -69,3 +70,10 @@ rule just-bin:
 rule just-man:
   pick:
     - just.1
+
+curl module starship:
+  url: https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-musl.tar.gz
+  unpack: tar
+  sha1: 3770fed174277f8fffe629bbe593bb382aae8797
+  pick:
+    - starship
