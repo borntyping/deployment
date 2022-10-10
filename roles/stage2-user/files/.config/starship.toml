@@ -1,35 +1,46 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = "$character$all$character"
-
-[aws]
-symbol = "aws "
-
-[azure]
-disabled = true
-
-[bun]
-disabled = true
+format = """
+$character\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$package\
+$golang\
+$helm\
+$java\
+$nodejs\
+$php\
+$python\
+$ruby\
+$rust\
+$scala\
+$terraform\
+$aws\
+$azure\
+$gcloud\
+$kubernetes\
+$openstack\
+$sudo\
+$cmd_duration\
+$jobs\
+$line_break\
+$character"""
 
 [character]
 success_symbol = "[\\$](purple)"
 error_symbol = "[\\$](red)"
 
-[daml]
-disabled = true
-
-[dart]
-disabled = true
-
-[deno]
-disabled = true
-
 [directory]
-style = "blue"
 read_only = " ro"
-truncation_length = 99
+style = "blue"
 truncate_to_repo = false
+truncation_length = 99
 
 [directory.substitutions]
 "~/Development/github.com/borntyping" = "~borntyping"
@@ -38,15 +49,6 @@ truncate_to_repo = false
 "~/Development/gitlab.com" = "~gitlab"
 "~/Development/scratch" = "~scratch"
 "~/Development" = "~source"
-
-[docker_context]
-symbol = "docker "
-
-[elixir]
-disabled = true
-
-[elm]
-disabled = true
 
 [git_branch]
 style = "purple"
@@ -70,38 +72,21 @@ renamed = "[»$count](yellow)"
 deleted = "[-$count](yellow)"
 style = ""
 
-[golang]
-disabled = true
+[package]
+symbol = "pkg "
 
-[hg_branch]
-disabled = true
+[golang]
+symbol = "golang "
+
+[helm]
+symbol = "helm "
+style = "#326ce5"
 
 [java]
-disabled = true
-
-[julia]
-disabled = true
-
-[kotlin]
-disabled = true
-
-[lua]
-disabled = true
-
-[memory_usage]
-symbol = "memory "
-
-[nim]
-disabled = true
-
-[nix_shell]
-disabled = true
+symbol = "java "
 
 [nodejs]
 symbol = "nodejs "
-
-[package]
-symbol = "pkg "
 
 [php]
 symbol = "php "
@@ -110,7 +95,7 @@ symbol = "php "
 detect_files = ["__init__.py", "pyproject.toml", "setup.py"]
 format = 'via [${symbol}(${version} )]($style)'
 python_binary = ["./venv/bin/python", "python", "python3"]
-style = "#FFE873" # https://brandpalettes.com/python-logo-colors/
+style = "#FFE873"
 symbol = "python "
 version_format = "$raw"
 
@@ -121,18 +106,41 @@ symbol = "ruby "
 symbol = "rust "
 
 [scala]
-disabled = true
-
-[sudo]
-symbol = "sudo "
-
-[swift]
-disabled = true
+symbol = "scala "
 
 [terraform]
 format = "via [$symbol]($style) "
 symbol = "terraform "
 style = "#844FBA" # https://www.hashicorp.com/brand
 
-[zig]
-disabled = true
+[aws]
+symbol = "aws "
+style = "#FF9900"
+
+[azure]
+symbol = "azure "
+style = "#008AD7"
+
+[gcloud]
+symbol = "gcloud "
+style = ""
+
+[kubernetes]
+symbol = "kubernetes "
+style = "#326ce5"
+
+[openstack]
+symbol = "openstack "
+style = ""
+
+[sudo]
+symbol = "sudo "
+style = "bold red"
+
+[cmd_duration]
+style = ""
+
+[jobs]
+format = "[\\[$number\\]]($style) "
+style = "cyan"
+number_threshold = 1
