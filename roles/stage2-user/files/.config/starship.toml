@@ -3,34 +3,27 @@
 add_newline = false
 format = "$character$all$character"
 
-[character]
-success_symbol = "[\\$](bold green)"
-error_symbol = "[\\$](bold red)"
-
-[git_commit]
-tag_symbol = " tag "
-
-[git_status]
-ahead = "↑"
-behind = "↓"
-diverged = "⇅"
-renamed = "+"
-deleted = "-"
-
 [aws]
 symbol = "aws "
 
+[azure]
+disabled = true
+
 [bun]
-symbol = "bun "
+disabled = true
+
+[character]
+success_symbol = "[\\$](purple)"
+error_symbol = "[\\$](red)"
 
 [daml]
-symbol = "daml "
+disabled = true
 
 [dart]
-symbol = "dart "
+disabled = true
 
 [deno]
-symbol = "deno "
+disabled = true
 
 [directory]
 style = "blue"
@@ -50,43 +43,62 @@ truncate_to_repo = false
 symbol = "docker "
 
 [elixir]
-symbol = "elixir "
+disabled = true
 
 [elm]
-symbol = "elm "
+disabled = true
 
 [git_branch]
-symbol = "git "
+style = "purple"
+format = "[$branch(:$remote_branch)]($style)"
+
+[git_commit]
+tag_symbol = " tag "
+
+[git_status]
+format = '( $all_status)( $ahead_behind) '
+conflicted = "[=$count](red)"
+ahead = "[↑$count](green)"
+behind = "[↓$count](red)"
+diverged = "[⇅](red)"
+up_to_date = ""
+untracked = "[-$count](red)"
+stashed = "[\\$$count](cyan)"
+modified = "[+$count](yellow)"
+staged = "[+$count](green)"
+renamed = "[»$count](yellow)"
+deleted = "[-$count](yellow)"
+style = ""
 
 [golang]
-symbol = "go "
+disabled = true
 
 [hg_branch]
-symbol = "hg "
+disabled = true
 
 [java]
-symbol = "java "
+disabled = true
 
 [julia]
-symbol = "julia "
+disabled = true
 
 [kotlin]
-symbol = "kotlin "
+disabled = true
 
 [lua]
-symbol = "lua "
-
-[nodejs]
-symbol = "nodejs "
+disabled = true
 
 [memory_usage]
 symbol = "memory "
 
 [nim]
-symbol = "nim "
+disabled = true
 
 [nix_shell]
-symbol = "nix "
+disabled = true
+
+[nodejs]
+symbol = "nodejs "
 
 [package]
 symbol = "pkg "
@@ -95,7 +107,12 @@ symbol = "pkg "
 symbol = "php "
 
 [python]
+detect_files = ["__init__.py", "pyproject.toml", "setup.py"]
+format = 'via [${symbol}(${version} )]($style)'
+python_binary = ["./venv/bin/python", "python", "python3"]
+style = "#FFE873" # https://brandpalettes.com/python-logo-colors/
 symbol = "python "
+version_format = "$raw"
 
 [ruby]
 symbol = "ruby "
@@ -104,16 +121,18 @@ symbol = "ruby "
 symbol = "rust "
 
 [scala]
-symbol = "scala "
+disabled = true
 
 [sudo]
 symbol = "sudo "
 
 [swift]
-symbol = "swift "
+disabled = true
 
 [terraform]
+format = "via [$symbol]($style) "
 symbol = "terraform "
+style = "#844FBA" # https://www.hashicorp.com/brand
 
 [zig]
-symbol = "zig "
+disabled = true
