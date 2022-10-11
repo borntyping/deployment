@@ -73,27 +73,27 @@ deleted = "[-$count](#FFE873)"
 style = ""
 
 [package]
-symbol = "pkg "
+symbol = "pkg"
 style = ""
 
 [golang]
-symbol = "golang "
+symbol = "golang"
 style = "#29BEB0"
 
 [helm]
-symbol = "helm "
+symbol = "helm"
 style = "#326CE5"
 
 [java]
-symbol = "java "
+symbol = "java"
 style = "#F89820"
 
 [nodejs]
-symbol = "nodejs "
+symbol = "nodejs"
 style = "#66CC33"
 
 [php]
-symbol = "php "
+symbol = "php"
 style = "#777BB3"
 
 [python]
@@ -105,44 +105,44 @@ symbol = "python "
 version_format = "$raw"
 
 [ruby]
-symbol = "ruby "
+symbol = "ruby"
 style = "#CC0000"
 
 [rust]
-symbol = "rust "
+symbol = "rust"
 style = "#F74C00"
 
 [scala]
-symbol = "scala "
+symbol = "scala"
 style = "#DE3423"
 
 [terraform]
 format = "via [$symbol]($style) "
-symbol = "terraform "
+symbol = "terraform"
 style = "#844FBA" # https://www.hashicorp.com/brand
 
 [aws]
-symbol = "aws "
+symbol = "aws"
 style = "#FF9900"
 
 [azure]
-symbol = "azure "
+symbol = "azure"
 style = "#008AD7"
 
 [gcloud]
-symbol = "gcloud "
+symbol = "gcloud"
 style = ""
 
 [kubernetes]
-symbol = "kubernetes "
+symbol = "kubernetes"
 style = "#326ce5"
 
 [openstack]
-symbol = "openstack "
+symbol = "openstack"
 style = ""
 
 [sudo]
-symbol = "sudo "
+symbol = "sudo"
 style = "bold red"
 
 [cmd_duration]
