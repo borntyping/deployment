@@ -3,6 +3,7 @@ imports:
   aws-vault: 'roles/stage2-user/files/.local/bin/'
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
+  fantasque-nerd: 'roles/stage3-gui/files/.fonts'
   fixup|fixup-bin: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-zsh: 'roles/stage2-user/files/.local/share/zsh/'
   just|just-bin: 'roles/stage2-user/files/.local/bin/'
@@ -15,6 +16,8 @@ curl module aws-vault:
   sha1: 5d6d22b4fb7d24826816673d39a91e0357d3e6d6
   move:
     aws-vault-linux-amd64: aws-vault
+  executable:
+    - aws-vault
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
@@ -23,26 +26,25 @@ curl module miniplug:
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
   unpack: zip
-  pick:
-    - Dracula.json
   move:
     tilix-master/Dracula.json: Dracula.json
+  pick:
+    - Dracula.json
   sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
   unpack: zip
-  pick:
-    - FantasqueSansMono-Bold.ttf
-    - FantasqueSansMono-BoldItalic.ttf
-    - FantasqueSansMono-Italic.ttf
-    - FantasqueSansMono-Regular.ttf
-  move:
-    TTF/FantasqueSansMono-Bold.ttf: FantasqueSansMono-Bold.ttf
-    TTF/FantasqueSansMono-BoldItalic.ttf: FantasqueSansMono-BoldItalic.ttf
-    TTF/FantasqueSansMono-Italic.ttf: FantasqueSansMono-Italic.ttf
-    TTF/FantasqueSansMono-Regular.ttf: FantasqueSansMono-Regular.ttf
+  export: TTF/
   sha1: 54cf092de3ad5785f80bc198809837096f16966b
+
+curl module fantasque-nerd:
+  url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FantasqueSansMono.zip
+  unpack: zip
+  drop:
+    - "* Windows Compatible.ttf"
+    - "readme.md"
+  sha1: 4d353013b61eaeef399cc5413a1e2f640c0ac0d4
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
@@ -50,6 +52,8 @@ git module fixup:
 
 rule fixup-bin:
   pick:
+    - git-fixup
+  executable:
     - git-fixup
 
 rule fixup-zsh:
@@ -66,6 +70,8 @@ curl module just:
 rule just-bin:
   pick:
     - just
+  executable:
+    - just
 
 rule just-man:
   pick:
@@ -76,4 +82,6 @@ curl module starship:
   unpack: tar
   sha1: 3770fed174277f8fffe629bbe593bb382aae8797
   pick:
+    - starship
+  executable:
     - starship
