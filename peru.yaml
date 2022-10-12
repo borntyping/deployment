@@ -43,6 +43,7 @@ curl module fantasque-nerd:
   unpack: zip
   drop:
     - "* Windows Compatible.ttf"
+    - "* Mono.ttf" # The original is already mono.
     - "readme.md"
   sha1: 4d353013b61eaeef399cc5413a1e2f640c0ac0d4
 
