@@ -100,8 +100,11 @@ symbol = "php"
 style = "#777BB3"
 
 [python]
-detect_files = ["__init__.py", "pyproject.toml", "setup.py"]
-format = 'via [${symbol}(${version} )]($style)'
+# Detection is disabled so Python only shows when a virtualenv is active.
+detect_extensions = []
+detect_files = []
+detect_folders = []
+format = 'via [${symbol}(${version} )(\($virtualenv\) )]($style)'
 python_binary = ["./venv/bin/python", "python", "python3"]
 style = "#FFE873"
 symbol = "python "
@@ -120,9 +123,11 @@ symbol = "scala"
 style = "#DE3423"
 
 [terraform]
-format = "via [$symbol]($style) "
+format = "via [$symbol $version]($style) "
+version_format = "${raw}"
 symbol = "terraform"
 style = "#844FBA" # https://www.hashicorp.com/brand
+detect_folders = [".terraform", "terraform"]
 
 [aws]
 symbol = "aws"
