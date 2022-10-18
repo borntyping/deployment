@@ -4,10 +4,3 @@
 source_env_if_exists '.local/envrc'
 dotenv_if_exists '.env'
 dotenv_if_exists '.local/env'
-
-if [[ -f '.venv/bin/python' ]]; then
-    VIRTUAL_ENV="${PWD}/.venv"
-    export VIRTUAL_ENV
-    PATH_add "${VIRTUAL_ENV}/bin"
-    log_status "using python virtualenv $(user_rel_path "${VIRTUAL_ENV}")"
-fi
