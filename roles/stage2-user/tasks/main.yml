@@ -77,6 +77,16 @@
         - 'socket'
         - 'systemd'
 
+    - name: 'add user to docker group'
+      ansible.builtin.user:
+        name: '{{ lookup("env", "USER") }}'
+        groups: 'docker'
+        append: yes
+      become: 'yes'
+      tags:
+        - 'never'
+        - 'docker'
+
     - name: 'copy .config directories'
       ansible.builtin.copy:
         src: '.config/{{ item }}/'
