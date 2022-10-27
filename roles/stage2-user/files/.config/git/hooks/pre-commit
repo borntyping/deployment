@@ -135,13 +135,6 @@ hooks = [
     ),
     CommandHook(
         "python",
-        "flake8",
-        [".venv/bin/flake8", "."],
-        [".venv/bin/flake8"],
-        [".pre-commit-config.yaml"],
-    ),
-    CommandHook(
-        "python",
         "mypy",
         [".venv/bin/mypy", "."],
         [".venv/bin/mypy"],
