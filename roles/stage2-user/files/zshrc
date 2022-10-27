@@ -71,7 +71,7 @@ export PAGER="bat"                                                              
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
-export DOCKER_HOST="unix:///run/user/${UID}/podman/podman.sock"                 # Make docker-compose work with rootless podman.
+export DOCKER_HOST="unix:///run/user/${UID}/podman/podman.sock"                 # Make docker-compose work with rootless podman (systemctl --user start podman.socket).
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window wrap"              # Show preview window and wrap text. Useful for long commands.
 export NPM_CONFIG_PREFIX="${HOME}/.npm"                                         # https://docs.npmjs.com/cli/v7/configuring-npm/folders#prefix-configuration
 export PIP_REQUIRE_VIRTUALENV=1                                                 # Require that Pip is run inside a virtualenv.
