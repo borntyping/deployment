@@ -124,6 +124,7 @@ symbol = "scala "
 style = "#DE3423"
 
 [terraform]
+disabled = true
 format = "via [$symbol$version]($style) "
 version_format = "${raw}"
 symbol = "terraform "
@@ -131,6 +132,7 @@ style = "#844FBA" # https://www.hashicorp.com/brand
 detect_folders = [".terraform", "terraform"]
 
 [aws]
+disabled = true
 symbol = "aws "
 style = "#FF9900"
 
