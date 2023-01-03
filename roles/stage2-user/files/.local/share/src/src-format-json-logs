@@ -10,4 +10,4 @@ for line in sys.stdin:
     if line:
         data = json.loads(line)
         table = [[k, v] for k, v in data.items()]
-        print(tabulate.tabulate(table, tablefmt="rounded_grid"))
+        print(tabulate.tabulate(table, tablefmt="plain"))
