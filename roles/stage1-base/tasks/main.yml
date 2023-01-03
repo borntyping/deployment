@@ -52,6 +52,7 @@
           - 'rustc'
           - 'rustfmt'
           - 'snapd'
+          - 'strace'
           - 'sqlite'
           - 'tree'
           - 'wl-clipboard'              # optional dependency of micro
