@@ -19,3 +19,5 @@ git_hosts_local:
     [user]
     name = Sam Clements
     email = sam.clements@corporate.invalid
+    [core]
+    ssh -i '~/.ssh/keys/id_ed25519_github_borntyping_corporate
