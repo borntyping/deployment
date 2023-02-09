@@ -21,7 +21,7 @@ curl module aws-vault:
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
-  sha1: cc87eb8d24214df257d2809823869786b78d779d
+  sha1: 4b9e4bc549f7fed040a2058adcc76274b95003ed
 
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
@@ -81,7 +81,7 @@ rule just-man:
 curl module starship:
   url: https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
-  sha1: 3770fed174277f8fffe629bbe593bb382aae8797
+  sha1: f491880f53270e3eeef0ab65f449b5160bd93554
   pick:
     - starship
   executable:
