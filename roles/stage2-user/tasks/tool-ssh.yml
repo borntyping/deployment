@@ -22,21 +22,22 @@
         src: '.ssh/config.d/'
         dest: '{{ lookup("env", "HOME") }}/.ssh/config.d/'
 
-    - name: 'generate ssh key for github'
-      community.crypto.openssh_keypair:
-        type: 'ed25519'
-        path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_github'
-
-    - name: 'generate ssh key for gitlab'
-      community.crypto.openssh_keypair:
-        type: 'ed25519'
-        path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_gitlab'
-
-    - name: 'generate ssh key for others'
+    - name: 'generate essential ssh keys'
       community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_{{ item }}'
-      with_items: '{{ ssh_key_names }}'
+        comment: '{{ lookup("env", "HOST") }}'
+      loop:
+        - github_borntyping
+        - github_borntyping_corporate
+        - gitlab
+
+    - name: 'generate configured ssh keys'
+      community.crypto.openssh_keypair:
+        type: 'ed25519'
+        path: '{{ lookup("env", "HOME") }}/.ssh/keys/id_ed25519_{{ item }}'
+        comment: '{{ lookup("env", "HOST") }}'
+      loop: '{{ ssh_key_names }}'
 
     - name: 'assemble ssh config'
       ansible.builtin.assemble:
