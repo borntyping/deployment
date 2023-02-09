@@ -139,6 +139,7 @@
         - 'checkov'
         - 'poetry'
         - 'switchbox'
+        - 'peru'
       tags:
         - 'python'
         - 'pipx'
