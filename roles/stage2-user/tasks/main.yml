@@ -131,3 +131,14 @@
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
     - import_tasks: 'tool-ssh.yml'
+
+    - name: 'install python packages with pipx'
+      community.general.pipx:
+        name: '{{ item }}'
+      loop:
+        - 'checkov'
+        - 'poetry'
+        - 'switchbox'
+      tags:
+        - 'python'
+        - 'pipx'
