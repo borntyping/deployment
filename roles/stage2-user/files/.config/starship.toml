@@ -132,7 +132,6 @@ style = "#844FBA" # https://www.hashicorp.com/brand
 detect_folders = [".terraform", "terraform"]
 
 [aws]
-disabled = true
 symbol = "aws "
 style = "#FF9900"
 
