@@ -66,10 +66,10 @@ class Hook:
         raise Exception(f"Unexpected result from 'git config' ({result}).")
 
     def enabled(self) -> bool:
-        ...
+        raise NotImplementedError
 
     def run(self) -> str | None:
-        ...
+        raise NotImplementedError
 
 
 @dataclasses.dataclass()
