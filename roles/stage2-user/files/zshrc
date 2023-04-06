@@ -133,7 +133,7 @@ eval "$(direnv hook zsh)"
 
 # Podman
 # systemctl --user start podman.socket
-if [[ -v 'commands[podman]' ]]; then
+if [[ -v 'commands[podman]' && -f "${XDG_RUNTIME_DIR}/podman/podman.sock" ]]; then
   export DOCKER_HOST="unix://${XDG_RUNTIME_DIR}/podman/podman.sock"
 fi
 
