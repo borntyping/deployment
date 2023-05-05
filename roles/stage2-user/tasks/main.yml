@@ -114,20 +114,6 @@
         - starship
         - zsh
 
-    - name: 'install cargo packages'
-      ansible.builtin.command: 'cargo install {{ item.package }}'
-      args:
-        creates: '{{ lookup("env", "HOME") }}/.cargo/bin/{{ item.bin|default(item.package) }}'
-      loop:
-        - package: 'atuin'
-        - package: 'difftastic'
-          bin: 'difft'
-      loop_control:
-        label: '{{ item.package }}'
-      tags:
-        - 'cargo'
-        - 'rust'
-
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
     - import_tasks: 'tool-ssh.yml'
@@ -143,3 +129,32 @@
       tags:
         - 'python'
         - 'pipx'
+
+    - name: 'install cargo packages'
+      ansible.builtin.command: 'cargo install {{ item.package }}'
+      args:
+        creates: '{{ lookup("env", "HOME") }}/.cargo/bin/{{ item.bin }}'
+      loop:
+        - package: 'atuin'
+          bin: 'atuin'
+        - package: 'difftastic'
+          bin: 'difft'
+      loop_control:
+        label: '{{ item.package }}'
+      tags:
+        - 'bin'
+        - 'cargo'
+        - 'rust'
+
+    - name: 'install golang executables'
+      ansible.builtin.command: 'go install {{ item.package }}'
+      args:
+        creates: '{{ lookup("env", "HOME") }}/.local/lib/go/bin/{{ item.bin }}'
+      loop:
+        - package: github.com/stern/stern@latest
+          bin: stern
+        - package: github.com/bbrks/shotgun@latest
+          bin: shotgun
+      tags:
+        - 'bin'
+        - 'golang'
