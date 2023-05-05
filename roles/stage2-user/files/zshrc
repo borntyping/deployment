@@ -71,16 +71,29 @@ export PAGER="bat"                                                              
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
+export FORGIT_FZF_DEFAULT_OPTS="--reverse"                                      # https://github.com/wfxr/forgit#fzf-options
+export FORGIT_NO_ALIASES=1                                                      # https://github.com/wfxr/forgit#shell-aliases
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window wrap"              # Show preview window and wrap text. Useful for long commands.
+export GOPATH="${HOME}/.local/lib/go"                                           # Stop golang from polluting my home directory.
 export NPM_CONFIG_PREFIX="${HOME}/.npm"                                         # https://docs.npmjs.com/cli/v7/configuring-npm/folders#prefix-configuration
-export PIP_REQUIRE_VIRTUALENV=1                                                 # Require that Pip is run inside a virtualenv.
 export PIPENV_DONT_LOAD_ENV=1                                                   # Direnv manages our '.env', tell Pipenv not to load it.
 export PIPENV_IGNORE_VIRTUALENVS=1                                              # Don't try and detect running in an existing Python virtualenv.
 export PIPENV_VENV_IN_PROJECT=1                                                 # Place Pipenv virtualenvs in '.venv' directories.
+export PIP_REQUIRE_VIRTUALENV=1                                                 # Require that Pip is run inside a virtualenv.
 export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
 
-export PATH="${HOME}/.cargo/bin:${HOME}/.npm/bin:${HOME}/.krew/bin:${PATH}"     # Language package managers.
-export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/.local/share/src:${PATH}"  # The '.bin' directory should take precedence over '.local/bin'.
+export PATH="${HOME}/.local/share/miniplug/wfxr/forgit/bin:${PATH}"            # https://github.com/wfxr/forgit#git-integration
+
+# Language package managers.
+export PATH="${HOME}/.cargo/bin:${PATH}"
+export PATH="${HOME}/.krew/bin:${PATH}"
+export PATH="${HOME}/.local/lib/go:${PATH}"
+export PATH="${HOME}/.npm/bin:${PATH}"
+
+# The '.bin' directory should take precedence over '.local/bin'.
+export PATH="${HOME}/.local/share/src:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.bin:${PATH}"
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
@@ -112,6 +125,7 @@ fi
 # https://git.sr.ht/~yerinalexey/miniplug
 source "$HOME/.local/share/zsh/miniplug.zsh"
 miniplug plugin 'ajeetdsouza/zoxide'
+miniplug plugin 'wfxr/forgit'
 miniplug plugin 'zsh-users/zsh-completions'
 miniplug load
 
