@@ -71,6 +71,7 @@ export PAGER="bat"                                                              
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
+export BUN_INSTALL="$HOME/.bun"                                                 # https://bun.sh/docs/installation
 export FORGIT_FZF_DEFAULT_OPTS="--reverse"                                      # https://github.com/wfxr/forgit#fzf-options
 export FORGIT_NO_ALIASES=1                                                      # https://github.com/wfxr/forgit#shell-aliases
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window wrap"              # Show preview window and wrap text. Useful for long commands.
@@ -85,6 +86,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1                                             
 export PATH="${HOME}/.local/share/miniplug/wfxr/forgit/bin:${PATH}"            # https://github.com/wfxr/forgit#git-integration
 
 # Language package managers.
+export PATH="${HOME}/.bun/bin:${PATH}"
 export PATH="${HOME}/.cargo/bin:${PATH}"
 export PATH="${HOME}/.krew/bin:${PATH}"
 export PATH="${HOME}/.local/lib/go:${PATH}"
@@ -141,6 +143,10 @@ fi
 # https://asdf-vm.com/
 [[ -f "${HOME}/.asdf/asdf.sh" ]] && source "${HOME}/.asdf/asdf.sh"
 
+# Bun
+# https://bun.sh
+[ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"
+
 # Direnv
 # https://direnv.net/
 eval "$(direnv hook zsh)"
@@ -167,7 +173,7 @@ done
 
 # Starship prompt
 # https://starship.rs
-eval "$(starship init zsh)"
+source <(/home/sam/.local/bin/starship init zsh --print-full-init)
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."
