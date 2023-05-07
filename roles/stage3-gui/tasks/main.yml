@@ -4,6 +4,7 @@
     - 'stage3-gui'
   block:
     - name: 'install packages'
+      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         name:
           - 'firefox'
@@ -17,6 +18,32 @@
       become: 'yes'
       tags:
         - 'dnf'
+
+    - name: 'install 1Password'
+      when: ansible_distribution == 'Fedora' 
+      ansible.builtin.dnf:
+        state: 'latest'
+        pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
+      tags:
+        - 'dnf'
+        - '1p'
+
+    - name: 'install snap packages'
+      community.general.snap:
+        name: '{{ item }}'
+      loop:
+        - 'slack'
+      tags:
+        - 'snap'
+    
+    - name: 'install snap packages with --classic'
+      community.general.snap:
+        name: '{{ item }}'
+        classic: true
+      loop:
+        - 'pycharm-professional'
+      tags:
+        - 'snap'
 
     - name: 'install .fonts/'
       copy:
