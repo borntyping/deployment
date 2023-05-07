@@ -139,6 +139,8 @@
           bin: 'atuin'
         - package: 'difftastic'
           bin: 'difft'
+        - package: 'starship'
+          bin: 'starship'
       loop_control:
         label: '{{ item.package }}'
       tags:

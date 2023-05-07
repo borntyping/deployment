@@ -5,6 +5,7 @@
     - 'stage1-base'
   block:
     - name: 'install dnf packages'
+      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         state: 'latest'
         pkg:
@@ -66,6 +67,7 @@
         - 'dnf'
 
     - name: 'remove dnf packages'
+      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         state: 'absent'
         pkg:
@@ -74,37 +76,13 @@
       tags:
         - 'dnf'
 
-    - name: 'install 1Password'
-      ansible.builtin.dnf:
-        state: 'latest'
-        pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
-      tags:
-        - 'dnf'
-        - '1p'
-
     # https://snapcraft.io/docs/installing-snap-on-fedora
     - name: 'configure snap'
+      when: ansible_distribution == 'Fedora'
       ansible.builtin.file:
         src: '/var/lib/snapd/snap'
         dest: '/snap'
         state: 'link'
-      tags:
-        - 'snap'
-
-    - name: 'install snap packages'
-      community.general.snap:
-        name: '{{ item }}'
-      loop:
-        - 'slack'
-      tags:
-        - 'snap'
-
-    - name: 'install snap packages with --classic'
-      community.general.snap:
-        name: '{{ item }}'
-        classic: true
-      loop:
-        - 'pycharm-professional'
       tags:
         - 'snap'
 
