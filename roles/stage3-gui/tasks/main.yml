@@ -20,10 +20,11 @@
         - 'dnf'
 
     - name: 'install 1Password'
-      when: ansible_distribution == 'Fedora' 
+      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         state: 'latest'
         pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
+      become: 'yes'
       tags:
         - 'dnf'
         - '1p'
@@ -31,15 +32,17 @@
     - name: 'install snap packages'
       community.general.snap:
         name: '{{ item }}'
+      become: 'yes'
       loop:
         - 'slack'
       tags:
         - 'snap'
-    
+
     - name: 'install snap packages with --classic'
       community.general.snap:
         name: '{{ item }}'
         classic: true
+      become: 'yes'
       loop:
         - 'pycharm-professional'
       tags:

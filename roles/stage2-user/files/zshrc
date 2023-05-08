@@ -173,7 +173,7 @@ done
 
 # Starship prompt
 # https://starship.rs
-source <(/home/sam/.local/bin/starship init zsh --print-full-init)
+source <("${HOME}/.local/bin/starship" init zsh --print-full-init)
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."
