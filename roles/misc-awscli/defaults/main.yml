@@ -1,7 +1,0 @@
----
-awscli_home: '{{ lookup("env", "HOME") }}'
-awscli_url: 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
-awscli_zip: '{{ awscli_home }}/Downloads/awscli-exe-linux-x86_64.zip'
-awscli_tmp: '{{ awscli_home }}/Downloads/awscli-exe-linux-x86_64'
-awscli_install_dir: '{{ awscli_home }}/.local/aws-cli'
-awscli_bin_dir: '{{ awscli_home }}/.local/bin'
