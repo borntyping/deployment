@@ -13,6 +13,7 @@
           - 'ack'
           - 'ansible-core'
           - 'asciinema'
+          - 'awscli2'
           - 'bat'
           - 'cargo'
           - 'clippy'
