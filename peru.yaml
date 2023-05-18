@@ -1,5 +1,8 @@
 ---
 imports:
+  atuin|atuin-bin: 'roles/stage2-user/files/.local/bin/'
+  atuin|atuin-zsh: 'roles/stage2-user/files/.local/share/zsh/'
+  difft: 'roles/stage2-user/files/.local/bin/'
   aws-vault: 'roles/stage2-user/files/.local/bin/'
   dracula: 'roles/stage3-gui/files/.config/tilix/schemes'
   fantasque: 'roles/stage3-gui/files/.fonts'
@@ -13,6 +16,23 @@ imports:
   miniplug: 'roles/stage2-user/files/.local/share/zsh/'
   starship: 'roles/stage2-user/files/.local/bin/'
 
+curl module atuin:
+  url: https://github.com/ellie/atuin/releases/download/v14.0.1/atuin-v14.0.1-x86_64-unknown-linux-gnu.tar.gz
+  unpack: tar
+  export: atuin-v14.0.1-x86_64-unknown-linux-gnu
+
+rule atuin-bin:
+  pick:
+    - atuin
+  executable:
+    - atuin
+
+rule atuin-zsh:
+  copy:
+    completions/_atuin: atuin.zsh
+  pick:
+    - atuin.zsh
+
 curl module aws-vault:
   url: https://github.com/99designs/aws-vault/releases/download/v6.6.0/aws-vault-linux-amd64
   sha1: 5d6d22b4fb7d24826816673d39a91e0357d3e6d6
@@ -20,6 +40,15 @@ curl module aws-vault:
     aws-vault-linux-amd64: aws-vault
   executable:
     - aws-vault
+
+
+curl module difft:
+  url: https://github.com/Wilfred/difftastic/releases/download/0.47.0/difft-x86_64-unknown-linux-gnu.tar.gz
+  unpack: tar
+  pick:
+    - difft
+  executable:
+    - difft
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
@@ -91,7 +120,6 @@ curl module kubens:
 curl module starship:
   url: https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
-  sha1: f491880f53270e3eeef0ab65f449b5160bd93554
   pick:
     - starship
   executable:
