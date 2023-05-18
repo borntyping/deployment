@@ -118,6 +118,17 @@
     - import_tasks: 'tool-git.yml'
     - import_tasks: 'tool-ssh.yml'
 
+    - name: 'install python packages with pip'
+      ansible.builtin.pip:
+        name:
+          - pip
+          - wheel
+          - peru
+        extra_args: --user
+      tags:
+        - 'python'
+        - 'pip'
+
     - name: 'install python packages with pipx'
       community.general.pipx:
         name: '{{ item }}'
@@ -125,28 +136,9 @@
         - 'checkov'
         - 'poetry'
         - 'switchbox'
-        - 'peru'
       tags:
         - 'python'
         - 'pipx'
-
-    - name: 'install cargo packages'
-      ansible.builtin.command: 'cargo install {{ item.package }}'
-      args:
-        creates: '{{ lookup("env", "HOME") }}/.cargo/bin/{{ item.bin }}'
-      loop:
-        - package: 'atuin'
-          bin: 'atuin'
-        - package: 'difftastic'
-          bin: 'difft'
-        - package: 'starship'
-          bin: 'starship'
-      loop_control:
-        label: '{{ item.package }}'
-      tags:
-        - 'bin'
-        - 'cargo'
-        - 'rust'
 
     - name: 'install golang executables'
       ansible.builtin.command: 'go install {{ item.package }}'
