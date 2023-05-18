@@ -5,7 +5,6 @@
     - 'stage1-base'
   block:
     - name: 'install dnf packages'
-      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         state: 'latest'
         pkg:
@@ -28,7 +27,6 @@
           - 'gh'                        # github cli
           - 'git'
           - 'git-lfs'                   # git large file support
-          - 'google-chrome-stable'
           - 'htop'
           - 'jq'
           - 'micro'
@@ -68,7 +66,6 @@
         - 'dnf'
 
     - name: 'remove dnf packages'
-      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         state: 'absent'
         pkg:
@@ -76,16 +73,6 @@
           - 'starship'
       tags:
         - 'dnf'
-
-    # https://snapcraft.io/docs/installing-snap-on-fedora
-    - name: 'configure snap'
-      when: ansible_distribution == 'Fedora'
-      ansible.builtin.file:
-        src: '/var/lib/snapd/snap'
-        dest: '/snap'
-        state: 'link'
-      tags:
-        - 'snap'
 
     - name: 'configure sudo'
       ansible.builtin.copy:
