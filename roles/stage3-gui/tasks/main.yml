@@ -4,7 +4,6 @@
     - 'stage3-gui'
   block:
     - name: 'install packages'
-      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         name:
           - 'firefox'
@@ -12,6 +11,7 @@
           - 'gitg'
           - 'gnome-shell-extension-dash-to-dock'
           - 'gnome-tweaks'
+          - 'google-chrome-stable'
           - 'meld'
           - 'tilix'
         state: 'latest'
@@ -20,7 +20,6 @@
         - 'dnf'
 
     - name: 'install 1Password'
-      when: ansible_distribution == 'Fedora'
       ansible.builtin.dnf:
         state: 'latest'
         pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
@@ -28,6 +27,16 @@
       tags:
         - 'dnf'
         - '1p'
+
+    # Enable 'classic' Snap support.
+    # https://snapcraft.io/docs/installing-snap-on-fedora
+    - name: 'configure snap'
+      ansible.builtin.file:
+        src: '/var/lib/snapd/snap'
+        dest: '/snap'
+        state: 'link'
+      tags:
+        - 'snap'
 
     - name: 'install snap packages'
       community.general.snap:
