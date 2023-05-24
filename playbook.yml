@@ -2,7 +2,5 @@
 - hosts: all
   roles:
     - role: stage2-user
-
-- hosts: graphical
-  roles:
     - role: stage3-gui
+      when: stage3_gui_enabled == true
