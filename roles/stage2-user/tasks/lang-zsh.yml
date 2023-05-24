@@ -38,11 +38,11 @@
       tags:
         - 'local'
 
-    - name: 'set shell to zsh'
-      ansible.builtin.user:
-        name: '{{ lookup("env", "USER") }}'
-        shell: '/bin/zsh'
-      become: 'yes'
+#    - name: 'set shell to zsh'
+#      ansible.builtin.user:
+#        name: '{{ lookup("env", "USER") }}'
+#        shell: '/bin/zsh'
+#      become: 'yes'
 
 #     - name: 'generate kubectl completion files'
 #       ansible.builtin.shell:
