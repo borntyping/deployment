@@ -94,15 +94,19 @@
       loop:
         - atuin
         - direnv
+        - fish
         - micro
+        - pip
         - pypoetry
       tags:
         - atuin
-        - direnv
         - config
+        - direnv
+        - fish
         - micro
-        - python
+        - pip
         - poetry
+        - python
 
     - name: 'copy .config files'
       ansible.builtin.copy:
