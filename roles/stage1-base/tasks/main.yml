@@ -22,6 +22,7 @@
           - 'docker-compose'
           - 'exa'                       # ls replacement
           - 'fd-find'                   # find replacement
+          - 'fish'
           - 'fzf'                       # shell menu
           - 'gcc-c++'                   # needed for cargo install task
           - 'gh'                        # github cli
