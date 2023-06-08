@@ -24,7 +24,7 @@ def print_alert(text: str, *, fg: str, symbol: str, width: int = 80 + 9) -> None
 
 
 def print_start(text: str) -> None:
-    print_alert(text, fg="30", symbol="➔")
+    print_alert(text, fg="30", symbol="→")
 
 
 def print_failure(text: str) -> None:
@@ -36,7 +36,7 @@ def print_failure_note(text: str) -> None:
 
 
 def print_success(text: str) -> None:
-    print_alert(text, fg="32", symbol="➔")
+    print_alert(text, fg="32", symbol="→")
 
 
 @dataclasses.dataclass()
