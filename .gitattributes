@@ -1,5 +1,5 @@
-roles/stage2-user/files/.local/bin/* filter=lfs diff=lfs merge=lfs -text
-roles/stage2-user/files/.local/share/man/* filter=lfs diff=lfs merge=lfs
+roles/stage2-user/files/.local/bin/** filter=lfs diff=lfs merge=lfs -text
+roles/stage2-user/files/.local/share/man/** filter=lfs diff=lfs merge=lfs
 roles/stage2-user/files/.local/share/zsh/atuin.zsh filter=lfs diff=lfs merge=lfs
 roles/stage2-user/files/.local/share/zsh/dog.zsh filter=lfs diff=lfs merge=lfs
 roles/stage2-user/files/.local/share/zsh/fixup.zsh filter=lfs diff=lfs merge=lfs
