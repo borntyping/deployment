@@ -17,9 +17,10 @@ imports:
   starship: 'roles/stage2-user/files/.local/bin/'
 
 curl module atuin:
-  url: https://github.com/ellie/atuin/releases/download/v14.0.1/atuin-v14.0.1-x86_64-unknown-linux-gnu.tar.gz
+  url: https://github.com/ellie/atuin/releases/download/v15.0.0/atuin-v15.0.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
-  export: atuin-v14.0.1-x86_64-unknown-linux-gnu
+  export: atuin-v15.0.0-x86_64-unknown-linux-gnu
+  sha1: 19c6e63a31cf92e3841c64059ce6886d20ec2d13
 
 rule atuin-bin:
   pick:
@@ -34,13 +35,13 @@ rule atuin-zsh:
     - atuin.zsh
 
 curl module aws-vault:
-  url: https://github.com/99designs/aws-vault/releases/download/v6.6.0/aws-vault-linux-amd64
-  sha1: 5d6d22b4fb7d24826816673d39a91e0357d3e6d6
+  url: https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-amd64
   move:
     aws-vault-linux-amd64: aws-vault
   executable:
     - aws-vault
 
+  sha1: 70efe397bcd199619ae6e5d121b7a88d8291156e
 
 curl module difft:
   url: https://github.com/Wilfred/difftastic/releases/download/0.47.0/difft-x86_64-unknown-linux-gnu.tar.gz
@@ -49,6 +50,7 @@ curl module difft:
     - difft
   executable:
     - difft
+  sha1: b45e61ea969b1acd400619d543712ebc784c4351
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
@@ -70,13 +72,9 @@ curl module fantasque:
   sha1: 54cf092de3ad5785f80bc198809837096f16966b
 
 curl module fantasque-nerd:
-  url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FantasqueSansMono.zip
+  url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FantasqueSansMono.zip
   unpack: zip
-  drop:
-    - "* Windows Compatible.ttf"
-    - "* Mono.ttf" # The original is already mono.
-    - "readme.md"
-  sha1: 4d353013b61eaeef399cc5413a1e2f640c0ac0d4
+  sha1: bd31e05a801f6389ae197462d513dd04d1141206
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
@@ -95,9 +93,9 @@ rule fixup-zsh:
     - fixup.zsh
 
 curl module just:
-  url: https://github.com/casey/just/releases/download/1.4.0/just-1.4.0-x86_64-unknown-linux-musl.tar.gz
+  url: https://github.com/casey/just/releases/download/1.14.0/just-1.14.0-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
-  sha1: ab323d0d1617c74d79427f1d596f25e7cb3c28b9
+  sha1: 9414f897b56666827c238674c4277adaa4e9dceb
 
 rule just-bin:
   pick:
@@ -112,10 +110,12 @@ rule just-man:
 curl module kubectx:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx
   executable: kubectx
+  sha1: 1718cd9a4bef8caf9af11138223e7d53fb41a5ea
 
 curl module kubens:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens
   executable: kubens
+  sha1: 4d0ba0d52d6c6ee9e2da7aed12b269b2c2e71aa6
 
 curl module starship:
   url: https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-musl.tar.gz
@@ -124,3 +124,4 @@ curl module starship:
     - starship
   executable:
     - starship
+  sha1: 56c209a295368fcd7ca504a807bfc3c6204d5085
