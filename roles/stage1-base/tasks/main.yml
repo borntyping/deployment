@@ -77,6 +77,15 @@
       tags:
         - 'dnf'
 
+    - name: 'install snap packages'
+      community.general.snap:
+        name: '{{ item }}'
+      become: 'yes'
+      loop:
+        - 'lnav'
+      tags:
+        - 'snap'
+
     - name: 'configure sudo'
       ansible.builtin.copy:
         src: 'etc/sudoers.d/sam'
