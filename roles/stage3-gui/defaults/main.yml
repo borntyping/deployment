@@ -1,1 +1,2 @@
-stage3_enabled: true
+stage3_gui_enabled: true
+snap_enabled: true

@@ -14,6 +14,7 @@
           - 'google-chrome-stable'
           - 'meld'
           - 'tilix'
+          - 'zeal'
         state: 'latest'
       become: 'yes'
       tags:
@@ -28,17 +29,8 @@
         - 'dnf'
         - '1p'
 
-    # Enable 'classic' Snap support.
-    # https://snapcraft.io/docs/installing-snap-on-fedora
-    - name: 'configure snap'
-      ansible.builtin.file:
-        src: '/var/lib/snapd/snap'
-        dest: '/snap'
-        state: 'link'
-      tags:
-        - 'snap'
-
     - name: 'install snap packages'
+      when: 'snap_enabled == true'
       community.general.snap:
         name: '{{ item }}'
       become: 'yes'
@@ -47,7 +39,8 @@
       tags:
         - 'snap'
 
-    - name: 'install snap packages with --classic'
+    - name: 'install snap packages with --clasic'
+      when: 'snap_enabled == true'
       community.general.snap:
         name: '{{ item }}'
         classic: true

@@ -148,6 +148,8 @@
       ansible.builtin.command: 'go install {{ item.package }}'
       args:
         creates: '{{ lookup("env", "HOME") }}/.local/lib/go/bin/{{ item.bin }}'
+      environment:
+        GOPATH: '{{ lookup("env", "HOME") }}/.local/lib/go'
       loop:
         - package: github.com/stern/stern@latest
           bin: stern
