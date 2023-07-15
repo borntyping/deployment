@@ -59,7 +59,6 @@
           - 'sqlite'
           - 'tree'
           - 'wl-clipboard'              # optional dependency of micro
-          - 'zeal'
           - 'zoxide'                    # provides z
           - 'zsh'
           - 'zsh-autosuggestions'
@@ -77,7 +76,19 @@
       tags:
         - 'dnf'
 
+    # Enable 'classic' Snap support.
+    # https://snapcraft.io/docs/installing-snap-on-fedora
+    - name: 'configure snap'
+      when: 'snap_enabled == true'
+      ansible.builtin.file:
+        src: '/var/lib/snapd/snap'
+        dest: '/snap'
+        state: 'link'
+      tags:
+        - 'snap'
+
     - name: 'install snap packages'
+      when: 'snap_enabled == true'
       community.general.snap:
         name: '{{ item }}'
       become: 'yes'
