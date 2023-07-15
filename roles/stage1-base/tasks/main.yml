@@ -33,6 +33,7 @@
           - 'jq'
           - 'micro'
           - 'nano'
+          - 'npm'
           - 'pipx'                      # needed to install python executables
           - 'plantuml'
           - 'podman'                    # docker replacement
