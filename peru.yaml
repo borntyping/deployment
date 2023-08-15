@@ -17,10 +17,9 @@ imports:
   starship: 'roles/stage2-user/files/.local/bin/'
 
 curl module atuin:
-  url: https://github.com/ellie/atuin/releases/download/v15.0.0/atuin-v15.0.0-x86_64-unknown-linux-gnu.tar.gz
+  url: https://github.com/atuinsh/atuin/releases/download/v16.0.0/atuin-v16.0.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
-  export: atuin-v15.0.0-x86_64-unknown-linux-gnu
-  sha1: 19c6e63a31cf92e3841c64059ce6886d20ec2d13
+  export: atuin-v16.0.0-x86_64-unknown-linux-gnu
 
 rule atuin-bin:
   pick:
