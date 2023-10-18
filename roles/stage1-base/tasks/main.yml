@@ -4,6 +4,19 @@
     - 'stage1'
     - 'stage1-base'
   block:
+    - name: 'add tailscale repository'
+      ansible.builtin.yum_repository:
+        name: 'tailscale-stable'
+        description: 'Tailscale stable'
+        baseurl: 'https://pkgs.tailscale.com/stable/fedora/$basearch'
+        gpgcheck: true
+        repo_gpgcheck: true
+        gpgkey: 'https://pkgs.tailscale.com/stable/fedora/repo.gpg'
+      become: 'yes'
+      tags:
+       - 'dnf'
+       - 'tailscale'
+
     - name: 'install dnf packages'
       ansible.builtin.dnf:
         state: 'latest'
@@ -58,6 +71,7 @@
           - 'snapd'                     # needed to install snap dependencies
           - 'strace'
           - 'sqlite'
+          - 'tailscale'
           - 'tree'
           - 'util-linux-user'
           - 'wl-clipboard'              # optional dependency of micro
@@ -68,6 +82,7 @@
           - 'zsh-syntax-highlighting'
       tags:
         - 'dnf'
+        - 'tailscale'
 
     - name: 'remove dnf packages'
       ansible.builtin.dnf:
