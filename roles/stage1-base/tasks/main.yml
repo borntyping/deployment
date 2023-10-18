@@ -59,6 +59,7 @@
           - 'strace'
           - 'sqlite'
           - 'tree'
+          - 'util-linux-user'
           - 'wl-clipboard'              # optional dependency of micro
           - 'zoxide'                    # provides z
           - 'zsh'
