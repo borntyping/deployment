@@ -62,9 +62,11 @@
         classic: true
       become: 'yes'
       loop:
+        - 'code'
         - 'pycharm-professional'
       tags:
         - 'snap'
+        - 'vscode'
 
     - name: 'install .fonts/'
       copy:
