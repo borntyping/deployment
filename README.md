@@ -19,8 +19,6 @@ mkdir -p "~/Development/github.com/borntyping"
 cd "~/Development/github.com/borntyping"
 git clone 'https://github.com/borntyping/deployment.git'
 cd "deployment"
-git lfs install
-git lfs fetch
 ```
 
 Install Ansible collections:
