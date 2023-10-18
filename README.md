@@ -30,7 +30,7 @@ ansible-galaxy collection install --requirements-file 'collections/requirements.
 Create the local machine's inventory:
 
 ```bash
-cp 'host_vars/example.yaml' 'host_vars/localhost.yml'
+cp 'host_vars/example.yml' 'host_vars/localhost.yml'
 micro 'host_vars/localhost.yml'
 ```
 
