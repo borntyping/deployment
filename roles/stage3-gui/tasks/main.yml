@@ -3,9 +3,33 @@
     - 'stage3'
     - 'stage3-gui'
   block:
+    - name: 'add 1Password repository key'
+      ansible.builtin.rpm_key:
+        key: 'https://downloads.1password.com/linux/keys/1password.asc'
+        state: 'present'
+      become: 'yes'
+      tags:
+       - 'rpm'
+       - 'dnf'
+       - '1p'
+
+    - name: 'add 1Password repository'
+      ansible.builtin.yum_repository:
+        name: '1password'
+        description: '1Password Stable Channel'
+        baseurl: 'https://downloads.1password.com/linux/rpm/stable/$basearch'
+        gpgcheck: true
+        repo_gpgcheck: true
+        gpgkey: 'https://downloads.1password.com/linux/keys/1password.asc'
+      become: 'yes'
+      tags:
+       - 'dnf'
+       - '1p'
+
     - name: 'install packages'
       ansible.builtin.dnf:
         name:
+          - '1password'
           - 'firefox'
           - 'git-cola'
           - 'gitg'
@@ -16,14 +40,6 @@
           - 'tilix'
           - 'zeal'
         state: 'latest'
-      become: 'yes'
-      tags:
-        - 'dnf'
-
-    - name: 'install 1Password'
-      ansible.builtin.dnf:
-        state: 'latest'
-        pkg: 'https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm'
       become: 'yes'
       tags:
         - 'dnf'
