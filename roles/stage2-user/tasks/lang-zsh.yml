@@ -27,6 +27,12 @@
         - '.config/zsh/'
         - '.config/zsh/zshrc.d/'
 
+    # Stop .zshrc from crashing when zshrc.d is empty.
+    - name: 'create empty zshrc.d file'
+      ansible.builtin.copy:
+        content: ''
+        dest: '{{ home }}/.config/zsh/zshrc.d/empty.zsh'
+
     - name: 'create zsh local configuration'
       ansible.builtin.copy:
         content: "{{ item.value }}"
