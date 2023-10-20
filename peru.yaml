@@ -20,6 +20,7 @@ curl module atuin:
   url: https://github.com/atuinsh/atuin/releases/download/v16.0.0/atuin-v16.0.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
   export: atuin-v16.0.0-x86_64-unknown-linux-gnu
+  sha1: 281af515f5b8772f69a18c522a20e1059ea9b06f
 
 rule atuin-bin:
   pick:
@@ -77,7 +78,7 @@ curl module fantasque-nerd:
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
-  rev: 76c688c5582c5bd417231696ec4617f7d2de9bf8
+  rev: f964653f10bf9e91abe05b73c8d66c75ba25966d
 
 rule fixup-bin:
   pick:
@@ -123,4 +124,4 @@ curl module starship:
     - starship
   executable:
     - starship
-  sha1: 56c209a295368fcd7ca504a807bfc3c6204d5085
+  sha1: 8d5cfadf44950b021fbf7333d4baee11f28f40e6
