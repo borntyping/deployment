@@ -17,6 +17,15 @@
        - 'dnf'
        - 'tailscale'
 
+    - name: 'add terraform repository'
+      shell: 'dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo'
+      args:
+        creates: '/etc/yum.repos.d/hashicorp.repo'
+      become: 'yes'
+      tags:
+        - 'dnf'
+        - 'terraform'
+
     - name: 'install dnf packages'
       ansible.builtin.dnf:
         state: 'latest'
@@ -72,6 +81,7 @@
           - 'strace'
           - 'sqlite'
           - 'tailscale'
+          - 'terraform'
           - 'tree'
           - 'util-linux-user'
           - 'wl-clipboard'              # optional dependency of micro
@@ -83,6 +93,7 @@
       tags:
         - 'dnf'
         - 'tailscale'
+        - 'terraform'
 
     - name: 'remove dnf packages'
       ansible.builtin.dnf:
