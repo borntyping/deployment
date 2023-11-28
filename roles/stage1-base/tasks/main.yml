@@ -143,3 +143,13 @@
       tags:
         - never
         - hardware
+
+    # - name: 'add user to docker group'
+    #   ansible.builtin.user:
+    #     name: '{{ lookup("env", "USER") }}'
+    #     groups: 'docker'
+    #     append: yes
+    #   become: 'yes'
+    #   tags:
+    #     - 'never'
+    #     - 'docker'
