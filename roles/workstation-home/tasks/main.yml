@@ -1,6 +1,6 @@
 ---
 - tags:
-    - 'stage3'
+    - 'workstation'
     - 'workstation-home'
   block:
     - name: 'install .fonts/'
