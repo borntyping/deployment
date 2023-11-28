@@ -1,7 +1,8 @@
 ---
 - tags:
-    - 'stage3'
-    - 'stage3-gui'
+    - 'workstation'
+    - 'workstation-base'
+    - 'graphical'
   block:
     - name: 'add 1Password repository key'
       ansible.builtin.rpm_key:
@@ -55,7 +56,7 @@
       tags:
         - 'snap'
 
-    - name: 'install snap packages with --clasic'
+    - name: 'install snap packages with --classic'
       when: 'snap_enabled == true'
       community.general.snap:
         name: '{{ item }}'
@@ -67,19 +68,3 @@
       tags:
         - 'snap'
         - 'vscode'
-
-    - name: 'install .fonts/'
-      copy:
-        src: '.fonts/'
-        dest: '{{ lookup("env", "HOME") }}/.fonts'
-      tags:
-        - 'config'
-        - 'fonts'
-
-    - name: 'install .config/tilix/'
-      copy:
-        src: '.config/tilix/'
-        dest: '{{ lookup("env", "HOME") }}/.config/tilix'
-      tags:
-        - 'config'
-        - 'tilix'

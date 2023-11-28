@@ -58,7 +58,7 @@ Development
 -----------
 
 Some dependencies are managed using [Peru], which is installed by the
-`stage2-user` role. Once the development machine is bootstrapped you can run
+`home` role. Once the development machine is bootstrapped you can run
 `peru reup` to update those files, which will fetch the latest versions of the
 dependencies and copy them into this repository. Tasks that install these files
 are tagged with `peru`, so updating the deployed versions of those files can be

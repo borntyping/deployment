@@ -1,7 +1,6 @@
 ---
 ansible_sudo_pass: '{{ undef }}'
 snap_enabled: false
-stage3_gui_enabled: false
 ssh_key_names:
   - 'corporate'
 bin_scripts_local:

@@ -1,7 +1,7 @@
 ---
 - tags:
     - 'stage2'
-    - 'stage2-user'
+    - 'home'
   block:
     - name: 'copy dotfiles'
       copy:
