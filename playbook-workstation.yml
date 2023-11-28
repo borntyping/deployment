@@ -2,9 +2,5 @@
 - hosts:
     - localhost
   roles:
-    - role: stage2-user
-- hosts:
-    - localhost
-  roles:
-    - role: stage3-gui
-      when: stage3_gui_enabled == true
+    - role: workstation-base-fedora
+    - role: home

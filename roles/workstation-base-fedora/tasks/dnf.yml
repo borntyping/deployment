@@ -1,8 +1,7 @@
 ---
-- become: true
-  tags:
-    - 'stage1'
-    - 'stage1-base'
+- tags:
+    - 'workstation'
+    - 'workstation-base'
   block:
     - name: 'add tailscale repository'
       ansible.builtin.yum_repository:
@@ -12,7 +11,7 @@
         gpgcheck: true
         repo_gpgcheck: true
         gpgkey: 'https://pkgs.tailscale.com/stable/fedora/repo.gpg'
-      become: 'yes'
+      become: true
       tags:
        - 'dnf'
        - 'tailscale'
@@ -21,7 +20,7 @@
       shell: 'dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo'
       args:
         creates: '/etc/yum.repos.d/hashicorp.repo'
-      become: 'yes'
+      become: true
       tags:
         - 'dnf'
         - 'terraform'
@@ -103,53 +102,3 @@
           - 'starship'
       tags:
         - 'dnf'
-
-    # Enable 'classic' Snap support.
-    # https://snapcraft.io/docs/installing-snap-on-fedora
-    - name: 'configure snap'
-      when: 'snap_enabled == true'
-      ansible.builtin.file:
-        src: '/var/lib/snapd/snap'
-        dest: '/snap'
-        state: 'link'
-      tags:
-        - 'snap'
-
-    - name: 'install snap packages'
-      when: 'snap_enabled == true'
-      community.general.snap:
-        name: '{{ item }}'
-      become: 'yes'
-      loop:
-        - 'lnav'
-      tags:
-        - 'snap'
-
-    - name: 'configure sudo'
-      ansible.builtin.copy:
-        src: 'etc/sudoers.d/sam'
-        dest: '/etc/sudoers.d/sam'
-      tags:
-        - docker
-        - sudo
-        - sudoers
-
-    # Configure immediately by running this as root:
-    # $ echo 2 >> /sys/module/hid_apple/parameters/fnmode
-    - name: 'configure varmilo keyboard'
-      ansible.builtin.copy:
-        src: 'etc/modprobe.d/hid_apple.conf'
-        dest: '/etc/modprobe.d/hid_apple.conf'
-      tags:
-        - never
-        - hardware
-
-    # - name: 'add user to docker group'
-    #   ansible.builtin.user:
-    #     name: '{{ lookup("env", "USER") }}'
-    #     groups: 'docker'
-    #     append: yes
-    #   become: 'yes'
-    #   tags:
-    #     - 'never'
-    #     - 'docker'

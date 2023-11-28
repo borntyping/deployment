@@ -1,3 +1,2 @@
 ansible_python_interpreter: auto
 ansible_sudo_pass: "{{ undef }}"
-stage3_gui_enabled: true

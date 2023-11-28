@@ -1,0 +1,20 @@
+---
+- tags:
+    - 'stage3'
+    - 'workstation-home'
+  block:
+    - name: 'install .fonts/'
+      copy:
+        src: '.fonts/'
+        dest: '{{ lookup("env", "HOME") }}/.fonts'
+      tags:
+        - 'config'
+        - 'fonts'
+
+    - name: 'install .config/tilix/'
+      copy:
+        src: '.config/tilix/'
+        dest: '{{ lookup("env", "HOME") }}/.config/tilix'
+      tags:
+        - 'config'
+        - 'tilix'
