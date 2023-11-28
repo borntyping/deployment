@@ -1,10 +1,10 @@
 #!/bin/bash
-pushd "$(readlink -f $(dirname "${BASH_SOURCE[0]}"))" >/dev/null
+pushd "$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")" >/dev/null || exit
 export ANSIBLE_RETRY_FILES_ENABLED="false"
 export ANSIBLE_NOCOWS="true"
 export PIP_REQUIRE_VIRTUALENV="0"
 exec "ansible-playbook" \
   --diff \
-  --inventory="localhost," \
-  --extra-vars="ansible_connection=local" \
-  "playbook.yml" "$@"
+  --inventory-file="inventory.yml" \
+  --extra-vars="ansible_connection='local' ansible_host='$(hostname)'" \
+  "playbook-workstation.yml" "$@"

@@ -120,7 +120,6 @@
 
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
-    - import_tasks: 'tool-ssh.yml'
 
     - name: 'install python packages with pip'
       ansible.builtin.pip:
