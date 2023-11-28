@@ -5,6 +5,5 @@ git_config: {}
 git_config_local: {}
 git_hosts: {}
 git_hosts_local: {}
-ssh_key_names: []
 zsh_zshrc: {}
 zsh_zshrc_local: {}
