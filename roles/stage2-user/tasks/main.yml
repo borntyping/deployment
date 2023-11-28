@@ -121,17 +121,6 @@
     - import_tasks: 'lang-zsh.yml'
     - import_tasks: 'tool-git.yml'
 
-    - name: 'install python packages with pip'
-      ansible.builtin.pip:
-        name:
-          - pip
-          - wheel
-          - peru
-        extra_args: --user
-      tags:
-        - 'python'
-        - 'pip'
-
     - name: 'install python packages with pipx'
       community.general.pipx:
         name: '{{ item }}'
