@@ -1,6 +1,0 @@
----
-- hosts:
-    - localhost
-  roles:
-    - role: workstation-base-fedora
-    - role: home

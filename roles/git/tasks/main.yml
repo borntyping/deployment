@@ -1,45 +1,42 @@
 ---
 - tags:
+    - 'home'
     - 'dotfiles'
     - 'git'
   block:
     - name: 'copy git config directory'
       ansible.builtin.copy:
         src: '.config/git/'
-        dest: '{{ lookup("env", "HOME") }}/.config/git/'
+        dest: '{{ ansible_env.HOME }}/.config/git/'
         mode: 'preserve'
 
-    - name: 'create git config files'
+    - name: 'create git config.d files'
       ansible.builtin.copy:
         content: '{{ item.value }}'
-        dest: '{{ lookup("env", "HOME") }}/.config/git/config.d/{{ item.key }}'
+        dest: '{{ ansible_env.HOME }}/.config/git/config.d/{{ item.key }}'
         mode: 'preserve'
       loop: '{{ git_config|combine(git_config_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
-      tags:
-        - 'local'
 
-    - name: 'create git host config files'
+    - name: 'create git hosts.d files'
       ansible.builtin.copy:
         content: '{{ item.value }}'
-        dest: '{{ lookup("env", "HOME") }}/.config/git/hosts.d/{{ item.key }}'
+        dest: '{{ ansible_env.HOME }}/.config/git/hosts.d/{{ item.key }}'
         mode: 'preserve'
       loop: '{{ git_hosts|combine(git_hosts_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
-      tags:
-        - 'local'
 
     - name: 'assemble git config'
       ansible.builtin.assemble:
-        src: '{{ lookup("env", "HOME") }}/.config/git/config.d/'
-        dest: '{{ lookup("env", "HOME") }}/.config/git/config'
+        src: '{{ ansible_env.HOME }}/.config/git/config.d/'
+        dest: '{{ ansible_env.HOME }}/.config/git/config'
         delimiter: '\n'
 
     - name: 'create git source code directories'
       ansible.builtin.file:
-        name: '{{ lookup("env", "HOME") }}/{{ item }}'
+        name: '{{ ansible_env.HOME }}/{{ item }}'
         state: 'directory'
       with_items:
         - 'Development/github.com'
@@ -47,9 +44,3 @@
         - 'Development/gitlab.com'
         - 'Development/gitlab.com/borntyping'
         - 'Development/scratch'
-
-    - name: 'create git-river config directory'
-      tags: ['git', 'git-river']
-      ansible.builtin.file:
-        name: '{{ lookup("env", "HOME") }}/.config/git-river'
-        state: 'directory'

@@ -1,0 +1,17 @@
+---
+- tags:
+    - 'workstation'
+    - 'workstation-base'
+    - 'debian'
+  block:
+    - name: 'install apt packages'
+      ansible.builtin.apt:
+        state: 'latest'
+        pkg:
+          - ansible-core
+          - git
+          - git-lfs
+          - micro
+          - python3-full
+          - python3-poetry
+      become: true

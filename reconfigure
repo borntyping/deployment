@@ -6,5 +6,5 @@ export PIP_REQUIRE_VIRTUALENV="0"
 exec "ansible-playbook" \
   --diff \
   --inventory-file="inventory.yml" \
-  --extra-vars="ansible_connection='local' ansible_host='$(hostname)'" \
-  "playbook-workstation.yml" "$@"
+  --limit="localhost" \
+  "playbook-localhost.yml" "$@"
