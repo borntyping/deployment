@@ -108,7 +108,6 @@
         - zsh
 
     - import_tasks: 'lang-zsh.yml'
-    - import_tasks: 'tool-git.yml'
 
     - name: 'install python packages with pipx'
       community.general.pipx:

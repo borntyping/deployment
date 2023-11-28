@@ -1,4 +1,6 @@
 all:
   hosts:
-    server:
-    workstation:
+    localhost:
+      ansible_connection: local
+    cheri:
+      ansible_host: cheri.bunny-moth.ts.net

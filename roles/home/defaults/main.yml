@@ -1,9 +1,5 @@
 ---
 bin_scripts: {}
 bin_scripts_local:
-git_config: {}
-git_config_local: {}
-git_hosts: {}
-git_hosts_local: {}
 zsh_zshrc: {}
 zsh_zshrc_local: {}
