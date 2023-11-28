@@ -9,6 +9,7 @@ imports:
   fantasque-nerd: 'roles/stage3-gui/files/.fonts'
   fixup|fixup-bin: 'roles/stage2-user/files/.local/bin/'
   fixup|fixup-zsh: 'roles/stage2-user/files/.local/share/zsh/'
+  git-bug: 'roles/stage2-user/files/.local/bin/'
   just|just-bin: 'roles/stage2-user/files/.local/bin/'
   just|just-man: 'roles/stage2-user/files/.local/share/man/man1/'
   kubectx: 'roles/stage2-user/files/.local/bin/'
@@ -91,6 +92,13 @@ rule fixup-zsh:
     completion.zsh: fixup.zsh
   pick:
     - fixup.zsh
+
+curl module git-bug:
+  url: https://github.com/MichaelMure/git-bug/releases/download/v0.8.0/git-bug_linux_amd64
+  move:
+    git-bug_linux_amd64: git-bug
+  executable:
+    - git-bug
 
 curl module just:
   url: https://github.com/casey/just/releases/download/1.14.0/just-1.14.0-x86_64-unknown-linux-musl.tar.gz
