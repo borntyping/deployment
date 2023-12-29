@@ -1,5 +1,6 @@
 [tool.black]
 include = 'roles/home/files/.config/git/hooks/pre-commit'
+line-length = 128
 
 [tool.mypy]
 files = 'roles/home/files/.config/git/hooks/pre-commit'

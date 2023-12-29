@@ -110,9 +110,7 @@ class CommandHook(Hook):
         enabled = self.git_hook_enabled(self.name)
         present = (pathlib.Path(filename).exists() for filename in self.present)
         absent = (pathlib.Path(filename).exists() for filename in self.absent)
-        return (enabled is True) or (
-            enabled is None and all(present) and not any(absent)
-        )
+        return (enabled is True) or (enabled is None and all(present) and not any(absent))
 
     def run(self) -> str | None:
         try:
@@ -125,50 +123,17 @@ class CommandHook(Hook):
 
 
 hooks = [
-    ExcludeHook("diff", "exclude", "!nocommit"),
-    CommandHook(
-        group="cargo",
-        name="cargo test",
-        command=["cargo", "test", "--all"],
-        present=["Cargo.toml"],
-    ),
-    CommandHook(
-        group="cargo",
-        name="cargo fmt",
-        command=["cargo", "fmt", "--all", "--", "--check"],
-        present=["Cargo.toml"],
-    ),
-    CommandHook(
-        "python",
-        "black",
-        [".venv/bin/black", "--check", "."],
-        [".venv/bin/black"],
-        [".pre-commit-config.yaml"],
-    ),
-    CommandHook(
-        "python",
-        "mypy",
-        [".venv/bin/mypy", "."],
-        [".venv/bin/mypy"],
-        [".pre-commit-config.yaml"],
-    ),
-    CommandHook(
-        "python",
-        "pytest",
-        [".venv/bin/pytest"],
-        [".venv/bin/pytest"],
-        [".pre-commit-config.yaml"],
-    ),
-    CommandHook("python", "tox", ["tox"], ["tox.ini"]),
-    CommandHook("php", "phpunit", ["vendor/bin/phpunit"], ["vendor/bin/phpunit"]),
-    CommandHook("php", "phpstan", ["vendor/bin/phpstan"], ["vendor/bin/phpstan"]),
-    CommandHook("docs", "mkdocs", ["mkdocs", "build", "--strict"], ["mkdocs.yml"]),
-    CommandHook(
-        "pre-commit",
-        "pre-commit",
-        ["pre-commit", "run", "-a"],
-        [".pre-commit-config.yaml"],
-    ),
+    ExcludeHook("diff", "exclude", pattern="!nocommit"),
+    CommandHook("cargo", "cargo fmt", command=["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
+    CommandHook("cargo", "cargo test", command=["cargo", "test", "--all"], present=["Cargo.toml"]),
+    CommandHook("docs", "mkdocs", command=["mkdocs", "build", "--strict"], present=["mkdocs.yml"]),
+    CommandHook("php", "phpstan", command=["vendor/bin/phpstan"], present=["vendor/bin/phpstan"]),
+    CommandHook("php", "phpunit", command=["vendor/bin/phpunit"], present=["vendor/bin/phpunit"]),
+    CommandHook("pre-commit", "pre-commit", command=["pre-commit", "run", "-a"], present=[".pre-commit-config.yaml"]),
+    CommandHook("python", "black", command=[".venv/bin/black", "--check", "."], present=[".venv/bin/black"]),
+    CommandHook("python", "mypy", command=[".venv/bin/mypy", "."], present=[".venv/bin/mypy"]),
+    CommandHook("python", "pytest", command=[".venv/bin/pytest"], present=[".venv/bin/pytest"]),
+    CommandHook("python", "tox", command=["tox"], present=["tox.ini"]),
 ]
 if __name__ == "__main__":
     results = [(hook, hook()) for hook in hooks if hook.enabled()]
