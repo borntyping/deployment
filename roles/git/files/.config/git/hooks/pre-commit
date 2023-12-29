@@ -127,6 +127,18 @@ class CommandHook(Hook):
 hooks = [
     ExcludeHook("diff", "exclude", "!nocommit"),
     CommandHook(
+        group="cargo",
+        name="cargo test",
+        command=["cargo", "test", "--all"],
+        present=["Cargo.toml"],
+    ),
+    CommandHook(
+        group="cargo",
+        name="cargo fmt",
+        command=["cargo", "fmt", "--all", "--", "--check"],
+        present=["Cargo.toml"],
+    ),
+    CommandHook(
         "python",
         "black",
         [".venv/bin/black", "--check", "."],
@@ -158,7 +170,6 @@ hooks = [
         [".pre-commit-config.yaml"],
     ),
 ]
-
 if __name__ == "__main__":
     results = [(hook, hook()) for hook in hooks if hook.enabled()]
     failed = [(hook, error) for hook, error in results if error]
