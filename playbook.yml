@@ -8,6 +8,4 @@
 - hosts: cheri
   roles:
     - role: server-base-debian
-    - role: git
-    - role: ssh
     - role: home

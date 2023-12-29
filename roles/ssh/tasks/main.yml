@@ -32,6 +32,8 @@
         - github_borntyping_corporate
         - gitlab
         - src
+      tags:
+        - 'ssh-keys'
 
     - name: 'generate configured ssh keys'
       community.crypto.openssh_keypair:
