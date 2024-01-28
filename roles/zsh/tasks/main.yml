@@ -8,17 +8,17 @@
     - name: 'copy zsh libraries'
       ansible.builtin.copy:
         src: '.local/share/zsh/'
-        dest: '{{ home }}/.local/share/zsh/'
+        dest: '{{ zsh_home }}/.local/share/zsh/'
         mode: 'u=rw,g=r,o=r'
 
     - name: 'copy zsh config'
       ansible.builtin.copy:
         src: 'zshrc'
-        dest: '{{ home }}/.zshrc'
+        dest: '{{ zsh_home }}/.zshrc'
 
     - name: 'create zsh directories'
       ansible.builtin.file:
-        name: '{{ home }}/{{ item }}'
+        name: '{{ zsh_home }}/{{ item }}'
         state: 'directory'
       loop:
         - '.cache/zsh/'
@@ -31,12 +31,12 @@
     - name: 'create empty zshrc.d file'
       ansible.builtin.copy:
         content: ''
-        dest: '{{ home }}/.config/zsh/zshrc.d/empty.zsh'
+        dest: '{{ zsh_home }}/.config/zsh/zshrc.d/empty.zsh'
 
     - name: 'create zsh local configuration'
       ansible.builtin.copy:
         content: "{{ item.value }}"
-        dest: '{{ home }}/.config/zsh/zshrc.d/{{ item.key }}'
+        dest: '{{ zsh_home }}/.config/zsh/zshrc.d/{{ item.key }}'
         mode: 'preserve'
       loop: '{{ zsh_zshrc|combine(zsh_zshrc_local)|dict2items }}'
       loop_control:
