@@ -105,9 +105,6 @@
         - starship.toml
       tags:
         - starship
-        - zsh
-
-    - import_tasks: 'lang-zsh.yml'
 
     - name: 'install python packages with pipx'
       community.general.pipx:

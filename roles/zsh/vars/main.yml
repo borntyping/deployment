@@ -1,0 +1,2 @@
+---
+zsh_home: '{{ lookup("env", "HOME") }}'
