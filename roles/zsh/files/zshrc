@@ -126,7 +126,9 @@ fi
 # ZSH plugins using miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
 source "$HOME/.local/share/zsh/miniplug.zsh"
-miniplug plugin 'ajeetdsouza/zoxide'
+if [[ -v 'commands[zoxide]' ]]; then
+  miniplug plugin 'ajeetdsouza/zoxide'
+fi
 miniplug plugin 'wfxr/forgit'
 miniplug plugin 'zsh-users/zsh-completions'
 miniplug load
@@ -139,17 +141,17 @@ if [[ -v 'commands[atuin]' ]]; then
   bindkey '^r' _atuin_search_widget
 fi
 
-# ASDF
-# https://asdf-vm.com/
-[[ -f "${HOME}/.asdf/asdf.sh" ]] && source "${HOME}/.asdf/asdf.sh"
-
 # Bun
 # https://bun.sh
-[ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"
+if [ -s "${HOME}/.bun/_bun" ]; then
+  source "${HOME}/.bun/_bun"
+fi
 
 # Direnv
 # https://direnv.net/
-eval "$(direnv hook zsh)"
+if [[ -v "commands[bat]" ]]; then
+  eval "$(direnv hook zsh)"
+fi
 
 # Podman
 # systemctl --user start podman.socket
@@ -173,7 +175,9 @@ done
 
 # Starship prompt
 # https://starship.rs
-source <("${HOME}/.local/bin/starship" init zsh --print-full-init)
+if [[ -v "commands[starship]" ]]; then
+  source <("${HOME}/.local/bin/starship" init zsh --print-full-init)
+fi
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."
@@ -182,18 +186,22 @@ fi
 
 # ZSH automatic completion ('^ ' is Ctrl+Space)
 # https://github.com/zsh-users/zsh-autosuggestions
-source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-bindkey '^ ' autosuggest-accept
+if [[ -f "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+  bindkey '^ ' autosuggest-accept
+fi
 
 # ZSH syntax highlighting plugin (should be loaded last)
 # https://github.com/zsh-users/zsh-syntax-highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
-export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
-export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
-export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
-export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
-export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
-export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
+if [[ -f "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+  export ZSH_HIGHLIGHT_STYLES['comment']='fg=green'
+  export ZSH_HIGHLIGHT_STYLES['unknown-token']='fg=red'
+  export ZSH_HIGHLIGHT_STYLES['globbing']='fg=cyan'
+  export ZSH_HIGHLIGHT_STYLES['single-quoted-argument']='fg=blue'
+  export ZSH_HIGHLIGHT_STYLES['double-quoted-argument']='fg=blue'
+  export ZSH_HIGHLIGHT_STYLES['dollar-double-quoted-argument']='fg=yellow'
+  export ZSH_HIGHLIGHT_STYLES['back-double-quoted-argument']='fg=yellow'
+fi
