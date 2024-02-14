@@ -2,5 +2,5 @@ all:
   hosts:
     localhost:
       ansible_connection: local
-    cheri:
-      ansible_host: cheri.bunny-moth.ts.net
+    razz:
+      ansible_host: razz.bunny-moth.ts.net

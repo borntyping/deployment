@@ -5,7 +5,7 @@
     - role: workstation-base-fedora
     - role: home
 
-- hosts: cheri
+- hosts: razz
   roles:
-    - role: server-base-debian
-    - role: home
+    - role: ssh
+    - role: git
