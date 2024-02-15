@@ -7,13 +7,13 @@
     - name: 'copy git config directory'
       ansible.builtin.copy:
         src: '.config/git/'
-        dest: '{{ ansible_env.HOME }}/.config/git/'
+        dest: '{{ ansible_user_dir }}/.config/git/'
         mode: 'preserve'
 
     - name: 'create git config.d files'
       ansible.builtin.copy:
         content: '{{ item.value }}'
-        dest: '{{ ansible_env.HOME }}/.config/git/config.d/{{ item.key }}'
+        dest: '{{ ansible_user_dir }}/.config/git/config.d/{{ item.key }}'
         mode: 'preserve'
       loop: '{{ git_config|combine(git_config_local)|dict2items }}'
       loop_control:
@@ -22,7 +22,7 @@
     - name: 'create git hosts.d files'
       ansible.builtin.copy:
         content: '{{ item.value }}'
-        dest: '{{ ansible_env.HOME }}/.config/git/hosts.d/{{ item.key }}'
+        dest: '{{ ansible_user_dir }}/.config/git/hosts.d/{{ item.key }}'
         mode: 'preserve'
       loop: '{{ git_hosts|combine(git_hosts_local)|dict2items }}'
       loop_control:
@@ -30,13 +30,13 @@
 
     - name: 'assemble git config'
       ansible.builtin.assemble:
-        src: '{{ ansible_env.HOME }}/.config/git/config.d/'
-        dest: '{{ ansible_env.HOME }}/.config/git/config'
+        src: '{{ ansible_user_dir }}/.config/git/config.d/'
+        dest: '{{ ansible_user_dir }}/.config/git/config'
         delimiter: '\n'
 
     - name: 'create git source code directories'
       ansible.builtin.file:
-        name: '{{ ansible_env.HOME }}/{{ item }}'
+        name: '{{ ansible_user_dir }}/{{ item }}'
         state: 'directory'
       with_items:
         - 'Development/github.com'

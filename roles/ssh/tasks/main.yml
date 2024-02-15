@@ -4,12 +4,12 @@
   block:
     - name: 'create ssh directory'
       ansible.builtin.file:
-        name: '{{ ssh_home }}'
+        name: '{{ ansible_user_dir }}/.ssh'
         state: 'directory'
 
     - name: 'create ssh sub-directories'
       ansible.builtin.file:
-        name: '{{ ssh_home }}/{{ item }}'
+        name: '{{ ansible_user_dir }}/.ssh/{{ item }}'
         state: 'directory'
       with_items:
         - 'config.d'
@@ -20,13 +20,13 @@
     - name: 'create ssh fragments'
       ansible.builtin.copy:
         src: '.ssh/config.d/'
-        dest: '{{ ssh_home }}/config.d/'
+        dest: '{{ ansible_user_dir }}/.ssh/config.d/'
 
     - name: 'generate essential ssh keys'
       community.crypto.openssh_keypair:
         type: 'ed25519'
-        path: '{{ ssh_home }}/keys/id_ed25519_{{ item }}'
-        comment: '{{ ssh_key_comment_user }}@{{ ssh_key_comment_host }}'
+        path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
+        comment: '{{ ansible_user_id }}@{{ ansible_host }}'
       loop:
         - github_borntyping
         - github_borntyping_corporate
@@ -38,12 +38,12 @@
     - name: 'generate configured ssh keys'
       community.crypto.openssh_keypair:
         type: 'ed25519'
-        path: '{{ ssh_home }}/keys/id_ed25519_{{ item }}'
+        path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
         comment: '{{ lookup("env", "HOST") }}'
       loop: '{{ ssh_key_names }}'
 
     - name: 'assemble ssh config'
       ansible.builtin.assemble:
-        src: '{{ ssh_home }}/config.d/'
-        dest: '{{ ssh_home }}/config'
+        src: '{{ ansible_user_dir }}/.ssh/config.d/'
+        dest: '{{ ansible_user_dir }}/.ssh/config'
         delimiter: '\n'
