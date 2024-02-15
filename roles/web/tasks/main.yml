@@ -10,6 +10,19 @@
         cmd: "dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo"
         creates: "/etc/yum.repos.d/docker-ce.repo"
 
+    - name: "remove dnf packages"
+      tags: [dnf]
+      become: true
+      ansible.builtin.dnf:
+        state: absent
+        pkg:
+          - caddy
+          - podman-docker
+          - postgresql-contrib
+          - postgresql-server
+          - python3-psycopg2
+          - python3-psycopg3
+
     - name: "install dnf packages"
       tags:
         - caddy
@@ -29,35 +42,10 @@
           - docker-compose-plugin
           - podman
           - podman-compose
-          - podman-docker
           - podman-remote
           - syncthing
 
-    - name: "remove dnf packages"
-      tags: [dnf]
-      become: true
-      ansible.builtin.dnf:
-        state: absent
-        pkg:
-          - caddy
-          - postgresql-contrib
-          - postgresql-server
-          - python3-psycopg2
-          - python3-psycopg3
-
-    - name: "start and enable services"
-      tags: [systemd]
-      become: true
-      ansible.builtin.systemd_service:
-        name: "{{ item }}"
-        scope: user
-        state: started
-        enabled: true
-      loop:
-        - syncthing.service
-        - docker.service
-
-    - name: "stop and disable services"
+    - name: "stop and disable system services"
       tags: [systemd]
       become: true
       ansible.builtin.systemd_service:
@@ -67,12 +55,33 @@
       loop:
        - firewalld.service
 
+    - name: "start and enable system services"
+      tags: [systemd]
+      become: true
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        scope: system
+        state: started
+        enabled: true
+      loop:
+        - docker.service
+
+    - name: "start and enable user services"
+      tags: [systemd]
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        scope: user
+        state: started
+        enabled: true
+      loop:
+        - syncthing.service
+
     - name: "create docker mounts"
       become: true
       ansible.builtin.file:
         name: "/opt/{{ item }}"
         state: "directory"
-        user: "{{ web_docker_mounts_owner }}"
-        group: "{{ web_docker_mounts_owner }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
         mode: "0770"
       with_items: "{{ web_docker_mounts }}"

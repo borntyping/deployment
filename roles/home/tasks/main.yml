@@ -5,7 +5,7 @@
     - name: 'copy dotfiles'
       copy:
         src: '{{ item }}'
-        dest: '{{ lookup("env", "HOME") }}/.{{ item }}'
+        dest: '{{ ansible_user_dir }}/.{{ item }}'
       with_items:
         - 'ackrc'
         - 'htoprc'
@@ -18,7 +18,7 @@
     - name: 'install executables'
       copy:
         src: '.local/bin/'
-        dest: '{{ lookup("env", "HOME") }}/.local/bin'
+        dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
       tags:
         - 'bin'
@@ -27,7 +27,7 @@
 
     - name: 'create .bin directory'
       ansible.builtin.file:
-        name: '{{ lookup("env", "HOME") }}/.bin'
+        name: '{{ ansible_user_dir }}/.bin'
         state: 'directory'
       tags:
         - local
@@ -35,7 +35,7 @@
     - name: 'install local scripts'
       ansible.builtin.copy:
         content: '{{ item.value }}'
-        dest: '{{ lookup("env", "HOME") }}/.bin/{{ item.key }}'
+        dest: '{{ ansible_user_dir }}/.bin/{{ item.key }}'
         mode: '0755'
       loop: '{{ bin_scripts|combine(bin_scripts_local)|dict2items }}'
       loop_control:
@@ -46,7 +46,7 @@
     - name: 'install scripts'
       ansible.builtin.copy:
         src: '.local/share/src/'
-        dest: '{{ lookup("env", "HOME") }}/.local/share/src/'
+        dest: '{{ ansible_user_dir }}/.local/share/src/'
         mode: '0755'
       tags:
         - 'bin'
@@ -59,7 +59,7 @@
     - name: 'install man pages'
       ansible.builtin.copy:
         src: '.local/share/man/'
-        dest: '{{ lookup("env", "HOME") }}/.local/share/man/'
+        dest: '{{ ansible_user_dir }}/.local/share/man/'
         mode: '0755'
       tags:
         - 'man'
@@ -79,7 +79,7 @@
     - name: 'copy .config directories'
       ansible.builtin.copy:
         src: '.config/{{ item }}/'
-        dest: '{{ lookup("env", "HOME") }}/.config/{{ item }}/'
+        dest: '{{ ansible_user_dir }}/.config/{{ item }}/'
       loop:
         - atuin
         - direnv
@@ -100,7 +100,7 @@
     - name: 'copy .config files'
       ansible.builtin.copy:
         src: '.config/{{ item }}'
-        dest: '{{ lookup("env", "HOME") }}/.config/{{ item }}'
+        dest: '{{ ansible_user_dir }}/.config/{{ item }}'
       loop:
         - starship.toml
       tags:
@@ -120,9 +120,9 @@
 #    - name: 'install golang executables'
 #      ansible.builtin.command: 'go install {{ item.package }}'
 #      args:
-#        creates: '{{ lookup("env", "HOME") }}/.local/lib/go/bin/{{ item.bin }}'
+#        creates: '{{ ansible_user_dir }}/.local/lib/go/bin/{{ item.bin }}'
 #      environment:
-#        GOPATH: '{{ lookup("env", "HOME") }}/.local/lib/go'
+#        GOPATH: '{{ ansible_user_dir }}/.local/lib/go'
 #      loop:
 #        - package: github.com/stern/stern@latest
 #          bin: stern

@@ -2,7 +2,7 @@
 - name: common
   hosts:
    - umbreon
-   - razz
+   - razz-berry
   roles:
     - role: base
     - role: ssh
@@ -18,6 +18,6 @@
 
 - name: server
   hosts:
-    - razz
+    - razz-berry
   roles:
     - role: web

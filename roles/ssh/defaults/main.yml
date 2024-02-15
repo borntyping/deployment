@@ -1,5 +1,2 @@
 ---
 ssh_key_names: []
-ssh_home: '{{ lookup("env", "HOME") }}/.ssh'
-ssh_key_comment_user: '{{ ansible_user|default(lookup("env", "USER")) }}'
-ssh_key_comment_host: '{{ ansible_host }}'
