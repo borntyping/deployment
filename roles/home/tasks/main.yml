@@ -16,20 +16,20 @@
         - 'multitailrc'
 
     # Use the 'bin' role for architecture-dependant executables.
-    - name: 'install scripts'
+    - name: 'install scripts into ~/.local/bin'
       tags: [local, bin]
       copy:
         src: '.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
 
-    - name: 'create .bin directory'
+    - name: 'create ~/.bin directory'
       tags: [bin]
       ansible.builtin.file:
         name: '{{ ansible_user_dir }}/.bin'
         state: 'directory'
 
-    - name: 'install local scripts'
+    - name: 'install scripts from ansible variables into ~/.bin'
       tags: [bin]
       ansible.builtin.copy:
         content: '{{ item.value }}'
@@ -39,14 +39,14 @@
       loop_control:
         label: '{{ item.key }}'
 
-    - name: 'install scripts'
+    - name: 'install scripts from ansible source into ~/.local/share/src'
       tags: [local, share, src]
       ansible.builtin.copy:
         src: '.local/share/src/'
         dest: '{{ ansible_user_dir }}/.local/share/src/'
         mode: '0755'
 
-    - name: 'install man pages'
+    - name: 'install man pages into ~/.local/share/man'
       tags: [local, share, man]
       ansible.builtin.copy:
         src: '.local/share/man/'
@@ -65,7 +65,7 @@
         - 'socket'
         - 'systemd'
 
-    - name: 'copy .config directories'
+    - name: 'copy config directory into ~/.config'
       ansible.builtin.copy:
         src: '.config/{{ item }}/'
         dest: '{{ ansible_user_dir }}/.config/{{ item }}/'
@@ -86,7 +86,7 @@
         - poetry
         - python
 
-    - name: 'copy .config files'
+    - name: 'copy config files into ~/.config'
       ansible.builtin.copy:
         src: '.config/{{ item }}'
         dest: '{{ ansible_user_dir }}/.config/{{ item }}'
