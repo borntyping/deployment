@@ -1,5 +1,4 @@
 ---
-- import_tasks: 'tailscale.yml'
 - tags: [web]
   block:
     # https://docs.docker.com/engine/install/fedora/
