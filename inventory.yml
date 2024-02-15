@@ -4,4 +4,4 @@ all:
       ansible_host: umbreon.bunny-moth.ts.net
       ansible_connection: local
     razz-berry:
-      ansible_host: razz.bunny-moth.ts.net
+      ansible_host: razz-berry.bunny-moth.ts.net

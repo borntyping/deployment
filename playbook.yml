@@ -4,6 +4,7 @@
    - umbreon
    - razz-berry
   roles:
+    - role: tailscale
     - role: base
     - role: home
     - role: ssh

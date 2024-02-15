@@ -68,7 +68,6 @@
           - 'snapd'                     # needed to install snap dependencies
           - 'strace'
           - 'sqlite'
-          - 'tailscale'
           - 'tree'
           - 'util-linux-user'
           - 'wl-clipboard'              # optional dependency of micro
