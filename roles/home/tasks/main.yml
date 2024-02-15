@@ -15,24 +15,22 @@
         - 'dotfiles'
         - 'multitailrc'
 
-    - name: 'install executables'
+    # Use the 'bin' role for architecture-dependant executables.
+    - name: 'install scripts'
+      tags: [local, bin]
       copy:
         src: '.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
-      tags:
-        - 'bin'
-        - 'ansible'
-        - 'micro'
 
     - name: 'create .bin directory'
+      tags: [bin]
       ansible.builtin.file:
         name: '{{ ansible_user_dir }}/.bin'
         state: 'directory'
-      tags:
-        - local
 
     - name: 'install local scripts'
+      tags: [bin]
       ansible.builtin.copy:
         content: '{{ item.value }}'
         dest: '{{ ansible_user_dir }}/.bin/{{ item.key }}'
@@ -40,29 +38,20 @@
       loop: '{{ bin_scripts|combine(bin_scripts_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
-      tags:
-        - 'local'
 
     - name: 'install scripts'
+      tags: [local, share, src]
       ansible.builtin.copy:
         src: '.local/share/src/'
         dest: '{{ ansible_user_dir }}/.local/share/src/'
         mode: '0755'
-      tags:
-        - 'bin'
-        - 'git'
-        - 'git-tag-version'
-        - 'git-tidy'
-        - 'reconfigure'
-        - 'src'
 
     - name: 'install man pages'
+      tags: [local, share, man]
       ansible.builtin.copy:
         src: '.local/share/man/'
         dest: '{{ ansible_user_dir }}/.local/share/man/'
         mode: '0755'
-      tags:
-        - 'man'
 
     - name: 'enable user podman socket'
       ansible.builtin.systemd:
