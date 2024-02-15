@@ -4,12 +4,12 @@ imports:
   difft: 'roles/home/files/.local/bin/'
   aws-vault: 'roles/home/files/.local/bin/'
   fixup|fixup-bin: 'roles/home/files/.local/bin/'
-  git-bug: 'roles/home/files/.local/bin/'
   just|just-bin: 'roles/home/files/.local/bin/'
-  just|just-man: 'roles/home/files/.local/share/man/man1/'
   kubectx: 'roles/home/files/.local/bin/'
   kubens: 'roles/home/files/.local/bin/'
   starship: 'roles/home/files/.local/bin/'
+
+  just|just-man: 'roles/home/files/.local/share/man/man1/'
 
   dracula: 'roles/workstation-home/files/.config/tilix/schemes'
   fantasque: 'roles/workstation-home/files/.fonts'
@@ -95,13 +95,6 @@ rule fixup-zsh:
   pick:
     - fixup.zsh
 
-curl module git-bug:
-  url: https://github.com/MichaelMure/git-bug/releases/download/v0.8.0/git-bug_linux_amd64
-  move:
-    git-bug_linux_amd64: git-bug
-  executable:
-    - git-bug
-
 curl module just:
   url: https://github.com/casey/just/releases/download/1.14.0/just-1.14.0-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
@@ -134,4 +127,4 @@ curl module starship:
     - starship
   executable:
     - starship
-  sha1: 8d5cfadf44950b021fbf7333d4baee11f28f40e6
+  sha1: 8faa59a37ecf5ff491f0535b4f59d6ba219b685c
