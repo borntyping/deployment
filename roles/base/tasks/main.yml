@@ -1,0 +1,3 @@
+---
+- import_tasks: 'dnf.yml'
+- import_tasks: 'sudo.yml'

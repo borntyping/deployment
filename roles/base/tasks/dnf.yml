@@ -1,31 +1,20 @@
 ---
 - tags:
-    - 'workstation'
-    - 'workstation-base'
+    - 'base'
+    - 'dnf'
   block:
     - name: 'add tailscale repository'
+      become: true
       ansible.builtin.yum_repository:
-        name: 'tailscale-stable'
+        name: 'tailscale'
         description: 'Tailscale stable'
         baseurl: 'https://pkgs.tailscale.com/stable/fedora/$basearch'
         gpgcheck: true
         repo_gpgcheck: true
         gpgkey: 'https://pkgs.tailscale.com/stable/fedora/repo.gpg'
-      become: true
-      tags:
-       - 'dnf'
-       - 'tailscale'
-
-    - name: 'add terraform repository'
-      shell: 'dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo'
-      args:
-        creates: '/etc/yum.repos.d/hashicorp.repo'
-      become: true
-      tags:
-        - 'dnf'
-        - 'terraform'
 
     - name: 'install dnf packages'
+      become: true
       ansible.builtin.dnf:
         state: 'latest'
         pkg:
@@ -80,7 +69,6 @@
           - 'strace'
           - 'sqlite'
           - 'tailscale'
-          - 'terraform'
           - 'tree'
           - 'util-linux-user'
           - 'wl-clipboard'              # optional dependency of micro
@@ -89,16 +77,11 @@
           - 'zsh-autosuggestions'
           - 'zsh-html'
           - 'zsh-syntax-highlighting'
-      tags:
-        - 'dnf'
-        - 'tailscale'
-        - 'terraform'
 
     - name: 'remove dnf packages'
+      become: true
       ansible.builtin.dnf:
         state: 'absent'
         pkg:
           - 'python3-poetry'
           - 'starship'
-      tags:
-        - 'dnf'

@@ -1,7 +1,6 @@
 ---
 - tags:
     - 'workstation'
-    - 'workstation-base'
     - 'graphical'
   block:
     - name: 'add 1Password repository key'

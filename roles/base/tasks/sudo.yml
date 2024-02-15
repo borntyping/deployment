@@ -1,0 +1,25 @@
+---
+- tags:
+    - 'workstation'
+    - 'workstation-base'
+    - 'sudo'
+  block:
+    - name: 'configure sudo'
+      ansible.builtin.template:
+        src: 'sudoers.j2'
+        dest: '/etc/sudoers.d/{{ base_user }}'
+      become: true
+      tags:
+        - docker
+        - sudo
+        - sudoers
+
+    - name: 'add user to docker group'
+      ansible.builtin.user:
+        name: '{{ base_user }}'
+        groups: 'docker'
+        append: yes
+      become: true
+      tags:
+        - 'never'
+        - 'docker'

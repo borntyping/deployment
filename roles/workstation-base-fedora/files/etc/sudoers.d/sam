@@ -1,1 +1,0 @@
-sam ALL = (root) NOPASSWD: /usr/bin/docker-compose

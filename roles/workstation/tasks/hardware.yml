@@ -1,7 +1,6 @@
 ---
 - tags:
     - 'workstation'
-    - 'workstation-base'
     - 'hardware'
   block:
     # Configure immediately by running this as root:

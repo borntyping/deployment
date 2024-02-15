@@ -5,7 +5,7 @@
   block:
     - name: 'install .fonts/'
       copy:
-        src: '.fonts/'
+        src: 'home/.fonts/'
         dest: '{{ lookup("env", "HOME") }}/.fonts'
       tags:
         - 'config'
@@ -13,7 +13,7 @@
 
     - name: 'install .config/tilix/'
       copy:
-        src: '.config/tilix/'
+        src: 'home/.config/tilix/'
         dest: '{{ lookup("env", "HOME") }}/.config/tilix'
       tags:
         - 'config'

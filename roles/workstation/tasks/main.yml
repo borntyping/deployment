@@ -1,6 +1,4 @@
 ---
-- import_tasks: 'dnf.yml'
 - import_tasks: 'graphical.yml'
 - import_tasks: 'hardware.yml'
 - import_tasks: 'snap.yml'
-- import_tasks: 'sudo.yml'

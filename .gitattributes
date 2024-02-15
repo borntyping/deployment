@@ -4,4 +4,4 @@ roles/home/files/.local/share/zsh/atuin.zsh filter=lfs diff=lfs merge=lfs
 roles/home/files/.local/share/zsh/dog.zsh filter=lfs diff=lfs merge=lfs
 roles/home/files/.local/share/zsh/fixup.zsh filter=lfs diff=lfs merge=lfs
 roles/home/files/.local/share/zsh/miniplug.zsh filter=lfs diff=lfs merge=lfs
-roles/workstation-home/files/.fonts/* filter=lfs diff=lfs merge=lfs -text
+roles/workstation/files/.fonts/* filter=lfs diff=lfs merge=lfs -text

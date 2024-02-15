@@ -1,5 +1,2 @@
 ---
-dependencies:
-  - role: git
-  - role: ssh
-  - role: zsh
+dependencies: []

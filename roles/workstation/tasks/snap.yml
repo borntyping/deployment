@@ -1,18 +1,17 @@
 ---
 - tags:
     - 'workstation'
-    - 'workstation-base'
+    - 'snap'
   block:
     # Enable 'classic' Snap support.
     # https://snapcraft.io/docs/installing-snap-on-fedora
     - name: 'configure snap'
       when: 'snap_enabled == true'
+      become: true
       ansible.builtin.file:
         src: '/var/lib/snapd/snap'
         dest: '/snap'
         state: 'link'
-      tags:
-        - 'snap'
 
     - name: 'install snap packages'
       when: 'snap_enabled == true'
@@ -21,5 +20,3 @@
       become: true
       loop:
         - 'lnav'
-      tags:
-        - 'snap'

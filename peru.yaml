@@ -1,20 +1,20 @@
 ---
 imports:
   atuin|atuin-bin: 'roles/home/files/.local/bin/'
-  atuin|atuin-zsh: 'roles/home/files/.local/share/zsh/'
+  atuin|atuin-zsh: 'roles/zsh/files/.local/share/zsh/'
   difft: 'roles/home/files/.local/bin/'
   aws-vault: 'roles/home/files/.local/bin/'
   dracula: 'roles/workstation-home/files/.config/tilix/schemes'
   fantasque: 'roles/workstation-home/files/.fonts'
   fantasque-nerd: 'roles/workstation-home/files/.fonts'
   fixup|fixup-bin: 'roles/home/files/.local/bin/'
-  fixup|fixup-zsh: 'roles/home/files/.local/share/zsh/'
+  fixup|fixup-zsh: 'roles/zsh/files/.local/share/zsh/'
   git-bug: 'roles/home/files/.local/bin/'
   just|just-bin: 'roles/home/files/.local/bin/'
   just|just-man: 'roles/home/files/.local/share/man/man1/'
   kubectx: 'roles/home/files/.local/bin/'
   kubens: 'roles/home/files/.local/bin/'
-  miniplug: 'roles/home/files/.local/share/zsh/'
+  miniplug: 'roles/zsh/files/.local/share/zsh/'
   starship: 'roles/home/files/.local/bin/'
 
 curl module atuin:

@@ -2,7 +2,9 @@
 collections:
   - name: 'ansible.posix'
     version: '*'
+  - name: 'community.crypto'
+    version: '*'
   - name: 'community.general'
     version: '*'
-  - name: 'community.crypto'
+  - name: 'community.postgresql'
     version: '*'
