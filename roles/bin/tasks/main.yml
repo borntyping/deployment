@@ -1,7 +1,7 @@
 ---
 - tags: [bin]
   block:
-    - name: 'install executables'
+    - name: 'install executables into ~/.local/bin'
       tags: [local, bin]
       copy:
         src: '{{ ansible_architecture }}/.local/bin/'
