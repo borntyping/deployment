@@ -1,11 +1,23 @@
 ---
-- hosts:
-    - localhost
+- name: common
+  hosts:
+   - umbreon
+   - razz
   roles:
-    - role: workstation-base-fedora
-    - role: home
-
-- hosts: razz
-  roles:
+    - role: base
     - role: ssh
     - role: git
+    - role: zsh
+
+- name: workstation
+  hosts:
+    - umbreon
+  roles:
+    - role: home
+    - role: workstation
+
+- name: server
+  hosts:
+    - razz
+  roles:
+    - role: web

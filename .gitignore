@@ -8,8 +8,6 @@
 # Ignore Ansible retry files.
 site.retry
 
-# Ignore host vars for the local machine.
-host_vars/localhost.yml
-host_vars/localhost.yaml
-host_vars/*/*.local.yml
-host_vars/*/*.local.yaml
+# Ignore host vars with sensitive information.
+host_vars/*/secrets.yml
+host_vars/*/secrets.yaml

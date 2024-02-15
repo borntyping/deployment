@@ -1,0 +1,8 @@
+---
+web_domain: "{{ ansible_host }}"
+web_db_name: "vancelle"
+web_db_user: "vancelle"
+web_db_pass: "{{ undefined }}"
+
+web_docker_mounts_owner: "{{ ansible_user|default(undef) }}"
+web_docker_mounts: []
