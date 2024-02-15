@@ -99,7 +99,6 @@
       community.general.pipx:
         name: '{{ item }}'
       loop:
-        - 'checkov'
         - 'poetry'
         - 'switchbox'
       tags:
