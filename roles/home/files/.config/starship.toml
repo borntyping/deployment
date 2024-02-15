@@ -2,8 +2,8 @@
 
 add_newline = false
 format = """
-$character\
 $hostname\
+$character\
 $directory\
 $git_branch\
 $git_commit\
@@ -31,11 +31,18 @@ $status\
 $cmd_duration\
 $jobs\
 $line_break\
+$hostname\
 $character"""
 
 [character]
 success_symbol = "[\\$](purple)"
 error_symbol = "[\\$](purple)"
+
+[hostname]
+ssh_only = true
+ssh_symbol = ""
+format = "[\\[$hostname\\]]($style)"
+style = "purple"
 
 [directory]
 read_only = " ro"
