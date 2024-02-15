@@ -1,4 +1,4 @@
-roles/home/files/.local/bin/** filter=lfs diff=lfs merge=lfs -text
+roles/bin/files/** filter=lfs diff=lfs merge=lfs -text
 roles/home/files/.local/share/man/** filter=lfs diff=lfs merge=lfs
 roles/home/files/.local/share/zsh/atuin.zsh filter=lfs diff=lfs merge=lfs
 roles/home/files/.local/share/zsh/dog.zsh filter=lfs diff=lfs merge=lfs

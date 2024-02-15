@@ -1,63 +1,105 @@
 ---
 imports:
-  atuin|atuin-bin: 'roles/home/files/.local/bin/'
-  difft: 'roles/home/files/.local/bin/'
-  aws-vault: 'roles/home/files/.local/bin/'
-  fixup|fixup-bin: 'roles/home/files/.local/bin/'
-  just|just-bin: 'roles/home/files/.local/bin/'
-  kubectx: 'roles/home/files/.local/bin/'
-  kubens: 'roles/home/files/.local/bin/'
-  starship: 'roles/home/files/.local/bin/'
+  atuin-aarch64|atuin-aarch64-bin: roles/bin/files/aarch64/.local/bin/
+  atuin-x86_64|atuin-x86_64-bin: roles/bin/files/x86_64/.local/bin/
+  aws-vault-aarch64: roles/bin/files/aarch64/.local/bin/
+  aws-vault-x86_64: roles/bin/files/x86_64/.local/bin/
+  difft-aarch64: roles/bin/files/aarch64/.local/bin/
+  difft-x86_64: roles/bin/files/x86_64/.local/bin/
+  just-aarch64|just-aarch64-bin: roles/bin/files/aarch64/.local/bin/
+  just-x86_64|just-x86_64-bin: roles/bin/files/x86_64/.local/bin/
+  kubectx-aarch64: roles/bin/files/aarch64/.local/bin/
+  kubectx-x86_64: roles/bin/files/x86_64/.local/bin/
+  kubens-aarch64: roles/bin/files/aarch64/.local/bin/
+  kubens-x86_64: roles/bin/files/x86_64/.local/bin/
+  starship-aarch64: roles/bin/files/aarch64/.local/bin/
+  starship-x86_64: roles/bin/files/x86_64/.local/bin/
 
-  just|just-man: 'roles/home/files/.local/share/man/man1/'
+  fixup|fixup-bin: roles/home/files/.local/bin/
+  just-x86_64|just-x86_64-man: roles/home/files/.local/share/man/man1/
 
-  dracula: 'roles/workstation-home/files/.config/tilix/schemes'
-  fantasque: 'roles/workstation-home/files/.fonts'
-  fantasque-nerd: 'roles/workstation-home/files/.fonts'
+  dracula: roles/workstation-home/files/.config/tilix/schemes
+  fantasque: roles/workstation-home/files/.fonts
+  fantasque-nerd: roles/workstation-home/files/.fonts
 
-  atuin|atuin-zsh: 'roles/zsh/files/.local/share/zsh/'
-  fixup|fixup-zsh: 'roles/zsh/files/.local/share/zsh/'
-  miniplug: 'roles/zsh/files/.local/share/zsh/'
+  atuin-x86_64|atuin-x86_64-zsh: roles/zsh/files/.local/share/zsh/
+  fixup|fixup-zsh: roles/zsh/files/.local/share/zsh/
+  miniplug: roles/zsh/files/.local/share/zsh/
 
-curl module atuin:
+#
+# Atuin
+# https://atuin.sh/
+#
+
+curl module atuin-aarch64:
+  url: https://github.com/atuinsh/atuin/releases/download/v16.0.0/atuin-v16.0.0-aarch64-unknown-linux-gnu.tar.gz
+  unpack: tar
+  export: atuin-v16.0.0-aarch64-unknown-linux-gnu
+
+rule atuin-aarch64-bin:
+  pick: [atuin]
+  executable: [atuin]
+
+curl module atuin-x86_64:
   url: https://github.com/atuinsh/atuin/releases/download/v16.0.0/atuin-v16.0.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
   export: atuin-v16.0.0-x86_64-unknown-linux-gnu
   sha1: 281af515f5b8772f69a18c522a20e1059ea9b06f
 
-rule atuin-bin:
-  pick:
-    - atuin
-  executable:
-    - atuin
+rule atuin-x86_64-bin:
+  pick: [atuin]
+  executable: [atuin]
 
-rule atuin-zsh:
-  copy:
-    completions/_atuin: atuin.zsh
-  pick:
-    - atuin.zsh
+rule atuin-x86_64-zsh:
+  copy: {completions/_atuin: atuin.zsh}
+  pick: [atuin.zsh]
 
-curl module aws-vault:
+#
+# aws-vault
+# https://github.com/99designs/aws-vault/
+#
+
+curl module aws-vault-aarch64:
+  url: https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-arm64
+  move: {aws-vault-linux-arm64: aws-vault}
+  executable: [aws-vault]
+
+curl module aws-vault-x86_64:
   url: https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-amd64
-  move:
-    aws-vault-linux-amd64: aws-vault
-  executable:
-    - aws-vault
-
+  move: {aws-vault-linux-amd64: aws-vault}
+  executable: [aws-vault]
   sha1: 70efe397bcd199619ae6e5d121b7a88d8291156e
 
-curl module difft:
-  url: https://github.com/Wilfred/difftastic/releases/download/0.47.0/difft-x86_64-unknown-linux-gnu.tar.gz
+#
+# difftastic
+# https://difftastic.wilfred.me.uk/
+#
+
+curl module difft-aarch64:
+  url: https://github.com/Wilfred/difftastic/releases/download/0.55.0/difft-aarch64-unknown-linux-gnu.tar.gz
   unpack: tar
-  pick:
-    - difft
-  executable:
-    - difft
-  sha1: b45e61ea969b1acd400619d543712ebc784c4351
+  pick: [difft]
+  executable: [difft]
+
+curl module difft-x86_64:
+  url: https://github.com/Wilfred/difftastic/releases/download/0.55.0/difft-x86_64-unknown-linux-gnu.tar.gz
+  unpack: tar
+  pick: [difft]
+  executable: [difft]
+
+#
+# miniplug
+# https://git.sr.ht/~yerinalexey/miniplug
+#
 
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
   sha1: 4b9e4bc549f7fed040a2058adcc76274b95003ed
+
+#
+# Dracula for Tilix
+# https://github.com/dracula/tilix
+#
 
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
@@ -67,6 +109,11 @@ curl module dracula:
   pick:
     - Dracula.json
   sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
+
+#
+# Fantasque Sans Mono
+# https://github.com/belluzj/fantasque-sans
+#
 
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
@@ -78,6 +125,11 @@ curl module fantasque-nerd:
   url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FantasqueSansMono.zip
   unpack: zip
   sha1: bd31e05a801f6389ae197462d513dd04d1141206
+
+#
+# git-fixup
+# https://github.com/keis/git-fixup
+#
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
@@ -95,36 +147,76 @@ rule fixup-zsh:
   pick:
     - fixup.zsh
 
-curl module just:
-  url: https://github.com/casey/just/releases/download/1.14.0/just-1.14.0-x86_64-unknown-linux-musl.tar.gz
+#
+# Just
+# https://just.systems/
+#
+
+curl module just-aarch64:
+  url: https://github.com/casey/just/releases/download/1.24.0/just-1.24.0-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
-  sha1: 9414f897b56666827c238674c4277adaa4e9dceb
 
-rule just-bin:
-  pick:
-    - just
-  executable:
-    - just
+rule just-aarch64-bin:
+  pick: just
+  executable: just
 
-rule just-man:
-  pick:
-    - just.1
+rule just-aarch64-man:
+  pick: just.1
 
-curl module kubectx:
-  url: https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx
+curl module just-x86_64:
+  url: https://github.com/casey/just/releases/download/1.24.0/just-1.24.0-x86_64-unknown-linux-musl.tar.gz
+  unpack: tar
+
+rule just-x86_64-bin:
+  pick: just
+  executable: just
+
+rule just-x86_64-man:
+  pick: just.1
+
+#
+# kubectx + kubens
+# http://github.com/ahmetb/kubectx/
+#
+
+curl module kubectx-x86_64:
+  url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_x86_64.tar.gz
+  pick: kubectx
   executable: kubectx
-  sha1: 1718cd9a4bef8caf9af11138223e7d53fb41a5ea
+  unpack: tar
 
-curl module kubens:
-  url: https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens
+curl module kubectx-aarch64:
+  url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_arm64.tar.gz
+  pick: kubectx
+  executable: kubectx
+  unpack: tar
+
+curl module kubens-x86_64:
+  url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz
+  pick: kubens
   executable: kubens
-  sha1: 4d0ba0d52d6c6ee9e2da7aed12b269b2c2e71aa6
+  unpack: tar
 
-curl module starship:
+curl module kubens-aarch64:
+  url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_arm64.tar.gz
+  pick: kubens
+  executable: kubens
+  unpack: tar
+
+#
+# Starship
+# https://starship.rs/
+#
+
+curl module starship-aarch64:
+  url: https://github.com/starship/starship/releases/latest/download/starship-aarch64-unknown-linux-musl.tar.gz
+  unpack: tar
+  pick: [starship]
+  executable: [starship]
+
+curl module starship-x86_64:
   url: https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
-  pick:
-    - starship
-  executable:
-    - starship
+  pick: [starship]
+  executable: [starship]
   sha1: 8faa59a37ecf5ff491f0535b4f59d6ba219b685c

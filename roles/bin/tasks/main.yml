@@ -1,0 +1,9 @@
+---
+- tags: [bin]
+  block:
+    - name: 'install executables'
+      tags: [local, bin]
+      copy:
+        src: '{{ ansible_architecture }}/.local/bin/'
+        dest: '{{ ansible_user_dir }}/.local/bin'
+        mode: '0755'
