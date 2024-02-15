@@ -5,6 +5,7 @@
    - razz-berry
   roles:
     - role: base
+    - role: home
     - role: ssh
     - role: git
     - role: zsh
@@ -13,7 +14,6 @@
   hosts:
     - umbreon
   roles:
-    - role: home
     - role: workstation
 
 - name: server
