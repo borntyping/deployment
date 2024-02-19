@@ -37,6 +37,7 @@
           - 'gcc-c++'                   # needed for cargo install task
           - 'gh'                        # github cli
           - 'git'
+          - 'git-absorb'                # https://github.com/tummychow/git-absorb
           - 'git-lfs'                   # git large file support
           - 'golang'                    # needed to install golang executables
           - 'htop'
