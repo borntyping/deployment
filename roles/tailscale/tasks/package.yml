@@ -1,0 +1,21 @@
+---
+- tags:
+    - dnf
+    - tailscale
+  block:
+    - name: "add tailscale repository"
+      become: true
+      ansible.builtin.yum_repository:
+        name: "tailscale"
+        description: "Tailscale stable"
+        baseurl: "https://pkgs.tailscale.com/stable/fedora/$basearch"
+        gpgcheck: true
+        repo_gpgcheck: true
+        gpgkey: "https://pkgs.tailscale.com/stable/fedora/repo.gpg"
+
+    - name: 'install tailscale package'
+      become: true
+      ansible.builtin.dnf:
+        state: 'latest'
+        pkg:
+          - 'tailscale'
