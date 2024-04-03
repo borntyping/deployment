@@ -4,16 +4,15 @@
     - 'workstation-home'
   block:
     - name: 'install .fonts/'
-      copy:
-        src: 'home/.fonts/'
+      ansible.builtin.copy:
+        src: '.fonts/'
         dest: '{{ ansible_user_dir }}/.fonts'
       tags:
-        - 'config'
         - 'fonts'
 
     - name: 'install .config/tilix/'
-      copy:
-        src: 'home/.config/tilix/'
+      ansible.builtin.copy:
+        src: '.config/tilix/'
         dest: '{{ ansible_user_dir }}/.config/tilix'
       tags:
         - 'config'
