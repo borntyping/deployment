@@ -67,7 +67,6 @@ alias src-pre-commit='~borntyping/deployment/roles/home/files/.config/git/hooks/
 alias src-just='just --justfile=.local/justfile'
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
-export PAGER="bat"                                                              # https://github.com/sharkdp/bat
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
@@ -141,6 +140,18 @@ if [[ -v 'commands[atuin]' ]]; then
   bindkey '^r' _atuin_search_widget
 fi
 
+# Bat
+# https://github.com/sharkdp/bat
+# https://github.com/Manishearth/oreutils
+if [[ -v "commands[bat]" ]]; then
+  export PAGER="bat"
+  alias cat='bat'
+elif [[ -v "commands[batcat]" ]]; then
+  export PAGER="batcat"
+  alias bat='batcat'
+  alias cat='batcat'
+fi
+
 # Bun
 # https://bun.sh
 if [ -s "${HOME}/.bun/_bun" ]; then
@@ -149,7 +160,7 @@ fi
 
 # Direnv
 # https://direnv.net/
-if [[ -v "commands[bat]" ]]; then
+if [[ -v "commands[direnv]" ]]; then
   eval "$(direnv hook zsh)"
 fi
 
@@ -161,7 +172,7 @@ fi
 
 # Replace various coreutils executables with oreutils alternatives.
 # https://github.com/Manishearth/oreutils
-[[ -v "commands[bat]" ]] && alias cat='bat'
+
 [[ -v "commands[exa]" ]] && alias ls='exa'
 [[ -v "commands[rg]" ]] && alias grep='rg'
 
