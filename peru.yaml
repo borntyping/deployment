@@ -209,14 +209,13 @@ curl module kubens-aarch64:
 #
 
 curl module starship-aarch64:
-  url: https://github.com/starship/starship/releases/latest/download/starship-aarch64-unknown-linux-musl.tar.gz
+  url: https://github.com/starship/starship/releases/download/v1.18.2/starship-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
   pick: [starship]
   executable: [starship]
 
 curl module starship-x86_64:
-  url: https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-musl.tar.gz
+  url: https://github.com/starship/starship/releases/download/v1.18.2/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
   pick: [starship]
   executable: [starship]
-  sha1: 8faa59a37ecf5ff491f0535b4f59d6ba219b685c
