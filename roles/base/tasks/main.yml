@@ -1,3 +1,8 @@
 ---
-- import_tasks: 'dnf.yml'
+- include_tasks: 'dnf.yml'
+  when: "ansible_distribution in ['Fedora']"
+
+- include_tasks: 'apt.yml'
+  when: "ansible_distribution in ['Ubuntu']"
+
 - import_tasks: 'sudo.yml'

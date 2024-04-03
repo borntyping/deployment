@@ -1,0 +1,26 @@
+---
+- tags:
+    - 'base'
+    - 'apt'
+  block:
+    - name: 'install apt packages'
+      become: true
+      ansible.builtin.apt:
+        state: 'latest'
+        pkg:
+          - 'ack'
+          - 'bat'
+          - 'git'
+          - 'git-lfs'
+          - 'micro'
+          - 'pre-commit'
+          - 'python3'
+          - 'python3-pip'
+          - 'tree'
+
+    - name: 'remove apt packages'
+      become: true
+      ansible.builtin.apt:
+        state: 'absent'
+        pkg:
+          - 'ansible-core'
