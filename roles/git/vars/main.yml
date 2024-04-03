@@ -3,30 +3,20 @@ git_forges:
   - host: 'github.com'
     user: 'borntyping'
     path: '~/Development/github.com/borntyping/**'
+    email: 'sam@borntyping.co.uk'
+    ssh_key: 'id_ed25519_github_borntyping'
     priority: 45
-    config: |
-      [user]
-      name = Sam Clements
-      email = sam@borntyping.co.uk
-      [core]
-      sshCommand = ssh -i '~/.ssh/keys/id_ed25519_github_borntyping'
+
   - host: 'github.com'
     user: 'borntyping-corporate'
     path: '~/Development/github.com/borntyping-corporate/**'
+    email: 'sam@borntyping.co.uk'
+    ssh_key: 'id_ed25519_github_borntyping_corporate'
     priority: 45
-    config: |
-      [user]
-      name = Sam Clements
-      email = sam@borntyping.co.uk
-      [core]
-      sshCommand = ssh -i '~/.ssh/keys/id_ed25519_github_borntyping_corporate'
+
   - host: 'gitlab.com'
     user: 'borntyping'
     path: '~/Development/gitlab.com/borntyping/**'
+    email: 'sam@borntyping.co.uk'
+    ssh_key: 'id_ed25519_gitlab_borntyping'
     priority: 45
-    config: |
-      [user]
-      name = Sam Clements
-      email = sam@borntyping.co.uk
-      [core]
-      sshCommand = ssh -i '~/.ssh/keys/id_ed25519_gitlab_borntyping'
