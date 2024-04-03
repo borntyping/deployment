@@ -3,6 +3,7 @@
     - 'home'
     - 'dotfiles'
     - 'git'
+    - focus
   block:
     - name: 'copy git config directory'
       ansible.builtin.copy:
@@ -10,30 +11,33 @@
         dest: '{{ ansible_user_dir }}/.config/git/'
         mode: 'preserve'
 
-    - name: 'create git config.d files'
+    - name: 'create git config.d files for includeIf config'
       ansible.builtin.copy:
-        content: '{{ item.value }}'
-        dest: '{{ ansible_user_dir }}/.config/git/config.d/{{ item.key }}'
+        content: |
+          [includeIf "gitdir:{{ item.path|default("~/Development/%s/%s/**" | format(item.host, item.user)) }}"]
+          path = hosts.d/{{ item.host }}/{{ item.user }}.config
+        dest: '{{ ansible_user_dir }}/.config/git/config.d/{{ item.priority|default(50) }}-{{ item.host }}-{{ item.user }}.config'
         mode: 'preserve'
-      loop: '{{ git_config|combine(git_config_local)|dict2items }}'
+      loop: '{{ (git_forges + git_forges_local) }}'
       loop_control:
-        label: '{{ item.key }}'
+        label: '{{ item.host }}/{{ item.user }}'
 
     - name: 'create git hosts.d directories'
       ansible.builtin.file:
-        name: '{{ ansible_user_dir }}/.config/git/hosts.d/{{ item }}'
+        name: '{{ ansible_user_dir }}/.config/git/hosts.d/{{ item.host }}'
         state: 'directory'
-      loop: '{{ git_dirs + git_dirs_local }}'
-      tags: focus
+      loop: '{{ (git_forges + git_forges_local) }}'
+      loop_control:
+        label: '{{ item.host }}/{{ item.user }}'
 
     - name: 'create git hosts.d files'
       ansible.builtin.copy:
-        content: '{{ item.value }}'
-        dest: '{{ ansible_user_dir }}/.config/git/hosts.d/{{ item.key }}'
+        content: '{{ item.config }}'
+        dest: '{{ ansible_user_dir }}/.config/git/hosts.d/{{ item.host }}/{{ item.user }}.config'
         mode: 'preserve'
-      loop: '{{ git_hosts|combine(git_hosts_local)|dict2items }}'
+      loop: '{{ (git_forges + git_forges_local) }}'
       loop_control:
-        label: '{{ item.key }}'
+        label: '{{ item.host }}/{{ item.user }}'
 
     - name: 'assemble git config'
       ansible.builtin.assemble:
@@ -41,8 +45,16 @@
         dest: '{{ ansible_user_dir }}/.config/git/config'
         delimiter: '\n'
 
-    - name: 'create git source code directories'
+    - name: 'create git source code directories for each host'
       ansible.builtin.file:
         name: '{{ ansible_user_dir }}/Development/{{ item }}'
         state: 'directory'
-      with_items: '{{ git_dirs + git_dirs_local }}'
+      loop: '{{ (git_forges + git_forges_local)|map(attribute="host")|unique }}'
+
+    - name: 'create git source code directories for each host + user'
+      ansible.builtin.file:
+        name: '{{ ansible_user_dir }}/Development/{{ item.host }}/{{ item.user }}'
+        state: 'directory'
+      loop: '{{ (git_forges + git_forges_local) }}'
+      loop_control:
+        label: '{{ item.host }}/{{ item.user }}'

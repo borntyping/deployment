@@ -12,16 +12,13 @@ zsh_zshrc_local:
   50-kaluza.zsh: |
     #!/usr/bin/env zsh
     export corporate="${github}/corporate"
-git_config_local:
-  50-corporate.config: |
-    [includeIf "gitdir:~/Development/github.com/corporate/**"]
-    path = hosts.d/github.com/corporate.local.config
-git_hosts_local:
-  github.com/corporate.local.config: |
-    [user]
-    name = Sam Clements
-    email = sam.clements@corporate.invalid
-    [core]
-    sshCommand = ssh -i '~/.ssh/keys/id_ed25519_github_borntyping_corporate
-git_dirs_local:
-  - 'git.example.invalid'
+git_forges_local:
+  - host: 'github.com'
+    user: 'corporate'
+    path: '~/Development/github.com/corporate/**'
+    config: |
+      [ user ]
+      name = Sam Clements
+      email = sam.clements@corporate.invalid
+      [core]
+      sshCommand = ssh -i '~/.ssh/keys/id_ed25519_github_borntyping_corporate
