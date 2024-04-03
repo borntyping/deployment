@@ -19,6 +19,13 @@
       loop_control:
         label: '{{ item.key }}'
 
+    - name: 'create git hosts.d directories'
+      ansible.builtin.file:
+        name: '{{ ansible_user_dir }}/.config/git/hosts.d/{{ item }}'
+        state: 'directory'
+      loop: '{{ git_dirs + git_dirs_local }}'
+      tags: focus
+
     - name: 'create git hosts.d files'
       ansible.builtin.copy:
         content: '{{ item.value }}'
@@ -36,11 +43,6 @@
 
     - name: 'create git source code directories'
       ansible.builtin.file:
-        name: '{{ ansible_user_dir }}/{{ item }}'
+        name: '{{ ansible_user_dir }}/Development/{{ item }}'
         state: 'directory'
-      with_items:
-        - 'Development/github.com'
-        - 'Development/github.com/borntyping'
-        - 'Development/gitlab.com'
-        - 'Development/gitlab.com/borntyping'
-        - 'Development/scratch'
+      with_items: '{{ git_dirs + git_dirs_local }}'

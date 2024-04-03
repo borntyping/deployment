@@ -3,3 +3,10 @@ git_config: {}
 git_config_local: {}
 git_hosts: {}
 git_hosts_local: {}
+git_dirs:
+  - 'github.com'
+  - 'github.com/borntyping'
+  - 'gitlab.com'
+  - 'gitlab.com/borntyping'
+  - 'scratch'
+git_dirs_local: []

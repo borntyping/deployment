@@ -23,3 +23,5 @@ git_hosts_local:
     email = sam.clements@corporate.invalid
     [core]
     sshCommand = ssh -i '~/.ssh/keys/id_ed25519_github_borntyping_corporate
+git_dirs_local:
+  - 'git.example.invalid'
