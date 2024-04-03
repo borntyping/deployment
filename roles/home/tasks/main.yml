@@ -15,14 +15,6 @@
         - 'dotfiles'
         - 'multitailrc'
 
-    # Use the 'bin' role for architecture-dependant executables.
-    - name: 'install scripts into ~/.local/bin'
-      tags: [local, bin]
-      copy:
-        src: '.local/bin/'
-        dest: '{{ ansible_user_dir }}/.local/bin'
-        mode: '0755'
-
     - name: 'create ~/.bin directory'
       tags: [bin]
       ansible.builtin.file:

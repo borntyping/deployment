@@ -6,6 +6,7 @@ imports:
   aws-vault-x86_64: roles/bin/files/x86_64/.local/bin/
   difft-aarch64: roles/bin/files/aarch64/.local/bin/
   difft-x86_64: roles/bin/files/x86_64/.local/bin/
+  fixup|fixup-bin: roles/bin/files/.local/bin/
   just-aarch64|just-aarch64-bin: roles/bin/files/aarch64/.local/bin/
   just-x86_64|just-x86_64-bin: roles/bin/files/x86_64/.local/bin/
   kubectx-aarch64: roles/bin/files/aarch64/.local/bin/
@@ -15,7 +16,6 @@ imports:
   starship-aarch64: roles/bin/files/aarch64/.local/bin/
   starship-x86_64: roles/bin/files/x86_64/.local/bin/
 
-  fixup|fixup-bin: roles/home/files/.local/bin/
   just-x86_64|just-x86_64-man: roles/home/files/.local/share/man/man1/
 
   dracula: roles/workstation-home/files/.config/tilix/schemes
