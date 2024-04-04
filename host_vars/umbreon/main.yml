@@ -6,3 +6,6 @@ git_forges_local:
     path: '~/Development/razz-berry.bunny-moth.ts.net/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_gitlab_src'
+ssh_key_names_local:
+  - razz_berry
+  - src

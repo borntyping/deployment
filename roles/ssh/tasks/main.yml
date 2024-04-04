@@ -27,20 +27,9 @@
         type: 'ed25519'
         path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
         comment: '{{ ansible_user_id }}@{{ ansible_host }}'
-      loop:
-        - github_borntyping
-        - github_borntyping_corporate
-        - gitlab
-        - src
+      loop: '{{ ssh_key_names + ssh_key_names_local }}'
       tags:
         - 'ssh-keys'
-
-    - name: 'generate configured ssh keys'
-      community.crypto.openssh_keypair:
-        type: 'ed25519'
-        path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
-        comment: '{{ lookup("env", "HOST") }}'
-      loop: '{{ ssh_key_names }}'
 
     - name: 'assemble ssh config'
       ansible.builtin.assemble:
