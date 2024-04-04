@@ -8,17 +8,13 @@ bin_scripts_local:
   src-corporate-example: |
     #!/usr/bin/env zsh
     echo "hello world"
-zsh_zshrc_local:
-  50-kaluza.zsh: |
-    #!/usr/bin/env zsh
-    export corporate="${github}/corporate"
 git_forges_local:
   - host: 'github.com'
     user: 'corporate'
     path: '~/Development/github.com/corporate/**'
-    config: |
-      [ user ]
-      name = Sam Clements
-      email = sam.clements@corporate.invalid
-      [core]
-      sshCommand = ssh -i '~/.ssh/keys/id_ed25519_github_borntyping_corporate
+    email: 'sam.clements@corporate.invalid'
+    ssh_key: 'id_ed25519_github_borntyping_corporate'
+zsh_zshrc_local:
+  50-kaluza.zsh: |
+    #!/usr/bin/env zsh
+    export corporate="${github}/corporate"

@@ -1,11 +1,15 @@
 ---
-snap_enabled: true
 git_forges_local:
   - host: 'razz-berry.bunny-moth.ts.net'
     user: 'src'
     path: '~/Development/razz-berry.bunny-moth.ts.net/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_gitlab_src'
+snap_enabled: true
 ssh_key_names_local:
   - razz_berry
   - src
+zsh_zshrc_local:
+  50-razz-berry.zsh: |
+    #!/usr/bin/env zsh
+    export razz-berry="${HOME}/Development/razz-berry.bunny-moth.ts.net"

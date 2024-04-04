@@ -98,11 +98,9 @@ export PATH="${HOME}/.bin:${PATH}"
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
-export source="${HOME}/Development"
-export borntyping="${source}/github.com/borntyping"
-export github="${source}/github.com"
-export gitlab="${source}/gitlab.com"
-export scratch="${source}/scratch"
+export github="${HOME}/Development/github.com"
+export gitlab="${HOME}/Development/gitlab.com"
+export scratch="${HOME}/Development/scratch"
 
 # Completion rules
 # https://zsh.sourceforge.net/Doc/Release/Completion-System.html
