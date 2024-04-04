@@ -3,55 +3,95 @@ deployment
 
 Deploys dotfiles, configuration and packages to my machines using Ansible.
 
-Usage
------
+## Usage
 
-Install essential dependencies:
+### Clone the repo and install dependencies
 
-```bash
-sudo dnf install ansible-core git git-lfs micro
+Install essential dependencies.
+
+```shell
+sudo dnf install ansible-core just git git-lfs micro
 ```
 
-Clone this repository:
+Clone this repository.
 
-```bash
+```shell
 mkdir -p "~/Development/github.com/borntyping"
 cd "~/Development/github.com/borntyping"
 git clone 'https://github.com/borntyping/deployment.git'
 cd "deployment"
 ```
 
-Install Ansible collections:
+If you run into line ending issues as you cloned the repo with GitHub Desktop and are using it inside a WSL distribution:
 
-```bash
+```shell
+git config --global core.eol lf
+git config --global core.autocrlf input
+git reset --hard
+```
+
+Install git-lfs (because you didn't listen the first time round), and checkout lfs files.
+
+```shell
+sudo dnf install git-lfs
+git lfs fetch
+git lfs checkout
+```
+
+Install Ansible collections.
+You'll have to do this manually if you don't have `just` installed yet.
+
+```shell
+just install
+```
+
+```shell
 ansible-galaxy collection install --requirements-file 'collections/requirements.yml'
 ```
 
-Create the local machine's inventory:
+### Optional: Create a local Ansible configuration
 
-```bash
-cp 'host_vars/example.yml' 'host_vars/localhost.yml'
-micro 'host_vars/localhost.yml'
+This will create `playbook.local.yml` and `inventory.local.yml`, which can be used to
+configure machines without committing any details about them to the repository.
+
+```shell
+just local-init
 ```
+
+```shell
+cp playbook.yml playbook.local.yml
+cp inventory.yml inventory.local.yml
+cp host_vars/example host_vars/$(hostname -s)
+```
+
+After editing these files, run Ansible with the local files and skip the next section.
+
+```shell
+just local-conf
+```
+
+```shell
+ansible-playbook "playbook.local.yml" --diff --inventory-file="inventory.local.yml" --limit="$(hostname -s)"
+```
+
+### Run Ansible for the first time
 
 Run the playbook:
 
-```bash
-./reconfigure
+```shell
+just configure
 ```
+
+```shell
+ansible-playbook "playbook.yml" --diff --inventory-file="inventory.yml" --limit="$(hostname -s)"
+```
+
+### Finish application setup
 
 Open `tilix`, and install ZSH plugins:
 
 ```zsh
 miniplug install
-```
-
-If you run into line ending issues as you cloned the repo with GitHub Desktop and are using it inside a WSL distribution:
-
-```bash
-git config --global core.eol lf
-git config --global core.autocrlf input
-git reset --hard
 ```
 
 Development
