@@ -4,7 +4,7 @@ bin_scripts_local:
     #!/usr/bin/env zsh
     echo "hello world"
 snap_enabled: false
-ssh_key_names_local:
+ssh_keys_local:
   - 'corporate'
 git_forges_local:
   - host: 'github.com'

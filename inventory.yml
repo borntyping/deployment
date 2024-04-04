@@ -3,15 +3,5 @@ all:
     umbreon:
       ansible_host: umbreon.bunny-moth.ts.net
       ansible_connection: local
-      git_forges_local:
-        - host: 'razz-berry.bunny-moth.ts.net'
-          user: 'src'
-          path: '~/Development/razz-berry.bunny-moth.ts.net/**'
-          email: 'sam@borntyping.co.uk'
-          ssh_key: 'id_ed25519_gitlab_src'
-      snap_enabled: true
-      ssh_key_names_local:
-        - razz_berry
-        - src
     razz-berry:
       ansible_host: razz-berry.bunny-moth.ts.net

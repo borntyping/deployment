@@ -5,10 +5,19 @@ git_forges_local:
     path: '~/Development/razz-berry.bunny-moth.ts.net/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_gitlab_src'
+
 snap_enabled: true
-ssh_key_names_local:
-  - razz_berry
-  - src
+
+ssh_config_local:
+  - name: src
+    config: |
+      Host *.bunny-moth.ts.net razz-berry.bunny-moth.ts.net razz-berry.local
+        User src
+        IdentitiesOnly yes
+        IdentityFile "~/.ssh/keys/id_ed25519_tailscale"
+ssh_keys_local:
+  - tailscale
+
 zsh_zshrc_local:
   50-razz-berry.zsh: |
     #!/usr/bin/env zsh

@@ -1,5 +1,5 @@
 ---
-ssh_key_names:
+ssh_keys:
   - github_borntyping
   - github_borntyping_corporate
   - gitlab_borntyping

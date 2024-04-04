@@ -2,6 +2,11 @@
 - tags:
     - 'ssh'
   block:
+    - name: 'set facts'
+      ansible.builtin.set_fact:
+        _ssh_config: '{{ ssh_config + ssh_config_local + ssh_config_secret }}'
+        _ssh_keys: '{{ ssh_keys + ssh_keys_local + ssh_keys_secret }}'
+
     - name: 'create ssh directory'
       ansible.builtin.file:
         name: '{{ ansible_user_dir }}/.ssh'
@@ -17,19 +22,25 @@
         - 'keys'
         - 'controlmasters'
 
-    - name: 'create ssh fragments'
+    - name: 'create ssh fragments from files'
       ansible.builtin.copy:
         src: '.ssh/config.d/'
         dest: '{{ ansible_user_dir }}/.ssh/config.d/'
+
+    - name: 'create ssh fragments from config'
+      ansible.builtin.copy:
+        content: '{{ item.config  }}'
+        dest: '{{ ansible_user_dir }}/.ssh/config.d/{{ item.order|default(50) }}-{{ item.name }}.config'
+      loop: '{{ _ssh_config }}'
+      loop_control:
+        label: '{{ item.name }}'
 
     - name: 'generate essential ssh keys'
       community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
         comment: '{{ ansible_user_id }}@{{ ansible_host }}'
-      loop: '{{ ssh_key_names + ssh_key_names_local }}'
-      tags:
-        - 'ssh-keys'
+      loop: '{{ _ssh_keys }}'
 
     - name: 'assemble ssh config'
       ansible.builtin.assemble:
