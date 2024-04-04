@@ -1,5 +1,5 @@
-playbook := "playbook.yml"
-inventory := "inventory.yml"
+playbook := if path_exists("playbook.local.yml") == "true" { "playbook.local.yml" } else { "playbook.yml" }
+inventory := if path_exists("inventory.local.yml") == "true" { "inventory.local.yml" } else { "inventory.yml" }
 hostname := `hostname -s`
 export ANSIBLE_NOCOWS := "true"
 export ANSIBLE_RETRY_FILES_ENABLED := "false"
@@ -21,10 +21,6 @@ configure tags="all" limit=hostname:
 # Install Ansible dependencies
 install:
     ansible-galaxy collection install --requirements-file 'collections/requirements.yml'
-
-# Run a local-only configuration
-local-conf tags="all" limit=hostname:
-    @just playbook="playbook.local.yml" inventory="inventory.local.yml" tags="{{ tags }}" limit="{{ limit }}"
 
 # Create a local-only configuration
 local-init hostname=hostname:

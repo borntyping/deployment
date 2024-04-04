@@ -64,16 +64,6 @@ cp inventory.yml inventory.local.yml
 cp host_vars/example host_vars/$(hostname -s)
 ```
 
-After editing these files, run Ansible with the local files and skip the next section.
-
-```shell
-just local-conf
-```
-
-```shell
-ansible-playbook "playbook.local.yml" --diff --inventory-file="inventory.local.yml" --limit="$(hostname -s)"
-```
-
 ### Run Ansible for the first time
 
 Run the playbook:
@@ -81,6 +71,8 @@ Run the playbook:
 ```shell
 just configure
 ```
+
+If you run Ansible manually, make sure you use the right playbook and inventory files if you created local-only versions.
 
 ```shell
 ansible-playbook "playbook.yml" --diff --inventory-file="inventory.yml" --limit="$(hostname -s)"
