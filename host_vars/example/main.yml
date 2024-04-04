@@ -1,13 +1,11 @@
 ---
-ansible_sudo_pass: '{{ undef }}'
-snap_enabled: false
-ssh_key_comment_host: 'hostname'
-ssh_key_names:
-  - 'corporate'
 bin_scripts_local:
   src-corporate-example: |
     #!/usr/bin/env zsh
     echo "hello world"
+snap_enabled: false
+ssh_key_names_local:
+  - 'corporate'
 git_forges_local:
   - host: 'github.com'
     user: 'corporate'
@@ -15,6 +13,6 @@ git_forges_local:
     email: 'sam.clements@corporate.invalid'
     ssh_key: 'id_ed25519_github_borntyping_corporate'
 zsh_zshrc_local:
-  50-kaluza.zsh: |
+  50-corporate.zsh: |
     #!/usr/bin/env zsh
     export corporate="${github}/corporate"
