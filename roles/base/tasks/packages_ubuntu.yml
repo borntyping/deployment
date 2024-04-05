@@ -15,6 +15,7 @@
           - 'gcc'
           - 'python3'
           - 'python3-pip'
+          - 'zsh-doc'
 
     - name: 'remove apt packages'
       become: true

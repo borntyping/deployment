@@ -47,6 +47,7 @@
           - 'rustfmt'
           - 'snapd'
           - 'util-linux-user'
+          - 'zsh-html'
 
     - name: 'remove dnf packages'
       become: true
