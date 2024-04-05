@@ -82,7 +82,8 @@ export PIPENV_VENV_IN_PROJECT=1                                                 
 export PIP_REQUIRE_VIRTUALENV=1                                                 # Require that Pip is run inside a virtualenv.
 export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
 
-export PATH="${HOME}/.local/share/miniplug/wfxr/forgit/bin:${PATH}"            # https://github.com/wfxr/forgit#git-integration
+export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"                            # https://brew.sh/
+export PATH="${HOME}/.local/share/miniplug/wfxr/forgit/bin:${PATH}"             # https://github.com/wfxr/forgit#git-integration
 
 # Language package managers.
 export PATH="${HOME}/.bun/bin:${PATH}"

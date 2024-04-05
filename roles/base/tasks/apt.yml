@@ -15,7 +15,9 @@
         pkg:
           - 'ack'
           - 'bat'
+          - 'build-essential'
           - 'fzf'
+          - 'gcc'
           - 'git'
           - 'git-cola'
           - 'git-lfs'
