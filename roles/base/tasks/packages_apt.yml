@@ -13,20 +13,10 @@
       ansible.builtin.apt:
         state: 'latest'
         pkg:
-          - 'ack'
-          - 'bat'
           - 'build-essential'
-          - 'fzf'
           - 'gcc'
-          - 'git'
-          - 'git-cola'
-          - 'git-lfs'
-          - 'gitg'
-          - 'micro'
-          - 'pre-commit'
           - 'python3'
           - 'python3-pip'
-          - 'tree'
 
     - name: 'remove apt packages'
       become: true

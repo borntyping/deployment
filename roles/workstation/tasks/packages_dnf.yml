@@ -1,7 +1,7 @@
 ---
 - tags:
     - 'workstation'
-    - 'graphical'
+    - 'dnf'
   block:
     - name: 'add 1Password repository key'
       ansible.builtin.rpm_key:
@@ -44,26 +44,3 @@
       tags:
         - 'dnf'
         - '1p'
-
-    - name: 'install snap packages'
-      when: 'snap_enabled == true'
-      community.general.snap:
-        name: '{{ item }}'
-      become: 'yes'
-      loop:
-        - 'slack'
-      tags:
-        - 'snap'
-
-    - name: 'install snap packages with --classic'
-      when: 'snap_enabled == true'
-      community.general.snap:
-        name: '{{ item }}'
-        classic: true
-      become: 'yes'
-      loop:
-        - 'code'
-        - 'pycharm-professional'
-      tags:
-        - 'snap'
-        - 'vscode'

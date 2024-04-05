@@ -1,0 +1,9 @@
+---
+- tags: ['apt' , 'base' , 'dnf']
+  block:
+    - name: 'install generic packages'
+      become: true
+      ansible.builtin.package:
+        state: 'latest'
+        pkg:
+          - 'gitg'
