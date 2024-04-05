@@ -1,0 +1,12 @@
+---
+- tags:
+    - 'base'
+    - 'apt'
+  block:
+    - name: 'install apt packages'
+      become: true
+      ansible.builtin.apt:
+        state: 'latest'
+        pkg:
+          - 'meld'
+          - 'gitg'

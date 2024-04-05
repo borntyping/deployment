@@ -1,0 +1,20 @@
+---
+- tags:
+    - 'workstation'
+    - 'snap'
+  block:
+    - name: 'install snap packages'
+      become: true
+      community.general.snap:
+        name: '{{ item }}'
+      loop:
+        - 'slack'
+
+    - name: 'install snap packages with --classic'
+      become: true
+      community.general.snap:
+        name: '{{ item }}'
+        classic: true
+      loop:
+        - 'code'
+        - 'pycharm-professional'
