@@ -1,7 +1,5 @@
 ---
-- tags:
-    - 'base'
-    - 'apt'
+- tags: ['base', 'apt']
   block:
     - name: 'add git ppa'
       become: true
@@ -24,4 +22,20 @@
         state: 'absent'
         pkg:
           - 'ansible-core'
+          - 'direnv'
+
+- tags: ['base', 'homebrew']
+  block:
+    - name: 'check homebrew executable'
+      stat:
+        path: '/home/linuxbrew/.linuxbrew/bin/brew'
+      register: 'homebrew_executable'
+      check_mode: true
+
+    - name: 'install homebrew packages'
+      when: 'homebrew_executable.stat.exists'
+      community.general.homebrew:
+        state: present
+        name:
+          - 'go'
           - 'direnv'
