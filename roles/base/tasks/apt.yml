@@ -3,6 +3,11 @@
     - 'base'
     - 'apt'
   block:
+    - name: 'add git ppa'
+      become: true
+      ansible.builtin.apt_repository:
+        repo: 'ppa:git-core/ppa'
+
     - name: 'install apt packages'
       become: true
       ansible.builtin.apt:
