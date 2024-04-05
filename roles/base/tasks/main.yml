@@ -1,11 +1,11 @@
 ---
 - name: 'install dnf packages'
-  include_tasks: 'packages_dnf.yml'
+  include_tasks: 'packages_fedora.yml'
   when: 'ansible_distribution in ["Fedora"]'
   tags: dnf
 
 - name: 'install apt packages'
-  include_tasks: 'packages_apt.yml'
+  include_tasks: 'packages_ubuntu.yml'
   when: 'ansible_distribution in ["Ubuntu"]'
   tags: apt
 
