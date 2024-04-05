@@ -1,3 +1,2 @@
 ---
 base_user: '{{ lookup("env", "USER") }}'
-snap_enabled: false
