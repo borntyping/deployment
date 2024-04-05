@@ -23,6 +23,7 @@
           - 'awscli2'
           - 'cargo'
           - 'clippy'
+          - 'direnv'
           - 'docker-compose'
           - 'gcc-c++'
           - 'golang'

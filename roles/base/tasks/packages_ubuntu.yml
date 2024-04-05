@@ -24,3 +24,4 @@
         state: 'absent'
         pkg:
           - 'ansible-core'
+          - 'direnv'

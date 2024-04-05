@@ -11,7 +11,6 @@
           - 'bat'
           - 'colordiff'
           - 'curl'
-          - 'direnv'
           - 'exa'
           - 'fd-find'
           - 'fish'
