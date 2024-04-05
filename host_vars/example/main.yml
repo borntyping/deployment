@@ -3,7 +3,6 @@ bin_scripts_local:
   src-corporate-example: |
     #!/usr/bin/env zsh
     echo "hello world"
-snap_enabled: false
 ssh_keys_local:
   - 'corporate'
 git_forges_local:

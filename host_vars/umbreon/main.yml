@@ -6,8 +6,6 @@ git_forges_local:
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_gitlab_src'
 
-snap_enabled: true
-
 ssh_config_local:
   - name: src
     config: |
