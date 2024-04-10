@@ -14,6 +14,7 @@
         - sudo
         - sudoers
 
+    # Run "newgrp docker" to use the new group without logging out and back in.
     - name: 'add user to docker group'
       ansible.builtin.user:
         name: '{{ base_user }}'
@@ -21,5 +22,4 @@
         append: yes
       become: true
       tags:
-        - 'never'
         - 'docker'
