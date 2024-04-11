@@ -1,0 +1,13 @@
+[Unit]
+Description=Foundry VTT
+Documentation=https://foundryvtt.com
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node %h/foundryvtt/resources/app/main.js --dataPath=%h/foundrydata --noupnp
+WorkingDirectory=%h/foundryvtt
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
