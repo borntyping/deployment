@@ -34,6 +34,13 @@
         - '{{ ansible_fqdn }}.crt'
         - '{{ ansible_fqdn }}.key'
 
+    - name: 'add caddy to the tailscale certificates group'
+      tags: ['caddy']
+      ansible.builtin.user:
+        name: 'caddy'
+        groups: '{{ tailscale_certificates_group }}'
+        append: true
+
     - name: 'allow caddy to use tailscale certificates'
       tags: ['caddy']
       ansible.builtin.lineinfile:

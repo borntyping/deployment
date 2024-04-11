@@ -1,3 +1,10 @@
-razz.bunny-moth.ts.net {
-  reverse_proxy localhost:5000
+(common) {
+  tls /etc/pki/tls/private/razz-berry.bunny-moth.ts.net.crt /etc/pki/tls/private/razz-berry.bunny-moth.ts.net.key
+}
+
+razz-berry.bunny-moth.ts.net:443 {
+  import common
+  reverse_proxy /vancelle/* localhost:8000
+  reverse_proxy /foundry/* localhost:30000
+  reverse_proxy /* localhost:8001
 }

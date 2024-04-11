@@ -1,0 +1,52 @@
+---
+- tags: 'foundry'
+  block:
+    - name: 'install packages'
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - 'systemd-container'
+          - 'nodejs'
+        state: 'latest'
+
+    - name: 'create foundryvtt group'
+      become: true
+      ansible.builtin.group:
+        name: '{{ foundryvtt_group }}'
+        state: 'present'
+
+    - name: 'create foundryvtt user'
+      become: true
+      ansible.builtin.user:
+        name: '{{ foundryvtt_user }}'
+        group: '{{ foundryvtt_group }}'
+        comment: 'Foundry VTT'
+        state: 'present'
+
+    - name: 'create foundryvtt directories'
+      become: true
+      become_user: '{{ foundryvtt_user }}'
+      ansible.builtin.file:
+        path: '/home/{{ foundryvtt_user }}/{{ item }}'
+        state: 'directory'
+      loop:
+        - 'foundryvtt'
+        - 'foundrydata'
+
+    - name: 'create systemd directories'
+      become: true
+      become_user: '{{ foundryvtt_user }}'
+      ansible.builtin.file:
+        path: '/home/{{ foundryvtt_user }}/.config/systemd/user'
+        state: 'directory'
+      loop:
+        - 'foundryvtt'
+        - 'foundrydata'
+
+    - name: 'create foundryvtt service'
+      become: true
+      become_user: '{{ foundryvtt_user }}'
+      ansible.builtin.copy:
+        src: 'foundryvtt.service'
+        dest: '/home/{{ foundryvtt_user }}/.config/systemd/user/foundryvtt.service'
+      tags: ['systemd', 'focus']
