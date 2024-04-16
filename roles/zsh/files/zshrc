@@ -50,12 +50,14 @@ bindkey '\e[4~'   end-of-line           #
 bindkey '\e[F'    end-of-line           #
 bindkey '\eOF'    end-of-line           #
 
-alias cola='git-cola 2>/dev/null &'                                             # Run 'git-cola' in the background and mute any UI warnings.
-alias gitg='gitg 2>/dev/null &'                                                 # Run 'gitg' in the background and mute any UI warnings.
 alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'
 alias gs='git status'
+
+alias cola='git-cola 2>/dev/null &'                                             # Run 'git-cola' in the background and mute any UI warnings.
+alias gitg='gitg 2>/dev/null &'                                                 # Run 'gitg' in the background and mute any UI warnings.
+alias gf='git-forgit'                                                           # https://github.com/wfxr/forgit
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
 

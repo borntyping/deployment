@@ -31,6 +31,14 @@
       loop_control:
         label: '{{ item.key }}'
 
+    - name: 'install scripts from ansible source into ~/.local/bin (ubuntu only)'
+      when: 'ansible_distribution in ["Ubuntu"]'
+      tags: [local, bin]
+      copy:
+        src: 'ubuntu/.local/bin/'
+        dest: '{{ ansible_user_dir }}/.local/bin'
+        mode: '0755'
+
     - name: 'install scripts from ansible source into ~/.local/share/src'
       tags: [local, share, src]
       ansible.builtin.copy:
