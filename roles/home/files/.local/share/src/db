@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec docker run --rm --interactive --tty "$(docker build --quiet --tag=db .)"

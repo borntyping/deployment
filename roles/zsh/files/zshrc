@@ -50,21 +50,12 @@ bindkey '\e[4~'   end-of-line           #
 bindkey '\e[F'    end-of-line           #
 bindkey '\eOF'    end-of-line           #
 
-alias cola='git-cola 2>/dev/null &'     # The 'git-cola' executable often prints QT warnings.
-alias db='docker run --rm --interactive --tty $(docker build --quiet --tag=db .)'
+alias cola='git-cola 2>/dev/null &'                                             # Run 'git-cola' in the background and mute any UI warnings.
+alias gitg='gitg 2>/dev/null &'                                                 # Run 'gitg' in the background and mute any UI warnings.
 alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'
-alias gitg='gitg 2>/dev/null &'
-alias grep='grep --color=auto'
 alias gs='git status'
-alias la='ls -la'
-alias ll='ls -l'
-alias reconfigure-git='reconfigure -t git'
-alias reconfigure-ssh='reconfigure -t ssh'
-alias reconfigure-zshrc='reconfigure -t zshrc; source ~/.zshrc'
-alias src-pre-commit='~borntyping/deployment/roles/home/files/.config/git/hooks/pre-commit'
-alias src-just='just --justfile=.local/justfile'
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
 
@@ -82,54 +73,27 @@ export PIPENV_VENV_IN_PROJECT=1                                                 
 export PIP_REQUIRE_VIRTUALENV=1                                                 # Require that Pip is run inside a virtualenv.
 export VIRTUAL_ENV_DISABLE_PROMPT=1                                             # My personal prompt has it's own display for Python virtualenvs.
 
-export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"                            # https://brew.sh/
-export PATH="${HOME}/.local/share/miniplug/wfxr/forgit/bin:${PATH}"             # https://github.com/wfxr/forgit#git-integration
+# 2.5.11: Path
+# https://zsh.sourceforge.io/Guide/zshguide02.html#l24
+typeset -U path
+export path=("/home/linuxbrew/.linuxbrew/bin" $path)                            # https://brew.sh/
+export path=("${HOME}/.local/share/miniplug/wfxr/forgit/bin" $path)             # https://github.com/wfxr/forgit#git-integration
 
-# Language package managers.
-export PATH="${HOME}/.bun/bin:${PATH}"
-export PATH="${HOME}/.cargo/bin:${PATH}"
-export PATH="${HOME}/.krew/bin:${PATH}"
-export PATH="${HOME}/.local/lib/go/bin:${PATH}"
-export PATH="${HOME}/.npm/bin:${PATH}"
+export path=("${HOME}/.bun/bin" $path)                                          # https://bun.sh/docs/installation
+export path=("${HOME}/.cargo/bin" $path)                                        # https://doc.rust-lang.org/cargo/
+export path=("${HOME}/.krew/bin" $path)                                         # https://krew.sigs.k8s.io/
+export path=("${HOME}/.local/lib/go/bin" $path)                                 # https://go.dev/wiki/GOPATH (see $GOPATH above).
+export path=("${HOME}/.npm/bin" $path)                                          # https://www.npmjs.com/
 
-# The '.bin' directory should take precedence over '.local/bin'.
-export PATH="${HOME}/.local/share/src:${PATH}"
-export PATH="${HOME}/.local/bin:${PATH}"
-export PATH="${HOME}/.bin:${PATH}"
+export path=("${HOME}/.local/share/src" $path)                                  # Ansible installs my own scripts here.
+export path=("${HOME}/.local/bin" $path)                                        # pip/pipx and other tools install binaries here.
+export path=("${HOME}/.bin" $path)                                              # The '.bin' directory should take precedence over '.local/bin'.
 
 # 2.5.7: Named directories
 # http://zsh.sourceforge.net/Guide/zshguide02.html
 export github="${HOME}/Development/github.com"
 export gitlab="${HOME}/Development/gitlab.com"
 export scratch="${HOME}/Development/scratch"
-
-# Completion rules
-# https://zsh.sourceforge.net/Doc/Release/Completion-System.html
-# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
-fpath+=("${HOME}/.cache/zsh/functions" "${HOME}/.asdf/completions")
-autoload -Uz compinit
-zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                         # Set list-colors to enable filename colorizing.
-zstyle ':completion:*:descriptions' format '[%d]'                               # Set descriptions format to enable group support.
-zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
-zstyle -e ':completion:*:hosts' hosts 'reply=()'
-compinit -C
-
-# Completion for kubectl aliases.
-# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
-if [[ -v 'commands[kubectl]' ]]; then
-  source "$HOME/.local/share/zsh/kubectl.zsh"
-fi
-
-# ZSH plugins using miniplug
-# https://git.sr.ht/~yerinalexey/miniplug
-source "$HOME/.local/share/zsh/miniplug.zsh"
-if [[ -v 'commands[zoxide]' ]]; then
-  miniplug plugin 'ajeetdsouza/zoxide'
-fi
-miniplug plugin 'wfxr/forgit'
-miniplug plugin 'zsh-users/zsh-completions'
-miniplug load
 
 # Atuin
 # https://github.com/ellie/atuin/blob/main/docs/key-binding.md
@@ -139,7 +103,7 @@ if [[ -v 'commands[atuin]' ]]; then
   bindkey '^r' _atuin_search_widget
 fi
 
-# Bat
+# Bat - cat replacement
 # https://github.com/sharkdp/bat
 # https://github.com/Manishearth/oreutils
 if [[ -v "commands[bat]" ]]; then
@@ -151,16 +115,17 @@ elif [[ -v "commands[batcat]" ]]; then
   alias cat='batcat'
 fi
 
-# Bun
-# https://bun.sh
-if [ -s "${HOME}/.bun/_bun" ]; then
-  source "${HOME}/.bun/_bun"
-fi
-
 # Direnv
 # https://direnv.net/
 if [[ -v "commands[direnv]" ]]; then
   eval "$(direnv hook zsh)"
+fi
+
+# Exa - ls replacement
+# https://the.exa.website/
+# https://github.com/Manishearth/oreutils
+if [[ -v "commands[exa]" ]]; then
+  alias ls='exa'
 fi
 
 # Podman
@@ -169,14 +134,17 @@ if [[ -v 'commands[podman]' && -f "${XDG_RUNTIME_DIR}/podman/podman.sock" ]]; th
   export DOCKER_HOST="unix://${XDG_RUNTIME_DIR}/podman/podman.sock"
 fi
 
-# Replace various coreutils executables with oreutils alternatives.
-# https://github.com/Manishearth/oreutils
+# Completion for kubectl aliases.
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
+if [[ -v 'commands[kubectl]' ]]; then
+  source "$HOME/.local/share/zsh/kubectl.zsh"
+fi
 
-[[ -v "commands[exa]" ]] && alias ls='exa'
-[[ -v "commands[rg]" ]] && alias grep='rg'
-
-# # Load personal prompt configuration
-# source "$HOME/.local/share/zsh/prompt.zsh"
+# Ubuntu specific configuration.
+# This isn't needed on most of my machines.
+if [[ $(lsb_release -i) == "Distributor ID:	Ubuntu" ]]; then
+  source "$HOME/.local/share/zsh/ubuntu.zsh"
+fi
 
 # Load machine-local configuration.
 for conf in "$HOME/.config/zsh/zshrc.d/"*.zsh; do
@@ -188,6 +156,30 @@ done
 if [[ -v "commands[starship]" ]]; then
   source <("${HOME}/.local/bin/starship" init zsh --print-full-init)
 fi
+
+# Completion rules
+# These should be loaded after 'kubectl.zsh' and anything that adds completions.
+# https://zsh.sourceforge.net/Doc/Release/Completion-System.html
+# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
+fpath+=("${HOME}/.cache/zsh/functions" "${HOME}/.asdf/completions")
+autoload -Uz compinit
+zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                         # Set list-colors to enable filename colorizing.
+zstyle ':completion:*:descriptions' format '[%d]'                               # Set descriptions format to enable group support.
+zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
+zstyle -e ':completion:*:hosts' hosts 'reply=()'
+compinit
+
+# ZSH plugins using miniplug
+# https://git.sr.ht/~yerinalexey/miniplug
+source "$HOME/.local/share/zsh/miniplug.zsh"
+if [[ -v 'commands[zoxide]' ]]; then
+  miniplug plugin 'ajeetdsouza/zoxide'
+fi
+miniplug plugin 'wfxr/forgit'
+miniplug plugin 'zsh-users/zsh-completions'
+miniplug load
+
 
 if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
   echo "Not loading full profile, running inside a JetBrains IDE."

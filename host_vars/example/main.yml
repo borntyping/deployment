@@ -15,3 +15,8 @@ zsh_zshrc_local:
   50-corporate.zsh: |
     #!/usr/bin/env zsh
     export corporate="${github}/corporate"
+  55-kubectl.zsh: |
+    #!/usr/bin/env zsh
+    source <(kubectl completion zsh)
+    source <(kubectl-argo-rollouts completion zsh)
+    source <(helm completion zsh)

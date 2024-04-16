@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec "${HOME}/Development/github.com/deployment/roles/home/files/.config/git/hooks/pre-commit" "$@"
