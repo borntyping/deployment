@@ -8,12 +8,10 @@
         dest: '{{ ansible_user_dir }}/.{{ item }}'
       with_items:
         - 'ackrc'
-        - 'htoprc'
         - 'inputrc'
         - 'multitailrc'
       tags:
         - 'dotfiles'
-        - 'multitailrc'
 
     - name: 'create ~/.bin directory'
       tags: [bin]
@@ -70,21 +68,24 @@
         src: '.config/{{ item }}/'
         dest: '{{ ansible_user_dir }}/.config/{{ item }}/'
       loop:
-        - atuin
-        - direnv
-        - fish
-        - micro
-        - pip
-        - pypoetry
+        - "atuin"
+        - "direnv"
+        - "fish"
+        - "htop"
+        - "micro"
+        - "pip"
+        - "pypoetry"
       tags:
-        - atuin
-        - config
-        - direnv
-        - fish
-        - micro
-        - pip
-        - poetry
-        - python
+        - "config"
+        - "python"
+
+        - "atuin"
+        - "direnv"
+        - "fish"
+        - "htop"
+        - "micro"
+        - "pip"
+        - "poetry"
 
     - name: 'copy config files into ~/.config'
       ansible.builtin.copy:
