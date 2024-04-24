@@ -64,6 +64,8 @@ export EDITOR="micro"                                                           
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
 export BUN_INSTALL="$HOME/.bun"                                                 # https://bun.sh/docs/installation
+export EXA_COLORS="uu=35:gu=35"                                                 # colour own user and group in pink instead of yellow (https://the.exa.website/docs/colour-themes
+export EXA_ICON_SPACING="2"                                                     # add extra spacing when using icons (https://the.exa.website/docs/environment-variables
 export FORGIT_FZF_DEFAULT_OPTS="--reverse"                                      # https://github.com/wfxr/forgit#fzf-options
 export FORGIT_NO_ALIASES=1                                                      # https://github.com/wfxr/forgit#shell-aliases
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window wrap"              # Show preview window and wrap text. Useful for long commands.
@@ -127,7 +129,7 @@ fi
 # https://the.exa.website/
 # https://github.com/Manishearth/oreutils
 if [[ -v "commands[exa]" ]]; then
-  alias ls='exa'
+  alias exa='exa --group'                                                       # Always show group information when using exa
 fi
 
 # Podman
