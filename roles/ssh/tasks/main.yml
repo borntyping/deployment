@@ -35,7 +35,7 @@
       loop_control:
         label: '{{ item.name }}'
 
-    - name: 'generate essential ssh keys'
+    - name: 'generate ssh keys'
       community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
