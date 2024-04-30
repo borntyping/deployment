@@ -60,7 +60,7 @@ truncation_length = 99
 
 [git_branch]
 style = "purple"
-format = "[$branch(:$remote_branch)]($style)"
+format = "git [$branch(:$remote_branch)]($style)"
 
 [git_commit]
 tag_symbol = " tag "
@@ -88,11 +88,11 @@ symbol = "pkg"
 version_format = "${raw}"
 
 [golang]
-symbol = "golang"
+symbol = "go "
 style = "#29BEB0"
 
 [helm]
-symbol = "helm"
+symbol = "helm "
 style = "#326CE5"
 
 [java]
@@ -151,8 +151,10 @@ symbol = "gcloud "
 style = ""
 
 [kubernetes]
-symbol = "kubernetes "
-style = "#326ce5"
+disabled = false
+format = "on [$symbol$context(/$namespace)]($style) "
+symbol = "k8s "
+style = "#98b5f2" # lighten(#326CE5, 50%) https://github.com/kubernetes/kubernetes/blob/master/logo/colors.md
 
 [openstack]
 symbol = "openstack "
