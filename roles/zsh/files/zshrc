@@ -130,6 +130,8 @@ fi
 # https://github.com/Manishearth/oreutils
 if [[ -v "commands[exa]" ]]; then
   alias exa='exa --group'                                                       # Always show group information when using exa
+  alias ll='exa --long'
+  alias lll='exa --long --tree --level=2'
 fi
 
 # Podman
