@@ -1,9 +1,11 @@
 playbook := if path_exists("playbook.local.yml") == "true" { "playbook.local.yml" } else { "playbook.yml" }
 inventory := if path_exists("inventory.local.yml") == "true" { "inventory.local.yml" } else { "inventory.yml" }
 hostname := `hostname -s`
+export ANSIBLE_CACHE_PLUGIN := "ansible.builtin.jsonfile"
+export ANSIBLE_CACHE_PLUGIN_CONNECTION := ".ansible-cache"
 export ANSIBLE_NOCOWS := "true"
-export ANSIBLE_RETRY_FILES_ENABLED := "false"
 export ANSIBLE_PIPELINING := "true"
+export ANSIBLE_RETRY_FILES_ENABLED := "false"
 export PIP_REQUIRE_VIRTUALENV := "0"
 
 # List availible commands
