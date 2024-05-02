@@ -167,7 +167,7 @@ fi
 # These should be loaded after 'kubectl.zsh' and anything that adds completions.
 # https://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
-fpath+=("${HOME}/.cache/zsh/functions" "${HOME}/.asdf/completions")
+fpath+=("${HOME}/.cache/zsh/functions" "${HOME}/.asdf/completions" "/home/linuxbrew/.linuxbrew/share/zsh/site-functions")
 autoload -Uz compinit
 zstyle ':completion:*:*:*:*:*' menu select                                      # Select completions with an interactive menu.
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"                         # Set list-colors to enable filename colorizing.
