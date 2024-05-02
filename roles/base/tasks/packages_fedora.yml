@@ -26,6 +26,7 @@
           - 'direnv'
           - 'docker-compose'
           - 'gcc-c++'
+          - 'git-delta'
           - 'golang'
           - 'npm'
           - 'podman'

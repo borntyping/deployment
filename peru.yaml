@@ -4,8 +4,6 @@ imports:
   atuin-x86_64|atuin-x86_64-bin: roles/bin/files/x86_64/.local/bin/
   aws-vault-aarch64: roles/bin/files/aarch64/.local/bin/
   aws-vault-x86_64: roles/bin/files/x86_64/.local/bin/
-  difft-aarch64: roles/bin/files/aarch64/.local/bin/
-  difft-x86_64: roles/bin/files/x86_64/.local/bin/
   fixup|fixup-bin: roles/bin/files/.local/bin/
   just-aarch64|just-aarch64-bin: roles/bin/files/aarch64/.local/bin/
   just-x86_64|just-x86_64-bin: roles/bin/files/x86_64/.local/bin/
@@ -69,23 +67,6 @@ curl module aws-vault-x86_64:
   move: {aws-vault-linux-amd64: aws-vault}
   executable: [aws-vault]
   sha1: 70efe397bcd199619ae6e5d121b7a88d8291156e
-
-#
-# difftastic
-# https://difftastic.wilfred.me.uk/
-#
-
-curl module difft-aarch64:
-  url: https://github.com/Wilfred/difftastic/releases/download/0.55.0/difft-aarch64-unknown-linux-gnu.tar.gz
-  unpack: tar
-  pick: [difft]
-  executable: [difft]
-
-curl module difft-x86_64:
-  url: https://github.com/Wilfred/difftastic/releases/download/0.55.0/difft-x86_64-unknown-linux-gnu.tar.gz
-  unpack: tar
-  pick: [difft]
-  executable: [difft]
 
 #
 # miniplug
