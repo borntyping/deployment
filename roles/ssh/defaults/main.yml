@@ -3,6 +3,9 @@ ssh_config: []
 ssh_config_local: []
 ssh_config_secret: []
 
-ssh_keys: []
+ssh_keys:
+  - github_borntyping
+  - github_borntyping_corporate
+  - gitlab_borntyping
 ssh_keys_local: []
 ssh_keys_secret: []
