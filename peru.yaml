@@ -30,19 +30,18 @@ imports:
 #
 
 curl module atuin-aarch64:
-  url: https://github.com/atuinsh/atuin/releases/download/v16.0.0/atuin-v16.0.0-aarch64-unknown-linux-gnu.tar.gz
+  url: https://github.com/atuinsh/atuin/releases/download/v18.2.0/atuin-v18.2.0-aarch64-unknown-linux-gnu.tar.gz
   unpack: tar
-  export: atuin-v16.0.0-aarch64-unknown-linux-gnu
+  export: atuin-v18.2.0-aarch64-unknown-linux-gnu
 
 rule atuin-aarch64-bin:
   pick: [atuin]
   executable: [atuin]
 
 curl module atuin-x86_64:
-  url: https://github.com/atuinsh/atuin/releases/download/v16.0.0/atuin-v16.0.0-x86_64-unknown-linux-gnu.tar.gz
+  url: https://github.com/atuinsh/atuin/releases/download/v18.2.0/atuin-v18.2.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
-  export: atuin-v16.0.0-x86_64-unknown-linux-gnu
-  sha1: 281af515f5b8772f69a18c522a20e1059ea9b06f
+  export: atuin-v18.2.0-x86_64-unknown-linux-gnu
 
 rule atuin-x86_64-bin:
   pick: [atuin]

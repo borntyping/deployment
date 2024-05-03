@@ -2,14 +2,25 @@
 - tags: [bin]
   block:
     - name: 'install executables into ~/.local/bin'
-      tags: [local, bin]
+      tags:
+        - local
+        - bin
+        - atuin
+        - aws-vault
+        - just
+        - kubectx
+        - kubens
+        - starship
       copy:
         src: '{{ ansible_architecture }}/.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
 
     - name: 'install scripts into ~/.local/bin'
-      tags: [local, bin]
+      tags:
+        - local
+        - bin
+        - git-fixup
       copy:
         src: '.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
