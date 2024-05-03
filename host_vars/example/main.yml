@@ -11,6 +11,9 @@ git_forges_local:
     path: '~/Development/github.com/corporate/**'
     email: 'sam.clements@corporate.invalid'
     ssh_key: 'id_ed25519_github_borntyping_corporate'
+    groups:
+      - 'example-organisation'
+      - 'example-user'
 zsh_zshrc_local:
   50-corporate.zsh: |
     #!/usr/bin/env zsh
