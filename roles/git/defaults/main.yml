@@ -6,6 +6,7 @@ git_forges:
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_github_borntyping'
     priority: 45
+    groups: []
 
   - host: 'github.com'
     user: 'borntyping-corporate'
@@ -13,6 +14,7 @@ git_forges:
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_github_borntyping_corporate'
     priority: 45
+    groups: []
 
   - host: 'gitlab.com'
     user: 'borntyping'
@@ -20,5 +22,7 @@ git_forges:
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_gitlab_borntyping'
     priority: 45
+    groups: []
+
 git_forges_local: []
 git_forges_secret: []

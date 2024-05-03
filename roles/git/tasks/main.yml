@@ -62,3 +62,11 @@
       loop: '{{ _git_forges }}'
       loop_control:
         label: '{{ item.host }}/{{ item.user }}'
+
+    - name: 'create git source code directories for each host + group'
+      ansible.builtin.file:
+        name: '{{ ansible_user_dir }}/Development/{{ item.0.host }}/{{ item.1 }}'
+        state: 'directory'
+      loop: '{{ _git_forges | subelements("groups", skip_missing=True) }}'
+      loop_control:
+        label: '{{ item.0.host }}/{{ item.1 }}'
