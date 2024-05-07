@@ -160,7 +160,7 @@ done
 # Starship prompt
 # https://starship.rs
 if [[ -v "commands[starship]" ]]; then
-  source <("${HOME}/.local/bin/starship" init zsh --print-full-init)
+  source <(starship init zsh --print-full-init)
 fi
 
 # Completion rules
