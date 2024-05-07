@@ -112,11 +112,11 @@ fi
 # https://github.com/Manishearth/oreutils
 if [[ -v "commands[bat]" ]]; then
   export PAGER="bat"
-  alias cat='bat'
+  alias cat='bat'                                                               # Pair this with BAT_STYLE=plain.
 elif [[ -v "commands[batcat]" ]]; then
-  export PAGER="batcat"
-  alias bat='batcat'
-  alias cat='batcat'
+  export PAGER="batcat"                                                         # On Ubuntu, the executable is 'batcat'
+  alias bat='batcat'                                                            # even though the package is 'bat'.
+  alias cat='batcat'                                                            # https://github.com/sharkdp/bat/issues/656
 fi
 
 # Direnv
@@ -129,8 +129,8 @@ fi
 # https://the.exa.website/
 # https://github.com/Manishearth/oreutils
 if [[ -v "commands[exa]" ]]; then
-  alias exa='exa --group'                                                       # Always show group information when using exa
-  alias ll='exa --long'
+  alias exa='exa --group'                                                       # Always show group information when using exa.
+  alias ll='exa --long'                                                         # Traditionally, 'alias ll=ls -alF'.
   alias lll='exa --long --tree --level=2'
 fi
 
