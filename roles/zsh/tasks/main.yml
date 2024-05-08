@@ -59,3 +59,10 @@
 #       ansible.builtin.shell:
 #         cmd: 'oc completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
 #         creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
+
+    - name: 'copy ~/.config/starship.toml'
+      ansible.builtin.copy:
+        src: '.config/starship.toml'
+        dest: '{{ ansible_user_dir }}/.config/starship.toml'
+      tags:
+        - starship
