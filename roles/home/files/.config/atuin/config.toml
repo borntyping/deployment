@@ -1,3 +1,5 @@
 dialect = "uk"
 search_mode = "fulltext"
 filter_mode = "host"
+[sync]
+records = true
