@@ -25,3 +25,28 @@
         src: '.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
+
+    - name: 'install python packages with pipx'
+      community.general.pipx:
+        name: '{{ item }}'
+      loop:
+        - 'poetry'
+        - 'switchbox'
+      tags:
+        - 'python'
+        - 'pipx'
+
+    - name: 'install golang executables'
+      ansible.builtin.command: 'go install {{ item.package }}'
+      args:
+        creates: '{{ ansible_user_dir }}/.local/lib/go/bin/{{ item.bin }}'
+      environment:
+        GOPATH: '{{ ansible_user_dir }}/.local/lib/go'
+      loop:
+        - package: github.com/stern/stern@latest
+          bin: stern
+        - package: github.com/bbrks/shotgun@latest
+          bin: shotgun
+      tags:
+        - 'golang'
+        - 'never'
