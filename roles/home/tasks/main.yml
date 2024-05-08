@@ -87,15 +87,6 @@
         - "pip"
         - "poetry"
 
-    - name: 'copy config files into ~/.config'
-      ansible.builtin.copy:
-        src: '.config/{{ item }}'
-        dest: '{{ ansible_user_dir }}/.config/{{ item }}'
-      loop:
-        - starship.toml
-      tags:
-        - starship
-
     - name: 'install python packages with pipx'
       community.general.pipx:
         name: '{{ item }}'
