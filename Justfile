@@ -12,9 +12,18 @@ export PIP_REQUIRE_VIRTUALENV := "0"
 default:
     @just --list
 
-# Run Ansible. Set tags= to run specific tags, set limit= to pick hosts to run against.
+# Run Ansible. Set tags= to select tags. Set limit= to select hosts.
 configure tags="all" limit=hostname:
     ansible-playbook "{{ playbook }}" \
+      --diff \
+      --inventory-file="{{ inventory }}" \
+      --limit="{{ limit }}" \
+      --tags="{{ tags }}"
+
+# Run Ansible in check mode. Set tags= to select tags. Set limit= to select hosts.
+check tags="all" limit=hostname:
+    ansible-playbook "{{ playbook }}" \
+      --check \
       --diff \
       --inventory-file="{{ inventory }}" \
       --limit="{{ limit }}" \
