@@ -148,7 +148,7 @@ fi
 
 # Ubuntu specific configuration.
 # This isn't needed on most of my machines.
-if [[ $(lsb_release -i) == "Distributor ID:	Ubuntu" ]]; then
+if [[ "$(grep -ioP '^ID=\K.+' '/etc/os-release')" == 'ubuntu' ]]; then
   source "$HOME/.local/share/zsh/ubuntu.zsh"
 fi
 
