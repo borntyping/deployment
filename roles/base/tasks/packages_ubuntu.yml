@@ -25,13 +25,25 @@
           - 'ansible-core'
           - 'direnv'
 
-- tags: ['base', 'homebrew']
+- tags: ['base', 'brew', 'homebrew']
   block:
     - name: 'check homebrew executable'
       stat:
         path: '/home/linuxbrew/.linuxbrew/bin/brew'
       register: 'homebrew_executable'
       check_mode: true
+
+    - name: 'create homebrew config directory'
+      when: 'homebrew_executable.stat.exists'
+      ansible.builtin.file:
+        name: '/home/linuxbrew/.linuxbrew/etc/homebrew'
+        state: 'directory'
+
+    - name: 'create homebrew config'
+      when: 'homebrew_executable.stat.exists'
+      ansible.builtin.copy:
+        src: 'brew.env'
+        dest: '/home/linuxbrew/.linuxbrew/etc/homebrew/brew.env'
 
     - name: 'install homebrew packages'
       when: 'homebrew_executable.stat.exists'
