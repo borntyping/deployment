@@ -1,7 +1,6 @@
 ---
-- tags:
-    - 'workstation'
-    - 'dnf'
+- name: 'fedora workstation packages'
+  tags: ['workstation', 'dnf']
   block:
     - name: 'add 1Password repository key'
       ansible.builtin.rpm_key:

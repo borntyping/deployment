@@ -1,2 +1,2 @@
 ---
-tailscale_certificates_group: "src-tailscale-certs"
+tailscale_certificates_group: 'src-tailscale-certs'

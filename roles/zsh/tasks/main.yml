@@ -1,5 +1,6 @@
 ---
-- tags:
+- name: 'configure zsh'
+  tags:
     - 'dotfiles'
     - 'shell'
     - 'zsh'
@@ -29,20 +30,20 @@
 
     # Stop .zshrc from crashing when zshrc.d is empty.
     - name: 'create empty zshrc.d file'
+      tags: ['config', 'local']
       ansible.builtin.copy:
         content: ''
         dest: '{{ zsh_home }}/.config/zsh/zshrc.d/empty.zsh'
 
     - name: 'create zsh local configuration'
+      tags: ['config', 'local']
       ansible.builtin.copy:
-        content: "{{ item.value }}"
+        content: '{{ item.value }}'
         dest: '{{ zsh_home }}/.config/zsh/zshrc.d/{{ item.key }}'
         mode: 'preserve'
       loop: '{{ zsh_zshrc|combine(zsh_zshrc_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
-      tags:
-        - 'local'
 
 #    - name: 'set shell to zsh'
 #      ansible.builtin.user:
@@ -61,8 +62,7 @@
 #         creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
 
     - name: 'copy ~/.config/starship.toml'
+      tags: ['starship']
       ansible.builtin.copy:
         src: '.config/starship.toml'
         dest: '{{ ansible_user_dir }}/.config/starship.toml'
-      tags:
-        - starship

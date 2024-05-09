@@ -1,25 +1,24 @@
 ---
-- name: common
+- name: 'common'
   hosts:
-    - umbreon
-    - razz-berry
+    - 'umbreon'
+    - 'razz-berry'
   roles:
-    - role: tailscale
-    - role: base
-    - role: home
-    - role: ssh
-    - role: git
-    - role: zsh
+    - role: 'tailscale'
+    - role: 'base'
+    - role: 'home'
+    - role: 'ssh'
+    - role: 'git'
+    - role: 'zsh'
 
-- name: workstation
+- name: 'workstation'
   hosts:
-    - umbreon
+    - 'umbreon'
   roles:
-    - role: workstation
+    - role: 'workstation'
 
-- name: server
+- name: 'server'
   hosts:
-    - razz-berry
+    - 'razz-berry'
   roles:
-    - role: web
-    - role: tmux
+    - role: 'web'

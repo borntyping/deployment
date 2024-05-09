@@ -1,20 +1,20 @@
 ---
 - name: 'install dnf packages'
-  import_tasks: 'packages_fedora.yml'
+  tags: ['dnf']
   when: 'ansible_distribution in ["Fedora"]'
-  tags: dnf
+  import_tasks: 'packages_fedora.yml'
 
 - name: 'install apt packages'
-  import_tasks: 'packages_ubuntu.yml'
+  tags: ['apt']
   when: 'ansible_distribution in ["Ubuntu"]'
-  tags: apt
+  import_tasks: 'packages_ubuntu.yml'
 
 - name: 'install generic packages'
-  import_tasks: 'packages_generic.yml'
+  tags: ['apt', 'dnf', 'package']
   when: 'ansible_distribution in ["Fedora", "Ubuntu"]'
-  tags: apt, dnf, package
+  import_tasks: 'packages_generic.yml'
 
 - name: 'install snap packages'
-  import_tasks: 'packages_snap.yml'
+  tags: ['snap']
   when: 'ansible_distribution in ["Fedora", "Ubuntu"]'
-  tags: snap
+  import_tasks: 'packages_snap.yml'

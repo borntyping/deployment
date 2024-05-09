@@ -1,5 +1,10 @@
 ---
-extends: default
+extends: 'default'
+ignore: |
+  peru.yaml
 rules:
-  comments-indentation: disable
-  line-length: disable
+  comments-indentation: 'disable'
+  line-length: 'disable'
+  quoted-strings:
+    quote-type: 'single'
+#    allow-quoted-quotes: true

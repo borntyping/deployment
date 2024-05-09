@@ -3,7 +3,6 @@
     - 'home'
     - 'dotfiles'
     - 'git'
-    - focus
   block:
     - name: 'update facts'
       ansible.builtin.set_fact:

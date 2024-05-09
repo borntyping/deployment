@@ -2,7 +2,7 @@
 all:
   hosts:
     umbreon:
-      ansible_host: umbreon.bunny-moth.ts.net
-      ansible_connection: local
+      ansible_host: 'umbreon.bunny-moth.ts.net'
+      ansible_connection: 'local'
     razz-berry:
-      ansible_host: razz-berry.bunny-moth.ts.net
+      ansible_host: 'razz-berry.bunny-moth.ts.net'

@@ -1,7 +1,6 @@
 ---
-- tags:
-    - 'workstation'
-    - 'snap'
+- name: 'snap workstation packages'
+  tags: ['workstation', 'snap']
   block:
     - name: 'install snap packages'
       become: true

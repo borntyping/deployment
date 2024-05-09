@@ -1,7 +1,6 @@
 ---
-- tags:
-    - 'base'
-    - 'apt'
+- name: 'ubuntu workstation packages'
+  tags: ['workstation', 'ubuntu']
   block:
     - name: 'install apt packages'
       become: true

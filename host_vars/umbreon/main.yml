@@ -7,14 +7,14 @@ git_forges_local:
     ssh_key: 'id_ed25519_gitlab_src'
 
 ssh_config_local:
-  - name: src
+  - name: 'src'
     config: |
       Host *.bunny-moth.ts.net razz-berry.bunny-moth.ts.net razz-berry.local
         User src
         IdentitiesOnly yes
         IdentityFile "~/.ssh/keys/id_ed25519_tailscale"
 ssh_keys_local:
-  - tailscale
+  - 'tailscale'
 
 zsh_zshrc_local:
   50-razz-berry.zsh: |

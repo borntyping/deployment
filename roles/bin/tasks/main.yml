@@ -1,16 +1,16 @@
 ---
-- tags: [bin]
+- tags: ['bin']
   block:
     - name: 'install executables into ~/.local/bin'
       tags:
-        - local
-        - bin
-        - atuin
-        - aws-vault
-        - just
-        - kubectx
-        - kubens
-        - starship
+        - 'local'
+        - 'bin'
+        - 'atuin'
+        - 'aws-vault'
+        - 'just'
+        - 'kubectx'
+        - 'kubens'
+        - 'starship'
       copy:
         src: '{{ ansible_architecture }}/.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
@@ -18,9 +18,9 @@
 
     - name: 'install scripts into ~/.local/bin'
       tags:
-        - local
-        - bin
-        - git-fixup
+        - 'local'
+        - 'bin'
+        - 'git-fixup'
       copy:
         src: '.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
@@ -28,14 +28,14 @@
       diff: false
 
     - name: 'install python packages with pipx'
+      tags:
+        - 'python'
+        - 'pipx'
       community.general.pipx:
         name: '{{ item }}'
       loop:
         - 'poetry'
         - 'switchbox'
-      tags:
-        - 'python'
-        - 'pipx'
 
     - name: 'install golang executables'
       ansible.builtin.command: 'go install {{ item.package }}'
@@ -44,10 +44,10 @@
       environment:
         GOPATH: '{{ ansible_user_dir }}/.local/lib/go'
       loop:
-        - package: github.com/stern/stern@latest
-          bin: stern
-        - package: github.com/bbrks/shotgun@latest
-          bin: shotgun
+        - package: 'github.com/stern/stern@latest'
+          bin: 'stern'
+        - package: 'github.com/bbrks/shotgun@latest'
+          bin: 'shotgun'
       tags:
         - 'golang'
         - 'never'
