@@ -25,6 +25,7 @@
         src: '.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
+      diff: no
 
     - name: 'install python packages with pipx'
       community.general.pipx:
