@@ -19,7 +19,7 @@
       ansible.builtin.user:
         name: '{{ base_user }}'
         groups: 'docker'
-        append: yes
+        append: true
       become: true
       tags:
         - 'docker'

@@ -1,8 +1,8 @@
 ---
 - name: common
   hosts:
-   - umbreon
-   - razz-berry
+    - umbreon
+    - razz-berry
   roles:
     - role: tailscale
     - role: base

@@ -47,8 +47,15 @@
 
     - name: 'install homebrew packages'
       when: 'homebrew_executable.stat.exists'
+      tags:
+        - 'direnv'
+        - 'go'
+        - 'starship'
+        - 'zoxide'
       community.general.homebrew:
         state: present
         name:
-          - 'go'
           - 'direnv'
+          - 'go'
+          - 'starship'
+          - 'zoxide'
