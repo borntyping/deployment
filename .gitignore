@@ -13,7 +13,7 @@ host_vars/*/secrets.yml
 host_vars/*/secrets.yaml
 
 # Ignore alternate config we don't want to commit.
-playbook.local.yml
-inventory.local.yml
+/playbook.local.yml
+/inventory.local.yml
 
 .ansible-cache/
