@@ -15,7 +15,6 @@
       ansible.builtin.dnf:
         state: 'absent'
         pkg:
-          - 'caddy'
           - 'podman-docker'
           - 'postgresql-contrib'
           - 'postgresql-server'
@@ -24,6 +23,7 @@
 
     - name: 'install dnf packages'
       tags:
+        - 'bcrypt'
         - 'caddy'
         - 'dnf'
         - 'docker'

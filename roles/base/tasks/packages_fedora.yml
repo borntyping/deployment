@@ -28,6 +28,7 @@
           - 'gcc-c++'
           - 'git-delta'
           - 'golang'
+          - 'httpie'
           - 'npm'
           - 'podman'
           - 'python3'
@@ -48,6 +49,7 @@
           - 'rustfmt'
           - 'snapd'
           - 'util-linux-user'
+          - 'yamllint'
           - 'zsh-html'
 
     - name: 'remove dnf packages'
