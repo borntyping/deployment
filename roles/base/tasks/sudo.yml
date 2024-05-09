@@ -10,9 +10,9 @@
         dest: '/etc/sudoers.d/{{ base_user }}'
       become: true
       tags:
-        - docker
-        - sudo
-        - sudoers
+        - 'docker'
+        - 'sudo'
+        - 'sudoers'
 
     # Run "newgrp docker" to use the new group without logging out and back in.
     - name: 'add user to docker group'

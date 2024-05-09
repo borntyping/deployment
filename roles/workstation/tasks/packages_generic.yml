@@ -1,5 +1,6 @@
 ---
-- tags: ['apt', 'base', 'dnf']
+- name: 'generic workstation packages'
+  tags: ['apt', 'base', 'dnf']
   block:
     - name: 'install generic packages'
       become: true

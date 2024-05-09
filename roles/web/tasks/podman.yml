@@ -1,7 +1,6 @@
 ---
-- tags:
-    - web
-    - podman
+- name: 'configure podman'
+  tags: ['web', 'podman']
   block:
     # "For systemd to work with ‘user’, the executing user must have its own
     # instance of dbus started and accessible (systemd requirement)."
@@ -9,22 +8,22 @@
     # For now:
     #   systemctl --user enable podman.socket
     #   systemctl --user start podman.socket
-    - name: "start and enable podman"
-      tags: [systemd, podman]
+    - name: 'start and enable podman'
+      tags: ['systemd']
       ansible.builtin.systemd_service:
-        name: podman.socket
-        state: started
-        scope: user
+        name: 'podman.socket'
+        state: 'started'
+        scope: 'user'
         enabled: true
       become: true
 
-    - name: "check if user {{ ansible_user_id }} is lingering"
-      tags: [systemd, linger]
+    - name: 'check if user {{ ansible_user_id }} is lingering'
+      tags: ['systemd', 'linger']
       stat:
-        path: "/var/lib/systemd/linger/{{ ansible_user_id }}"
-      register: "user_lingering"
+        path: '/var/lib/systemd/linger/{{ ansible_user_id }}'
+      register: 'user_lingering'
 
-    - name: "enable linger for user {{ ansible_user_id }} if needed"
-      tags: [systemd, linger]
-      command: "loginctl enable-linger {{ ansible_user_id }}"
-      when: "not user_lingering.stat.exists"
+    - name: 'enable linger for user {{ ansible_user_id }} if needed'
+      tags: ['systemd', 'linger']
+      command: 'loginctl enable-linger {{ ansible_user_id }}'
+      when: 'not user_lingering.stat.exists'

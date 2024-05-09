@@ -53,7 +53,7 @@
         - 'starship'
         - 'zoxide'
       community.general.homebrew:
-        state: present
+        state: 'present'
         name:
           - 'direnv'
           - 'go'

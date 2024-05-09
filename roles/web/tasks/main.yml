@@ -1,86 +1,86 @@
 ---
-- tags: [web]
+- tags: ['web']
   block:
     # https://docs.docker.com/engine/install/fedora/
-    - name: "add docker repository"
-      tags: [dnf, docker]
+    - name: 'add docker repository'
+      tags: ['dnf', 'docker']
       become: true
       command:
-        cmd: "dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo"
-        creates: "/etc/yum.repos.d/docker-ce.repo"
+        cmd: 'dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo'
+        creates: '/etc/yum.repos.d/docker-ce.repo'
 
-    - name: "remove dnf packages"
-      tags: [dnf]
+    - name: 'remove dnf packages'
+      tags: ['dnf']
       become: true
       ansible.builtin.dnf:
-        state: absent
+        state: 'absent'
         pkg:
-          - caddy
-          - podman-docker
-          - postgresql-contrib
-          - postgresql-server
-          - python3-psycopg2
-          - python3-psycopg3
+          - 'caddy'
+          - 'podman-docker'
+          - 'postgresql-contrib'
+          - 'postgresql-server'
+          - 'python3-psycopg2'
+          - 'python3-psycopg3'
 
-    - name: "install dnf packages"
+    - name: 'install dnf packages'
       tags:
-        - caddy
-        - dnf
-        - docker
-        - podman
-        - syncthing
-        - systemd
+        - 'caddy'
+        - 'dnf'
+        - 'docker'
+        - 'podman'
+        - 'syncthing'
+        - 'systemd'
       become: true
       ansible.builtin.dnf:
-        state: latest
+        state: 'latest'
         pkg:
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-ce
-          - docker-ce-cli
-          - docker-compose-plugin
-          - podman
-          - podman-compose
-          - podman-remote
-          - syncthing
+          - 'containerd.io'
+          - 'docker-buildx-plugin'
+          - 'docker-ce'
+          - 'docker-ce-cli'
+          - 'docker-compose-plugin'
+          - 'podman'
+          - 'podman-compose'
+          - 'podman-remote'
+          - 'syncthing'
 
-    - name: "stop and disable system services"
-      tags: [systemd]
+    - name: 'stop and disable system services'
+      tags: ['systemd']
       become: true
       ansible.builtin.systemd_service:
-        name: "{{ item }}"
-        state: stopped
+        name: '{{ item }}'
+        state: 'stopped'
         enabled: false
       loop:
-        - firewalld.service
+        - 'firewalld.service'
 
-    - name: "start and enable system services"
-      tags: [systemd]
+    - name: 'start and enable system services'
+      tags: ['systemd']
       become: true
       ansible.builtin.systemd_service:
-        name: "{{ item }}"
-        scope: system
-        state: started
+        name: '{{ item }}'
+        scope: 'system'
+        state: 'started'
         enabled: true
       loop:
-        - docker.service
+        - 'docker.service'
 
-    - name: "start and enable user services"
-      tags: [systemd]
+    - name: 'start and enable user services'
+      tags: ['systemd']
       ansible.builtin.systemd_service:
-        name: "{{ item }}"
-        scope: user
-        state: started
+        name: '{{ item }}'
+        scope: 'user'
+        state: 'started'
         enabled: true
       loop:
-        - syncthing.service
+        - 'syncthing.service'
 
-    - name: "create docker mounts"
+    - name: 'create docker mounts'
       become: true
       ansible.builtin.file:
-        name: "/opt/{{ item }}"
-        state: "directory"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
-        mode: "0770"
-      with_items: "{{ web_docker_mounts }}"
+        name: '/opt/{{ item }}'
+        state: 'directory'
+        owner: '{{ ansible_user_id }}'
+        group: '{{ ansible_user_id }}'
+        mode: '0770'
+      with_items: '{{ web_docker_mounts }}'

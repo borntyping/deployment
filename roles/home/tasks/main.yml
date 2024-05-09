@@ -14,13 +14,13 @@
         - 'dotfiles'
 
     - name: 'create ~/.bin directory'
-      tags: [bin]
+      tags: ['bin']
       ansible.builtin.file:
         name: '{{ ansible_user_dir }}/.bin'
         state: 'directory'
 
     - name: 'install scripts from ansible variables into ~/.bin'
-      tags: [bin]
+      tags: ['bin']
       ansible.builtin.copy:
         content: '{{ item.value }}'
         dest: '{{ ansible_user_dir }}/.bin/{{ item.key }}'
@@ -31,21 +31,21 @@
 
     - name: 'install scripts from ansible source into ~/.local/bin (ubuntu only)'
       when: 'ansible_distribution in ["Ubuntu"]'
-      tags: [local, bin]
+      tags: ['local', 'bin']
       copy:
         src: 'ubuntu/.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
 
     - name: 'install scripts from ansible source into ~/.local/share/src'
-      tags: [local, share, src]
+      tags: ['local', 'share', 'src']
       ansible.builtin.copy:
         src: '.local/share/src/'
         dest: '{{ ansible_user_dir }}/.local/share/src/'
         mode: '0755'
 
     - name: 'install man pages into ~/.local/share/man'
-      tags: [local, share, man]
+      tags: ['local', 'share', 'man']
       ansible.builtin.copy:
         src: '.local/share/man/'
         dest: '{{ ansible_user_dir }}/.local/share/man/'
@@ -55,7 +55,7 @@
       ansible.builtin.systemd:
         name: 'podman.socket'
         state: 'started'
-        scope: user
+        scope: 'user'
       when: 'ansible_distribution == "Fedora"'
       tags:
         - 'fedora'
@@ -68,23 +68,23 @@
         src: '.config/{{ item }}/'
         dest: '{{ ansible_user_dir }}/.config/{{ item }}/'
       loop:
-        - "atuin"
-        - "direnv"
-        - "fish"
-        - "htop"
-        - "micro"
-        - "pip"
-        - "pypoetry"
-        - "tmux"
+        - 'atuin'
+        - 'direnv'
+        - 'fish'
+        - 'htop'
+        - 'micro'
+        - 'pip'
+        - 'pypoetry'
+        - 'tmux'
       tags:
-        - "config"
-        - "python"
+        - 'config'
+        - 'python'
 
-        - "atuin"
-        - "direnv"
-        - "fish"
-        - "htop"
-        - "micro"
-        - "pip"
-        - "poetry"
-        - "tmux"
+        - 'atuin'
+        - 'direnv'
+        - 'fish'
+        - 'htop'
+        - 'micro'
+        - 'pip'
+        - 'poetry'
+        - 'tmux'

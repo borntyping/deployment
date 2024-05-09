@@ -1,53 +1,51 @@
 ---
-- name: "manage tailscale certificates"
+- name: 'manage tailscale certificates'
+  tags: ['tailscale', 'certificates']
   become: true
-  tags:
-    - tailscale
-    - certificates
   block:
-    - name: "create certificates"
+    - name: 'create certificates'
       ansible.builtin.command:
         cmd: >-
           tailscale cert
           --cert-file "/etc/pki/tls/private/{{ ansible_fqdn }}.crt"
           --key-file "/etc/pki/tls/private/{{ ansible_fqdn }}.key"
           "{{ ansible_fqdn }}"
-        creates: "/etc/pki/tls/private/{{ ansible_fqdn }}.crt"
+        creates: '/etc/pki/tls/private/{{ ansible_fqdn }}.crt'
 
-    - name: "create tailscale certificates group"
+    - name: 'create tailscale certificates group'
       ansible.builtin.group:
-        name: "{{ tailscale_certificates_group }}"
+        name: '{{ tailscale_certificates_group }}'
         system: true
-        state: present
+        state: 'present'
 
-    - name: "add the current user to the tailscale certificates group"
+    - name: 'add the current user to the tailscale certificates group'
       ansible.builtin.user:
-        name: "{{ ansible_user_id }}"
-        groups: "{{ tailscale_certificates_group }}"
+        name: '{{ ansible_user_id }}'
+        groups: '{{ tailscale_certificates_group }}'
         append: true
 
-    - name: "set permissions on certificate files"
+    - name: 'set permissions on certificate files'
       ansible.builtin.file:
-        path: "/etc/pki/tls/private/{{ item }}"
-        owner: "root"
-        group: "{{ tailscale_certificates_group }}"
-        mode: "0750"
+        path: '/etc/pki/tls/private/{{ item }}'
+        owner: 'root'
+        group: '{{ tailscale_certificates_group }}'
+        mode: '0750'
       loop:
-        - "{{ ansible_fqdn }}.crt"
-        - "{{ ansible_fqdn }}.key"
+        - '{{ ansible_fqdn }}.crt'
+        - '{{ ansible_fqdn }}.key'
 
-    - name: "allow caddy to use tailscale certificates"
-      tags: [caddy]
+    - name: 'allow caddy to use tailscale certificates'
+      tags: ['caddy']
       ansible.builtin.lineinfile:
-        path: "/etc/default/tailscaled"
-        line: "TS_PERMIT_CERT_UID=caddy"
+        path: '/etc/default/tailscaled'
+        line: 'TS_PERMIT_CERT_UID=caddy'
 
-    - name: "use tailscale certificates for cockpit"
-      tags: [cockpit]
+    - name: 'use tailscale certificates for cockpit'
+      tags: ['cockpit']
       ansible.builtin.file:
-        src: "/etc/pki/tls/private/{{ item }}"
-        dest: "/etc/cockpit/ws-certs.d/{{ item }}"
-        state: link
+        src: '/etc/pki/tls/private/{{ item }}'
+        dest: '/etc/cockpit/ws-certs.d/{{ item }}'
+        state: 'link'
       loop:
-        - "{{ ansible_fqdn }}.crt"
-        - "{{ ansible_fqdn }}.key"
+        - '{{ ansible_fqdn }}.crt'
+        - '{{ ansible_fqdn }}.key'

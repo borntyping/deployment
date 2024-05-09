@@ -1,7 +1,6 @@
 ---
-- tags:
-    - 'workstation'
-    - 'workstation-home'
+- name: 'workstation home directory'
+  tags: ['workstation', 'workstation-home']
   block:
     - name: 'install .fonts/'
       ansible.builtin.copy:

@@ -2,8 +2,8 @@
 default:
   hosts:
     example-workstation:
-      ansible_host: example-workstation.corporate.invalid
-      ansible_connection: local
+      ansible_host: 'example-workstation.corporate.invalid'
+      ansible_connection: 'local'
       git_forges_local:
         - host: 'git.corp.invalid'
           user: 'src'
@@ -13,7 +13,7 @@ default:
           groups:
             - 'team'
       ssh_config_local:
-        - name: src
+        - name: 'src'
           config: |
             Host *.corporate.invalid
               User src
@@ -41,7 +41,7 @@ servers:
             - 'team'
       ssh_config: []
       ssh_config_local:
-        - name: src
+        - name: 'src'
           config: |
             Host *.corporate.invalid
               User src

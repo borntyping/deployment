@@ -10,5 +10,5 @@
         src: 'etc/modprobe.d/hid_apple.conf'
         dest: '/etc/modprobe.d/hid_apple.conf'
       tags:
-        - never
-        - hardware
+        - 'never'
+        - 'hardware'
