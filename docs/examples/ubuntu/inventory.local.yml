@@ -1,0 +1,51 @@
+default:
+  hosts:
+    example-workstation:
+      ansible_host: example-workstation.corporate.invalid
+      ansible_connection: local
+      git_forges_local:
+        - host: 'git.corp.invalid'
+          user: 'src'
+          path: '~/Development/git.corp.invalid/**'
+          email: 'src@corp.invalid'
+          ssh_key: 'id_ed25519_corp_src'
+          groups:
+            - 'team'
+      ssh_config_local:
+        - name: src
+          config: |
+            Host *.corporate.invalid
+              User src
+              IdentitiesOnly yes
+              IdentityFile "~/.ssh/keys/id_ed25519_corp_src"
+      ssh_keys_local:
+        - 'corp_src'
+      zsh_zshrc_local:
+        50-corporate.zsh: |
+          #!/usr/bin/env zsh
+          export corporate="${HOME}/Development/git.corporate.invalid"
+
+servers:
+  hosts:
+    example-server:
+      ansible_host: 'example-server.corporate.invalid'
+      git_forges: []
+      git_forges_local:
+        - host: 'git.corp.invalid'
+          user: 'src'
+          path: '~/Development/git.corp.invalid/**'
+          email: 'src@corp.invalid'
+          ssh_key: 'id_ed25519_corp_src'
+          groups:
+            - 'team'
+      ssh_config: []
+      ssh_config_local:
+        - name: src
+          config: |
+            Host *.corporate.invalid
+              User src
+              IdentitiesOnly yes
+              IdentityFile "~/.ssh/keys/id_ed25519_corp_src"
+      ssh_keys: []
+      ssh_keys_local:
+        - 'corp_src'

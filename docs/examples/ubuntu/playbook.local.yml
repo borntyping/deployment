@@ -1,0 +1,17 @@
+---
+- name: ubuntu-all
+  hosts:
+    - all
+  roles:
+    - base
+    - home
+    - ssh
+    - git
+    - zsh
+
+- name: ubuntu-workstation
+  hosts:
+    - default
+  roles:
+    - workstation
+    - workstation-home
