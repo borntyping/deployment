@@ -13,21 +13,23 @@ default:
     @just --list
 
 # Run Ansible. Set tags= to select tags. Set limit= to select hosts.
-configure tags="all" limit=hostname:
+configure tags="all" limit=hostname *args:
     ansible-playbook "{{ playbook }}" \
       --diff \
       --inventory-file="{{ inventory }}" \
       --limit="{{ limit }}" \
-      --tags="{{ tags }}"
+      --tags="{{ tags }}" \
+      {{ args }}
 
 # Run Ansible in check mode. Set tags= to select tags. Set limit= to select hosts.
-check tags="all" limit=hostname:
+check tags="all" limit=hostname *args:
     ansible-playbook "{{ playbook }}" \
       --check \
       --diff \
       --inventory-file="{{ inventory }}" \
       --limit="{{ limit }}" \
-      --tags="{{ tags }}"
+      --tags="{{ tags }}" \
+      {{ args }}
 
 # Install Ansible dependencies
 install:
