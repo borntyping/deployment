@@ -1,10 +1,14 @@
 #!/usr/bin/env zsh
+# shellcheck disable=SC2034
 
 if [[ -v 'commands[bat]' ]]; then
+  _TEXT_PAGER='bat'
   _YAML_PAGER='bat --language=yaml'
 elif [[ -v 'commands[batcat]' ]]; then
+  _TEXT_PAGER='batcat'
   _YAML_PAGER='batcat --language=yaml'
 else
+  _TEXT_PAGER='cat'
   _YAML_PAGER='cat'
 fi
 
@@ -29,6 +33,10 @@ if [[ -v "commands[kubectl]" ]]; then
     kubectl "$@"
   }
 
+  function kb() {
+    kubectl "$@" | ${=_TEXT_PAGER}
+  }
+
   function kj() {
     kubectl --output="json" "$@"
   }
@@ -37,11 +45,14 @@ if [[ -v "commands[kubectl]" ]]; then
     kubectl --output="yaml" "$@" | ${=_YAML_PAGER}
   }
 
-  if [[ -v '_comps[kubectl]' ]]; then
-    compdef k=kubectl
-    compdef kj=kubectl
-    compdef ky=kubectl
-  fi
+  function kubectl_post_compinit() {
+    if [[ -v '_comps[kubectl]' ]]; then
+      compdef k=kubectl
+      compdef kb=kubectl
+      compdef kj=kubectl
+      compdef ky=kubectl
+    fi
+  }
 fi
 
 # ArgoCD Rollouts

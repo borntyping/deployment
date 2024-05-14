@@ -1,5 +1,5 @@
 #!/bin/zsh
-# shellcheck disable=SC1090 disable=SC2034 disable=SC2206
+# shellcheck disable=SC1090 disable=SC2034 disable=SC2206 source-path=SCRIPTDIR
 
 HISTFILE="$HOME/.zhistory"              # Save history.
 HISTSIZE=7500                           # Lines of history to keep in memory.
@@ -175,6 +175,12 @@ zstyle ':completion:*:descriptions' format '[%d]'                               
 zstyle ':completion:*:git-checkout:*' sort false                                # Disable sort when completing `git checkout`.
 zstyle -e ':completion:*:hosts' hosts 'reply=()'
 compinit
+
+# Completion for kubectl aliases.
+# This has to run _after_ compinit.
+if typeset -f kubectl_post_compinit >/dev/null; then
+  kubectl_post_compinit
+fi
 
 # ZSH plugins using miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
