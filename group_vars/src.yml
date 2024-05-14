@@ -1,0 +1,30 @@
+---
+ssh_config:
+  - name: 'src'
+    config: |
+      Host *.bunny-moth.ts.net eevee.bunny-moth.ts.net razz-berry.bunny-moth.ts.net
+        User src
+        IdentitiesOnly yes
+        IdentityFile "~/.ssh/keys/id_ed25519_tailscale"
+
+      Host eevee.local razz-berry.local
+        User src
+        IdentitiesOnly yes
+        IdentityFile "~/.ssh/keys/id_ed25519_src"
+
+ssh_keys_local:
+  - 'src'
+  - 'tailscale'
+
+git_forges_local:
+  - host: 'eevee.bunny-moth.ts.net'
+    user: 'src'
+    path: '~/Development/eevee.bunny-moth.ts.net/**'
+    email: 'sam@borntyping.co.uk'
+    ssh_key: 'id_ed25519_tailscale'
+
+  - host: 'razz-berry.bunny-moth.ts.net'
+    user: 'src'
+    path: '~/Development/razz-berry.bunny-moth.ts.net/**'
+    email: 'sam@borntyping.co.uk'
+    ssh_key: 'id_ed25519_tailscale'

@@ -1,0 +1,2 @@
+---
+tailscale_certificates_directory: '/etc/ssl/private'

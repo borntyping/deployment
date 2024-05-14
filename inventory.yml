@@ -1,8 +1,19 @@
 ---
 all:
-  hosts:
-    umbreon:
-      ansible_host: 'umbreon.bunny-moth.ts.net'
-      ansible_connection: 'local'
-    razz-berry:
-      ansible_host: 'razz-berry.bunny-moth.ts.net'
+  children:
+    src:
+      hosts:
+        eevee:
+          ansible_host: 'eevee.bunny-moth.ts.net'
+        razz-berry:
+          ansible_host: 'razz-berry.bunny-moth.ts.net'
+        umbreon:
+          ansible_host: 'umbreon.bunny-moth.ts.net'
+          ansible_connection: 'local'
+
+workstation:
+  umbreon:
+
+webserver:
+  eevee:
+  razz-berry:

@@ -8,10 +8,6 @@
 # Ignore Ansible retry files.
 site.retry
 
-# Ignore host vars with sensitive information.
-host_vars/*/secrets.yml
-host_vars/*/secrets.yaml
-
 # Ignore alternate config we don't want to commit.
 /playbook.local.yml
 /inventory.local.yml

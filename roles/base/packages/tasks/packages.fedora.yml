@@ -1,7 +1,5 @@
 ---
-- tags:
-    - 'base'
-    - 'dnf'
+- tags: ['base', 'dnf', 'redhat', 'fedora']
   block:
     - name: 'add tailscale repository'
       become: true
@@ -23,6 +21,7 @@
           - 'awscli2'
           - 'cargo'
           - 'clippy'
+          - 'cockpit'
           - 'direnv'
           - 'docker-compose'
           - 'gcc-c++'
@@ -48,6 +47,7 @@
           - 'rustc'
           - 'rustfmt'
           - 'snapd'
+          - 'sqlite'
           - 'util-linux-user'
           - 'yamllint'
           - 'zsh-html'
