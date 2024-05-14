@@ -1,25 +1,20 @@
 ---
-- name: 'common'
-  hosts:
-    - 'umbreon'
-    - 'razz-berry'
+- name: 'base'
+  hosts: 'src'
   roles:
-    - role: 'tailscale'
-    - role: 'base'
+    - role: 'base/packages'
+    - role: 'base/tailscale'
+    - role: 'base/cockpit'
+
+- name: 'home'
+  hosts: 'src'
+  roles:
     - role: 'home'
     - role: 'ssh'
     - role: 'git'
     - role: 'zsh'
 
 - name: 'workstation'
-  hosts:
-    - 'umbreon'
+  hosts: 'workstation'
   roles:
     - role: 'workstation'
-
-- name: 'server'
-  hosts:
-    - 'razz-berry'
-  roles:
-    - role: 'web'
-    - role: 'foundryvtt'

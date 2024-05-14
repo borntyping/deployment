@@ -1,12 +1,12 @@
 ---
-- tags: ['base', 'apt']
+- tags: ['apt', 'base', 'ubuntu']
   block:
-    - name: 'add git ppa'
+    - name: 'ubuntu : add git ppa'
       become: true
       ansible.builtin.apt_repository:
         repo: 'ppa:git-core/ppa'
 
-    - name: 'install apt packages'
+    - name: 'ubuntu : install apt packages'
       become: true
       ansible.builtin.apt:
         state: 'latest'
@@ -15,9 +15,10 @@
           - 'gcc'
           - 'python3'
           - 'python3-pip'
+          - 'sqlite'
           - 'zsh-doc'
 
-    - name: 'remove apt packages'
+    - name: 'ubuntu : remove apt packages'
       become: true
       ansible.builtin.apt:
         state: 'absent'
@@ -27,25 +28,25 @@
 
 - tags: ['base', 'brew', 'homebrew']
   block:
-    - name: 'check homebrew executable'
+    - name: 'ubuntu : check homebrew executable'
       stat:
         path: '/home/linuxbrew/.linuxbrew/bin/brew'
       register: 'homebrew_executable'
       check_mode: true
 
-    - name: 'create homebrew config directory'
+    - name: 'ubuntu : create homebrew config directory'
       when: 'homebrew_executable.stat.exists'
       ansible.builtin.file:
         name: '/home/linuxbrew/.linuxbrew/etc/homebrew'
         state: 'directory'
 
-    - name: 'create homebrew config'
+    - name: 'ubuntu : create homebrew config'
       when: 'homebrew_executable.stat.exists'
       ansible.builtin.copy:
         src: 'brew.env'
         dest: '/home/linuxbrew/.linuxbrew/etc/homebrew/brew.env'
 
-    - name: 'install homebrew packages'
+    - name: 'ubuntu : install homebrew packages'
       when: 'homebrew_executable.stat.exists'
       tags:
         - 'direnv'

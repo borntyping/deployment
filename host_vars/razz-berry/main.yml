@@ -1,4 +1,0 @@
----
-zsh_zshrc_local:
-  50-razz-berry.zsh: |
-    #!/usr/bin/env zsh

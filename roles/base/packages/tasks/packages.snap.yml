@@ -1,11 +1,9 @@
 ---
-- tags:
-    - 'base'
-    - 'snap'
+- tags: ['base', 'snap']
   block:
     # Enable 'classic' Snap support.
     # https://snapcraft.io/docs/installing-snap-on-fedora
-    - name: 'configure snap'
+    - name: 'snap : configure'
       when: 'ansible_distribution == "Fedora"'
       become: true
       ansible.builtin.file:
@@ -13,7 +11,7 @@
         dest: '/snap'
         state: 'link'
 
-    - name: 'install snap packages'
+    - name: 'snap : install packages'
       become: true
       community.general.snap:
         name: '{{ item }}'

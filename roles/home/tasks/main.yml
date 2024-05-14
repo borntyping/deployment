@@ -30,7 +30,7 @@
         label: '{{ item.key }}'
 
     - name: 'install scripts from ansible source into ~/.local/bin (ubuntu only)'
-      when: 'ansible_distribution in ["Ubuntu"]'
+      when: 'ansible_os_family == "Debian"'
       tags: ['local', 'bin']
       copy:
         src: 'ubuntu/.local/bin/'

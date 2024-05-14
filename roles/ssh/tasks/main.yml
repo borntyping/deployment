@@ -39,7 +39,7 @@
       community.crypto.openssh_keypair:
         type: 'ed25519'
         path: '{{ ansible_user_dir }}/.ssh/keys/id_ed25519_{{ item }}'
-        comment: '{{ ansible_user_id }}@{{ ansible_host }}'
+        comment: '{{ ansible_user_id }}@{{ ansible_host }}:id_ed25519_{{ item }}'
       loop: '{{ _ssh_keys }}'
 
     - name: 'assemble ssh config'
