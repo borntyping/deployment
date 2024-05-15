@@ -1,2 +1,3 @@
 ---
 tailscale_certificates_directory: '/etc/ssl/private'
+tailscale_certificates_group: 'ssl-cert'

@@ -1,18 +1,32 @@
 ---
 - tags: ['apt', 'base', 'debian']
   block:
+    - name: 'debian : install syncthing repo key'
+      tags: ['syncthing']
+      become: true
+      ansible.builtin.get_url:
+        url: 'https://syncthing.net/release-key.gpg'
+        dest: '/etc/apt/keyrings/syncthing-archive-keyring.gpg'
+
+    - name: 'debian : install syncthing repo'
+      tags: ['syncthing']
+      become: true
+      ansible.builtin.apt_repository:
+        repo: 'deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable'
+        state: 'present'
+
     - name: 'debian : install tailscale repo key'
       tags: ['tailscale']
       become: true
       ansible.builtin.get_url:
         url: 'https://pkgs.tailscale.com/stable/debian/bookworm.noarmor.gpg'
-        dest: '/usr/share/keyrings/tailscale-archive-keyring.gpg'
+        dest: '/etc/apt/keyrings/tailscale-archive-keyring.gpg'
 
     - name: 'debian : install tailscale repo'
       tags: ['tailscale']
       become: true
       ansible.builtin.apt_repository:
-        repo: 'deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/debian bookworm main'
+        repo: 'deb [signed-by=/etc/apt/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/debian bookworm main'
         state: 'present'
 
     - name: 'debian : install apt packages'

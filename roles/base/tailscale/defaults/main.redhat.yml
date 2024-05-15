@@ -1,2 +1,3 @@
 ---
 tailscale_certificates_directory: '/etc/pki/tls/private'
+tailscale_certificates_group: 'src-tailscale-certs'

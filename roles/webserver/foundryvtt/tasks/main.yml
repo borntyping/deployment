@@ -23,6 +23,14 @@
         comment: 'Foundry VTT'
         state: 'present'
 
+    - name: 'add the foundryvtt user to the tailscale certificates group'
+      tags: ['tailscale']
+      become: true
+      ansible.builtin.user:
+        name: '{{ foundryvtt_user }}'
+        groups: '{{ tailscale_certificates_group }}'
+        append: true
+
     - name: 'create foundryvtt directories'
       become: true
       become_user: '{{ foundryvtt_user }}'
@@ -51,4 +59,21 @@
       ansible.builtin.copy:
         src: 'foundryvtt.service'
         dest: '/home/{{ foundryvtt_user }}/.config/systemd/user/foundryvtt.service'
-      # TODO: trigger 'systemctl --user daemon-reload'.
+      notify:
+        - 'foundryvtt-syncthing'
+
+    - name: 'use tailscale certificates for syncthing'
+      tags: ['certificates', 'tailscale']
+      become: true
+      become_user: '{{ foundryvtt_user }}'
+      ansible.builtin.copy:
+        remote_src: true
+        src: '{{ tailscale_certificates_directory }}/{{ item.src }}'
+        dest: '/home/{{ foundryvtt_user }}/.local/state/syncthing/{{ item.dest }}'
+      loop:
+        - src: '{{ tailscale_host }}.crt'
+          dest: 'https-cert.pem'
+        - src: '{{ tailscale_host }}.key'
+          dest: 'https-key.pem'
+      notify:
+        - 'foundryvtt-syncthing'
