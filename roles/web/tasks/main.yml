@@ -28,7 +28,7 @@
         - 'dnf'
         - 'docker'
         - 'podman'
-        - 'syncthing'
+
         - 'systemd'
       become: true
       ansible.builtin.dnf:

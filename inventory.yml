@@ -12,8 +12,10 @@ all:
           ansible_connection: 'local'
 
 workstation:
-  umbreon:
+  hosts:
+    umbreon:
 
 webserver:
-  eevee:
-  razz-berry:
+  hosts:
+    eevee:
+    razz-berry:

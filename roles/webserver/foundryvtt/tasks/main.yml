@@ -3,7 +3,7 @@
   block:
     - name: 'install packages'
       become: true
-      ansible.builtin.dnf:
+      ansible.builtin.package:
         name:
           - 'systemd-container'
           - 'nodejs'
@@ -34,6 +34,7 @@
         - 'foundrydata'
 
     - name: 'create systemd directories'
+      tags: ['systemd']
       become: true
       become_user: '{{ foundryvtt_user }}'
       ansible.builtin.file:
@@ -44,9 +45,10 @@
         - 'foundrydata'
 
     - name: 'create foundryvtt service'
+      tags: ['systemd']
       become: true
       become_user: '{{ foundryvtt_user }}'
       ansible.builtin.copy:
         src: 'foundryvtt.service'
         dest: '/home/{{ foundryvtt_user }}/.config/systemd/user/foundryvtt.service'
-      tags: ['systemd', 'focus']
+      # TODO: trigger 'systemctl --user daemon-reload'.

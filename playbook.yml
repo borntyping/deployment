@@ -9,12 +9,19 @@
 - name: 'home'
   hosts: 'src'
   roles:
+    - role: 'bin'
+    - role: 'git'
     - role: 'home'
     - role: 'ssh'
-    - role: 'git'
     - role: 'zsh'
 
 - name: 'workstation'
   hosts: 'workstation'
   roles:
     - role: 'workstation'
+
+- name: 'webserver'
+  hosts: 'webserver'
+  roles:
+    - role: 'webserver/foundryvtt'
+      tags: 'webserver'
