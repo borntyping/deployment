@@ -9,5 +9,5 @@
         dest: '/etc/cockpit/ws-certs.d/{{ item }}'
         state: 'link'
       loop:
-        - '{{ ansible_fqdn }}.crt'
-        - '{{ ansible_fqdn }}.key'
+        - '{{ tailscale_host }}.crt'
+        - '{{ tailscale_host }}.key'

@@ -5,11 +5,14 @@ all:
       hosts:
         eevee:
           ansible_host: 'eevee.bunny-moth.ts.net'
+          tailscale_host: 'eevee.bunny-moth.ts.net'
         razz-berry:
           ansible_host: 'razz-berry.bunny-moth.ts.net'
+          tailscale_host: 'razz-berry.bunny-moth.ts.net'
         umbreon:
-          ansible_host: 'umbreon.bunny-moth.ts.net'
           ansible_connection: 'local'
+          ansible_host: 'umbreon.bunny-moth.ts.net'
+          tailscale_host: 'umbreon.bunny-moth.ts.net'
 
 workstation:
   hosts:
@@ -19,3 +22,12 @@ webserver:
   hosts:
     eevee:
     razz-berry:
+
+fedora:
+  hosts:
+    razz-berry:
+    umbreon:
+
+debian:
+  hosts:
+    eevee:
