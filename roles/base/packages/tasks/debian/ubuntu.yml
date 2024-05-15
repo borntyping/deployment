@@ -1,0 +1,15 @@
+---
+- tags: ['apt', 'base', 'ubuntu']
+  block:
+    - name: 'ubuntu : add git ppa'
+      become: true
+      ansible.builtin.apt_repository:
+        repo: 'ppa:git-core/ppa'
+
+    - name: 'ubuntu : install apt packages'
+      become: true
+      ansible.builtin.apt:
+        state: 'latest'
+        pkg:
+          - 'git'
+          - 'sqlite'
