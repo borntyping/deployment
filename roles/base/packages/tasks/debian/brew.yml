@@ -1,0 +1,19 @@
+---
+- tags: ['base', 'brew', 'homebrew']
+  block:
+    - ansible.builtin.include_role:
+        name: 'base/linuxbrew'
+
+    - name: 'brew : install brew packages'
+      tags:
+        - 'direnv'
+        - 'go'
+        - 'starship'
+        - 'zoxide'
+      community.general.homebrew:
+        state: 'present'
+        name:
+          - 'direnv'
+          - 'go'
+          - 'starship'
+          - 'zoxide'

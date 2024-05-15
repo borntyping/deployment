@@ -1,0 +1,28 @@
+---
+- tags: ['base', 'brew', 'homebrew']
+  block:
+    - name: 'create temporary directory'
+      become: false
+      ansible.builtin.file:
+        path: '/tmp/homebrew'
+        state: 'directory'
+        mode: '0700'
+
+    - name: 'fetch install.sh'
+      become: false
+      ansible.builtin.get_url:
+        url: 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh'
+        dest: '/tmp/homebrew/install.sh'
+        mode: '0700'
+
+    - name: 'run install.sh'
+      become: false
+      ansible.builtin.command:
+        cmd: '/tmp/homebrew/install.sh'
+        creates: '/home/linuxbrew/.linuxbrew/bin/brew'
+
+    - name: 'remove temporary directory'
+      become: false
+      ansible.builtin.file:
+        path: '/tmp/homebrew'
+        state: 'absent'

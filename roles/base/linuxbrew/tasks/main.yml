@@ -1,0 +1,23 @@
+---
+- tags: ['base', 'brew', 'linuxbrew', 'homebrew']
+  block:
+    - name: 'check brew executable'
+      ansible.builtin.stat:
+        path: '/home/linuxbrew/.linuxbrew/bin/brew'
+      register: 'linuxbrew_stat'
+      become: true
+
+    - name: 'install brew'
+      when: 'not linuxbrew_stat.stat.exists'
+      ansible.builtin.include_tasks:
+        file: 'install.yml'
+
+    - name: 'create homebrew config directory'
+      ansible.builtin.file:
+        name: '/home/linuxbrew/.linuxbrew/etc/homebrew'
+        state: 'directory'
+
+    - name: 'create homebrew config'
+      ansible.builtin.copy:
+        src: 'brew.env'
+        dest: '/home/linuxbrew/.linuxbrew/etc/homebrew/brew.env'
