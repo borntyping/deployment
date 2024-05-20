@@ -1,0 +1,7 @@
+---
+- name: 'syncthing'
+  ansible.builtin.systemd_service:
+    name: 'syncthing'
+    scope: 'user'
+    daemon_reload: true
+    state: 'restarted'
