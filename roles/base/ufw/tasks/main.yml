@@ -1,0 +1,32 @@
+---
+- tags: ['base', 'firewall', 'ufw']
+  block:
+    # Enable ufw first so we can configure rules.
+    - become: true
+      community.general.ufw:
+        state: 'enabled'
+
+    # Allow SSH connections. You want to be able
+    # to recover this when it goes wrong, right?
+    - become: true
+      community.general.ufw:
+        rule: 'allow'
+        port: 'ssh'
+        proto: 'tcp'
+
+    # Allow all connections on the 'tailscale0' interface.
+    # https://tailscale.com/kb/1077/secure-server-ubuntu-18-04#step-4-enable-ufw
+    - become: true
+      community.general.ufw:
+        rule: 'allow'
+        direction: 'in'
+        interface: 'tailscale0'
+        proto: 'tcp'
+
+    # Reject incoming connections by default. This uses 'reject' instead of deny
+    # as devices are usually on a trusted network, and getting an error message
+    # when a connection doesn't work is nice. Make sure to to this *after*
+    # creating rules, especially for SSH.
+    - become: true
+      community.general.ufw:
+        policy: 'reject'

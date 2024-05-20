@@ -5,6 +5,7 @@
     - role: 'base/packages'
     - role: 'base/tailscale'
     - role: 'base/cockpit'
+    - role: 'base/ufw'
 
 - name: 'home'
   hosts: 'src'

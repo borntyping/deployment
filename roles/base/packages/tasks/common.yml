@@ -2,6 +2,7 @@
 - tags: ['base', 'common']
   block:
     - name: 'install common packages'
+      tags: ['firewall', 'ufw']
       become: true
       ansible.builtin.package:
         state: 'latest'
@@ -36,6 +37,7 @@
           - 'tailscale'
           - 'tmux'
           - 'tree'
+          - 'ufw'
           - 'wl-clipboard'
           - 'zoxide'
           - 'zsh'
