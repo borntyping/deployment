@@ -1,0 +1,16 @@
+---
+- tags: ['syncthing']
+  block:
+    - name: 'use tailscale certificates for syncthing'
+      tags: ['certificates', 'tailscale']
+      ansible.builtin.copy:
+        remote_src: true
+        src: '{{ tailscale_certificates_directory }}/{{ item.src }}'
+        dest: '{{ ansible_user_dir }}/.local/state/syncthing/{{ item.dest }}'
+      loop:
+        - src: '{{ tailscale_host }}.crt'
+          dest: 'https-cert.pem'
+        - src: '{{ tailscale_host }}.key'
+          dest: 'https-key.pem'
+      notify:
+        - 'syncthing'
