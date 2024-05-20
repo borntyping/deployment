@@ -4,6 +4,7 @@
   become: true
   block:
     - name: 'include os variables'
+      tags: ['always']
       include_vars: 'defaults/main.{{ ansible_os_family|lower }}.yml'
 
     - block:
