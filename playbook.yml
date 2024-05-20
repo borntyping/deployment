@@ -9,11 +9,11 @@
 - name: 'home'
   hosts: 'src'
   roles:
-    - role: 'bin'
-    - role: 'git'
-    - role: 'home'
-    - role: 'ssh'
-    - role: 'zsh'
+    - role: 'home/bin'
+    - role: 'home/cfg'
+    - role: 'home/git'
+    - role: 'home/ssh'
+    - role: 'home/zsh'
 
 - name: 'workstation'
   hosts: 'workstation'

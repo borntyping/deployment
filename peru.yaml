@@ -1,18 +1,18 @@
 ---
 imports:
-  atuin-aarch64|atuin-aarch64-bin: roles/bin/files/aarch64/.local/bin/
-  atuin-x86_64|atuin-x86_64-bin: roles/bin/files/x86_64/.local/bin/
-  aws-vault-aarch64: roles/bin/files/aarch64/.local/bin/
-  aws-vault-x86_64: roles/bin/files/x86_64/.local/bin/
-  fixup|fixup-bin: roles/bin/files/.local/bin/
-  just-aarch64|just-aarch64-bin: roles/bin/files/aarch64/.local/bin/
-  just-x86_64|just-x86_64-bin: roles/bin/files/x86_64/.local/bin/
-  kubectx-aarch64: roles/bin/files/aarch64/.local/bin/
-  kubectx-x86_64: roles/bin/files/x86_64/.local/bin/
-  kubens-aarch64: roles/bin/files/aarch64/.local/bin/
-  kubens-x86_64: roles/bin/files/x86_64/.local/bin/
-  starship-aarch64: roles/bin/files/aarch64/.local/bin/
-  starship-x86_64: roles/bin/files/x86_64/.local/bin/
+  atuin-aarch64|atuin-aarch64-bin: roles/home/bin/files/aarch64/.local/bin/
+  atuin-x86_64|atuin-x86_64-bin: roles/home/bin/files/x86_64/.local/bin/
+  aws-vault-aarch64: roles/home/bin/files/aarch64/.local/bin/
+  aws-vault-x86_64: roles/home/bin/files/x86_64/.local/bin/
+  fixup|fixup-bin: roles/home/bin/files/.local/bin/
+  just-aarch64|just-aarch64-bin: roles/home/bin/files/aarch64/.local/bin/
+  just-x86_64|just-x86_64-bin: roles/home/bin/files/x86_64/.local/bin/
+  kubectx-aarch64: roles/home/bin/files/aarch64/.local/bin/
+  kubectx-x86_64: roles/home/bin/files/x86_64/.local/bin/
+  kubens-aarch64: roles/home/bin/files/aarch64/.local/bin/
+  kubens-x86_64: roles/home/bin/files/x86_64/.local/bin/
+  starship-aarch64: roles/home/bin/files/aarch64/.local/bin/
+  starship-x86_64: roles/home/bin/files/x86_64/.local/bin/
 
   just-x86_64|just-x86_64-man: roles/home/files/.local/share/man/man1/
 
