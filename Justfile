@@ -21,15 +21,9 @@ configure tags="all" limit=hostname *args="":
       --tags="{{ tags }}" \
       {{ args }}
 
-# Run Ansible in check mode. Set tags= to select tags. Set limit= to select hosts.
-check tags="all" limit=hostname *args="":
-    ansible-playbook "{{ playbook }}" \
-      --check \
-      --diff \
-      --inventory-file="{{ inventory }}" \
-      --limit="{{ limit }}" \
-      --tags="{{ tags }}" \
-      {{ args }}
+# Run Ansible against all tags on all hosts.
+all:
+    @just configure all all
 
 # Install Ansible dependencies
 install:
