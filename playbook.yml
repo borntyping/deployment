@@ -7,10 +7,6 @@
     - {tags: 'base', role: 'base/cockpit'}
     - {tags: 'base', role: 'base/docker'}
     - {tags: 'base', role: 'base/ufw'}
-
-- name: 'home'
-  hosts: 'src'
-  roles:
     - {tags: 'home', role: 'home/bin'}
     - {tags: 'home', role: 'home/cfg'}
     - {tags: 'home', role: 'home/git'}
@@ -24,8 +20,8 @@
     - {tags: 'workstation', role: 'workstation/packages'}
     - {tags: 'workstation', role: 'workstation/home'}
 
-- name: 'webserver'
-  hosts: 'webserver'
+- name: 'eevee'
+  hosts: 'eevee'
   roles:
-    - {tags: 'webserver', role: 'webserver/database'}
-    - {tags: 'webserver', role: 'webserver/foundryvtt'}
+    - {role: 'webserver/foundryvtt'}
+    - {role: 'webserver/vancelle'}

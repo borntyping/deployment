@@ -21,7 +21,6 @@ workstation:
 webserver:
   hosts:
     eevee:
-    razz-berry:
 
 fedora:
   hosts:
