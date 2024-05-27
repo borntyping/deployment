@@ -20,9 +20,9 @@ imports:
   fantasque: roles/workstation/home/files/.fonts
   fantasque-nerd: roles/workstation/home/files/.fonts
 
-  atuin-x86_64|atuin-x86_64-zsh: roles/zsh/files/.local/share/zsh/
-  fixup|fixup-zsh: roles/zsh/files/.local/share/zsh/
-  miniplug: roles/zsh/files/.local/share/zsh/
+  atuin-x86_64|atuin-x86_64-zsh: roles/home/zsh/files/.local/share/zsh/
+  fixup|fixup-zsh: roles/home/zsh/files/.local/share/zsh/
+  miniplug: roles/home/zsh/files/.local/share/zsh/
 
 #
 # Atuin
