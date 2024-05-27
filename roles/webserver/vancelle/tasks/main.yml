@@ -1,0 +1,19 @@
+---
+- tags: ['vancelle']
+  block:
+    - name: 'create user'
+      become: true
+      become_user: 'postgres'
+      community.postgresql.postgresql_user:
+        name: '{{ vancelle_db_user }}'
+        password: '{{ vancelle_db_password }}'
+        role_attr_flags: 'CREATEDB,NOSUPERUSER'
+      environment:
+        PGOPTIONS: '-c password_encryption=scram-sha-256'  # https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_user_module.html#id5
+
+    - name: 'create database'
+      become: true
+      become_user: 'postgres'
+      community.postgresql.postgresql_db:
+        name: '{{ vancelle_db_name }}'
+        owner: '{{ vancelle_db_user }}'

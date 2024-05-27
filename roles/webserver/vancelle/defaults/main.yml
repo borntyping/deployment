@@ -1,0 +1,4 @@
+---
+vancelle_db_name: 'vancelle'
+vancelle_db_password: '{{ undefined }}'
+vancelle_db_user: 'vancelle'
