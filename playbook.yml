@@ -2,28 +2,29 @@
 - name: 'base'
   hosts: 'src'
   roles:
-    - role: 'base/packages'
-    - role: 'base/tailscale'
-    - role: 'base/cockpit'
-    - role: 'base/ufw'
+    - {tags: 'base', role: 'base/packages'}
+    - {tags: 'base', role: 'base/tailscale'}
+    - {tags: 'base', role: 'base/cockpit'}
+    - {tags: 'base', role: 'base/docker'}
+    - {tags: 'base', role: 'base/ufw'}
 
 - name: 'home'
   hosts: 'src'
   roles:
-    - role: 'home/bin'
-    - role: 'home/cfg'
-    - role: 'home/git'
-    - role: 'home/ssh'
-    - role: 'home/zsh'
-    - role: 'home/syncthing'
+    - {tags: 'home', role: 'home/bin'}
+    - {tags: 'home', role: 'home/cfg'}
+    - {tags: 'home', role: 'home/git'}
+    - {tags: 'home', role: 'home/ssh'}
+    - {tags: 'home', role: 'home/zsh'}
+    - {tags: 'home', role: 'home/syncthing'}
 
 - name: 'workstation'
   hosts: 'workstation'
   roles:
-    - role: 'workstation'
+    - {tags: 'workstation', role: 'workstation'}
 
 - name: 'webserver'
   hosts: 'webserver'
   roles:
-    - role: 'webserver/foundryvtt'
-      tags: 'webserver'
+    - {tags: 'webserver', role: 'webserver/base'}
+    - {tags: 'webserver', role: 'webserver/foundryvtt'}

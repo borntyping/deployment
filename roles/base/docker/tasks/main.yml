@@ -1,0 +1,42 @@
+---
+- tags: ['docker']
+  block:
+    - name: 'install fedora packages'
+      when: 'ansible_distribution == "Fedora"'
+      include_tasks: 'fedora/main.yml'
+
+    - name: 'install debian packages'
+      tags: ['apt', 'debian', 'syncthing', 'tailscale']
+      when: 'ansible_os_family == "Debian"'
+      include_tasks: 'debian/main.yml'
+
+    - name: 'configure sudo'
+      tags: ['sudo']
+      become: true
+      ansible.builtin.template:
+        src: 'sudoers.j2'
+        dest: '/etc/sudoers.d/{{ ansible_user_id }}-docker-compose'
+
+    - name: 'remove old sudoers file'
+      tags: ['sudo']
+      become: true
+      ansible.builtin.file:
+        path: '/etc/sudoers.d/{{ ansible_user_id }}'
+        state: 'absent'
+
+    # Run "newgrp docker" to use the new group without logging out and back in.
+    - name: 'add user to docker group'
+      become: true
+      ansible.builtin.user:
+        name: '{{ ansible_user_id }}'
+        groups: 'docker'
+        append: true
+
+    - name: 'start and enable docker services'
+      tags: ['systemd']
+      become: true
+      ansible.builtin.systemd_service:
+        name: 'docker.service'
+        scope: 'system'
+        state: 'started'
+        enabled: true
