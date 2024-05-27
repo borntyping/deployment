@@ -1,0 +1,48 @@
+---
+# https://docs.docker.com/engine/install/debian/
+#
+# ```shell
+# deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable
+# ```
+
+- tags: ['apt', 'debian']
+  block:
+    - name: 'remove apt packages'
+      tags: ['docker']
+      become: true
+      ansible.builtin.apt:
+        state: 'absent'
+        pkg:
+          - 'containerd'
+          - 'docker-compose'
+          - 'docker-doc'
+          - 'docker.io'
+          - 'podman-docker'
+          - 'runc'
+
+    - name: 'install apt repo key'
+      tags: ['docker']
+      become: true
+      ansible.builtin.get_url:
+        url: 'https://download.docker.com/linux/debian/gpg'
+        dest: '/etc/apt/keyrings/docker.asc'
+
+    - name: 'install apt repo'
+      become: true
+      ansible.builtin.template:
+        src: 'docker.list.j2'
+        dest: '/etc/apt/sources.list.d/docker.list'
+      register: 'docker_apt_repo'
+
+    - name: 'install apt packages'
+      tags: ['docker']
+      become: true
+      ansible.builtin.apt:
+        state: 'latest'
+        update_cache: '{{ docker_apt_repo.changed }}'
+        pkg:
+          - 'containerd.io'
+          - 'docker-buildx-plugin'
+          - 'docker-ce'
+          - 'docker-ce-cli'
+          - 'docker-compose-plugin'

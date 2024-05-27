@@ -25,6 +25,13 @@ configure tags="all" limit=hostname *args="":
 all:
     @just configure all all
 
+fact fact limit="all":
+  ansible \
+    --inventory-file="{{ inventory }}" \
+    --module-name="setup" \
+    --args="filter={{ fact }}" \
+    "{{limit}}"
+
 # Install Ansible dependencies
 install:
     ansible-galaxy collection install --requirements-file 'collections/requirements.yml'

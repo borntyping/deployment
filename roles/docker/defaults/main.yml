@@ -1,2 +1,0 @@
----
-docker_user: '{{ lookup("env", "USER") }}'

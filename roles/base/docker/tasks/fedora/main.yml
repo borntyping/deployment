@@ -1,0 +1,36 @@
+---
+- tags: ['dnf', 'redhat', 'fedora']
+  block:
+    - name: 'remove dnf packages'
+      become: true
+      ansible.builtin.dnf:
+        state: 'absent'
+        pkg:
+          - 'docker'
+          - 'docker-client'
+          - 'docker-client-latest'
+          - 'docker-common'
+          - 'docker-engine'
+          - 'docker-engine-selinux'
+          - 'docker-latest'
+          - 'docker-latest-logrotate'
+          - 'docker-logrotate'
+          # - 'docker-selinux' # Removing this removes container-selinux, which is then reinstalled...
+
+    - name: 'install dnf repositories'
+      become: true
+      ansible.builtin.copy:
+        src: 'docker-ce.repo'
+        dest: '/etc/yum.repos.d/docker-ce.repo'
+
+    - name: 'install dnf packages'
+      become: true
+      ansible.builtin.dnf:
+        state: 'latest'
+        pkg:
+          - 'containerd.io'
+          - 'docker-buildx-plugin'
+          - 'docker-ce'
+          - 'docker-ce-cli'
+          - 'docker-compose'
+          - 'docker-compose-plugin'
