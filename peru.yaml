@@ -16,9 +16,9 @@ imports:
 
   just-x86_64|just-x86_64-man: roles/home/files/cfg/.local/share/man/man1/
 
-  dracula: roles/workstation-home/files/.config/tilix/schemes
-  fantasque: roles/workstation-home/files/.fonts
-  fantasque-nerd: roles/workstation-home/files/.fonts
+  dracula: roles/workstation/home/files/.config/tilix/schemes
+  fantasque: roles/workstation/home/files/.fonts
+  fantasque-nerd: roles/workstation/home/files/.fonts
 
   atuin-x86_64|atuin-x86_64-zsh: roles/zsh/files/.local/share/zsh/
   fixup|fixup-zsh: roles/zsh/files/.local/share/zsh/

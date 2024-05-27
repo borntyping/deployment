@@ -21,7 +21,8 @@
 - name: 'workstation'
   hosts: 'workstation'
   roles:
-    - {tags: 'workstation', role: 'workstation'}
+    - {tags: 'workstation', role: 'workstation/packages'}
+    - {tags: 'workstation', role: 'workstation/home'}
 
 - name: 'webserver'
   hosts: 'webserver'
