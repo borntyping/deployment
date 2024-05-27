@@ -14,3 +14,11 @@
           dest: 'https-key.pem'
       notify:
         - 'syncthing'
+
+    - name: 'start and enable user services'
+      tags: ['systemd']
+      ansible.builtin.systemd_service:
+        name: 'syncthing.service'
+        scope: 'user'
+        state: 'started'
+        enabled: true
