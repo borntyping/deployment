@@ -1,5 +1,5 @@
 ---
-- tags: ['base', 'snap']
+- tags: ['snap']
   block:
     # Enable 'classic' Snap support.
     # https://snapcraft.io/docs/installing-snap-on-fedora

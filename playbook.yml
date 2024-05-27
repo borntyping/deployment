@@ -27,5 +27,5 @@
 - name: 'webserver'
   hosts: 'webserver'
   roles:
-    - {tags: 'webserver', role: 'webserver/base'}
+    - {tags: 'webserver', role: 'webserver/database'}
     - {tags: 'webserver', role: 'webserver/foundryvtt'}

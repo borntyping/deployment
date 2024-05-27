@@ -1,5 +1,5 @@
 ---
-- tags: ['base', 'dnf', 'redhat', 'fedora']
+- tags: ['dnf', 'redhat', 'fedora']
   block:
     - name: 'add tailscale repository'
       become: true
@@ -12,6 +12,7 @@
         gpgkey: 'https://pkgs.tailscale.com/stable/fedora/repo.gpg'
 
     - name: 'install dnf packages'
+      tags: ['postgres']
       become: true
       ansible.builtin.dnf:
         state: 'latest'
@@ -30,6 +31,8 @@
           - 'httpie'
           - 'npm'
           - 'podman'
+          - 'postgresql'
+          - 'postgresql-server'
           - 'python3'
           - 'python3-black'
           - 'python3-devel'
