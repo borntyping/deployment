@@ -1,5 +1,5 @@
 ---
-- tags: ['base', 'brew', 'homebrew']
+- tags: ['brew', 'homebrew']
   block:
     - name: 'create temporary directory'
       become: false

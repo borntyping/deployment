@@ -1,5 +1,5 @@
 ---
-- tags: ['base', 'firewall', 'ufw']
+- tags: ['firewall', 'ufw']
   block:
     # Enable ufw first so we can configure rules.
     - become: true
@@ -12,6 +12,14 @@
       community.general.ufw:
         rule: 'allow'
         port: 'ssh'
+        proto: 'tcp'
+
+    # Allow all connections on the 'docker0' interface.
+    - become: true
+      community.general.ufw:
+        rule: 'allow'
+        direction: 'in'
+        interface: 'docker0'
         proto: 'tcp'
 
     # Allow all connections on the 'tailscale0' interface.

@@ -1,5 +1,5 @@
 ---
-- tags: ['base', 'brew', 'linuxbrew', 'homebrew']
+- tags: ['brew', 'linuxbrew', 'homebrew']
   block:
     - name: 'check brew executable'
       ansible.builtin.stat:

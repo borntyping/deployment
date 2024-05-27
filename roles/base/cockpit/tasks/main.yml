@@ -1,5 +1,5 @@
 ---
-- tags: ['base', 'cockpit']
+- tags: ['cockpit']
   block:
     - name: 'use tailscale certificates for cockpit'
       tags: ['certificates', 'tailscale']
