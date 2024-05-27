@@ -1,0 +1,22 @@
+---
+- tags: ['workstation']
+  block:
+    - name: 'install dnf packages'
+      tags: ['dnf']
+      when: 'ansible_os_family == "RedHat"'
+      import_tasks: 'packages_fedora.yml'
+
+    - name: 'install apt packages'
+      tags: ['apt']
+      when: 'ansible_os_family == "Debian"'
+      import_tasks: 'packages_ubuntu.yml'
+
+    - name: 'install generic packages'
+      tags: ['apt', 'dnf', 'package']
+      when: 'ansible_distribution in ["Fedora", "Ubuntu"]'
+      import_tasks: 'packages_generic.yml'
+
+    - name: 'install snap packages'
+      tags: ['snap']
+      when: 'ansible_distribution in ["Fedora", "Ubuntu"]'
+      import_tasks: 'packages_snap.yml'
