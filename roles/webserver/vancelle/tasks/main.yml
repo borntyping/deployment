@@ -1,4 +1,36 @@
 ---
+# - tags: ['postgres', 'postgresql']
+#   block:
+#     - name: 'configure postgresql.conf'
+#       become: true
+#       ansible.builtin.copy:
+#         src: 'conf.d/'
+#         dest: '/etc/postgresql/15/main/conf.d/'
+#       notify: 'postgresql'
+#
+#     - name: 'configure pg_hba.conf'
+#       become: true
+#       ansible.builtin.lineinfile:
+#         path: '/etc/postgresql/15/main/pg_hba.conf'
+#         insertbefore: '# DO NOT DISABLE!'
+#         line: '{{ item.line }}'
+#         state: absent
+#       notify: 'postgresql'
+#       loop_control:
+#         label: '{{ item.name }}'
+#       loop:
+#         - name: 'ipv4'
+#           line: 'host    all             all             {{ ansible_docker0.ipv4.address }}/{{ ansible_docker0.ipv4.prefix }}            scram-sha-256'
+#         - name: 'ipv6[0]'
+#           line: 'host    all             all             {{ ansible_docker0.ipv6[0].address }}/{{ ansible_docker0.ipv6[0].prefix }}            scram-sha-256'
+#
+#     - name: 'start service'
+#       tags: ['systemd']
+#       ansible.builtin.systemd_service:
+#         name: 'postgresql.service'
+#         state: 'started'
+#         enabled: true
+
 - tags: ['vancelle']
   block:
     - name: 'create user'
