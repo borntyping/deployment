@@ -33,6 +33,7 @@
           - 'podman'
           - 'postgresql'
           - 'postgresql-server'
+          - 'postgresql-upgrade'
           - 'python3'
           - 'python3-black'
           - 'python3-devel'
