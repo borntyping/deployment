@@ -16,4 +16,5 @@
       community.general.snap:
         name: '{{ item }}'
       loop:
+        - 'dart-sass'
         - 'lnav'
