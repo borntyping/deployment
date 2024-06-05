@@ -129,7 +129,7 @@ hooks = [
     CommandHook("docs", "mkdocs", command=["mkdocs", "build", "--strict"], present=["mkdocs.yml"]),
     CommandHook("php", "phpstan", command=["vendor/bin/phpstan"], present=["vendor/bin/phpstan"]),
     CommandHook("php", "phpunit", command=["vendor/bin/phpunit"], present=["vendor/bin/phpunit"]),
-    CommandHook("pre-commit", "pre-commit", command=["pre-commit", "run", "-a"], present=[".pre-commit-config.yaml"]),
+    CommandHook("pre-commit", "pre-commit", command=["pre-commit", "run"], present=[".pre-commit-config.yaml"]),
     CommandHook("python", "black", command=[".venv/bin/black", "--check", "."], present=[".venv/bin/black"]),
     CommandHook("python", "mypy", command=[".venv/bin/mypy", "."], present=[".venv/bin/mypy"]),
     CommandHook("python", "pytest", command=[".venv/bin/pytest"], present=[".venv/bin/pytest"]),
