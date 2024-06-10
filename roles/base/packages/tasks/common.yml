@@ -29,6 +29,7 @@
           - 'nano'
           - 'pipx'
           - 'plantuml'
+          - 'plocate'
           - 'pre-commit'
           - 'ripgrep'
           - 'shellcheck'
