@@ -14,7 +14,7 @@
 
     - name: 'copy zsh libraries'
       ansible.builtin.copy:
-        src: '.local/share/zsh/'
+        src: '.local/share/src/'
         dest: '{{ zsh_home }}/.local/share/src/'
         mode: 'u=rw,g=r,o=r'
 
