@@ -55,6 +55,15 @@ if [[ -v "commands[kubectl]" ]]; then
   }
 fi
 
+# Kustomize
+# https://kubectl.docs.kubernetes.io/installation/kustomize/
+if [[ -v "commands[kustomize]" ]]; then
+  if [[ ! -f "${HOME}/.cache/zsh/functions/_kustomize" ]]; then
+    kustomize completion zsh > "${HOME}/.cache/zsh/functions/_kustomize"
+    echo "Generated kustomize completions, restart ${SHELL} to use"
+  fi
+fi
+
 # ArgoCD Rollouts
 # https://argoproj.github.io/argo-rollouts/installation/#shell-auto-completion
 if [[ -v "commands[kubectl-argo-rollouts]" ]]; then
