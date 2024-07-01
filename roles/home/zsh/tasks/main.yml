@@ -12,6 +12,12 @@
         dest: '{{ zsh_home }}/.local/share/zsh/'
         mode: 'u=rw,g=r,o=r'
 
+    - name: 'copy zsh libraries'
+      ansible.builtin.copy:
+        src: '.local/share/zsh/'
+        dest: '{{ zsh_home }}/.local/share/src/'
+        mode: 'u=rw,g=r,o=r'
+
     - name: 'copy zsh config'
       ansible.builtin.copy:
         src: 'zshrc'
@@ -44,22 +50,6 @@
       loop: '{{ zsh_zshrc|combine(zsh_zshrc_local)|dict2items }}'
       loop_control:
         label: '{{ item.key }}'
-
-#    - name: 'set shell to zsh'
-#      ansible.builtin.user:
-#        name: '{{ lookup("env", "USER") }}'
-#        shell: '/bin/zsh'
-#      become: 'yes'
-
-#     - name: 'generate kubectl completion files'
-#       ansible.builtin.shell:
-#         cmd: 'kubectl completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
-#         creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_kubectl'
-
-#     - name: 'generate oc completion files'
-#       ansible.builtin.shell:
-#         cmd: 'oc completion zsh > {{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
-#         creates: '{{ lookup("env", "HOME") }}/.cache/zsh/functions/_oc'
 
     - name: 'copy ~/.config/starship.toml'
       tags: ['starship']

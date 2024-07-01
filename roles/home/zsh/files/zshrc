@@ -143,13 +143,13 @@ fi
 # Completion for kubectl aliases.
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
 if [[ -v 'commands[kubectl]' ]]; then
-  source "$HOME/.local/share/zsh/kubectl.zsh"
+  source "$HOME/.local/share/src/kubectl.zsh"
 fi
 
 # Ubuntu specific configuration.
 # This isn't needed on most of my machines.
 if [[ "$(grep -ioP '^ID=\K.+' '/etc/os-release')" == 'ubuntu' ]]; then
-  source "$HOME/.local/share/zsh/ubuntu.zsh"
+  source "$HOME/.local/share/src/ubuntu.zsh"
 fi
 
 # Load machine-local configuration.
