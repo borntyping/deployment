@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+DATE="$(date -d "${1:?}")"
+
+
+export GIT_AUTHOR_DATE="${DATE}"
+export GIT_COMMITTER_DATE="${DATE}"
+
+git commit --amend --no-edit --no-verify --date="${DATE}"
+git show --format=fuller --no-patch
