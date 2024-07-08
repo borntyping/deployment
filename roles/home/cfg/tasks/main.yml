@@ -1,6 +1,7 @@
 ---
 - tags:
     - 'home'
+    - 'cfg'
   block:
     - name: 'copy dotfiles'
       copy:
@@ -38,7 +39,7 @@
         mode: '0755'
 
     - name: 'install scripts from ansible source into ~/.local/share/src'
-      tags: ['local', 'share', 'src']
+      tags: ['local', 'share', 'src', 'git']
       ansible.builtin.copy:
         src: '.local/share/src/'
         dest: '{{ ansible_user_dir }}/.local/share/src/'
