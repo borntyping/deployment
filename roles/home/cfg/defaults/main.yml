@@ -1,3 +1,4 @@
 ---
-bin_scripts: {}
-bin_scripts_local:
+cfg_scripts: []
+cfg_scripts_local: []
+cfg_scripts_secret: []
