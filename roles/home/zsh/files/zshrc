@@ -56,8 +56,9 @@ alias gd='git diff'
 alias gs='git status'
 
 alias cola='git-cola 2>/dev/null &'                                             # Run 'git-cola' in the background and mute any UI warnings.
-alias gitg='gitg 2>/dev/null &'                                                 # Run 'gitg' in the background and mute any UI warnings.
 alias gf='git-forgit'                                                           # https://github.com/wfxr/forgit
+alias gitg='gitg 2>/dev/null &'                                                 # Run 'gitg' in the background and mute any UI warnings.
+alias gsp='git-spice'                                                           # https://abhinav.github.io/git-spice/
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
 
