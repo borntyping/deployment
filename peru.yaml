@@ -1,14 +1,14 @@
 ---
 imports:
-  atuin-aarch64|atuin-aarch64-bin: roles/home/bin/files/aarch64/.local/bin/
-  atuin-x86_64|atuin-x86_64-bin: roles/home/bin/files/x86_64/.local/bin/
+  atuin-aarch64|atuin-bin: roles/home/bin/files/aarch64/.local/bin/
+  atuin-x86_64|atuin-bin: roles/home/bin/files/x86_64/.local/bin/
   aws-vault-aarch64: roles/home/bin/files/aarch64/.local/bin/
   aws-vault-x86_64: roles/home/bin/files/x86_64/.local/bin/
   fixup|fixup-bin: roles/home/bin/files/.local/bin/
   git-spice-aarch64|git-spice-bin: roles/home/bin/files/aarch64/.local/bin/
   git-spice-x86_64|git-spice-bin: roles/home/bin/files/x86_64/.local/bin/
-  just-aarch64|just-aarch64-bin: roles/home/bin/files/aarch64/.local/bin/
-  just-x86_64|just-x86_64-bin: roles/home/bin/files/x86_64/.local/bin/
+  just-aarch64|just-bin: roles/home/bin/files/aarch64/.local/bin/
+  just-x86_64|just-bin: roles/home/bin/files/x86_64/.local/bin/
   kubectx-aarch64: roles/home/bin/files/aarch64/.local/bin/
   kubectx-x86_64: roles/home/bin/files/x86_64/.local/bin/
   kubens-aarch64: roles/home/bin/files/aarch64/.local/bin/
@@ -16,13 +16,13 @@ imports:
   starship-aarch64: roles/home/bin/files/aarch64/.local/bin/
   starship-x86_64: roles/home/bin/files/x86_64/.local/bin/
 
-  just-x86_64|just-x86_64-man: roles/home/files/cfg/.local/share/man/man1/
+  just-x86_64|just-man: roles/home/files/cfg/.local/share/man/man1/
 
   dracula: roles/workstation/home/files/.config/tilix/schemes
   fantasque: roles/workstation/home/files/.fonts
   fantasque-nerd: roles/workstation/home/files/.fonts
 
-  atuin-x86_64|atuin-x86_64-zsh: roles/home/zsh/files/.local/share/zsh/
+  atuin-x86_64|atuin-zsh: roles/home/zsh/files/.local/share/zsh/
   fixup|fixup-zsh: roles/home/zsh/files/.local/share/zsh/
   miniplug: roles/home/zsh/files/.local/share/zsh/
 
@@ -36,20 +36,16 @@ curl module atuin-aarch64:
   unpack: tar
   export: atuin-v18.2.0-aarch64-unknown-linux-gnu
 
-rule atuin-aarch64-bin:
-  pick: [atuin]
-  executable: [atuin]
-
 curl module atuin-x86_64:
   url: https://github.com/atuinsh/atuin/releases/download/v18.2.0/atuin-v18.2.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
   export: atuin-v18.2.0-x86_64-unknown-linux-gnu
 
-rule atuin-x86_64-bin:
+rule atuin-bin:
   pick: [atuin]
   executable: [atuin]
 
-rule atuin-x86_64-zsh:
+rule atuin-zsh:
   copy: {completions/_atuin: atuin.zsh}
   pick: [atuin.zsh]
 
@@ -157,22 +153,15 @@ curl module just-aarch64:
   url: https://github.com/casey/just/releases/download/1.24.0/just-1.24.0-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
 
-rule just-aarch64-bin:
-  pick: just
-  executable: just
-
-rule just-aarch64-man:
-  pick: just.1
-
 curl module just-x86_64:
   url: https://github.com/casey/just/releases/download/1.24.0/just-1.24.0-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
 
-rule just-x86_64-bin:
+rule just-bin:
   pick: just
   executable: just
 
-rule just-x86_64-man:
+rule just-man:
   pick: just.1
 
 #
