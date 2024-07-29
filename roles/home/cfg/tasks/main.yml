@@ -6,6 +6,8 @@
     - name: 'set facts'
       ansible.builtin.set_fact:
         _cfg_scripts: '{{ cfg_scripts + cfg_scripts_local + cfg_scripts_secret }}'
+      tags:
+        - 'always'
 
     - name: 'copy dotfiles'
       copy:
