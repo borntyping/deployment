@@ -5,6 +5,8 @@ imports:
   aws-vault-aarch64: roles/home/bin/files/aarch64/.local/bin/
   aws-vault-x86_64: roles/home/bin/files/x86_64/.local/bin/
   fixup|fixup-bin: roles/home/bin/files/.local/bin/
+  git-spice-aarch64|git-spice-bin: roles/home/bin/files/aarch64/.local/bin/
+  git-spice-x86_64|git-spice-bin: roles/home/bin/files/x86_64/.local/bin/
   just-aarch64|just-aarch64-bin: roles/home/bin/files/aarch64/.local/bin/
   just-x86_64|just-x86_64-bin: roles/home/bin/files/x86_64/.local/bin/
   kubectx-aarch64: roles/home/bin/files/aarch64/.local/bin/
@@ -126,6 +128,25 @@ rule fixup-zsh:
     completion.zsh: fixup.zsh
   pick:
     - fixup.zsh
+
+
+#
+# git-spice
+# https://abhinav.github.io/git-spice/
+#
+
+curl module git-spice-aarch64:
+  url: https://github.com/abhinav/git-spice/releases/download/v0.3.0/git-spice.Linux-aarch64.tar.gz
+  unpack: tar
+
+curl module git-spice-x86_64:
+  url: https://github.com/abhinav/git-spice/releases/download/v0.3.0/git-spice.Linux-x86_64.tar.gz
+  unpack: tar
+
+rule git-spice-bin:
+  move: {gs: git-spice}
+  pick: git-spice
+  executable: git-spice
 
 #
 # Just
