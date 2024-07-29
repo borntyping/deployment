@@ -35,11 +35,13 @@ curl module atuin-aarch64:
   url: https://github.com/atuinsh/atuin/releases/download/v18.2.0/atuin-v18.2.0-aarch64-unknown-linux-gnu.tar.gz
   unpack: tar
   export: atuin-v18.2.0-aarch64-unknown-linux-gnu
+  sha1: 57864e70964e4d267030e6bb0cd7d16c581972c3
 
 curl module atuin-x86_64:
   url: https://github.com/atuinsh/atuin/releases/download/v18.2.0/atuin-v18.2.0-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
   export: atuin-v18.2.0-x86_64-unknown-linux-gnu
+  sha1: 179f9e42f6d298a211cc554e864031243a729f26
 
 rule atuin-bin:
   pick: [atuin]
@@ -58,6 +60,7 @@ curl module aws-vault-aarch64:
   url: https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-arm64
   move: {aws-vault-linux-arm64: aws-vault}
   executable: [aws-vault]
+  sha1: dce08a9a7a979160f26b7f19f75f00c8447b911d
 
 curl module aws-vault-x86_64:
   url: https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-amd64
@@ -111,7 +114,7 @@ curl module fantasque-nerd:
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
-  rev: f964653f10bf9e91abe05b73c8d66c75ba25966d
+  rev: dc8c1657ca0b12885950150ab30cf4f5df693905
 
 rule fixup-bin:
   pick:
@@ -134,10 +137,12 @@ rule fixup-zsh:
 curl module git-spice-aarch64:
   url: https://github.com/abhinav/git-spice/releases/download/v0.3.0/git-spice.Linux-aarch64.tar.gz
   unpack: tar
+  sha1: fcd54420ff2697339852320a2664c917ee34c088
 
 curl module git-spice-x86_64:
   url: https://github.com/abhinav/git-spice/releases/download/v0.3.0/git-spice.Linux-x86_64.tar.gz
   unpack: tar
+  sha1: decd3da3bc8196bafad654daa4aae6d8691b5897
 
 rule git-spice-bin:
   move: {gs: git-spice}
@@ -152,10 +157,12 @@ rule git-spice-bin:
 curl module just-aarch64:
   url: https://github.com/casey/just/releases/download/1.24.0/just-1.24.0-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
+  sha1: eb05a618f0ae6b46c67dcb375e709cb6f9a32641
 
 curl module just-x86_64:
   url: https://github.com/casey/just/releases/download/1.24.0/just-1.24.0-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
+  sha1: 9175a8961872e3e9c9509445f8c0b60ab62f2dde
 
 rule just-bin:
   pick: just
@@ -174,24 +181,28 @@ curl module kubectx-x86_64:
   pick: kubectx
   executable: kubectx
   unpack: tar
+  sha1: e6214c2aaf0d76ba972a280b8457d8f013fc77d1
 
 curl module kubectx-aarch64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_arm64.tar.gz
   pick: kubectx
   executable: kubectx
   unpack: tar
+  sha1: a9b3457cdf0698ad4efcd3bbf480d7f14bbd2858
 
 curl module kubens-x86_64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz
   pick: kubens
   executable: kubens
   unpack: tar
+  sha1: ec79608aef9b7ff707c3f95c94c14f6cfd970c9f
 
 curl module kubens-aarch64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_arm64.tar.gz
   pick: kubens
   executable: kubens
   unpack: tar
+  sha1: 9b34ab99d5aa7634fea8f41820bdb6a7bf35ef08
 
 #
 # Starship
@@ -203,9 +214,11 @@ curl module starship-aarch64:
   unpack: tar
   pick: [starship]
   executable: [starship]
+  sha1: e337e385414bf5828f3bd40ff78f79382ed3427c
 
 curl module starship-x86_64:
   url: https://github.com/starship/starship/releases/download/v1.18.2/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
   pick: [starship]
   executable: [starship]
+  sha1: 6ef5ed8c8fac7534020176ebee37abe086888255
