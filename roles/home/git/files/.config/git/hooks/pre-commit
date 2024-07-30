@@ -74,7 +74,7 @@ class Hook:
 
 @dataclasses.dataclass()
 class ExcludeHook(Hook):
-    pattern: str
+    patterns: typing.Collection[str]
 
     def enabled(self) -> bool:
         return self.git_hook_enabled(self.name) is not False
@@ -94,8 +94,9 @@ class ExcludeHook(Hook):
         if result.returncode != 0:
             return None
 
-        if self.pattern in result.stdout:
-            return f"commit diff includes {self.pattern!r}"
+        for pattern in self.patterns:
+            if pattern in result.stdout:
+                return f"commit diff includes {pattern!r}"
 
         return None
 
@@ -123,7 +124,8 @@ class CommandHook(Hook):
 
 
 hooks = [
-    ExcludeHook("diff", "exclude", pattern="!nocommit"),
+    ExcludeHook("diff", "exclude", patterns=["!nocommit"]),
+    ExcludeHook("diff", "spelling", patterns=["kustomise"]),
     CommandHook("cargo", "cargo fmt", command=["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
     CommandHook("cargo", "cargo test", command=["cargo", "test", "--all"], present=["Cargo.toml"]),
     CommandHook("docs", "mkdocs", command=["mkdocs", "build", "--strict"], present=["mkdocs.yml"]),
