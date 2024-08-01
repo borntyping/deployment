@@ -128,7 +128,7 @@ hooks = [
     ExcludeHook("diff", "spelling", patterns=["kustomise"]),
     CommandHook("cargo", "cargo fmt", command=["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
     CommandHook("cargo", "cargo test", command=["cargo", "test", "--all"], present=["Cargo.toml"]),
-    CommandHook("docs", "mkdocs", command=["mkdocs", "build", "--strict"], present=["mkdocs.yml"]),
+    CommandHook("docs", "mkdocs", command=["mkdocs", "build", "--strict", "--quiet"], present=["mkdocs.yml"]),
     CommandHook("php", "phpstan", command=["vendor/bin/phpstan"], present=["vendor/bin/phpstan"]),
     CommandHook("php", "phpunit", command=["vendor/bin/phpunit"], present=["vendor/bin/phpunit"]),
     CommandHook("pre-commit", "pre-commit", command=["pre-commit", "run"], present=[".pre-commit-config.yaml"]),
