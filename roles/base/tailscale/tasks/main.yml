@@ -30,7 +30,6 @@
           --cert-file "{{ tailscale_certificates_directory }}/{{ tailscale_host }}.crt"
           --key-file "{{ tailscale_certificates_directory }}/{{ tailscale_host }}.key"
           "{{ tailscale_host }}"
-        creates: '{{ tailscale_certificates_directory }}/{{ tailscale_host }}.crt'
 
     - name: 'create tailscale certificates group'
       ansible.builtin.group:
@@ -53,6 +52,29 @@
       loop:
         - '{{ tailscale_host }}.crt'
         - '{{ tailscale_host }}.key'
+
+    # https://tailscale.com/kb/1019/subnets?tab=linux#enable-ip-forwarding
+    # echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+    # echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+    # sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
+    - name: 'enable ipv4 forwarding'
+      ansible.posix.sysctl:
+        name: 'net.ipv4.ip_forward'
+        value: '1'
+        sysctl_file: '/etc/sysctl.d/90-tailscale.conf'
+    - name: 'enable ipv6 forwarding'
+      ansible.posix.sysctl:
+        name: 'net.ipv6.conf.all.forwarding'
+        value: '1'
+        sysctl_file: '/etc/sysctl.d/90-tailscale.conf'
+
+    # NETDEV=$(ip route show 8.8.8.8 | cut -f5 -d' ')
+    # sudo ethtool -K $NETDEV rx-udp-gro-forwarding on rx-gro-list off
+    - name: 'optimise network performance'
+      ansible.builtin.command:
+        cmd: 'ethtool -K "{{ item }}" rx-udp-gro-forwarding on rx-gro-list off'
+      loop: '{{ tailscale_ethtool_devices }}'
+
 
 #    - name: 'add caddy to the tailscale certificates group'
 #      tags: ['caddy']
