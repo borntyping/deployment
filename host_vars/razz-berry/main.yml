@@ -1,0 +1,4 @@
+---
+tailscale_ethtool_devices:
+  - 'end0'
+  - 'wlan0'
