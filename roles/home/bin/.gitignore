@@ -1,4 +1,3 @@
-!files/*/.local/
-!files/.local/
-files/aarch64/.local/bin/git-spice
-files/x86_64/.local/bin/git-spice
+files/.local/bin/*
+files/aarch64/.local/bin/*
+files/x86_64/.local/bin/*
