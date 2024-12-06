@@ -135,14 +135,12 @@ rule fixup-zsh:
 #
 
 curl module git-spice-aarch64:
-  url: https://github.com/abhinav/git-spice/releases/download/v0.3.0/git-spice.Linux-aarch64.tar.gz
+  url: https://github.com/abhinav/git-spice/releases/download/v0.9.0/git-spice.Linux-aarch64.tar.gz
   unpack: tar
-  sha1: fcd54420ff2697339852320a2664c917ee34c088
 
 curl module git-spice-x86_64:
-  url: https://github.com/abhinav/git-spice/releases/download/v0.3.0/git-spice.Linux-x86_64.tar.gz
+  url: https://github.com/abhinav/git-spice/releases/download/v0.9.0/git-spice.Linux-x86_64.tar.gz
   unpack: tar
-  sha1: decd3da3bc8196bafad654daa4aae6d8691b5897
 
 rule git-spice-bin:
   move: {gs: git-spice}
