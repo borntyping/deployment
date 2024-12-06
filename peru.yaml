@@ -114,7 +114,7 @@ curl module fantasque-nerd:
 
 git module fixup:
   url: https://github.com/keis/git-fixup.git
-  rev: dc8c1657ca0b12885950150ab30cf4f5df693905
+  rev: 8337259f5d3fd3a459936a09139901d5eb2c1d1e
 
 rule fixup-bin:
   pick:
@@ -137,10 +137,12 @@ rule fixup-zsh:
 curl module git-spice-aarch64:
   url: https://github.com/abhinav/git-spice/releases/download/v0.9.0/git-spice.Linux-aarch64.tar.gz
   unpack: tar
+  sha1: 3f90feac7c37cb2febc6df52b2dc8ef85e833b0c
 
 curl module git-spice-x86_64:
   url: https://github.com/abhinav/git-spice/releases/download/v0.9.0/git-spice.Linux-x86_64.tar.gz
   unpack: tar
+  sha1: 121178c4297e8288bb2c6d61f49f8d2eb5013328
 
 rule git-spice-bin:
   move: {gs: git-spice}
