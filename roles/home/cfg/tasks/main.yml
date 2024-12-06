@@ -4,10 +4,9 @@
     - 'cfg'
   block:
     - name: 'set facts'
+      tags: ['always', 'scripts']
       ansible.builtin.set_fact:
         _cfg_scripts: '{{ cfg_scripts + cfg_scripts_local + cfg_scripts_secret }}'
-      tags:
-        - 'always'
 
     - name: 'copy dotfiles'
       copy:
@@ -27,7 +26,7 @@
         state: 'directory'
 
     - name: 'install scripts from ansible variables into ~/.bin'
-      tags: ['bin']
+      tags: ['bin', 'scripts']
       ansible.builtin.copy:
         content: '{{ item.content }}'
         dest: '{{ ansible_user_dir }}/.bin/{{ item.name }}'
@@ -38,14 +37,14 @@
 
     - name: 'install scripts from ansible source into ~/.local/bin (ubuntu only)'
       when: 'ansible_os_family == "Debian"'
-      tags: ['local', 'bin']
+      tags: ['local', 'bin', 'scripts']
       copy:
         src: 'ubuntu/.local/bin/'
         dest: '{{ ansible_user_dir }}/.local/bin'
         mode: '0755'
 
     - name: 'install scripts from ansible source into ~/.local/share/src'
-      tags: ['local', 'share', 'src', 'git']
+      tags: ['local', 'share', 'src', 'git', 'scripts']
       ansible.builtin.copy:
         src: '.local/share/src/'
         dest: '{{ ansible_user_dir }}/.local/share/src/'
