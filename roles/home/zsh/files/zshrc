@@ -136,6 +136,12 @@ if [[ -v "commands[exa]" ]]; then
   alias lll='exa --long --tree --level=2'
 fi
 
+# jj - git replacement
+# https://jj-vcs.github.io/jj/v0.25.0/install-and-setup/#command-line-completio
+if [[ -v "commands[jj]" ]]; then
+  source <(COMPLETE=zsh jj)
+fi
+
 # Podman
 # systemctl --user start podman.socket
 if [[ -v 'commands[podman]' && -f "${XDG_RUNTIME_DIR}/podman/podman.sock" ]]; then
