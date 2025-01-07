@@ -5,15 +5,12 @@
         name: 'base/linuxbrew'
 
     - name: 'brew : install brew packages'
-      tags:
-        - 'direnv'
-        - 'go'
-        - 'starship'
-        - 'zoxide'
+      tags: ['direnv', 'fzf', 'go', 'starship', 'zoxide']
       community.general.homebrew:
         state: 'present'
         name:
           - 'direnv'
+          - 'fzf'
           - 'go'
           - 'starship'
           - 'zoxide'
