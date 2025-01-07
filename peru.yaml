@@ -16,7 +16,7 @@ imports:
   starship-aarch64: roles/home/bin/files/aarch64/.local/bin/
   starship-x86_64: roles/home/bin/files/x86_64/.local/bin/
 
-  just-x86_64|just-man: roles/home/files/cfg/.local/share/man/man1/
+  just-x86_64|just-man: roles/home/cfg/.local/share/man/man1/
 
   dracula: roles/workstation/home/files/.config/tilix/schemes
   fantasque: roles/workstation/home/files/.fonts
