@@ -1,5 +1,8 @@
 dialect = "uk"
 search_mode = "fulltext"
 filter_mode = "host"
+history_filter = [
+    "^__jetbrains_intellij_run_generator .*",
+]
 [sync]
 records = true
