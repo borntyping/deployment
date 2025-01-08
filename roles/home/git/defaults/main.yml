@@ -5,15 +5,16 @@ git_forges:
     path: '~/Development/github.com/borntyping/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_github_borntyping'
-    priority: 45
-    groups: []
+    priority: 30
+    groups:
+      - 'rust-psutil'
 
   - host: 'github.com'
     user: 'borntyping-corporate'
     path: '~/Development/github.com/borntyping-corporate/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_github_borntyping_corporate'
-    priority: 45
+    priority: 30
     groups: []
 
   - host: 'gitlab.com'
@@ -21,7 +22,7 @@ git_forges:
     path: '~/Development/gitlab.com/borntyping/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_gitlab_borntyping'
-    priority: 45
+    priority: 40
     groups: []
 
 git_forges_local: []
