@@ -14,165 +14,120 @@ imports:
   starship-aarch64: roles/home/bin/files/aarch64/.local/bin/
   starship-x86_64: roles/home/bin/files/x86_64/.local/bin/
 
-  just-x86_64|just-man: roles/home/cfg/.local/share/man/man1/
-
   dracula: roles/workstation/home/files/.config/tilix/schemes
-  fantasque: roles/workstation/home/files/.fonts
   fantasque-nerd: roles/workstation/home/files/.fonts
-
+  fantasque: roles/workstation/home/files/.fonts
   fixup|fixup-zsh: roles/home/zsh/files/.local/share/zsh/
+  just-x86_64|just-man: roles/home/cfg/.local/share/man/man1/
   miniplug: roles/home/zsh/files/.local/share/zsh/
 
-#
 # Atuin
 # https://atuin.sh/
 # https://github.com/atuinsh/atuin/releases
-#
-
 curl module atuin-aarch64:
   url: https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-aarch64-unknown-linux-gnu.tar.gz
   unpack: tar
   move: {atuin-aarch64-unknown-linux-gnu/atuin: atuin}
   pick: [atuin]
-
 curl module atuin-x86_64:
   url: https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
   move: {atuin-x86_64-unknown-linux-gnu/atuin: atuin}
   pick: [atuin]
 
-#
 # miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
-#
-
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
   sha1: 4b9e4bc549f7fed040a2058adcc76274b95003ed
 
-#
 # Dracula for Tilix
 # https://github.com/dracula/tilix
-#
-
 curl module dracula:
   url: https://github.com/dracula/tilix/archive/master.zip
   unpack: zip
-  move:
-    tilix-master/Dracula.json: Dracula.json
-  pick:
-    - Dracula.json
+  move: {tilix-master/Dracula.json: Dracula.json}
+  pick: [Dracula.json]
   sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
 
-#
 # Fantasque Sans Mono
 # https://github.com/belluzj/fantasque-sans
-#
-
 curl module fantasque:
   url: https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip
   unpack: zip
   export: TTF/
   sha1: 54cf092de3ad5785f80bc198809837096f16966b
-
 curl module fantasque-nerd:
   url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FantasqueSansMono.zip
   unpack: zip
   sha1: bd31e05a801f6389ae197462d513dd04d1141206
 
-#
 # git-fixup
 # https://github.com/keis/git-fixup
-#
-
 git module fixup:
   url: https://github.com/keis/git-fixup.git
   rev: 721b1f956e7b334a10a79b212190a6aacceebc45
-
 rule fixup-bin:
-  pick:
-    - git-fixup
-  executable:
-    - git-fixup
-
+  pick: [git-fixup]
+  executable: [git-fixup]
 rule fixup-zsh:
-  copy:
-    completion.zsh: fixup.zsh
-  pick:
-    - fixup.zsh
+  copy: {completion.zsh: fixup.zsh}
+  pick: [fixup.zsh]
 
-
-#
 # git-spice
 # https://abhinav.github.io/git-spice/
 # https://github.com/abhinav/git-spice/releases
-#
-
 curl module git-spice-aarch64:
   url: https://github.com/abhinav/git-spice/releases/download/v0.11.0/git-spice.Linux-aarch64.tar.gz
   unpack: tar
   sha1: 06f900a5e69cef0cb576cd88920cce81135a9249
-
 curl module git-spice-x86_64:
   url: https://github.com/abhinav/git-spice/releases/download/v0.11.0/git-spice.Linux-x86_64.tar.gz
   unpack: tar
   sha1: f228497b285b84b2fa8f3cc8327b8f785e2a095e
-
 rule git-spice-bin:
   move: {gs: git-spice}
   pick: git-spice
   executable: git-spice
 
-#
 # Just
 # https://just.systems/
 # https://github.com/casey/just/releases
-#
-
 curl module just-aarch64:
   url: https://github.com/casey/just/releases/download/1.39.0/just-1.39.0-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
   sha1: 5006bc1d640cff5bdd367f4989812676db6787cf
-
 curl module just-x86_64:
   url: https://github.com/casey/just/releases/download/1.39.0/just-1.39.0-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
   sha1: 3014678e8b45ab12fb39b5dbf0efed06bfdd5acf
-
 rule just-bin:
   pick: just
   executable: just
-
 rule just-man:
   pick: just.1
 
-#
 # kubectx + kubens
 # http://github.com/ahmetb/kubectx/
 # https://github.com/ahmetb/kubectx/releases
-#
-
 curl module kubectx-x86_64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_x86_64.tar.gz
   pick: kubectx
   executable: kubectx
   unpack: tar
   sha1: e6214c2aaf0d76ba972a280b8457d8f013fc77d1
-
 curl module kubectx-aarch64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_arm64.tar.gz
   pick: kubectx
   executable: kubectx
   unpack: tar
   sha1: a9b3457cdf0698ad4efcd3bbf480d7f14bbd2858
-
 curl module kubens-x86_64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_x86_64.tar.gz
   pick: kubens
   executable: kubens
   unpack: tar
   sha1: ec79608aef9b7ff707c3f95c94c14f6cfd970c9f
-
 curl module kubens-aarch64:
   url: https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_arm64.tar.gz
   pick: kubens
@@ -180,19 +135,15 @@ curl module kubens-aarch64:
   unpack: tar
   sha1: 9b34ab99d5aa7634fea8f41820bdb6a7bf35ef08
 
-#
 # Starship
 # https://starship.rs/
 # https://github.com/starship/starship/releases
-#
-
 curl module starship-aarch64:
   url: https://github.com/starship/starship/releases/download/v1.22.1/starship-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
   pick: [starship]
   executable: [starship]
   sha1: f7ce04b13eeaaa87538b7390b660078003db8153
-
 curl module starship-x86_64:
   url: https://github.com/starship/starship/releases/download/v1.22.1/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
