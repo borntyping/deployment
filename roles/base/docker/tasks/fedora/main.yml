@@ -10,6 +10,7 @@
           - 'docker-client'
           - 'docker-client-latest'
           - 'docker-common'
+          - 'docker-compose'
           - 'docker-engine'
           - 'docker-engine-selinux'
           - 'docker-latest'
@@ -32,5 +33,4 @@
           - 'docker-buildx-plugin'
           - 'docker-ce'
           - 'docker-ce-cli'
-          - 'docker-compose'
           - 'docker-compose-plugin'

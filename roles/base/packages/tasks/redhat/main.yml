@@ -24,7 +24,6 @@
           - 'clippy'
           - 'cockpit'
           - 'direnv'
-          - 'docker-compose'
           - 'fzf'
           - 'gcc-c++'
           - 'git-delta'

@@ -18,7 +18,7 @@
           fail:
             msg: 'run "sudo tailscale up --operator=$USER"'
 
-    - name: 'check tailscale hostname ({{ tailscale_host }})'
+    - name: 'check tailscale hostname'
       when: 'not tailscale_host.endswith(".ts.net")'
       fail:
         msg: 'tailscale_host is not set to a tailscale domain'
