@@ -1,4 +1,1 @@
 ---
-dependencies:
-  - role: 'base/packages'
-  - role: 'base/tailscale'
