@@ -1,10 +1,13 @@
 #!/usr/bin/env zsh
 
 # shellcheck disable=SC2016
-exec git switch "$(git branch --color=always --list --format '%(refname:lstrip=2)' | fzf \
-  --no-sort \
-  --cycle \
-  --height="~100%" \
-  --info="default" --info-command 'echo "$FZF_INFO" "$ git switch {1}"' \
-  --preview-label="git log" \
-  --preview="git log --color=always --graph --pretty=graph --date=short --decorate {1}")"
+exec git switch "$(git branch --color=always --list --format '%(if)%(HEAD)%(then)%(color:green)%(else)%(if:equals=refs/heads/sclement/feature)%(refname:rstrip=-4)%(then)%(else)%(color:white)%(end)%(end)%(refname:lstrip=2)%(color:reset)' \
+  | fzf \
+    --ansi \
+    --no-sort \
+    --cycle \
+    --height="~100%" \
+    --info="default" --info-command 'echo "$FZF_INFO" "$ git switch {1}"' \
+    --preview-label="git log" \
+    --preview="git log --color=always --graph --pretty=graph --date=short --decorate {1}" \
+  | awk '{print $1}')"

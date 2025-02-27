@@ -54,6 +54,7 @@ alias gc='git commit'
 alias gca='git commit -a'
 alias gd='git diff'
 alias gs='git status'
+alias gv='git-vers'
 
 alias cola='git-cola 2>/dev/null &'                                             # Run 'git-cola' in the background and mute any UI warnings.
 alias gf='git-forgit'                                                           # https://github.com/wfxr/forgit
