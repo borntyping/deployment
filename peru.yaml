@@ -14,7 +14,8 @@ imports:
   starship-aarch64: roles/home/bin/files/aarch64/.local/bin/
   starship-x86_64: roles/home/bin/files/x86_64/.local/bin/
 
-  dracula: roles/workstation/home/files/.config/tilix/schemes
+  tilix-catppuccin: roles/workstation/home/files/.config/tilix/schemes
+  tilix-dracula: roles/workstation/home/files/.config/tilix/schemes
   fantasque-nerd: roles/workstation/home/files/.fonts
   fantasque: roles/workstation/home/files/.fonts
   fixup|fixup-zsh: roles/home/zsh/files/.local/share/zsh/
@@ -40,15 +41,6 @@ curl module atuin-x86_64:
 curl module miniplug:
   url: https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh
   sha1: 4b9e4bc549f7fed040a2058adcc76274b95003ed
-
-# Dracula for Tilix
-# https://github.com/dracula/tilix
-curl module dracula:
-  url: https://github.com/dracula/tilix/archive/master.zip
-  unpack: zip
-  move: {tilix-master/Dracula.json: Dracula.json}
-  pick: [Dracula.json]
-  sha1: fa1b5484eb419e4ed573b070596df9aee60b9220
 
 # Fantasque Sans Mono
 # https://github.com/belluzj/fantasque-sans
@@ -150,3 +142,21 @@ curl module starship-x86_64:
   pick: [starship]
   executable: [starship]
   sha1: 289e85e3010bcbdfac9873857e6f93ade40252ff
+
+git module tilix-catppuccin:
+  url: git@github.com:catppuccin/tilix.git
+  move:
+    themes/catppuccin-frappe.json: catppuccin-frappe.json
+    themes/catppuccin-latte.json: catppuccin-latte.json
+    themes/catppuccin-macchiato.json: catppuccin-macchiato.json
+    themes/catppuccin-mocha.json: catppuccin-mocha.json
+  pick:
+   - "catppuccin-*.json"
+  rev: 07e53fce36e2162242c8b70f15996841df8f7ce2
+
+# Dracula for Tilix
+# https://github.com/dracula/tilix
+git module tilix-dracula:
+  url: git@github.com:dracula/tilix.git
+  pick: [Dracula.json]
+  rev: d1189a002732c8af5adf9ef2ffc5214fa713c594
