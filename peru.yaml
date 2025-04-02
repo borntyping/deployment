@@ -14,8 +14,8 @@ imports:
   starship-aarch64: roles/home/bin/files/aarch64/.local/bin/
   starship-x86_64: roles/home/bin/files/x86_64/.local/bin/
 
-  tilix-catppuccin: roles/workstation/home/files/.config/tilix/schemes
-  tilix-dracula: roles/workstation/home/files/.config/tilix/schemes
+  catppuccin-tilix: roles/workstation/home/files/.config/tilix/schemes
+  catppuccin-micro: roles/home/cfg/files/.config/micro/colorschemes
   fantasque-nerd: roles/workstation/home/files/.fonts
   fantasque: roles/workstation/home/files/.fonts
   fixup|fixup-zsh: roles/home/zsh/files/.local/share/zsh/
@@ -143,7 +143,7 @@ curl module starship-x86_64:
   executable: [starship]
   sha1: 289e85e3010bcbdfac9873857e6f93ade40252ff
 
-git module tilix-catppuccin:
+git module catppuccin-tilix:
   url: git@github.com:catppuccin/tilix.git
   move:
     themes/catppuccin-frappe.json: catppuccin-frappe.json
@@ -154,9 +154,17 @@ git module tilix-catppuccin:
    - "catppuccin-*.json"
   rev: 07e53fce36e2162242c8b70f15996841df8f7ce2
 
-# Dracula for Tilix
-# https://github.com/dracula/tilix
-git module tilix-dracula:
-  url: git@github.com:dracula/tilix.git
-  pick: [Dracula.json]
-  rev: d1189a002732c8af5adf9ef2ffc5214fa713c594
+git module catppuccin-micro:
+  url: git@github.com:catppuccin/micro.git
+  move:
+    src/catppuccin-frappe-transparent.micro: catppuccin-frappe-transparent.micro
+    src/catppuccin-frappe.micro: catppuccin-frappe.micro
+    src/catppuccin-latte-transparent.micro: catppuccin-latte-transparent.micro
+    src/catppuccin-latte.micro: catppuccin-latte.micro
+    src/catppuccin-macchiato-transparent.micro: catppuccin-macchiato-transparent.micro
+    src/catppuccin-macchiato.micro: catppuccin-macchiato.micro
+    src/catppuccin-mocha-transparent.micro: catppuccin-mocha-transparent.micro
+    src/catppuccin-mocha.micro: catppuccin-mocha.micro
+  pick:
+    - "catppuccin-*.micro"
+  rev: 2802b32308e5b1a827689c095f11ae604bbc85e6

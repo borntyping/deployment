@@ -63,6 +63,7 @@ alias sp='git-spice'                                                            
 alias spl='git spice log long --all'
 
 export EDITOR="micro"                                                           # https://micro-editor.github.io/
+export MICRO_TRUECOLOR="1"                                                      # https://github.com/catppuccin/micro
 
 export BAT_PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"                # Don't use a pager for short files, just echo them.
 export BAT_STYLE="plain"                                                        # Minimal UI when using bat as a pager. Just does code highlighting.
