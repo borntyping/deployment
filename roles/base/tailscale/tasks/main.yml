@@ -7,6 +7,13 @@
       tags: ['always']
       include_vars: 'defaults/main.{{ ansible_os_family|lower }}.yml'
 
+    - name: 'start tailscale service'
+      tags: ['systemd']
+      ansible.builtin.systemd_service:
+        name: 'tailscaled.service'
+        state: 'started'
+        enabled: true
+
     - block:
         - name: 'check tailscale is logged in'
           ansible.builtin.command:
@@ -18,10 +25,15 @@
           fail:
             msg: 'run "sudo tailscale up --operator=$USER"'
 
+    - name: 'check tailscale hostname is defined'
+      when: 'tailscale_host is undefined'
+      fail:
+        msg: 'tailscale_host is not defined, this is required for cockpit certificates'
+
     - name: 'check tailscale hostname'
       when: 'not tailscale_host.endswith(".ts.net")'
       fail:
-        msg: 'tailscale_host is not set to a tailscale domain'
+        msg: 'tailscale_host is not set to a tailscale domain ({{ tailscale_host }})'
 
     - name: 'create certificates'
       ansible.builtin.command:

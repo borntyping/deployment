@@ -2,7 +2,7 @@
 ssh_config:
   - name: 'src'
     config: |
-      Host *.bunny-moth.ts.net eevee.bunny-moth.ts.net razz-berry.bunny-moth.ts.net
+      Host *.bunny-moth.ts.net bellossom.bunny-moth.ts.net eevee.bunny-moth.ts.net razz-berry.bunny-moth.ts.net
         User src
         IdentitiesOnly yes
         IdentityFile "~/.ssh/keys/id_ed25519_tailscale"
@@ -12,9 +12,15 @@ ssh_config:
         IdentitiesOnly yes
         IdentityFile "~/.ssh/keys/id_ed25519_src"
 
+      Host bellossom.rosetyping.net
+        User src
+        IdentitiesOnly yes
+        IdentityFile "~/.ssh/keys/id_ed25519_linode"
+
 ssh_keys_local:
   - 'src'
   - 'tailscale'
+  - 'linode'
 
 git_forges_local:
   - host: 'eevee.bunny-moth.ts.net'

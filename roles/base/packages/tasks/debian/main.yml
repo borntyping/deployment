@@ -29,7 +29,7 @@
         repo: 'deb [signed-by=/etc/apt/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/debian bookworm main'
         state: 'present'
 
-    - name: 'debian : install apt packages'
+    - name: 'debian : install base packages with apt'
       tags: ['postgres']
       become: true
       ansible.builtin.apt:
@@ -47,7 +47,7 @@
           - 'python3-psycopg2'
           - 'zsh-doc'
 
-    - name: 'debian : remove apt packages'
+    - name: 'debian : remove base packages with apt'
       become: true
       ansible.builtin.apt:
         state: 'absent'
@@ -55,10 +55,10 @@
           - 'ansible-core'
           - 'direnv'
 
-- name: 'install ubuntu packages'
+- name: 'install base packages from ubuntu repositories'
   include_tasks: 'debian/ubuntu.yml'
   when: 'ansible_distribution == "Ubuntu"'
 
-- name: 'install brew packages'
+- name: 'install base packages from homebrew'
   include_tasks: 'debian/brew.yml'
   when: 'ansible_architecture == "x86_64"'

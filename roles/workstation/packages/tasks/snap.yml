@@ -2,11 +2,23 @@
 - name: 'snap workstation packages'
   tags: ['workstation', 'snap']
   block:
+    # Enable 'classic' Snap support.
+    # https://snapcraft.io/docs/installing-snap-on-fedora
+    - name: 'snap : configure'
+      when: 'ansible_distribution == "Fedora"'
+      become: true
+      ansible.builtin.file:
+        src: '/var/lib/snapd/snap'
+        dest: '/snap'
+        state: 'link'
+
     - name: 'install snap packages'
       become: true
       community.general.snap:
         name: '{{ item }}'
       loop:
+        - 'dart-sass'
+        - 'lnav'
         - 'slack'
 
     - name: 'install snap packages with --classic'

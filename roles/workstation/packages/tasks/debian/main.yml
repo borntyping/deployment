@@ -2,7 +2,7 @@
 - name: 'ubuntu workstation packages'
   tags: ['workstation', 'ubuntu']
   block:
-    - name: 'install apt packages'
+    - name: 'install workstation packages with apt'
       become: true
       ansible.builtin.apt:
         state: 'latest'

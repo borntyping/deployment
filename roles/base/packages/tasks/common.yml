@@ -1,7 +1,7 @@
 ---
 - tags: ['common']
   block:
-    - name: 'install common packages'
+    - name: 'install base packages'
       tags: ['firewall', 'ufw']
       become: true
       ansible.builtin.package:
@@ -27,7 +27,6 @@
           - 'micro'
           - 'nano'
           - 'pipx'
-          - 'plantuml'
           - 'plocate'
           - 'pre-commit'
           - 'ripgrep'

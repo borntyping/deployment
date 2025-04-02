@@ -1,7 +1,7 @@
 ---
 - tags: 'foundry'
   block:
-    - name: 'install packages'
+    - name: 'install foundryvtt packages'
       become: true
       ansible.builtin.package:
         name:

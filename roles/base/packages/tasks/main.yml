@@ -1,17 +1,13 @@
 ---
 - tags: ['packages']
   block:
-    - name: 'install fedora packages'
+    - name: 'install base packages for fedora'
       when: 'ansible_os_family == "RedHat"'
       include_tasks: 'redhat/main.yml'
 
-    - name: 'install debian packages'
+    - name: 'install base packages for debian'
       tags: ['apt', 'debian', 'syncthing', 'tailscale']
       when: 'ansible_os_family == "Debian"'
       include_tasks: 'debian/main.yml'
 
     - import_tasks: 'common.yml'
-
-    - name: 'install snap packages'
-      when: 'ansible_distribution in ("Fedora", "Ubuntu")'
-      include_tasks: 'snap.yml'

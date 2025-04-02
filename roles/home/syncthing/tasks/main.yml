@@ -1,6 +1,14 @@
 ---
 - tags: ['syncthing']
   block:
+    - name: 'start and enable user services'
+      tags: ['systemd']
+      ansible.builtin.systemd_service:
+        name: 'syncthing.service'
+        scope: 'user'
+        state: 'started'
+        enabled: true
+
     - name: 'use tailscale certificates for syncthing'
       tags: ['certificates', 'tailscale']
       ansible.builtin.copy:
@@ -14,11 +22,3 @@
           dest: 'https-key.pem'
       notify:
         - 'syncthing'
-
-    - name: 'start and enable user services'
-      tags: ['systemd']
-      ansible.builtin.systemd_service:
-        name: 'syncthing.service'
-        scope: 'user'
-        state: 'started'
-        enabled: true

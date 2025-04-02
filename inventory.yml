@@ -4,15 +4,21 @@ all:
     src:
       hosts:
         eevee:
+          ansible_user: 'src'
           ansible_host: 'eevee.bunny-moth.ts.net'
           tailscale_host: 'eevee.bunny-moth.ts.net'
         razz-berry:
+          ansible_user: 'src'
           ansible_host: 'razz-berry.bunny-moth.ts.net'
           tailscale_host: 'razz-berry.bunny-moth.ts.net'
         umbreon:
           ansible_connection: 'local'
           ansible_host: 'umbreon.bunny-moth.ts.net'
           tailscale_host: 'umbreon.bunny-moth.ts.net'
+        bellossom:
+          ansible_user: 'src'
+          ansible_host: 'bellossom.rosetyping.net'
+          tailscale_host: 'bellossom.bunny-moth.ts.net'
 
 workstation:
   hosts:

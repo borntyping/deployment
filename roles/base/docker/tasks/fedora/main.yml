@@ -1,13 +1,13 @@
 ---
 - tags: ['dnf', 'redhat', 'fedora']
   block:
-    - name: 'install dnf repositories'
+    - name: 'install docker repositories with dnf'
       become: true
       ansible.builtin.copy:
         src: 'docker-ce.repo'
         dest: '/etc/yum.repos.d/docker-ce.repo'
 
-    - name: 'install dnf packages'
+    - name: 'install docker packages with dnf'
       become: true
       ansible.builtin.dnf:
         state: 'latest'

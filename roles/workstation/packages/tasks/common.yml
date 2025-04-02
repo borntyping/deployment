@@ -2,9 +2,10 @@
 - name: 'generic workstation packages'
   tags: ['apt', 'base', 'dnf']
   block:
-    - name: 'install generic packages'
+    - name: 'install workstation packages'
       become: true
       ansible.builtin.package:
         state: 'latest'
         pkg:
           - 'gitg'
+          - 'plantuml'
