@@ -22,3 +22,11 @@
           dest: 'https-key.pem'
       notify:
         - 'syncthing'
+
+    - name: 'listen for external requests (only use with ufw+tailscale!)'
+      ansible.builtin.lineinfile:
+        path: '{{ ansible_user_dir }}/.local/state/syncthing/config.xml'
+        search_string: '        <address>127.0.0.1:8384</address>'
+        line: '        <address>0.0.0.0:8384</address>'
+      notify:
+        - 'syncthing'
