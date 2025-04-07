@@ -2,19 +2,20 @@
 git_forges:
   - host: 'github.com'
     user: 'borntyping'
-    path: '~/Development/github.com/borntyping/**'
+    path: '~/Development/github.com/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_github_borntyping'
     priority: 30
     groups:
-      - 'rust-psutil'
+      - name: 'rust-psutil'
+        priority: 31
 
   - host: 'github.com'
     user: 'borntyping-corporate'
     path: '~/Development/github.com/borntyping-corporate/**'
     email: 'sam@borntyping.co.uk'
     ssh_key: 'id_ed25519_github_borntyping_corporate'
-    priority: 30
+    priority: 31
     groups: []
 
   - host: 'gitlab.com'

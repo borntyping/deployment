@@ -28,13 +28,13 @@
     - name: 'create git config.d files for includeIf config for each group'
       ansible.builtin.copy:
         content: |
-          [includeIf "gitdir:{{ item.path|default("~/Development/%s/%s/**" | format(item.0.host, item.1)) }}"]
+          [includeIf "gitdir:{{ item.path|default("~/Development/%s/%s/**" | format(item.0.host, item.1.name)) }}"]
           path = hosts.d/{{ item.0.host }}/{{ item.0.user }}.config
-        dest: '{{ ansible_user_dir }}/.config/git/config.d/{{ item.0.priority|default(50) }}-{{ item.0.host }}-{{ item.1 }}.config'
+        dest: '{{ ansible_user_dir }}/.config/git/config.d/{{ item.1.priority|default(item.0.priority|default(50)) }}-{{ item.0.host }}-{{ item.1.name }}.config'
         mode: 'preserve'
       loop: '{{ _git_forges | subelements("groups", skip_missing=True) }}'
       loop_control:
-        label: '{{ item.0.host }}/{{ item.1 }}'
+        label: '{{ item.0.host }}/{{ item.1.name }}'
 
     - name: 'create git hosts.d directories'
       ansible.builtin.file:
@@ -75,8 +75,8 @@
 
     - name: 'create git source code directories for each host + group'
       ansible.builtin.file:
-        name: '{{ ansible_user_dir }}/Development/{{ item.0.host }}/{{ item.1 }}'
+        name: '{{ ansible_user_dir }}/Development/{{ item.0.host }}/{{ item.1.name }}'
         state: 'directory'
       loop: '{{ _git_forges | subelements("groups", skip_missing=True) }}'
       loop_control:
-        label: '{{ item.0.host }}/{{ item.1 }}'
+        label: '{{ item.0.host }}/{{ item.1.name }}'

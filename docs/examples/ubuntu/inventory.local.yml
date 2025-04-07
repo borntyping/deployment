@@ -10,8 +10,10 @@ default:
           path: '~/Development/git.corp.invalid/**'
           email: 'src@corp.invalid'
           ssh_key: 'id_ed25519_corp_src'
+          priority: 50
           groups:
-            - 'team'
+            - name: 'team'
+              priority: 0
       ssh_config_local:
         - name: 'src'
           config: |
@@ -37,8 +39,10 @@ servers:
           path: '~/Development/git.corp.invalid/**'
           email: 'src@corp.invalid'
           ssh_key: 'id_ed25519_corp_src'
+          priority: 50
           groups:
-            - 'team'
+            - name: 'team'
+              priority: 0
       ssh_config: []
       ssh_config_local:
         - name: 'src'
