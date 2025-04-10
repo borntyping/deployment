@@ -9,3 +9,5 @@ ssh_keys:
   - 'gitlab_borntyping'
 ssh_keys_local: []
 ssh_keys_secret: []
+
+ssh_assemble: false
