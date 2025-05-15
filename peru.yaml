@@ -26,15 +26,17 @@ imports:
 # https://atuin.sh/
 # https://github.com/atuinsh/atuin/releases
 curl module atuin-aarch64:
-  url: https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-aarch64-unknown-linux-gnu.tar.gz
+  url: https://github.com/atuinsh/atuin/releases/download/v18.6.1/atuin-aarch64-unknown-linux-gnu.tar.gz
   unpack: tar
   move: {atuin-aarch64-unknown-linux-gnu/atuin: atuin}
   pick: [atuin]
+  sha1: 49866b533ef615c10dc21711e129298e7dc7ff43
 curl module atuin-x86_64:
-  url: https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-x86_64-unknown-linux-gnu.tar.gz
+  url: https://github.com/atuinsh/atuin/releases/download/v18.6.1/atuin-x86_64-unknown-linux-gnu.tar.gz
   unpack: tar
   move: {atuin-x86_64-unknown-linux-gnu/atuin: atuin}
   pick: [atuin]
+  sha1: e7e658cc5fa0d8d967f3214cc7e903401b249e1e
 
 # miniplug
 # https://git.sr.ht/~yerinalexey/miniplug
@@ -70,13 +72,13 @@ rule fixup-zsh:
 # https://abhinav.github.io/git-spice/
 # https://github.com/abhinav/git-spice/releases
 curl module git-spice-aarch64:
-  url: https://github.com/abhinav/git-spice/releases/download/v0.11.0/git-spice.Linux-aarch64.tar.gz
+  url: https://github.com/abhinav/git-spice/releases/download/v0.13.0/git-spice.Linux-aarch64.tar.gz
   unpack: tar
-  sha1: 06f900a5e69cef0cb576cd88920cce81135a9249
+  sha1: df576c4793d84e6e6b7703b7f85fc631220c3484
 curl module git-spice-x86_64:
-  url: https://github.com/abhinav/git-spice/releases/download/v0.11.0/git-spice.Linux-x86_64.tar.gz
+  url: https://github.com/abhinav/git-spice/releases/download/v0.13.0/git-spice.Linux-x86_64.tar.gz
   unpack: tar
-  sha1: f228497b285b84b2fa8f3cc8327b8f785e2a095e
+  sha1: 84edebb0d15f2367eb66a0c6fbac231419e2839b
 rule git-spice-bin:
   move: {gs: git-spice}
   pick: git-spice
@@ -86,13 +88,13 @@ rule git-spice-bin:
 # https://just.systems/
 # https://github.com/casey/just/releases
 curl module just-aarch64:
-  url: https://github.com/casey/just/releases/download/1.39.0/just-1.39.0-aarch64-unknown-linux-musl.tar.gz
+  url: https://github.com/casey/just/releases/download/1.40.0/just-1.40.0-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
-  sha1: 5006bc1d640cff5bdd367f4989812676db6787cf
+  sha1: a0abf267ba432b4a871c77b9462d9cc59014a0bd
 curl module just-x86_64:
-  url: https://github.com/casey/just/releases/download/1.39.0/just-1.39.0-x86_64-unknown-linux-musl.tar.gz
+  url: https://github.com/casey/just/releases/download/1.40.0/just-1.40.0-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
-  sha1: 3014678e8b45ab12fb39b5dbf0efed06bfdd5acf
+  sha1: 4ec263d5cd9faacf682bb967c23bb6a21c3dfda0
 rule just-bin:
   pick: just
   executable: just
@@ -131,17 +133,17 @@ curl module kubens-aarch64:
 # https://starship.rs/
 # https://github.com/starship/starship/releases
 curl module starship-aarch64:
-  url: https://github.com/starship/starship/releases/download/v1.22.1/starship-aarch64-unknown-linux-musl.tar.gz
+  url: https://github.com/starship/starship/releases/download/v1.23.0/starship-aarch64-unknown-linux-musl.tar.gz
   unpack: tar
   pick: [starship]
   executable: [starship]
-  sha1: f7ce04b13eeaaa87538b7390b660078003db8153
+  sha1: 4b88f4931a8d0a9085fb5f3cc5fd84a14ebe019f
 curl module starship-x86_64:
-  url: https://github.com/starship/starship/releases/download/v1.22.1/starship-x86_64-unknown-linux-musl.tar.gz
+  url: https://github.com/starship/starship/releases/download/v1.23.0/starship-x86_64-unknown-linux-musl.tar.gz
   unpack: tar
   pick: [starship]
   executable: [starship]
-  sha1: 289e85e3010bcbdfac9873857e6f93ade40252ff
+  sha1: e885792df2c67512824f2168778f7a6c42a21630
 
 git module catppuccin-tilix:
   url: git@github.com:catppuccin/tilix.git
