@@ -9,6 +9,7 @@
         _git_forges: '{{ git_forges + git_forges_local + git_forges_secret }}'
 
     - name: 'copy git config directory'
+      tags: ['src-pre-commit']
       ansible.builtin.copy:
         src: '.config/git/'
         dest: '{{ ansible_user_dir }}/.config/git/'

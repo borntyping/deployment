@@ -1,6 +1,16 @@
-[tool.black]
-include = 'roles/home/cfg/files/.config/git/hooks/pre-commit'
+[project]
+name = "deployment"
+version = "0.0.0"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mypy>=1.16.1",
+    "ruff>=0.12.2",
+]
+
+[tool.ruff]
+include = ['roles/home/git/files/.config/git/hooks/pre-commit']
 line-length = 128
 
 [tool.mypy]
-files = 'roles/home/cfg/files/.config/git/hooks/pre-commit'
+files = 'roles/home/git/files/.config/git/hooks/pre-commit'

@@ -9,7 +9,7 @@ import typing
 
 def print_alert(text: str, *, fg: str, symbol: str, width: int = 80 + 9) -> None:
     if sys.stdout.isatty():
-        text = f"%(start)s {symbol} {text:{width-4}} %(end)s"
+        text = f"%(start)s {symbol} {text:{width - 4}} %(end)s"
         text = text % {
             "b": "\033[1m",  # bold
             "n": "\033[22m",  # normal
@@ -123,19 +123,42 @@ class CommandHook(Hook):
         return None
 
 
+@dataclasses.dataclass()
+class UvCommandHook(CommandHook):
+    def __init__(
+        self,
+        group: str,
+        name: str,
+        command: typing.Sequence[str],
+        present: typing.Sequence[str] = (),
+        absent: typing.Sequence[str] = (),
+    ) -> None:
+        super().__init__(
+            group=group,
+            name=f"uv run {name}",
+            command=("uv", "run", *command),
+            present=("uv.lock", *present),
+            absent=absent,
+        )
+
+
 hooks = [
     ExcludeHook("diff", "exclude", patterns=["!nocommit"]),
     ExcludeHook("diff", "spelling", patterns=["kustomise"]),
-    CommandHook("cargo", "cargo fmt", command=["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
-    CommandHook("cargo", "cargo test", command=["cargo", "test", "--all"], present=["Cargo.toml"]),
-    CommandHook("docs", "mkdocs", command=["mkdocs", "build", "--strict", "--quiet"], present=["mkdocs.yml"]),
-    CommandHook("php", "phpstan", command=["vendor/bin/phpstan"], present=["vendor/bin/phpstan"]),
-    CommandHook("php", "phpunit", command=["vendor/bin/phpunit"], present=["vendor/bin/phpunit"]),
-    CommandHook("pre-commit", "pre-commit", command=["pre-commit", "run"], present=[".pre-commit-config.yaml"]),
-    CommandHook("python", "black", command=[".venv/bin/black", "--check", "."], present=[".venv/bin/black"]),
-    CommandHook("python", "mypy", command=[".venv/bin/mypy", "."], present=[".venv/bin/mypy"]),
-    CommandHook("python", "pytest", command=[".venv/bin/pytest"], present=[".venv/bin/pytest"]),
-    CommandHook("python", "tox", command=["tox"], present=["tox.ini"]),
+    CommandHook("cargo", "cargo fmt", ["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
+    CommandHook("cargo", "cargo test", ["cargo", "test", "--all"], present=["Cargo.toml"]),
+    CommandHook("docs", "mkdocs", ["mkdocs", "build", "--strict", "--quiet"], present=["mkdocs.yml"]),
+    CommandHook("php", "phpstan", ["vendor/bin/phpstan"], present=["vendor/bin/phpstan"]),
+    CommandHook("php", "phpunit", ["vendor/bin/phpunit"], present=["vendor/bin/phpunit"]),
+    CommandHook("pre-commit", "pre-commit", ["pre-commit", "run"], present=[".pre-commit-config.yaml"], absent=["uv.lock"]),
+    CommandHook("python", "black", [".venv/bin/black", "--check", "."], present=[".venv/bin/black"]),
+    CommandHook("python", "mypy", [".venv/bin/mypy", "."], present=[".venv/bin/mypy"]),
+    CommandHook("python", "pytest", [".venv/bin/pytest"], present=[".venv/bin/pytest"]),
+    UvCommandHook("pre-commit", "pre-commit", ["pre-commit", "run"], present=[".pre-commit-config.yaml"]),
+    UvCommandHook("python", "mypy", ["mypy", "."], present=[".venv/bin/mypy"]),
+    UvCommandHook("python", "pytest", ["pytest"], present=[".venv/bin/pytest"]),
+    UvCommandHook("python", "ruff check", ["ruff", "check"], present=[".venv/bin/ruff"]),
+    UvCommandHook("python", "ruff format", ["ruff", "format"], present=[".venv/bin/ruff"]),
 ]
 if __name__ == "__main__":
     results = [(hook, hook()) for hook in hooks if hook.enabled()]
