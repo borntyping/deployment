@@ -44,6 +44,10 @@ class Hook:
     group: str
     name: str
 
+    def __post_init__(self) -> None:
+        if " " in self.name:
+            raise ValueError("Names cannot contain spaces.")
+
     def __str__(self) -> str:
         return self.name
 
@@ -135,7 +139,7 @@ class UvCommandHook(CommandHook):
     ) -> None:
         super().__init__(
             group=group,
-            name=f"uv run {name}",
+            name=f"uv-run-{name}",
             command=("uv", "run", *command),
             present=("uv.lock", *present),
             absent=absent,
@@ -145,8 +149,8 @@ class UvCommandHook(CommandHook):
 hooks = [
     ExcludeHook("diff", "exclude", patterns=["!nocommit"]),
     ExcludeHook("diff", "spelling", patterns=["kustomise"]),
-    CommandHook("cargo", "cargo fmt", ["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
-    CommandHook("cargo", "cargo test", ["cargo", "test", "--all"], present=["Cargo.toml"]),
+    CommandHook("cargo", "cargo-fmt", ["cargo", "fmt", "--all", "--", "--check"], present=["Cargo.toml"]),
+    CommandHook("cargo", "cargo-test", ["cargo", "test", "--all"], present=["Cargo.toml"]),
     CommandHook("docs", "mkdocs", ["mkdocs", "build", "--strict", "--quiet"], present=["mkdocs.yml"]),
     CommandHook("php", "phpstan", ["vendor/bin/phpstan"], present=["vendor/bin/phpstan"]),
     CommandHook("php", "phpunit", ["vendor/bin/phpunit"], present=["vendor/bin/phpunit"]),
@@ -157,8 +161,8 @@ hooks = [
     UvCommandHook("pre-commit", "pre-commit", ["pre-commit", "run"], present=[".pre-commit-config.yaml"]),
     UvCommandHook("python", "mypy", ["mypy", "."], present=[".venv/bin/mypy"]),
     UvCommandHook("python", "pytest", ["pytest"], present=[".venv/bin/pytest"]),
-    UvCommandHook("python", "ruff check", ["ruff", "check"], present=[".venv/bin/ruff"]),
-    UvCommandHook("python", "ruff format", ["ruff", "format"], present=[".venv/bin/ruff"]),
+    UvCommandHook("python", "ruff-check", ["ruff", "check"], present=[".venv/bin/ruff"]),
+    UvCommandHook("python", "ruff-format", ["ruff", "format"], present=[".venv/bin/ruff"]),
 ]
 if __name__ == "__main__":
     results = [(hook, hook()) for hook in hooks if hook.enabled()]
