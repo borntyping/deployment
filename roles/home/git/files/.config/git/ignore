@@ -9,6 +9,7 @@
 .idea/**/tasks.xml
 .idea/**/workspace.xml
 .idea/dictionaries
+.justfile
 .kitchen/
 .local/
 .mypy_cache/
